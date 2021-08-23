@@ -1,0 +1,70 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CSV.swift",
+        "repositoryURL": "https://github.com/yaslab/CSV.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "81d2874c51db364d7e1d71b0d99018a294c87ac1",
+          "version": "2.4.3"
+        }
+      },
+      {
+        "package": "FaviconFinder",
+        "repositoryURL": "https://github.com/will-lumley/FaviconFinder.git",
+        "state": {
+          "branch": null,
+          "revision": "7162634f8b701f21349c42ebf7632720a6ca0987",
+          "version": "3.1.0"
+        }
+      },
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
+        "state": {
+          "branch": null,
+          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
+          "version": "4.2.2"
+        }
+      },
+      {
+        "package": "MultipeerKit",
+        "repositoryURL": "https://github.com/insidegui/MultipeerKit.git",
+        "state": {
+          "branch": null,
+          "revision": "ee013fd04f20166ea40ff456a67058c040289c1c",
+          "version": "0.4.0"
+        }
+      },
+      {
+        "package": "DomainParser",
+        "repositoryURL": "https://github.com/Dashlane/SwiftDomainParser.git",
+        "state": {
+          "branch": "master",
+          "revision": "9ea8c15c666d7fe6ba97f82d52961ac08babf1bd",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftOTP",
+        "repositoryURL": "https://github.com/EthanLipnik/SwiftOTP.git",
+        "state": {
+          "branch": null,
+          "revision": "be0c91ba2f197a033a44a6af836bc03eeef77422",
+          "version": "3.0.2"
+        }
+      },
+      {
+        "package": "SwiftSoup",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
+        "state": {
+          "branch": null,
+          "revision": "774dc9c7213085db8aa59595e27c1cd22e428904",
+          "version": "2.3.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
