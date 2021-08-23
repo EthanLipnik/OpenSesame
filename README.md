@@ -2,6 +2,10 @@
 
 Native and encrypted password manager for iOS and macOS.
 
+#### [Join the TestFlight](https://testflight.apple.com/join/5ZW0k48j)
+
+![OpenSesame](Images/All.png)
+
 ## What is it?
 
 OpenSesame is a free and powerful password manager that lets you manage your passwords with ease.
