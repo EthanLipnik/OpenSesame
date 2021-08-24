@@ -23,6 +23,7 @@ struct VaultView: View {
     @State var selectedAccount: Account? = nil
     
     @State var shouldDeleteAccount: Bool = false
+    @State var accountToBeDeleted: Account? = nil
     
     @State var isCreatingNewAccount: Bool = false
     @State var search: String = ""
@@ -80,36 +81,35 @@ struct VaultView: View {
     }
     
     func deleteItems(offsets: IndexSet) {
-#warning("Add delete accounts")
-        //        withAnimation {
-        //            offsets.map { accounts[$0] }.forEach { account in
-        //
-        //                let domainIdentifer = ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: account.domain!, type: .domain),
-        //                                                                   user: account.username!,
-        //                                                                   recordIdentifier: nil)
-        //
-        //                ASCredentialIdentityStore.shared.removeCredentialIdentities([domainIdentifer]) { success, error in
-        //                    if let error = error {
-        //                        print("Failed to remove credential", error)
-        //
-        //#if os(macOS)
-        //                        NSAlert(error: NSError(domain: "Failed to delete credential for autofill: \(error.localizedDescription)", code: 0, userInfo: nil)).runModal()
-        //#endif
-        //                    }
-        //                }
-        //
-        //                viewContext.delete(account)
-        //            }
-        //
-        //            do {
-        //                try viewContext.save()
-        //            } catch {
-        //                // Replace this implementation with code to handle the error appropriately.
-        //                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        //                let nsError = error as NSError
-        //                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        //            }
-        //        }
+        withAnimation {
+            offsets.map { accounts[$0] }.forEach { account in
+                
+                let domainIdentifer = ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: account.domain!, type: .domain),
+                                                                   user: account.username!,
+                                                                   recordIdentifier: nil)
+                
+                ASCredentialIdentityStore.shared.removeCredentialIdentities([domainIdentifer]) { success, error in
+                    if let error = error {
+                        print("Failed to remove credential", error)
+                        
+#if os(macOS)
+                        NSAlert(error: NSError(domain: "Failed to delete credential for autofill: \(error.localizedDescription)", code: 0, userInfo: nil)).runModal()
+#endif
+                    }
+                }
+                
+                viewContext.delete(account)
+            }
+            
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
 }
 

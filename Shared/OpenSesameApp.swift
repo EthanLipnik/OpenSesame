@@ -124,12 +124,11 @@ struct OpenSesameApp: SwiftUI.App {
         }
         
         // MARK: - Settings
-        #warning("Add back settings for macOS")
-//        #if os(macOS)
-//        Settings {
-//            SettingsView()
-//                .environment(\.realmConfiguration, Realm.Configuration(fileURL: PersistenceController.storeURL))
-//        }
-//        #endif
+        #if os(macOS)
+        Settings {
+            SettingsView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
+        #endif
     }
 }

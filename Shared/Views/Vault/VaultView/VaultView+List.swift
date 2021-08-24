@@ -27,20 +27,20 @@ extension VaultView {
                         Label(account.isPinned ? "Unpin" : "Pin", systemImage: account.isPinned ? "pin.slash" : "pin")
                     }
                     Button("Delete", role: .destructive) {
+                        accountToBeDeleted = account
                         shouldDeleteAccount.toggle()
                     }
                 }
-                .confirmationDialog("Are you sure you want to delete this account? You cannot retreive it when it is gone.", isPresented: $shouldDeleteAccount) {
-                    Button("Delete", role: .destructive) {
-//                        viewContext.delete(account)
-                        #warning("This will delete the first account")
-                    }
-                    
-                    Button("Cancel", role: .cancel) {
-                        shouldDeleteAccount = false
-                    }.keyboardShortcut(.defaultAction)
-                }
             }.onDelete(perform: deleteItems)
+        }
+        .confirmationDialog("Are you sure you want to delete this account? You cannot retreive it when it is gone.", isPresented: $shouldDeleteAccount) {
+            Button("Delete", role: .destructive) {
+                deleteItems(offsets: IndexSet([accounts.firstIndex(of: accountToBeDeleted!)!]))
+            }
+            
+            Button("Cancel", role: .cancel) {
+                shouldDeleteAccount = false
+            }.keyboardShortcut(.defaultAction)
         }
     }
 }
