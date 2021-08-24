@@ -42,10 +42,19 @@ struct ContentView: View {
             list
                 .toolbar {
                     ToolbarItem(placement: ToolbarItemPlacement.navigation) {
-                        Button {
-                            isLocked = true
-                        } label: {
-                            Label("Lock", systemImage: "lock.fill")
+                        HStack {
+                            Button {
+                                isLocked = true
+                            } label: {
+                                Label("Lock", systemImage: "lock.fill")
+                            }
+#if os(iOS)
+                            NavigationLink {
+                                SettingsView()
+                            } label: {
+                                Label("Settings", systemImage: "gearshape.fill")
+                            }
+#endif
                         }
                     }
 #if os(iOS)

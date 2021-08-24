@@ -28,6 +28,7 @@ struct LockView: View {
     @State var encryptionTest: Data? = nil
     
     @State var isAuthenticating: Bool = false
+    @State var needsToResetPassword: Bool = false
     
     
     // MARK: - Variable Types
@@ -66,6 +67,42 @@ struct LockView: View {
         .animation(.default, value: isAuthenticating)
         .padding()
         .navigationTitle("OpenSesame")
+        
+#if os(macOS)
+        .toolbar { // LockView only toolbar
+            ToolbarItem(placement: .primaryAction) {
+                if isLocked {
+                    Button {
+                        needsToResetPassword.toggle()
+                    } label: {
+                        Label("Info", systemImage: "info")
+                    }
+                }
+            }
+        }
+#else
+        .overlay(Button(action: {
+            needsToResetPassword.toggle()
+        }, label: {
+            Image(systemName: "info")
+        }).padding(), alignment: .topTrailing)
+#endif
+        .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
+            Button("Reset password") {
+                let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                    .synchronizable(true)
+                
+                try! keychain
+                    .remove("masterPassword")
+                try! keychain
+                    .remove("encryptionTest")
+                
+                encryptionTest = nil
+                encryptionTestDoesntExist = true
+            }
+        }, message: {
+            Text("You can change it but you won't be able to decrypt any of your accounts.")
+        })
         
         // MARK: - Master Password Creation
         .sheet(isPresented: $encryptionTestDoesntExist) {

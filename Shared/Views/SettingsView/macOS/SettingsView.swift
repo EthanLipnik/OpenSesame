@@ -25,6 +25,11 @@ struct SettingsView: View {
                 .tabItem {
                     Label("Menu Bar", systemImage: "menubar.dock.rectangle")
                 }
+            SyncView()
+                .padding()
+                .tabItem {
+                    Label("Syncing", systemImage: "arrow.clockwise")
+                }
         }
         .frame(maxWidth: 450)
     }

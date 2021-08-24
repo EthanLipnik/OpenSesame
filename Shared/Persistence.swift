@@ -25,6 +25,10 @@ struct PersistenceController {
         }
         return result
     }()
+    
+    static var containerUrl: URL? {
+        return FileManager.default.url(forUbiquityContainerIdentifier: nil)
+    }
 
     let container: NSPersistentCloudKitContainer
 
@@ -63,6 +67,22 @@ struct PersistenceController {
             UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.set(1.1, forKey: "coreDataVersion")
         }
         
+        loadStore()
+        
+        // Check if iCloud Drive folder exists, if not, create one.
+        if let url = PersistenceController.containerUrl, !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        print("iCloud Drive folder location", PersistenceController.containerUrl?.path as Any)
+    }
+    
+    func loadStore() {
         let viewContext = container.viewContext
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -84,6 +104,40 @@ struct PersistenceController {
                 try? viewContext.setQueryGenerationFrom(.current)
             }
         })
+    }
+    
+    func uploadStoreTo(_ service: CloudService) throws {
+        switch service {
+        case .iCloud:
+            if let iCloudContainer = PersistenceController.containerUrl?.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite") {
+                if FileManager.default.fileExists(atPath: iCloudContainer.path) {
+                    try FileManager.default.removeItem(at: iCloudContainer)
+                }
+                try FileManager.default.copyItem(at: PersistenceController.storeURL, to: iCloudContainer)
+                
+                print("Uploaded store to iCloud", iCloudContainer.path)
+            } else {
+                throw CocoaError(.fileNoSuchFile)
+            }
+        }
+    }
+    
+    func downloadStoreFrom(_ service: CloudService) throws {
+        switch service {
+        case .iCloud:
+            if let iCloudContainer = PersistenceController.containerUrl?.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite") {
+                if FileManager.default.fileExists(atPath: PersistenceController.storeURL.path) {
+                    try FileManager.default.removeItem(at: PersistenceController.storeURL)
+                }
+                try FileManager.default.copyItem(at: iCloudContainer, to: PersistenceController.storeURL)
+                
+                loadStore()
+            }
+        }
+    }
+    
+    enum CloudService {
+        case iCloud
     }
 }
 

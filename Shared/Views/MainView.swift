@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KeychainAccess
 
 struct MainView: View {
     // MARK: - Environment
@@ -42,19 +43,6 @@ struct MainView: View {
             .blur(radius: isLocked ? 0 : 25)
             .allowsHitTesting(isLocked) // Prevent lock screen from being interacted with even though it's in the foreground.
             .animation(.default, value: isLocked)
-#if os(macOS)
-            .toolbar { // LockView only toolbar
-                ToolbarItem(placement: .primaryAction) {
-                    if isLocked {
-                        Button {
-                            
-                        } label: {
-                            Label("Info", systemImage: "info")
-                        }
-                    }
-                }
-            }
-#endif
         }
 #if os(macOS)
         .blur(radius: shouldHideApp ? 25 : 0)
