@@ -8,6 +8,7 @@
 import SwiftUI
 import AuthenticationServices
 import KeychainAccess
+import DomainParser
 
 struct NewAccountView: View {
     // MARK: - Environment
@@ -116,13 +117,17 @@ struct NewAccountView: View {
             let encryptedPassword = try CryptoSecurityService.encrypt(password)
             print("Encrypted password")
             
+            let domainParser = try DomainParser()
+            let domain = domainParser.parse(host: URL(string: website)?.host ?? website)?.domain
+            
             let newAccount = Account(context: viewContext)
             newAccount.dateAdded = Date()
             
             newAccount.passwordLength = Int16(password.count)
             newAccount.password = encryptedPassword
             
-            newAccount.domain = website
+            newAccount.domain = domain ?? website
+            newAccount.url = website
             newAccount.username = username
             
             vaults[vault].addToAccounts(newAccount)

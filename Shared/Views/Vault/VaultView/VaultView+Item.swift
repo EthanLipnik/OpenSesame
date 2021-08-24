@@ -13,11 +13,19 @@ extension VaultView {
         @Binding var selectedAccount: Account?
         
         var body: some View {
-            NavigationLink(tag: account, selection: $selectedAccount) {
+            var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain ?? "Unknown website")
+            if let domain = account.domain {
+                if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
+                    attributedDomain.foregroundColor = Color.secondary
+                    attributedDomain[match].foregroundColor = Color("Label")
+                }
+            }
+            
+            return NavigationLink(tag: account, selection: $selectedAccount) {
                 AccountView(account: account)
             } label: {
                 VStack(alignment: .leading) {
-                    Text(account.domain!.capitalizingFirstLetter())
+                    Text(attributedDomain)
                         .bold()
                         .lineLimit(1)
                     Text(account.username!)
