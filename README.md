@@ -58,7 +58,7 @@ OpenSesame is available under the MIT license. See the LICENSE file for more inf
 OpenSesame depends on the following open-source projects:
 
 * [SwiftOTP](https://github.com/OpenSesameManager/SwiftOTP.git) by [lachlanbell](https://github.com/lachlanbell) ([License](https://github.com/lachlanbell/SwiftOTP/blob/master/LICENSE))
-* [FaviconFinder](https://github.com/OpenSesameManager/SwiftOTP.git) by [will-lumley](https://github.com/will-lumley) ([License](https://github.com/will-lumley/FaviconFinder/blob/main/LICENSE.txt))
+* [FaviconFinder](https://github.com/will-lumley/FaviconFinder.git) by [will-lumley](https://github.com/will-lumley) ([License](https://github.com/will-lumley/FaviconFinder/blob/main/LICENSE.txt))
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess.git) by [kishikawakatsumi](https://github.com/kishikawakatsumi) ([License](https://github.com/kishikawakatsumi/KeychainAccess/blob/master/LICENSE))
 * [DomainParser](https://github.com/Dashlane/SwiftDomainParser.git) by [Dashlane](https://github.com/Dashlane) ([License](https://github.com/Dashlane/SwiftDomainParser/blob/master/LICENSE))
 * [CSV.swift](https://github.com/yaslab/CSV.swift.git) by [yaslab](https://github.com/yaslab) ([License](https://github.com/yaslab/CSV.swift/blob/master/LICENSE))
