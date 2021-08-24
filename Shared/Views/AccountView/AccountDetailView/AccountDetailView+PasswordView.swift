@@ -24,7 +24,7 @@ extension AccountView.AccountDetailsView {
                         .onTapGesture {
                             if !isShowingPassword {
                                 do {
-                                    decryptedPassword = try CryptoSecurityService.decrypt(account.password!, tag: account.encryptionTag!, nonce: account.nonce)
+                                    decryptedPassword = try CryptoSecurityService.decrypt(account.password!)
                                     
                                     displayedPassword = decryptedPassword ?? displayedPassword
                                     isShowingPassword = true
@@ -40,7 +40,7 @@ extension AccountView.AccountDetailsView {
                                 decryptedPassword = nil
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                    displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))
+                                    displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))!
                                 }
                             }
                         }

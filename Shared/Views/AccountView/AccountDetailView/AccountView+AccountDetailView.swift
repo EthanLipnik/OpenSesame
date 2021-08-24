@@ -60,7 +60,7 @@ extension AccountView {
                 .onChange(of: isEditing) { isEditing in
                     if isEditing {
                         do {
-                            decryptedPassword = try CryptoSecurityService.decrypt(account.password!, tag: account.encryptionTag!, nonce: account.nonce)
+                            decryptedPassword = try CryptoSecurityService.decrypt(account.password!)
                             newUsername = account.username ?? ""
                             newPassword = decryptedPassword ?? ""
                         } catch {
@@ -72,9 +72,7 @@ extension AccountView {
                             
                             let encryptedPassword = try CryptoSecurityService.encrypt(newPassword)
                             account.passwordLength = Int16(newPassword.count)
-                            account.password = encryptedPassword?.value ?? account.password
-                            account.encryptionTag = encryptedPassword?.tag ?? account.encryptionTag
-                            account.nonce = CryptoSecurityService.nonceStr
+                            account.password = encryptedPassword
                             
                             account.lastModified = Date()
                             
@@ -85,7 +83,7 @@ extension AccountView {
                     }
                 }
                 .onAppear {
-                    displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))
+                    displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))!
                 }
             }
         }

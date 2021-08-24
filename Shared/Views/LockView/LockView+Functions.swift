@@ -11,14 +11,11 @@ import KeychainAccess
 extension LockView {
     // Try to load encryption test from Keychain Access.
     func loadEncryptionTest() {
-        if let encryptionTest = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+        if let test = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
             .synchronizable(true)
-            .getData("encryptionTest"),
-           let json = try? JSONSerialization.jsonObject(with: encryptionTest, options: []) as? [String: String],
-           let test = json["test"],
-           let tag = json["tag"] {
+            .getData("encryptionTest") {
             
-            self.encryptionTest = (test, tag, json["nonce"])
+            self.encryptionTest = test
         } else {
             encryptionTestDoesntExist = true
         }
@@ -28,19 +25,12 @@ extension LockView {
     func createMasterPassword(_ password: String) {
         CryptoSecurityService.loadEncryptionKey(password) {
             do {
-                guard let encryptedTest = try CryptoSecurityService.encrypt(CryptoSecurityService.randomString(length: 32)) else { fatalError() }
+                guard let randomString = CryptoSecurityService.randomString(length: 32, method: .cryptic), let test = try CryptoSecurityService.encrypt(randomString) else { fatalError() }
                 
-                self.encryptionTest = (encryptedTest.value, encryptedTest.tag, CryptoSecurityService.nonceStr)
-                
-                let json = ["test": encryptedTest.value,
-                            "tag": encryptedTest.tag,
-                            "nonce": CryptoSecurityService.nonceStr]
-                
-                if let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .sortedKeys) { // Save as JSON so that it's easier to retrieve as a single value.
-                    try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-                        .synchronizable(true)
-                        .set(jsonData, key: "encryptionTest")
-                }
+                self.encryptionTest = test
+                try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                    .synchronizable(true)
+                    .set(test, key: "encryptionTest")
                 
                 encryptionTestDoesntExist = false
                 try? updateBiometrics(password) // Try to update biometrics if available.
@@ -67,10 +57,10 @@ extension LockView {
     
     // Test the given password with the saved encryption test to verify it is valid and correct.
     func unlock(_ password: String, method: UnlockMethod = .password) {
-        guard let (test, tag, nonce) = encryptionTest else { encryptionTestDoesntExist = true; return }
+        guard let test = encryptionTest else { encryptionTestDoesntExist = true; return }
         
         CryptoSecurityService.loadEncryptionKey(password) {
-            let string = try? CryptoSecurityService.decrypt(test, tag: tag, nonce: nonce)
+            let string = try? CryptoSecurityService.decrypt(test)
             
             if string != nil { // Passed the encryption test and the password is valid.
                 

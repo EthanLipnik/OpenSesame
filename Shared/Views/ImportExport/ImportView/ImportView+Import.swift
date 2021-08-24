@@ -47,7 +47,7 @@ extension ImportView {
                 
                 for importedAccount in accounts {
                     do {
-                        if let url = URL(string: importedAccount.url), let host = url.host, let domain = domainParser.parse(host: host)?.domain?.lowercased(), !addedAccounts.contains(where: { $0.domain == domain && $0.password == importedAccount.password && $0.username == importedAccount.username }) {
+                        if let url = URL(string: importedAccount.url), let host = url.host, let domain = domainParser.parse(host: host)?.domain?.lowercased(), !addedAccounts.contains(where: { $0.domain == domain && $0.username == importedAccount.username }) {
                             
                             let account = Account(context: viewContext)
                             account.domain = domain
@@ -57,10 +57,8 @@ extension ImportView {
                             account.otpAuth = importedAccount.otpAuth
                             account.dateAdded = Date()
                             
-                            guard let (encryptedPassword, encryptedTag) = try CryptoSecurityService.encrypt(importedAccount.password) else { return }
+                            guard let encryptedPassword = try CryptoSecurityService.encrypt(importedAccount.password) else { return }
                             account.password = encryptedPassword
-                            account.encryptionTag = encryptedTag
-                            account.nonce = CryptoSecurityService.nonceStr
                             account.passwordLength = Int16(importedAccount.password.count)
                             
                             selectedVault.addToAccounts(account)

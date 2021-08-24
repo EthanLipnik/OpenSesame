@@ -25,7 +25,7 @@ struct LockView: View {
     @State var biometricsFailed: Bool = false
     
     @State var encryptionTestDoesntExist = false
-    @State var encryptionTest: (test: String, tag: String, nonce: String?)? = nil
+    @State var encryptionTest: Data? = nil
     
     @State var isAuthenticating: Bool = false
     

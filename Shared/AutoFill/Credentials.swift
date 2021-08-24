@@ -76,7 +76,7 @@ extension CredentialProviderViewController {
             
             CryptoSecurityService.loadEncryptionKey(masterPassword)
             
-            let decryptPassword = try CryptoSecurityService.decrypt(account.password!, tag: account.encryptionTag!, nonce: account.nonce)
+            let decryptPassword = try CryptoSecurityService.decrypt(account.password!)
             
             print("Returned decrypted account")
             

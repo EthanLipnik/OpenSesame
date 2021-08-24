@@ -45,7 +45,7 @@ struct ExportView: View {
                     try csv.write(row: ["Title", "URL", "Username", "Password", "OTPAuth"])
                     
                     for account in accounts {
-                        if let decryptedPassword = try? CryptoSecurityService.decrypt(account.password!, tag: account.encryptionTag!, nonce: account.nonce) {
+                        if let decryptedPassword = try? CryptoSecurityService.decrypt(account.password!) {
                             try csv.write(row: [account.domain ?? "", account.url ?? "", account.username ?? "", decryptedPassword, account.otpAuth ?? ""])
                         }
                     }

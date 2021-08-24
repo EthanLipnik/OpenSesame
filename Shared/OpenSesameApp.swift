@@ -132,10 +132,4 @@ struct OpenSesameApp: SwiftUI.App {
 //        }
 //        #endif
     }
-    
-    // MARK: - Init
-    /// Load the nonce used for encrypting and decrypting in this session.
-    init() {
-        CryptoSecurityService.loadNonce()
-    }
 }

@@ -62,12 +62,11 @@ struct MultipeerShareSheet: View {
                 GroupBox {
                     Text(account.domain!)
                     Text(account.username!)
-                    Text(account.password!)
                 }
                 
                 if inviteAccepted {
                     Button("Share") {
-                        if let decryptedPassword = try? CryptoSecurityService.decrypt(account.password!, tag: account.encryptionTag!, nonce: account.nonce) {
+                        if let decryptedPassword = try? CryptoSecurityService.decrypt(account.password!) {
                             multipeer.transceiver.send(ShareableAccount(domain: account.domain!, dateAdded: account.dateAdded ?? Date(), lastModified: account.lastModified, password: decryptedPassword, username: account.username!, url: account.url!), to: [peer])
                             
                             dismiss.callAsFunction()

@@ -120,9 +120,7 @@ struct NewAccountView: View {
             newAccount.dateAdded = Date()
             
             newAccount.passwordLength = Int16(password.count)
-            newAccount.password = encryptedPassword?.value
-            newAccount.encryptionTag = encryptedPassword?.tag
-            newAccount.nonce = CryptoSecurityService.nonceStr
+            newAccount.password = encryptedPassword
             
             newAccount.domain = website
             newAccount.username = username

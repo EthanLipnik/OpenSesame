@@ -9,7 +9,7 @@
         <attribute name="nonce" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="otpAuth" optional="YES" attributeType="String"/>
-        <attribute name="password" attributeType="String" defaultValueString=""/>
+        <attribute name="password" optional="YES" attributeType="Binary" defaultValueString="" allowsCloudEncryption="YES"/>
         <attribute name="passwordLength" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="url" attributeType="String" defaultValueString=""/>
         <attribute name="username" attributeType="String" defaultValueString=""/>
