@@ -58,7 +58,8 @@ struct FaviconView: View {
                             
                             return
                         }
-                        guard let url = URL(string: "https://" + website) else { return }
+                        
+                        guard let url = URL(string: website.withHTTPIfNeeded) else { return }
                         FaviconFinder(url: url, preferredType: .html, preferences: [
                             FaviconDownloadType.html: FaviconType.appleTouchIcon.rawValue,
                             FaviconDownloadType.ico: "favicon.ico"
@@ -99,7 +100,7 @@ struct FaviconView: View {
 
 struct FaviconView_Previews: PreviewProvider {
     static var previews: some View {
-        FaviconView(website: "https://Google.com")
+        FaviconView(website: "Google.com")
             .aspectRatio(1/1, contentMode: .fit)
             .padding()
     }

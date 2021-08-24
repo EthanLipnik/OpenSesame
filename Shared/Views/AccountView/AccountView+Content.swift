@@ -9,6 +9,8 @@ import SwiftUI
 
 extension AccountView {
     var content: some View {
+        
+        // Give styling to domain
         var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain ?? "Unknown website")
         if let domain = account.domain {
             if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
@@ -77,7 +79,7 @@ extension AccountView {
                 Spacer()
 #endif
                 HStack {
-                    if let website = account.domain, let url = URL(string: "https://" + website) {
+                    if let website = ((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain, let url = URL(string: website.withHTTPIfNeeded) {
                         Link("Go to website", destination: url)
 #if os(iOS)
                             .hoverEffect()

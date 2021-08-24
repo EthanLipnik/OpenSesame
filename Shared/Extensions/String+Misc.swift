@@ -27,4 +27,14 @@ extension String {
             .map { String(format: "%X", $0.value) }
             .joined()
     }
+    
+    var withHTTPIfNeeded: String {
+        var urlStr = self
+        
+        if !urlStr.hasPrefix("http://") && !urlStr.hasPrefix("https://") {
+            urlStr = "https://" + self
+        }
+        
+        return urlStr
+    }
 }
