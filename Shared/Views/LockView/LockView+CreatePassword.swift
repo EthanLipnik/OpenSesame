@@ -18,6 +18,7 @@ extension LockView {
                     .font(.title.bold())
                 GroupBox {
                     TextField("Enter a new master password", text: $password, onCommit: {
+                        guard !password.isEmpty else { return }
                         completionAction(password)
                     })
                         .font(.system(.body, design: .monospaced))
@@ -28,6 +29,7 @@ extension LockView {
 #endif
                 }
                 Button("Continue") {
+                    guard !password.isEmpty else { return }
                     completionAction(password)
                 }
             }

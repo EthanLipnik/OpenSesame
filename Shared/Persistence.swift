@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import KeychainAccess
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -52,6 +53,16 @@ struct PersistenceController {
             
             print("CoreData location", PersistenceController.storeURL.path)
         }
+        
+        if let coreDataVersion = UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.float(forKey: "coreDataVersion"), coreDataVersion < 1.1 {
+            try? FileManager.default.removeItem(at: PersistenceController.storeURL)
+            try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                .synchronizable(true)
+                .remove("encryptionTest")
+            
+            UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.set(1.1, forKey: "coreDataVersion")
+        }
+        
         let viewContext = container.viewContext
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

@@ -58,7 +58,11 @@ extension ContentView {
         Section("Pinned") {
             ForEach(pinnedAccounts) { account in
                 NavigationLink {
-                    VaultView(vault: account.vault!, selectedAccount: account)
+                    if let vault = account.vault {
+                        VaultView(vault: vault, selectedAccount: account)
+                    } else {
+                        Text("Failed to get vault for pinned account")
+                    }
                 } label: {
                     VStack(alignment: .leading) {
                         Text(account.domain!.capitalizingFirstLetter())
