@@ -9,7 +9,15 @@ import SwiftUI
 
 extension AccountView {
     var content: some View {
-        GroupBox {
+        var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain ?? "Unknown website")
+        if let domain = account.domain {
+            if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
+                attributedDomain.foregroundColor = Color.secondary
+                attributedDomain[match].foregroundColor = Color("Label")
+            }
+        }
+        
+        return GroupBox {
             VStack(alignment: .leading) {
                 if let website = account.domain {
                     HStack(alignment: .top) {
@@ -17,7 +25,7 @@ extension AccountView {
                             .drawingGroup()
                             .frame(width: 50, height: 50)
                         VStack(alignment: .leading) {
-                            Text(website)
+                            Text(attributedDomain)
                                 .font(.headline)
                             if let dateAdded = account.dateAdded {
                                 Text("Date Added: ")
