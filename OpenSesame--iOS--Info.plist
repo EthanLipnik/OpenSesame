@@ -23,6 +23,10 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_OpenSesame._tcp</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -32,12 +36,6 @@
 	<array>
 		<string>fetch</string>
 		<string>remote-notification</string>
-	</array>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>Easily and securely share your passwords with people nearby.</string>
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_OpenSesame._tcp</string>
 	</array>
 </dict>
 </plist>

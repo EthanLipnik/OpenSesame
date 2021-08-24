@@ -27,7 +27,5 @@
 	<array>
 		<string>_OpenSesame._tcp</string>
 	</array>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>Easily and securely share your passwords with people nearby.</string>
 </dict>
 </plist>
