@@ -17,7 +17,7 @@ extension LockView {
                 Text("Welcome to OpenSesame")
                     .font(.title.bold())
                 GroupBox {
-                    TextField("Enter a new master password", text: $password, onCommit: {
+					SecureField("Enter a new master password", text: $password, onCommit: {
                         guard !password.isEmpty else { return }
                         completionAction(password)
                     })
