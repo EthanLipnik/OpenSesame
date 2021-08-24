@@ -54,4 +54,40 @@ class UserAuthenticationService: ObservableObject {
             }
         }
     }
+    
+    static func availableBiometrics() -> [BiometricType] {
+        var error: NSError?
+        let context = LAContext()
+        var types: [BiometricType] = []
+#if os(macOS)
+        let hasWatchAuthentication = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithWatch, error: &error)
+        
+        if hasWatchAuthentication {
+            types.append(.watch)
+        }
+#endif
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            switch context.biometryType {
+            case .faceID:
+                types.append(.faceID)
+            case .touchID:
+                types.append(.touchID)
+            case .none:
+                break
+            @unknown default:
+                break
+            }
+            
+            return types
+        } else {
+            return []
+        }
+    }
+    
+    enum BiometricType {
+        case touchID
+        case faceID
+        
+        case watch
+    }
 }

@@ -10,7 +10,20 @@ import KeychainAccess
 
 extension LockView {
     var unlockButtons: some View {
-        Group {
+        // Associate available biometric types to an image
+        let image: String? = {
+            if biometricTypes.contains(.faceID) {
+                return "faceid"
+            } else if biometricTypes.contains(.touchID) {
+                return "touchid"
+            } else if biometricTypes.contains(.watch) {
+                return "lock.applewatch"
+            } else {
+                return nil
+            }
+        }()
+        
+        return Group {
             Button {
                 unlock(password)
             } label: {
@@ -22,7 +35,7 @@ extension LockView {
             .keyboardShortcut(.defaultAction)
             .disabled(password.isEmpty)
             
-            if canAuthenticateWithBiometrics || biometricsFailed {
+            if let image = image, canAuthenticateWithBiometrics || biometricsFailed {
                 Button {
                     do {
 #if targetEnvironment(simulator)
@@ -42,7 +55,7 @@ extension LockView {
                         print(error)
                     }
                 } label: {
-                    Image(systemName: "faceid")
+                    Image(systemName: image)
 #if os(iOS)
                         .imageScale(.large)
 #endif

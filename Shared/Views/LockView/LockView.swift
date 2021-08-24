@@ -36,6 +36,15 @@ struct LockView: View {
         case password
     }
     
+    let biometricTypes: [UserAuthenticationService.BiometricType]
+    
+    init(isLocked: Binding<Bool>, onSuccessfulUnlock: @escaping () -> Void) {
+        self._isLocked = isLocked
+        self.onSuccessfulUnlock = onSuccessfulUnlock
+        
+        self.biometricTypes = UserAuthenticationService.availableBiometrics()
+    }
+    
     // MARK: - View
     var body: some View {
         VStack(spacing: 30) {

@@ -43,20 +43,22 @@ It syncs with iCloud and encrypts your data to make sure only **you** get access
 - Compromised/breached password notice
 - Chrome & native Windows support
 
-### Requirements
-- Xcode 13+
-- macOS 12+
-- iOS 15+
-
 ## Why use OpenSesame
 
 Now more than ever, what was previously amazing native apps have become slow and big web apps. Big apps take more control away from the user and push subscriptions and other payment models without much reason. OpenSesame aims to fix that by giving a free and open source password manager that is native and performant. Still get all the great features of other password managers without all the baggage.
+
+## Requirements
+
+- Xcode 13+
+- macOS 12+
+- iOS 15+
 
 ## License
 
 OpenSesame is available under the MIT license. See the LICENSE file for more info.
 
-### Acknowledgements
+## Acknowledgements
+
 OpenSesame depends on the following open-source projects:
 
 * [SwiftOTP](https://github.com/OpenSesameManager/SwiftOTP.git) by [lachlanbell](https://github.com/lachlanbell) ([License](https://github.com/lachlanbell/SwiftOTP/blob/master/LICENSE))
