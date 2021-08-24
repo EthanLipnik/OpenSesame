@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     // MARK: - Environment
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) var viewContext
     
     // MARK: - CoreData
     @FetchRequest(
@@ -20,6 +20,8 @@ struct AccountView: View {
     // MARK: - Variables
     let account: Account
     @State var isEditing: Bool = false
+    @State var newNotes: String = ""
+    
     @State private var isAddingAlternateDomains: Bool = false
     @State private var newAlternateDomains: String = ""
     @State private var isSharing: Bool = false
@@ -30,6 +32,8 @@ struct AccountView: View {
         
         let predicate = NSPredicate(format: "domain contains[c] %@", account.domain!)
         self._accounts = FetchRequest(sortDescriptors: [], predicate: predicate, animation: .default)
+        
+        self._newNotes = .init(initialValue: account.notes ?? "")
     }
     
     // MARK: - View

@@ -58,6 +58,13 @@ extension AccountView {
                 }
                 AccountDetailsView(account: account, isEditing: $isEditing)
                     .padding(.vertical)
+                GroupBox {
+                    TextField("Notes", text: $newNotes, onCommit: {
+                        account.notes = newNotes
+                        
+                        try? viewContext.save()
+                    }).textFieldStyle(.plain)
+                }
 #if os(macOS)
                 Spacer()
 #endif
