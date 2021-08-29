@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingsView: View {
     let persistenceController = PersistenceController.shared
     
+    @State private var isImporting: Bool = false
+    
     var body: some View {
         Form {
             // MARK: - Syncing
@@ -34,10 +36,29 @@ struct SettingsView: View {
                     }
                     .font(.headline)
                     .foregroundColor(Color.accentColor)
+                    .disabled(true)
                 }.buttonStyle(.plain)
+            }
+            
+            Section {
+                Button {
+                    isImporting.toggle()
+                } label: {
+                    Label("Import", systemImage: "square.and.arrow.down")
+                }
+
             }
         }
             .navigationTitle("Settings")
+            .sheet(isPresented: $isImporting) {
+                NavigationView {
+                    ImportView()
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                        .navigationTitle("Import")
+                }
+                .navigationViewStyle(.stack)
+                .interactiveDismissDisabled()
+            }
     }
 }
 

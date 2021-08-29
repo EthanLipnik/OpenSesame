@@ -34,7 +34,7 @@ extension SettingsView {
                                 } catch {
                                     print(error)
                                 }
-                            }
+                            }.disabled(true)
                         }
                     }.padding(5)
                 }

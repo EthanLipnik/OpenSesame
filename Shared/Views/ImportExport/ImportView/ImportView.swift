@@ -41,12 +41,26 @@ struct ImportView: View {
             //                TableColumn("Password", value: \.password)
             //                TableColumn("OTP Auth", value: \.otpAuth)
             //            }
-            List(accounts) {
-                Text($0.name)
+            List {
+#if os(iOS)
+                Section {
+                    Picker("Vault", selection: $selectedVault) {
+                        ForEach(0..<vaults.count, id: \.self) {
+                            Text(vaults[$0].name!)
+                                .tag($0)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                }
+#endif
+                ForEach(accounts) {
+                    Text($0.name)
+                }
             }
 #if os(macOS)
             .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
+#if os(macOS)
             GroupBox {
                 HStack {
                     Button("Cancel", role: .cancel) {
@@ -71,9 +85,33 @@ struct ImportView: View {
                         .disabled(isImporting)
                 }.padding()
             }
+#endif
         }
+#if os(macOS)
         .frame(minWidth: 400, minHeight: 300)
         .frame(width: 600, height: 500)
+#else
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel", role: .cancel) {
+                    dismiss.callAsFunction()
+                }
+                .keyboardShortcut(.cancelAction)
+                .disabled(isImporting)
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack {
+                    if isImporting {
+                        ProgressView("Progress", value: Double(accountProgress) / Double(accounts.count))
+                    }
+                    Button("Import", role: .destructive, action: importAccounts)
+                        .keyboardShortcut(.defaultAction)
+                        .disabled(isImporting)
+                }
+            }
+        }
+#endif
         .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: [.commaSeparatedText]) { result in
             switch result {
             case .success(let url):
