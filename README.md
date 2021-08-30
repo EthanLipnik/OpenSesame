@@ -26,11 +26,11 @@ It syncs with iCloud and encrypts your data to make sure only **you** get access
 - Multipeer account sharing
 - Import/Export
 - Password generator
+- Credit/Debit card support
+- Notes field
 - CoreData
 - 100% SwiftUI
 - Native support for macOS and iOS.
-- Credit/Debit card support
-- Notes field
 
 ## Planned Features
 
