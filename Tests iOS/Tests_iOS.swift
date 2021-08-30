@@ -26,6 +26,12 @@ class Tests_iOS: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        let masterPassword = app.secureTextFields["masterPassword"]
+        masterPassword.tap()
+        masterPassword.typeText("password")
+        
+        let loginButton = app.buttons["loginButton"]
+        loginButton.tap()
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

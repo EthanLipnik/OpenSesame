@@ -18,6 +18,7 @@ extension LockView {
                 })
                     .textFieldStyle(.plain)
                     .frame(maxWidth: 400)
+                    .accessibilityIdentifier("masterPassword")
 #if os(macOS) // macOS should display differently since a red background looks weird.
                 if attempts > 0 {
                     Text(attempts, format: .number)

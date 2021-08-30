@@ -71,14 +71,20 @@ struct SettingsView: View {
             }
         }
             .navigationTitle("Settings")
-            .sheet(isPresented: $isImporting) {
+            .halfSheet(showSheet: $isImporting) {
                 NavigationView {
                     ImportView()
                         .environment(\.managedObjectContext, persistenceController.container.viewContext)
                         .navigationTitle("Import")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .navigationViewStyle(.stack)
                 .interactiveDismissDisabled()
+                .onDisappear {
+                    isImporting = false
+                }
+            } onEnd: {
+                isImporting = false
             }
     }
 }

@@ -59,13 +59,18 @@ struct NewAccountView: View {
                         Label("Password", systemImage: "key.fill")
                             .foregroundColor(Color.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        HStack {
-                            TextField("Password", text: $password)
-                                .textFieldStyle(.roundedBorder)
+                        HStack(alignment: .top) {
+                            VStack(alignment: .leading) {
+                                SecureField("Password", text: $password)
+                                    .textFieldStyle(.roundedBorder)
+                                    .font(.system(.body, design: .monospaced))
 #if os(iOS)
-                                .autocapitalization(.none)
+                                    .autocapitalization(.none)
 #endif
-                                .disableAutocorrection(true)
+                                    .disableAutocorrection(true)
+                                Text(password.isEmpty ? " " : password)
+                                    .font(.system(.body, design: .monospaced))
+                            }
 #if os(iOS)
                             Button {
                                 password = Keychain.generatePassword()

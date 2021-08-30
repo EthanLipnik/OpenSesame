@@ -34,6 +34,7 @@ extension LockView {
             }
             .keyboardShortcut(.defaultAction)
             .disabled(password.isEmpty)
+            .accessibilityIdentifier("loginButton")
             
             if let image = image, canAuthenticateWithBiometrics || biometricsFailed {
                 Button {
