@@ -10,6 +10,10 @@ import SwiftUI
 struct CardView: View {
     let card: Card
     
+#if os(iOS)
+    @ObservedObject var manager = MotionManager()
+#endif
+    
     @State private var isShowingNumber: Bool = false
     @State private var decryptedNumber: String? = nil
     @State private var displayedNumber: String = ""
@@ -21,7 +25,9 @@ struct CardView: View {
     }
     
     var body: some View {
-        ScrollView {
+        let calendar = Calendar.current
+        
+        return ScrollView {
             VStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                     .fill(Color.secondary.opacity(0.25))
@@ -34,7 +40,7 @@ struct CardView: View {
                     Spacer()
                     HStack {
                         Text(displayedNumber)
-                            .font(.title2)
+                            .font(.system(.title2, design: .monospaced).weight(.semibold))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .blur(radius: isShowingNumber ? 0 : 8)
                             .animation(.default, value: isShowingNumber)
@@ -74,8 +80,8 @@ struct CardView: View {
                             Text("Valid Thru")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            Text(card.expirationDate!, style: .date)
-                                .font(.title3)
+                            Text("\(calendar.component(.month, from: card.expirationDate!))/" + "\(calendar.component(.year, from: card.expirationDate!))".suffix(2))
+                                .font(.system(.title3, design: .monospaced).bold())
                         }
                     }
                 }
@@ -84,7 +90,7 @@ struct CardView: View {
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(Color("Tertiary"))
+                        .fill(LinearGradient(colors: [Color("Tertiary"), Color("Tertiary").opacity(0.7)], startPoint: .top, endPoint: .bottom))
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .stroke(lineWidth: 2)
                         .fill(Color(white: 0.5, opacity: 0.25))
@@ -92,8 +98,19 @@ struct CardView: View {
             )
             .padding()
             .aspectRatio(1.6, contentMode: .fill)
+#if os(macOS)
             .frame(width: 400)
-        }.shadow(radius: 15, y: 8)
+#else
+            .frame(maxWidth: 400)
+            .modifier(ParallaxMotionModifier(manager: manager, magnitude: 10))
+#endif
+        }
+#if os(macOS)
+        .shadow(radius: 15, y: 8)
+#else
+        .shadow(radius: 30, y: 8)
+        .navigationTitle(card.name ?? card.holder ?? "Card")
+#endif
     }
 }
 

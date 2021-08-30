@@ -47,21 +47,37 @@ struct VaultView: View {
     // MARK: - View
     var body: some View {
         list
+#if os(macOS)
         .sheet(isPresented: $isCreatingNewAccount) {
             NewAccountView(selectedVault: vault)
         }
         .sheet(isPresented: $isCreatingNewCard) {
             NewCardView(selectedVault: vault)
         }
-        .searchable(text: $search)
-#if os(macOS)
         .listStyle(.inset(alternatesRowBackgrounds: true))
         .navigationTitle("OpenSesame – " + (vault.name ?? "Unknown vault"))
         .frame(minWidth: 200)
 #else
+        .halfSheet(showSheet: $isCreatingNewAccount) {
+            NewAccountView(selectedVault: vault)
+                .onDisappear {
+                    isCreatingNewAccount = false
+                }
+        } onEnd: {
+            isCreatingNewAccount = false
+        }
+        .halfSheet(showSheet: $isCreatingNewCard, supportsLargeView: false) {
+            NewCardView(selectedVault: vault)
+                .onDisappear {
+                    isCreatingNewCard = false
+                }
+        } onEnd: {
+            isCreatingNewCard = true
+        }
         .listStyle(.insetGrouped)
-        .navigationTitle(vault.name!)
+        .navigationTitle(vault.name ?? "Vault")
 #endif
+        .searchable(text: $search)
         .toolbar {
 #if os(iOS)
             ToolbarItem(placement: .navigationBarTrailing) {

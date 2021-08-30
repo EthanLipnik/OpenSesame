@@ -108,8 +108,6 @@
 		AA519A8726CF453300C1E354 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA519A7F26CF283C00C1E354 /* AccountView.swift */; };
 		AA519A9126CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA519A9026CF4B3200C1E354 /* OTPAuthenticatorService.swift */; };
 		AA519A9226CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA519A9026CF4B3200C1E354 /* OTPAuthenticatorService.swift */; };
-		AA78F43126DC3DC100F12D63 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78F43026DC3DC100F12D63 /* NewCardView.swift */; };
-		AA78F43226DC3DC100F12D63 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78F43026DC3DC100F12D63 /* NewCardView.swift */; };
 		AA8B501D26CD641D003C92AE /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B501C26CD641D003C92AE /* Tests_iOS.swift */; };
 		AA8B501F26CD641D003C92AE /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B501E26CD641D003C92AE /* Tests_iOSLaunchTests.swift */; };
 		AA8B502926CD641D003C92AE /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B502826CD641D003C92AE /* Tests_macOS.swift */; };
@@ -126,6 +124,7 @@
 		AA8B504A26CD6468003C92AE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8B504926CD6468003C92AE /* CloudKit.framework */; };
 		AA980E3D26D2DF05001CFF4E /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA980E3C26D2DF05001CFF4E /* MultipeerKit */; };
 		AA980E4126D2DF0C001CFF4E /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA980E4026D2DF0C001CFF4E /* MultipeerKit */; };
+		AA9B316E26DD6C180042BC58 /* HalfSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B316D26DD6C170042BC58 /* HalfSheetModal.swift */; };
 		AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DB8F26D3258900531E92 /* FaviconView.swift */; };
 		AAD3DB9126D3258900531E92 /* FaviconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DB8F26D3258900531E92 /* FaviconView.swift */; };
 		AAD3DBAA26D3351400531E92 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DB8126D30D3300531E92 /* ImportView.swift */; };
@@ -144,6 +143,9 @@
 		AAD3DBEE26D342B900531E92 /* URL+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DBE726D342AB00531E92 /* URL+Misc.swift */; };
 		AAD3DBEF26D342B900531E92 /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DBE626D342AB00531E92 /* String+Misc.swift */; };
 		AAD3DBFC26D3446500531E92 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = AAD3DBFB26D3446500531E92 /* SwiftOTP */; };
+		AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF56EB126DD6F75003581AC /* NewCardView.swift */; };
+		AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF56EB126DD6F75003581AC /* NewCardView.swift */; };
+		AAFAF5EA26DD5E0900CD1B48 /* ParallaxMotionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF5E926DD5E0900CD1B48 /* ParallaxMotionModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,8 +238,8 @@
 		AA1F6A2626CD68D4004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
 		AA1F6A2826CD6993004E1A81 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
 		AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OpenSesame.xcdatamodel; sourceTree = "<group>"; };
-		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VaultView+CardItemView.swift"; path = "../../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/Vault/VaultView/VaultView+CardItemView.swift"; sourceTree = "<group>"; };
-		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = "../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/CardView/CardView.swift"; sourceTree = "<group>"; };
+		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VaultView+CardItemView.swift"; path = "VaultView+CardItemView.swift"; sourceTree = "<group>"; };
+		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = CardView.swift; sourceTree = "<group>"; };
 		AA49EA0026D3EAF000B12838 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA49EA0126D3EAF000B12838 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentView+Add.swift"; sourceTree = "<group>"; };
@@ -271,7 +273,6 @@
 		AA519A7F26CF283C00C1E354 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		AA519A8026CF283C00C1E354 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		AA519A9026CF4B3200C1E354 /* OTPAuthenticatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPAuthenticatorService.swift; sourceTree = "<group>"; };
-		AA78F43026DC3DC100F12D63 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewCardView.swift; path = "../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/Vault/NewCardView.swift"; sourceTree = "<group>"; };
 		AA8B500526CD641C003C92AE /* OpenSesameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSesameApp.swift; sourceTree = "<group>"; };
 		AA8B500626CD641C003C92AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA8B500726CD641C003C92AE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -290,6 +291,7 @@
 		AA8B504926CD6468003C92AE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--iOS--Info.plist"; sourceTree = "<group>"; };
 		AA8B504C26CD6596003C92AE /* OpenSesame--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--macOS--Info.plist"; sourceTree = "<group>"; };
+		AA9B316D26DD6C170042BC58 /* HalfSheetModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfSheetModal.swift; sourceTree = "<group>"; };
 		AAD3DB8126D30D3300531E92 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		AAD3DB8F26D3258900531E92 /* FaviconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaviconView.swift; sourceTree = "<group>"; };
 		AAD3DBC726D33D1D00531E92 /* AccountView+AccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountView+AccountDetailView.swift"; sourceTree = "<group>"; };
@@ -297,6 +299,8 @@
 		AAD3DBE626D342AB00531E92 /* String+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Misc.swift"; sourceTree = "<group>"; };
 		AAD3DBE726D342AB00531E92 /* URL+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Misc.swift"; sourceTree = "<group>"; };
 		AAE4A8BC26CDFB3200D1C58E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AAF56EB126DD6F75003581AC /* NewCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewCardView.swift; path = "NewCardView.swift"; sourceTree = "<group>"; };
+		AAFAF5E926DD5E0900CD1B48 /* ParallaxMotionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParallaxMotionModifier.swift; path = ParallaxMotionModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,7 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				AA49EA2526D3EB6400B12838 /* NewAccountView.swift */,
-				AA78F43026DC3DC100F12D63 /* NewCardView.swift */,
+				AAF56EB126DD6F75003581AC /* NewCardView.swift */,
 				AAD3DBB126D3365100531E92 /* VaultView */,
 			);
 			path = Vault;
@@ -412,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				AA3754F426DD3D18007FF26F /* CardView.swift */,
+				AAFAF5E926DD5E0900CD1B48 /* ParallaxMotionModifier.swift */,
 			);
 			path = CardView;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 				AAD3DBB726D33B6400531E92 /* AccountView */,
 				AA3754F326DD3D0C007FF26F /* CardView */,
 				AAE4A8BB26CDFB3200D1C58E /* SettingsView */,
+				AA9B316D26DD6C170042BC58 /* HalfSheetModal.swift */,
 				AAD3DB8F26D3258900531E92 /* FaviconView.swift */,
 			);
 			path = Views;
@@ -942,11 +948,11 @@
 				AA49EA2626D3EB6400B12838 /* NewAccountView.swift in Sources */,
 				AA49EA2126D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */,
 				AA3754EC26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
+				AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA05CD0026CDDDA300E27F6D /* CryptoSecurityService.swift in Sources */,
 				AA49EA3726D3EB9700B12838 /* MultipeerService.swift in Sources */,
 				AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */,
 				AAD3DBC826D33D2500531E92 /* AccountView+AccountDetailView.swift in Sources */,
-				AA78F43126DC3DC100F12D63 /* NewCardView.swift in Sources */,
 				AA49EA2926D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AAD3DBAA26D3351400531E92 /* ImportView.swift in Sources */,
 				AA49EA2326D3EB5A00B12838 /* VaultView+List.swift in Sources */,
@@ -963,6 +969,8 @@
 				AA49EA3F26D3EBA300B12838 /* Data+Misc.swift in Sources */,
 				AA49EA1D26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA2E26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
+				AA9B316E26DD6C180042BC58 /* HalfSheetModal.swift in Sources */,
+				AAFAF5EA26DD5E0900CD1B48 /* ParallaxMotionModifier.swift in Sources */,
 				AA8B503226CD641D003C92AE /* Persistence.swift in Sources */,
 				AA8B502E26CD641D003C92AE /* OpenSesameApp.swift in Sources */,
 				AA8B503026CD641D003C92AE /* ContentView.swift in Sources */,
@@ -989,10 +997,10 @@
 				AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
-				AA78F43226DC3DC100F12D63 /* NewCardView.swift in Sources */,
 				AA49EA2F26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
 				AAD3DBC926D33D2600531E92 /* AccountView+AccountDetailView.swift in Sources */,
 				AA49EA3C26D3EB9700B12838 /* ShareableAccount.swift in Sources */,
+				AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA49EA2426D3EB5A00B12838 /* VaultView+List.swift in Sources */,
 				AA49EA3A26D3EB9700B12838 /* MultipeerShareSheet.swift in Sources */,
 				AA49EA2A26D3EB7500B12838 /* AccountView+Content.swift in Sources */,
@@ -1090,7 +1098,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1119,7 +1127,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1149,7 +1157,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1179,7 +1187,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1323,7 +1331,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1358,7 +1366,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1397,7 +1405,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1434,7 +1442,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1772,8 +1780,7 @@
 				AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */,
 			);
 			currentVersion = AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */;
-			name = OpenSesame.xcdatamodeld;
-			path = "../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/OpenSesame.xcdatamodeld";
+			path = OpenSesame.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -24,10 +24,10 @@ struct NewAccountView: View {
     // MARK: - View
     var body: some View {
         VStack {
-            Text("New Account")
-                .font(.title.bold())
-                .frame(maxWidth: .infinity)
-                .padding([.top, .horizontal])
+//            Text("New Account")
+//                .font(.title.bold())
+//                .frame(maxWidth: .infinity)
+//                .padding([.top, .horizontal])
             GroupBox {
                 VStack(spacing: 10) {
                     VStack(alignment: .leading) {

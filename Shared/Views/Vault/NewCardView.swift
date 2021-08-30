@@ -38,7 +38,7 @@ struct NewCardView: View {
                     HStack {
                         TextField("Card Number", text: $cardNumber)
                             .textFieldStyle(.plain)
-                            .font(.title2)
+                            .font(.system(.title2, design: .monospaced))
                             .frame(maxWidth: .infinity)
                         HStack(alignment: .bottom) {
                             Text("Valid Thru")
@@ -58,16 +58,27 @@ struct NewCardView: View {
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(Color("Tertiary"))
+                        .fill(LinearGradient(colors: [Color("Tertiary"), Color("Tertiary").opacity(0.7)], startPoint: .top, endPoint: .bottom))
+#if os(macOS)
                         .shadow(radius: 15, y: 8)
+#else
+                        .shadow(radius: 30, y: 8)
+#endif
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .stroke(lineWidth: 2)
                         .fill(Color(white: 0.5, opacity: 0.25))
                 }.compositingGroup()
             )
             .padding()
-            .aspectRatio(1.6, contentMode: .fill)
+            .aspectRatio(1.6, contentMode: .fit)
+#if os(macOS)
             .frame(height: 250)
+#else
+            .padding(.top)
+#endif
+#if os(iOS)
+            Spacer()
+#endif
             HStack {
                 Button("Cancel", role: .cancel) {
                     dismiss.callAsFunction()
@@ -77,12 +88,14 @@ struct NewCardView: View {
                 Spacer()
                 
                 Button("Add", action: add)
-                .keyboardShortcut(.defaultAction)
-                .disabled(name.isEmpty || holder.isEmpty || cardNumber.isEmpty || cardNumber.count < 15)
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(name.isEmpty || holder.isEmpty || cardNumber.isEmpty || cardNumber.count < 15)
             }.padding()
         }
 #if os(macOS)
         .frame(width: 400)
+#else
+        .frame(maxWidth: 400)
 #endif
     }
     
