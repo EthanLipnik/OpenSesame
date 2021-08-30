@@ -94,7 +94,7 @@ struct NewAccountView: View {
             }.padding()
         }
 #if os(macOS)
-        .frame(width: 300, height: 400)
+        .frame(width: 300)
 #endif
     }
     

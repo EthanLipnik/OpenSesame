@@ -30,6 +30,8 @@ struct LockView: View {
     @State var isAuthenticating: Bool = false
     @State var needsToResetPassword: Bool = false
     
+    @StateObject var userSettings = UserSettings.default
+    
     
     // MARK: - Variable Types
     public enum UnlockMethod {
@@ -50,7 +52,7 @@ struct LockView: View {
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
-            Image("Icon")
+            Image("\(userSettings.selectedIcon)Icon")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 250, height: 250)

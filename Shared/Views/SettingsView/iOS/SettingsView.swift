@@ -12,6 +12,10 @@ struct SettingsView: View {
     
     @State private var isImporting: Bool = false
     
+    private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
+    
+    @StateObject var userSettings = UserSettings.default
+    
     var body: some View {
         Form {
             // MARK: - Syncing
@@ -46,7 +50,24 @@ struct SettingsView: View {
                 } label: {
                     Label("Import", systemImage: "square.and.arrow.down")
                 }
-
+            }
+            Section("Appearance") {
+                Picker(selection: $userSettings.selectedIcon) {
+                    ForEach(icons, id: \.self) { icon in
+                        HStack(alignment: .top) {
+                            HStack {
+                                Image("\(icon)Icon")
+                                    .renderingMode(.original)
+                                    .resizable()
+                                    .frame(width: 60, height: 60)
+                                    .cornerRadius(15)
+                                Text(icon)
+                            }
+                        }.tag(icon)
+                    }
+                } label: {
+                    Label("Icon", systemImage: "app.fill")
+                }
             }
         }
             .navigationTitle("Settings")
