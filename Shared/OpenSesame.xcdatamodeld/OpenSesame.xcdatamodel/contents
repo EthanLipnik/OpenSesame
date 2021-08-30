@@ -6,6 +6,7 @@
         <attribute name="isPinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="onAppleWatch" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="otpAuth" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="Binary" allowsCloudEncryption="YES"/>
         <attribute name="passwordLength" attributeType="Integer 16" defaultValueString="8" usesScalarValueType="YES"/>
@@ -19,6 +20,7 @@
         <attribute name="isPinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="Binary"/>
+        <attribute name="onAppleWatch" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="vault" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vault" inverseName="cards" inverseEntity="Vault"/>
     </entity>
     <entity name="Vault" representedClassName="Vault" syncable="YES" codeGenerationType="class">
@@ -27,8 +29,8 @@
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="vault" inverseEntity="Card"/>
     </entity>
     <elements>
+        <element name="Account" positionX="-36" positionY="18" width="128" height="209"/>
+        <element name="Card" positionX="-9" positionY="117" width="128" height="134"/>
         <element name="Vault" positionX="-63" positionY="-18" width="128" height="74"/>
-        <element name="Account" positionX="-36" positionY="18" width="128" height="194"/>
-        <element name="Card" positionX="-9" positionY="117" width="128" height="119"/>
     </elements>
 </model>

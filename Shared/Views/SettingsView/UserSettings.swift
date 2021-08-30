@@ -24,5 +24,11 @@ class UserSettings: ObservableObject {
             UIApplication.shared.setAlternateIconName(selectedIcon != "Default" ? selectedIcon : nil)
         }
     }
+#else
+    var selectedIcon: String {
+        get {
+            return "Default"
+        }
+    }
 #endif
 }
