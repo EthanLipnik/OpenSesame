@@ -1,0 +1,113 @@
+//
+//  NewCardView.swift
+//  NewCardView
+//
+//  Created by Ethan Lipnik on 8/29/21.
+//
+
+import SwiftUI
+
+struct NewCardView: View {
+    // MARK: - Environment
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) var viewContext
+    
+    // MARK: - Variables
+    @State private var name: String = ""
+    @State private var holder: String = ""
+    @State private var cardNumber: String = ""
+    @State private var expirationDate: Date = Date()
+    
+    let selectedVault: Vault
+    
+    // MARK: - View
+    var body: some View {
+        VStack {
+            VStack {
+                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                    .fill(Color.secondary.opacity(0.25))
+                    .frame(height: 30)
+                VStack(alignment: .leading) {
+                    TextField("Name", text: $name)
+                        .textFieldStyle(.plain)
+                        .font(.title2)
+                    TextField("Holder", text: $holder)
+                        .textFieldStyle(.plain)
+                        .font(.title2)
+                    Spacer()
+                    HStack {
+                        TextField("Card Number", text: $cardNumber)
+                            .textFieldStyle(.plain)
+                            .font(.title2)
+                            .frame(maxWidth: .infinity)
+                        HStack(alignment: .bottom) {
+                            Text("Valid Thru")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            DatePicker("Expiration Date", selection: $expirationDate, displayedComponents: [.date])
+#if os(macOS)
+                                .datePickerStyle(.field)
+#endif
+                                .font(.title3)
+                                .labelsHidden()
+                        }
+                    }
+                }
+            }
+            .padding()
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color("Tertiary"))
+                        .shadow(radius: 15, y: 8)
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .stroke(lineWidth: 2)
+                        .fill(Color(white: 0.5, opacity: 0.25))
+                }.compositingGroup()
+            )
+            .padding()
+            .aspectRatio(1.6, contentMode: .fill)
+            .frame(height: 250)
+            HStack {
+                Button("Cancel", role: .cancel) {
+                    dismiss.callAsFunction()
+                }
+                .keyboardShortcut(.cancelAction)
+                
+                Spacer()
+                
+                Button("Add", action: add)
+                .keyboardShortcut(.defaultAction)
+                .disabled(name.isEmpty || holder.isEmpty || cardNumber.isEmpty || cardNumber.count < 15)
+            }.padding()
+        }
+#if os(macOS)
+        .frame(width: 400)
+#endif
+    }
+    
+    // MARK: - Functions
+    private func add() {
+        do {
+            let card = Card(context: viewContext)
+            card.name = name
+            card.holder = holder
+            card.number = try CryptoSecurityService.encrypt(cardNumber)
+            card.expirationDate = expirationDate
+            
+            selectedVault.addToCards(card)
+            
+            try viewContext.save()
+            
+            dismiss.callAsFunction()
+        } catch {
+            print(error)
+        }
+    }
+}
+
+struct NewCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewCardView(selectedVault: .init())
+    }
+}

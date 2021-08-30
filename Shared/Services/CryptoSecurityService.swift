@@ -67,11 +67,16 @@ class CryptoSecurityService {
         return combined
     }
     
-    static func randomString(length: Int, method: StringGeneratorMethod = .regular) -> String? {
+    static func randomString(length: Int, numbersOnly: Bool = false, method: StringGeneratorMethod = .regular) -> String? {
         
         switch method {
         case .regular:
-            let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            var letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            
+            if numbersOnly {
+                letters = "123456789"
+            }
+            
             let len = UInt32(letters.length)
             
             var randomString = ""

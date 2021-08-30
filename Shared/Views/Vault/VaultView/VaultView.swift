@@ -16,32 +16,42 @@ struct VaultView: View {
     
     // MARK: - CoreData Variables
     @FetchRequest var accounts: FetchedResults<Account>
+    @FetchRequest var cards: FetchedResults<Card>
     
     // MARK: - Variables
     let vault: Vault
     
     @State var selectedAccount: Account? = nil
+    @State var selectedCard: Card? = nil
     
     @State var shouldDeleteAccount: Bool = false
     @State var accountToBeDeleted: Account? = nil
     
     @State var isCreatingNewAccount: Bool = false
+    @State var isCreatingNewCard: Bool = false
+    
     @State var search: String = ""
     
     // MARK: - Init
-    init(vault: Vault, selectedAccount: Account? = nil) {
+    init(vault: Vault, selectedAccount: Account? = nil, selectedCard: Card? = nil) {
         self.vault = vault
         self._selectedAccount = .init(initialValue: selectedAccount)
+        self._selectedCard = .init(initialValue: selectedCard)
         
         self._accounts = FetchRequest(sortDescriptors: [.init(key: "domain", ascending: true)],
                                       predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
+        self._cards = FetchRequest(sortDescriptors: [],
+                                  predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
     }
     
     // MARK: - View
     var body: some View {
         list
         .sheet(isPresented: $isCreatingNewAccount) {
-            NewAccountView(vault: 0)
+            NewAccountView(selectedVault: vault)
+        }
+        .sheet(isPresented: $isCreatingNewCard) {
+            NewCardView(selectedVault: vault)
         }
         .searchable(text: $search)
 #if os(macOS)
@@ -59,25 +69,39 @@ struct VaultView: View {
             }
 #endif
             ToolbarItem {
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
+                Menu {
+                    Button {
+                        isCreatingNewAccount.toggle()
+                    } label: {
+                        Label("Add Account", systemImage: "person")
+                    }
+                    Button {
+                        isCreatingNewCard.toggle()
+                    } label: {
+                        Label("Add Card", systemImage: "creditcard")
+                    }
+                } label: {
+                    Label("Add", systemImage: "plus")
                 }
             }
         }
         .onOpenURL { url in
             if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems {
-                if let type = queryItems.first(where: { $0.name == "type" }), type.value == "account", url == "openSesame://new" {
-                    addItem()
+                if let type = queryItems.first(where: { $0.name == "type" }), url == "openSesame://new" {
+                    switch type.value {
+                    case "account":
+                        isCreatingNewAccount = true
+                    case "card":
+                        isCreatingNewCard = true
+                    default:
+                        break
+                    }
                 }
             } else {
                 print("Badly formatted URL")
             }
         }
-    }
-    
-    private func addItem() {
-        isCreatingNewAccount = true
     }
     
     func deleteItems(offsets: IndexSet) {

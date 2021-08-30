@@ -1,6 +1,6 @@
 //
-//  VaultView+Item.swift
-//  VaultView+Item
+//  VaultView+AccountItemView.swift
+//  VaultView+AccountItemView
 //
 //  Created by Ethan Lipnik on 8/22/21.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension VaultView {
-    struct ItemView: View {
+    struct AccountItemView: View {
         let account: Account
         @Binding var selectedAccount: Account?
         

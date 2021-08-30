@@ -38,33 +38,38 @@ struct PersistenceController {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         } else {
             let storeDescription = NSPersistentStoreDescription(url: PersistenceController.storeURL)
-            
+            storeDescription.shouldMigrateStoreAutomatically = true
+            storeDescription.shouldInferMappingModelAutomatically = true
+
             let cloudkitOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.ethanlipnik.OpenSesame")
             storeDescription.cloudKitContainerOptions = cloudkitOptions
-            
+
             let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
             storeDescription.setOption(true as NSNumber,
                                        forKey: remoteChangeKey)
-            
+
             storeDescription.setOption(true as NSNumber,
                                        forKey: NSPersistentHistoryTrackingKey)
-            
+
 #if !os(macOS)
             storeDescription.setOption(FileProtectionType.complete as NSObject, forKey: NSPersistentStoreFileProtectionKey)
 #endif
-            
+
             container.persistentStoreDescriptions = [storeDescription]
             
             print("CoreData location", PersistenceController.storeURL.path)
         }
         
-        if let coreDataVersion = UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.float(forKey: "coreDataVersion"), coreDataVersion < 1.1 {
+        if let coreDataVersion = UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.float(forKey: "coreDataVersion"), coreDataVersion < 1.2 {
             try? FileManager.default.removeItem(at: PersistenceController.storeURL)
-            try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-                .synchronizable(true)
-                .remove("encryptionTest")
             
-            UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.set(1.1, forKey: "coreDataVersion")
+            UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.set(1.2, forKey: "coreDataVersion")
+            
+            do {
+                try self.downloadStoreFrom(.iCloud)
+            } catch {
+                print(error)
+            }
         }
         
         loadStore()
@@ -84,6 +89,9 @@ struct PersistenceController {
     
     func loadStore() {
         let viewContext = container.viewContext
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.automaticallyMergesChangesFromParent = true
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -98,9 +106,6 @@ struct PersistenceController {
                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             } else {
-                viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-                viewContext.automaticallyMergesChangesFromParent = true
-                
                 try? viewContext.setQueryGenerationFrom(.current)
             }
         })
@@ -125,11 +130,17 @@ struct PersistenceController {
     func downloadStoreFrom(_ service: CloudService) throws {
         switch service {
         case .iCloud:
-            if let iCloudContainer = PersistenceController.containerUrl?.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite") {
+            if let iCloudContainer = PersistenceController.containerUrl {
+                
+                let allContainers = try FileManager.default.contentsOfDirectory(atPath: iCloudContainer.path)
+                let containersToDownload = allContainers
+                    .filter({ $0.contains(".icloud") })
+                try containersToDownload.forEach({ try FileManager.default.startDownloadingUbiquitousItem(at: URL(fileURLWithPath: $0)) })
+                
                 if FileManager.default.fileExists(atPath: PersistenceController.storeURL.path) {
                     try FileManager.default.removeItem(at: PersistenceController.storeURL)
                 }
-                try FileManager.default.copyItem(at: iCloudContainer, to: PersistenceController.storeURL)
+                try FileManager.default.copyItem(at: iCloudContainer.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite"), to: PersistenceController.storeURL)
                 
                 loadStore()
             }

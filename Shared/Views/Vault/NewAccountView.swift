@@ -15,17 +15,11 @@ struct NewAccountView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     
-    // MARK: - CoreData
-    @FetchRequest(
-        sortDescriptors: [],
-        animation: .default)
-    private var vaults: FetchedResults<Vault>
-    
     // MARK: - Variables
     @State private var website: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
-    @State var vault: Int = 0
+    let selectedVault: Vault
     
     // MARK: - View
     var body: some View {
@@ -88,30 +82,24 @@ struct NewAccountView: View {
 #endif
             }
             .padding()
-            Picker("Vault", selection: $vault) {
-                ForEach(0..<vaults.count) { i in
-                    Text(vaults[i].name!)
-                        .tag(i)
-                }
-            }
-            .padding(.horizontal)
             Spacer()
-            GroupBox {
-                HStack {
-                    Button("Cancel") {
-                        dismiss.callAsFunction()
-                    }.keyboardShortcut(.cancelAction)
-                    Spacer()
-                    Button("Add", action: add)
-                        .keyboardShortcut(.defaultAction)
-                }.padding(5)
-            }
+            HStack {
+                Button("Cancel") {
+                    dismiss.callAsFunction()
+                }.keyboardShortcut(.cancelAction)
+                Spacer()
+                Button("Add", action: add)
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(website.isEmpty || username.isEmpty || password.isEmpty)
+            }.padding()
         }
 #if os(macOS)
         .frame(width: 300, height: 400)
 #endif
     }
     
+    
+    // MARK: - Functions
     private func add() {
         do {
             let encryptedPassword = try CryptoSecurityService.encrypt(password)
@@ -130,7 +118,7 @@ struct NewAccountView: View {
             newAccount.url = website
             newAccount.username = username
             
-            vaults[vault].addToAccounts(newAccount)
+            selectedVault.addToAccounts(newAccount)
             
             try viewContext.save()
             
@@ -161,6 +149,6 @@ struct NewAccountView: View {
 
 struct NewAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        NewAccountView()
+        NewAccountView(selectedVault: .init())
     }
 }
