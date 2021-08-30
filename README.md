@@ -29,13 +29,13 @@ It syncs with iCloud and encrypts your data to make sure only **you** get access
 - CoreData
 - 100% SwiftUI
 - Native support for macOS and iOS.
+- Credit/Debit card support
+- Notes field
 
 ## Planned Features
 
 - Better password bulk deleting
 - Menubar access
-- Notes field
-- Credit/Debit card support
 - Dropbox, Google Drive, personal server support
 - OTP Autofill
 - OTP QR codes
