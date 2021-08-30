@@ -9,13 +9,6 @@ import SwiftUI
 
 @main
 struct OpenSesameApp: SwiftUI.App {
-    // MARK: - App Delegate
-    /// This is used for registering for remote notifications and any other functions that requires the AppDelegate
-    #if os(iOS)
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    #else
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    #endif
     
     // MARK: - Environment
     @Environment(\.scenePhase) var scenePhase

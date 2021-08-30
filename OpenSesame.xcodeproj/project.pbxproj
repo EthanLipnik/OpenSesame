@@ -46,8 +46,6 @@
 		AA3754F526DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
 		AA3754F626DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
 		AA41467726D3451900254812 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = AA41467626D3451900254812 /* SwiftOTP */; };
-		AA49EA0426D3EB0100B12838 /* AppDelegate iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0226D3EB0100B12838 /* AppDelegate iOS.swift */; };
-		AA49EA0626D3EB0400B12838 /* AppDelegate macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0326D3EB0100B12838 /* AppDelegate macOS.swift */; };
 		AA49EA0926D3EB1600B12838 /* ContentView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */; };
 		AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */; };
 		AA49EA0B26D3EB1600B12838 /* ContentView+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0826D3EB1600B12838 /* ContentView+List.swift */; };
@@ -242,8 +240,6 @@
 		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = "../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/CardView/CardView.swift"; sourceTree = "<group>"; };
 		AA49EA0026D3EAF000B12838 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA49EA0126D3EAF000B12838 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
-		AA49EA0226D3EB0100B12838 /* AppDelegate iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate iOS.swift"; sourceTree = "<group>"; };
-		AA49EA0326D3EB0100B12838 /* AppDelegate macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate macOS.swift"; sourceTree = "<group>"; };
 		AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentView+Add.swift"; sourceTree = "<group>"; };
 		AA49EA0826D3EB1600B12838 /* ContentView+List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentView+List.swift"; sourceTree = "<group>"; };
 		AA49EA0D26D3EB2500B12838 /* LockView+CreatePassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LockView+CreatePassword.swift"; sourceTree = "<group>"; };
@@ -381,15 +377,6 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
-		AA02830326D04B13004FCEA7 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				AA49EA0226D3EB0100B12838 /* AppDelegate iOS.swift */,
-				AA49EA0326D3EB0100B12838 /* AppDelegate macOS.swift */,
-			);
-			path = AppDelegate;
-			sourceTree = "<group>";
-		};
 		AA05CCCF26CDB16A00E27F6D /* Vault */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,7 +474,6 @@
 			isa = PBXGroup;
 			children = (
 				AA8B500526CD641C003C92AE /* OpenSesameApp.swift */,
-				AA02830326D04B13004FCEA7 /* AppDelegate */,
 				AA519A7E26CF283C00C1E354 /* Views */,
 				AA980E4626D2DF11001CFF4E /* Multipeer */,
 				AAD3DBE526D342AB00531E92 /* Extensions */,
@@ -982,7 +968,6 @@
 				AA8B503026CD641D003C92AE /* ContentView.swift in Sources */,
 				AA49EA1726D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
 				AA49EA1326D3EB2600B12838 /* LockView+Functions.swift in Sources */,
-				AA49EA0426D3EB0100B12838 /* AppDelegate iOS.swift in Sources */,
 				AA016A3226D577B8007397A7 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1022,7 +1007,6 @@
 				AA3754ED26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
 				AA49EA4026D3EBA300B12838 /* Data+Misc.swift in Sources */,
 				AA49EA1426D3EB2600B12838 /* LockView+Functions.swift in Sources */,
-				AA49EA0626D3EB0400B12838 /* AppDelegate macOS.swift in Sources */,
 				AA1F6A2A26CD6993004E1A81 /* VaultView.swift in Sources */,
 				AA49EA1B26D3EB4300B12838 /* ImportView+Import.swift in Sources */,
 				AA8B503326CD641D003C92AE /* Persistence.swift in Sources */,
