@@ -219,8 +219,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AA016A3126D577B8007397A7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = "../../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/SettingsView/iOS/SettingsView.swift"; sourceTree = "<group>"; };
-		AA016A3526D586DC007397A7 /* SettingsView+SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SettingsView+SyncView.swift"; path = "../../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/SettingsView/macOS/SettingsView+SyncView.swift"; sourceTree = "<group>"; };
+		AA016A3126D577B8007397A7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA016A3526D586DC007397A7 /* SettingsView+SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+SyncView.swift"; sourceTree = "<group>"; };
 		AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationService.swift; sourceTree = "<group>"; };
 		AA05CCE026CDDA5200E27F6D /* AutoFill iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AutoFill iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA05CCE326CDDA5200E27F6D /* CredentialProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialProviderViewController.swift; sourceTree = "<group>"; };
