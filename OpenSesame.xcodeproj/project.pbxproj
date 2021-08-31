@@ -27,6 +27,12 @@
 		AA05CD0326CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */; };
 		AA05CD0426CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */; };
 		AA05CD0626CDE08C00E27F6D /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = AA05CD0526CDE08C00E27F6D /* KeychainAccess */; };
+		AA08245026DDC304006BE956 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08244F26DDC304006BE956 /* Item.swift */; };
+		AA08245126DDC304006BE956 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08244F26DDC304006BE956 /* Item.swift */; };
+		AA08245226DDC304006BE956 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08244F26DDC304006BE956 /* Item.swift */; };
+		AA08245326DDC304006BE956 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08244F26DDC304006BE956 /* Item.swift */; };
+		AA08245526DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */; };
+		AA08245626DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */; };
 		AA12A79F26D0A5DB000418C7 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = AA12A79E26D0A5DB000418C7 /* CSV */; };
 		AA12A7A126D0A5E2000418C7 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = AA12A7A026D0A5E2000418C7 /* CSV */; };
 		AA1F6A2526CD68CF004E1A81 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F6A2426CD68CF004E1A81 /* AuthenticationServices.framework */; };
@@ -250,6 +256,8 @@
 		AA05CCE826CDDA5200E27F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA05CCE926CDDA5200E27F6D /* AutoFill_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutoFill_iOS.entitlements; sourceTree = "<group>"; };
 		AA05CCFE26CDDD9D00E27F6D /* CryptoSecurityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSecurityService.swift; sourceTree = "<group>"; };
+		AA08244F26DDC304006BE956 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Item.swift; path = "Item.swift"; sourceTree = "<group>"; };
+		AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VaultView+ViewModel.swift"; path = "VaultView+ViewModel.swift"; sourceTree = "<group>"; };
 		AA1F6A2426CD68CF004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		AA1F6A2626CD68D4004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
 		AA1F6A2826CD6993004E1A81 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
@@ -446,6 +454,7 @@
 			children = (
 				AA8B500726CD641C003C92AE /* Persistence.swift */,
 				AA3754EA26DD28E4007FF26F /* OpenSesame.xcdatamodeld */,
+				AA08244F26DDC304006BE956 /* Item.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -693,6 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1F6A2826CD6993004E1A81 /* VaultView.swift */,
+				AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */,
 				AA49EA2026D3EB5A00B12838 /* VaultView+List.swift */,
 				AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */,
 				AA49EA1F26D3EB5A00B12838 /* VaultView+AccountItemView.swift */,
@@ -1023,6 +1033,7 @@
 				AAD3DBED26D342B900531E92 /* String+Misc.swift in Sources */,
 				AA49EA5026D3EBF300B12838 /* Credentials.swift in Sources */,
 				AA3754EE26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
+				AA08245226DDC304006BE956 /* Item.swift in Sources */,
 				AAD3DBEC26D342B900531E92 /* URL+Misc.swift in Sources */,
 				AA49EA4626D3EBCE00B12838 /* Data+Misc.swift in Sources */,
 				AA05CD0426CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */,
@@ -1041,6 +1052,7 @@
 				AA49EA5126D3EBF300B12838 /* Credentials.swift in Sources */,
 				AAD3DBEE26D342B900531E92 /* URL+Misc.swift in Sources */,
 				AA3754EF26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
+				AA08245326DDC304006BE956 /* Item.swift in Sources */,
 				AA49EA4826D3EBCE00B12838 /* Data+Misc.swift in Sources */,
 				AA519A6126CEE5B700C1E354 /* CredentialProviderViewController.swift in Sources */,
 				AA340B6D26D2BE33003A2CF9 /* Persistence.swift in Sources */,
@@ -1083,6 +1095,7 @@
 				AA49EA3026D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */,
 				AA3754F526DD3D18007FF26F /* CardView.swift in Sources */,
 				AA49EA4126D3EBA300B12838 /* Date+Misc.swift in Sources */,
+				AA08245026DDC304006BE956 /* Item.swift in Sources */,
 				AA519A9126CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */,
 				AAD3DBE926D342B800531E92 /* String+Misc.swift in Sources */,
 				AA1F6A2926CD6993004E1A81 /* VaultView.swift in Sources */,
@@ -1090,6 +1103,7 @@
 				AA49EA3F26D3EBA300B12838 /* Data+Misc.swift in Sources */,
 				AA49EA1D26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA2E26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
+				AA08245526DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */,
 				AA9B316E26DD6C180042BC58 /* HalfSheetModal.swift in Sources */,
 				AAFAF5EA26DD5E0900CD1B48 /* ParallaxMotionModifier.swift in Sources */,
 				AA8B503226CD641D003C92AE /* Persistence.swift in Sources */,
@@ -1115,6 +1129,7 @@
 				AAD3DB9126D3258900531E92 /* FaviconView.swift in Sources */,
 				AA49EA4F26D3EBE100B12838 /* SettingsView+MenuBarView.swift in Sources */,
 				AA49EA4D26D3EBE100B12838 /* SettingsView+GeneralView.swift in Sources */,
+				AA08245126DDC304006BE956 /* Item.swift in Sources */,
 				AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
@@ -1144,6 +1159,7 @@
 				AA49EA1626D3EB2600B12838 /* LockView+TextField.swift in Sources */,
 				AA49EA2726D3EB6400B12838 /* NewAccountView.swift in Sources */,
 				AA49EA3326D3EB8600B12838 /* AccountDetailView+PasswordView.swift in Sources */,
+				AA08245626DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */,
 				AA49EA2226D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */,
 				AA8B502F26CD641D003C92AE /* OpenSesameApp.swift in Sources */,
 				AA8B503126CD641D003C92AE /* ContentView.swift in Sources */,

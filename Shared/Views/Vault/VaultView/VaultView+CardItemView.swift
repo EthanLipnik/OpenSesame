@@ -9,11 +9,12 @@ import SwiftUI
 
 extension VaultView {
     struct CardItemView: View {
+        @EnvironmentObject var viewModel: ViewModel
+        
         let card: Card
-        @Binding var selectedCard: Card?
         
         var body: some View {
-            NavigationLink(tag: card, selection: $selectedCard) {
+            NavigationLink(tag: .init(card), selection: $viewModel.selectedItem) {
                 CardView(card: card)
             } label: {
                 VStack(alignment: .leading) {

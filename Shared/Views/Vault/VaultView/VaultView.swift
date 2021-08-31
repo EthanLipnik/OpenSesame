@@ -21,12 +21,11 @@ struct VaultView: View {
     // MARK: - Variables
     let vault: Vault
     
-    @State var selectedAccount: Account? = nil
-    @State var selectedCard: Card? = nil
+    @StateObject var viewModel: ViewModel
     
     @State var shouldDeleteAccount: Bool = false
     @State var shouldDeleteCard: Bool = false
-    @State var itemToBeDeleted: AnyObject? = nil
+    @State var itemToBeDeleted: Item? = nil
     
     @State var isCreatingNewItem: Bool = false
     @State var itemToCreate: ItemCreationType = .none
@@ -40,15 +39,20 @@ struct VaultView: View {
     }
     
     // MARK: - Init
-    init(vault: Vault, selectedAccount: Account? = nil, selectedCard: Card? = nil) {
+    init(vault: Vault, selectedItem: Item? = nil) {
         self.vault = vault
-        self._selectedAccount = .init(initialValue: selectedAccount)
-        self._selectedCard = .init(initialValue: selectedCard)
         
         self._accounts = FetchRequest(sortDescriptors: [.init(key: "domain", ascending: true)],
                                       predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
         self._cards = FetchRequest(sortDescriptors: [],
                                    predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
+        
+        let viewModel = ViewModel()
+        if let selectedItem = selectedItem {
+            viewModel.selectedItem = selectedItem
+            viewModel.selectedItems.insert(selectedItem)
+        }
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     // MARK: - View

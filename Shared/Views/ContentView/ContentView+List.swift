@@ -59,7 +59,7 @@ extension ContentView {
                     ForEach(pinnedAccounts) { account in
                         NavigationLink {
                             if let vault = account.vault {
-                                VaultView(vault: vault, selectedAccount: account)
+                                VaultView(vault: vault, selectedItem: .init(account))
                             } else {
                                 Text("Failed to get vault for pinned account")
                             }
@@ -92,7 +92,7 @@ extension ContentView {
                     ForEach(pinnedCards) { card in
                         NavigationLink {
                             if let vault = card.vault {
-                                VaultView(vault: vault, selectedCard: card)
+                                VaultView(vault: vault, selectedItem: .init(card))
                             } else {
                                 Text("Failed to get vault for pinned card")
                             }

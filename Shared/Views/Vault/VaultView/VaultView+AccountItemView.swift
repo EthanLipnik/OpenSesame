@@ -9,8 +9,9 @@ import SwiftUI
 
 extension VaultView {
     struct AccountItemView: View {
+        @EnvironmentObject var viewModel: ViewModel
+        
         let account: Account
-        @Binding var selectedAccount: Account?
         
         var body: some View {
             var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain ?? "Unknown website")
@@ -21,7 +22,7 @@ extension VaultView {
                 }
             }
             
-            return NavigationLink(tag: account, selection: $selectedAccount) {
+            return NavigationLink(tag: .init(account), selection: $viewModel.selectedItem) {
                 AccountView(account: account)
             } label: {
                 VStack(alignment: .leading) {

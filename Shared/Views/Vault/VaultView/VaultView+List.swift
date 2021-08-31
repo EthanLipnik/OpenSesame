@@ -9,11 +9,12 @@ import SwiftUI
 
 extension VaultView {
     var list: some View {
-        List {
+        List(selection: $viewModel.selectedItems) {
             if !cards.isEmpty {
                 Section("Cards") {
                     ForEach(search.isEmpty ? cards.map({ $0 }) : cards.filter({ $0.name?.lowercased().contains(search.lowercased()) ?? false })) { card in
-                        CardItemView(card: card, selectedCard: $selectedCard)
+                        CardItemView(card: card)
+                            .environmentObject(viewModel)
                             .contextMenu {
                                 Button {
                                     
@@ -24,12 +25,12 @@ extension VaultView {
                                     Label(card.isPinned ? "Unpin" : "Pin", systemImage: card.isPinned ? "pin.slash" : "pin")
                                 }
                                 Button("Delete", role: .destructive) {
-                                    itemToBeDeleted = card
+                                    itemToBeDeleted = .init(card)
                                     shouldDeleteCard.toggle()
                                 }
                             }
                     }.onDelete { indexSet in
-                        itemToBeDeleted = cards[indexSet.first!]
+                        itemToBeDeleted = .init(cards[indexSet.first!])
                         shouldDeleteCard.toggle()
                     }
                 }
@@ -43,7 +44,8 @@ extension VaultView {
                         
                         return website.contains(search.lowercased()) || username.contains(search.lowercased())
                     })) { account in
-                        AccountItemView(account: account, selectedAccount: $selectedAccount)
+                        AccountItemView(account: account)
+                            .environmentObject(viewModel)
                             .contextMenu {
                                 Button {
                                     
@@ -54,12 +56,12 @@ extension VaultView {
                                     Label(account.isPinned ? "Unpin" : "Pin", systemImage: account.isPinned ? "pin.slash" : "pin")
                                 }
                                 Button("Delete", role: .destructive) {
-                                    itemToBeDeleted = account
+                                    itemToBeDeleted = .init(account)
                                     shouldDeleteAccount.toggle()
                                 }
                             }
                     }.onDelete { indexSet in
-                        itemToBeDeleted = accounts[indexSet.first!]
+                        itemToBeDeleted = .init(accounts[indexSet.first!])
                         shouldDeleteAccount.toggle()
                     }
                 }
@@ -67,7 +69,7 @@ extension VaultView {
         }
         .confirmationDialog("Are you sure you want to delete this account? You cannot retreive it when it is gone.", isPresented: $shouldDeleteAccount) {
             Button("Delete", role: .destructive) {
-                deleteItems(offsets: IndexSet([accounts.firstIndex(of: itemToBeDeleted as! Account)!]), type: .account)
+                deleteItems(offsets: IndexSet([accounts.firstIndex(of: itemToBeDeleted!.account!)!]), type: .account)
             }
             
             Button("Cancel", role: .cancel) {
@@ -76,7 +78,7 @@ extension VaultView {
         }
         .confirmationDialog("Are you sure you want to delete this card? You cannot retreive it when it is gone.", isPresented: $shouldDeleteCard) {
             Button("Delete", role: .destructive) {
-                deleteItems(offsets: IndexSet([cards.firstIndex(of: itemToBeDeleted as! Card)!]), type: .card)
+                deleteItems(offsets: IndexSet([cards.firstIndex(of: itemToBeDeleted!.card!)!]), type: .card)
             }
             
             Button("Cancel", role: .cancel) {
