@@ -48,6 +48,8 @@ struct OpenSesameApp: SwiftUI.App {
                         .keyboardShortcut("n")
                     Link("New Account...", destination: URL(string: "openSesame://new?type=account")!)
                         .keyboardShortcut("n", modifiers: [.shift, .command])
+                    Link("New Card...", destination: URL(string: "openSesame://new?type=card")!)
+                        .keyboardShortcut("n", modifiers: [.shift, .option, .command])
                 }.disabled(isLocked)
             }
             

@@ -301,7 +301,7 @@
 		AA5EB74726DD805B00390B85 /* SilverIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SilverIcon@2x.png"; sourceTree = "<group>"; };
 		AA5EB74826DD805B00390B85 /* PurpleIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PurpleIcon@3x.png"; sourceTree = "<group>"; };
 		AA5EB74926DD805B00390B85 /* RedIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedIcon@3x.png"; sourceTree = "<group>"; };
-		AA5EB75C26DD84E800390B85 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserSettings.swift; path = "UserSettings.swift"; sourceTree = "<group>"; };
+		AA5EB75C26DD84E800390B85 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		AA8B500526CD641C003C92AE /* OpenSesameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSesameApp.swift; sourceTree = "<group>"; };
 		AA8B500626CD641C003C92AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA8B500726CD641C003C92AE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -439,6 +439,15 @@
 				AA05CCE926CDDA5200E27F6D /* AutoFill_iOS.entitlements */,
 			);
 			path = "AutoFill iOS";
+			sourceTree = "<group>";
+		};
+		AA08244E26DDC234006BE956 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AA8B500726CD641C003C92AE /* Persistence.swift */,
+				AA3754EA26DD28E4007FF26F /* OpenSesame.xcdatamodeld */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		AA3754F326DD3D0C007FF26F /* CardView */ = {
@@ -580,8 +589,7 @@
 				AA519A7E26CF283C00C1E354 /* Views */,
 				AA980E4626D2DF11001CFF4E /* Multipeer */,
 				AAD3DBE526D342AB00531E92 /* Extensions */,
-				AA8B500726CD641C003C92AE /* Persistence.swift */,
-				AA3754EA26DD28E4007FF26F /* OpenSesame.xcdatamodeld */,
+				AA08244E26DDC234006BE956 /* Persistence */,
 				AA8B500826CD641D003C92AE /* Assets.xcassets */,
 				AA05CCD326CDB84F00E27F6D /* Services */,
 				AA519A6E26CEE5DC00C1E354 /* AutoFill */,
@@ -685,9 +693,9 @@
 			isa = PBXGroup;
 			children = (
 				AA1F6A2826CD6993004E1A81 /* VaultView.swift */,
+				AA49EA2026D3EB5A00B12838 /* VaultView+List.swift */,
 				AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */,
 				AA49EA1F26D3EB5A00B12838 /* VaultView+AccountItemView.swift */,
-				AA49EA2026D3EB5A00B12838 /* VaultView+List.swift */,
 			);
 			path = VaultView;
 			sourceTree = "<group>";

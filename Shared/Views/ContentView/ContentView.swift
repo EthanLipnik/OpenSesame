@@ -24,6 +24,12 @@ struct ContentView: View {
         animation: .default)
     var pinnedAccounts: FetchedResults<Account>
     
+    @FetchRequest(
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "isPinned == %i", 1),
+        animation: .default)
+    var pinnedCards: FetchedResults<Card>
+    
     // MARK: - Variables
     @Binding var isLocked: Bool
     
