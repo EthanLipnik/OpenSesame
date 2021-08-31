@@ -7,6 +7,12 @@
 
 import Foundation
 
+#if canImport(AppKit)
+import AppKit.NSPasteboard
+#elseif canImport(UIKit)
+import UIKit.UIPasteboard
+#endif
+
 extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).uppercased() + self.lowercased().dropFirst()
@@ -36,5 +42,16 @@ extension String {
         }
         
         return urlStr
+    }
+    
+    func copyToPasteboard() {
+#if os(macOS)
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(self, forType: .string)
+#else
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = self
+#endif
     }
 }

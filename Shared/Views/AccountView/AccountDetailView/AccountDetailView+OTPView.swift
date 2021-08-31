@@ -18,7 +18,13 @@ extension AccountView.AccountDetailsView {
                         HStack {
                             Text(code)
                                 .font(.system(.largeTitle, design: .monospaced).bold())
-                                .textSelection(.enabled)
+                                .contextMenu {
+                                    Button {
+                                        code.copyToPasteboard()
+                                    } label: {
+                                        Label("Copy code", systemImage: "doc.on.doc")
+                                    }
+                                }
                             
                             if let date = otpService.verificationCodeDate {
                                 Spacer()

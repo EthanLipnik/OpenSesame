@@ -20,6 +20,13 @@ extension AccountView.AccountDetailsView {
                     Text(displayedPassword)
                         .font(.system(.headline, design: .monospaced))
                         .blur(radius: isShowingPassword ? 0 : 8)
+                        .contextMenu {
+                            Button {
+                                displayedPassword.copyToPasteboard()
+                            } label: {
+                                Label("Copy password", systemImage: "doc.on.doc")
+                            }.disabled(!isShowingPassword)
+                        }
                         .animation(.default, value: isShowingPassword)
                         .onTapGesture {
                             if !isShowingPassword {
@@ -58,15 +65,7 @@ extension AccountView.AccountDetailsView {
             if !isEditing {
                 Spacer()
                 Button {
-                    guard let decryptedPassword = decryptedPassword else { return }
-#if os(macOS)
-                    let pasteboard = NSPasteboard.general
-                    pasteboard.declareTypes([.string], owner: nil)
-                    pasteboard.setString(decryptedPassword, forType: .string)
-#else
-                    let pasteboard = UIPasteboard.general
-                    pasteboard.string = decryptedPassword
-#endif
+                    decryptedPassword?.copyToPasteboard()
                 } label: {
                     Image(systemName: "doc.on.doc.fill")
                 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
+    // MARK: - Variables
     let card: Card
     
 #if os(iOS)
@@ -18,14 +19,17 @@ struct CardView: View {
     @State private var decryptedNumber: String? = nil
     @State private var displayedNumber: String = ""
     
+    // MARK: - Init
     init(card: Card) {
         self.card = card
         
         self._displayedNumber = .init(initialValue: CryptoSecurityService.randomString(length: 15, numbersOnly: true)!)
     }
     
+    // MARK: - View
     var body: some View {
         let calendar = Calendar.current
+        let expirationDate = "\(calendar.component(.month, from: card.expirationDate!))/" + "\(calendar.component(.year, from: card.expirationDate!))".suffix(2)
         
         return ScrollView {
             VStack {
@@ -37,12 +41,26 @@ struct CardView: View {
                         .font(.title2)
                     Text(card.holder!)
                         .font(.title2)
+                        .contextMenu {
+                            Button {
+                                card.holder?.copyToPasteboard()
+                            } label: {
+                                Label("Copy card holder", systemImage: "doc.on.doc")
+                            }
+                        }
                     Spacer()
                     HStack {
                         Text(displayedNumber)
                             .font(.system(.title2, design: .monospaced).weight(.semibold))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .blur(radius: isShowingNumber ? 0 : 8)
+                            .contextMenu {
+                                Button {
+                                    displayedNumber.copyToPasteboard()
+                                } label: {
+                                    Label("Copy card number", systemImage: "doc.on.doc")
+                                }.disabled(!isShowingNumber)
+                            }
                             .animation(.default, value: isShowingNumber)
                             .onTapGesture {
                                 if !isShowingNumber {
@@ -80,8 +98,15 @@ struct CardView: View {
                             Text("Valid Thru")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            Text("\(calendar.component(.month, from: card.expirationDate!))/" + "\(calendar.component(.year, from: card.expirationDate!))".suffix(2))
+                            Text(expirationDate)
                                 .font(.system(.title3, design: .monospaced).bold())
+                                .contextMenu {
+                                    Button {
+                                        expirationDate.copyToPasteboard()
+                                    } label: {
+                                        Label("Copy expiration date", systemImage: "doc.on.doc")
+                                    }
+                                }
                         }
                     }
                 }
