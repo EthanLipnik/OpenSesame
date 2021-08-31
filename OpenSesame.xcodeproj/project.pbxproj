@@ -256,8 +256,8 @@
 		AA05CCE826CDDA5200E27F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA05CCE926CDDA5200E27F6D /* AutoFill_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutoFill_iOS.entitlements; sourceTree = "<group>"; };
 		AA05CCFE26CDDD9D00E27F6D /* CryptoSecurityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSecurityService.swift; sourceTree = "<group>"; };
-		AA08244F26DDC304006BE956 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Item.swift; path = "Item.swift"; sourceTree = "<group>"; };
-		AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VaultView+ViewModel.swift"; path = "VaultView+ViewModel.swift"; sourceTree = "<group>"; };
+		AA08244F26DDC304006BE956 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+ViewModel.swift"; sourceTree = "<group>"; };
 		AA1F6A2426CD68CF004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		AA1F6A2626CD68D4004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
 		AA1F6A2826CD6993004E1A81 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
@@ -1236,7 +1236,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1265,7 +1265,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1295,7 +1295,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1325,7 +1325,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1469,7 +1469,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1504,7 +1504,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1543,7 +1543,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1580,7 +1580,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;

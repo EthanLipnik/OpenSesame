@@ -90,7 +90,7 @@ struct LockView: View {
         }).padding(), alignment: .topTrailing)
 #endif
         .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
-            Button("Reset password") {
+            Button("Reset password", role: .destructive) {
                 let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
                     .synchronizable(true)
                 
@@ -102,6 +102,9 @@ struct LockView: View {
                 encryptionTest = nil
                 encryptionTestDoesntExist = true
             }
+            Button("Cancel", role: .cancel) {
+                needsToResetPassword = false
+            }.keyboardShortcut(.cancelAction)
         }, message: {
             Text("You can change it but you won't be able to decrypt any of your accounts.")
         })

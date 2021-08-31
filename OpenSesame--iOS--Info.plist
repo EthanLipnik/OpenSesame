@@ -2,6 +2,75 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>Green</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>GreenIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Orange</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>OrangeIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Purple</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>PurpleIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Red</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>RedIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Silver</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>SilverIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Space Gray</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Space GrayIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -49,74 +118,5 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>AppIcon</string>
-			</array>
-			<key>UIPrerenderedIcon</key>
-			<false/>
-		</dict>
-		<key>CFBundleAlternateIcons</key>
-		<dict>
-			<key>Green</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>GreenIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Orange</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>OrangeIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Silver</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>SilverIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Purple</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>PurpleIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Red</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>RedIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Space Gray</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Space GrayIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-		</dict>
-	</dict>
 </dict>
 </plist>

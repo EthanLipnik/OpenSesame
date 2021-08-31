@@ -90,7 +90,7 @@ extension CredentialProviderViewController {
     
     override func provideCredentialWithoutUserInteraction(for credentialIdentity: ASPasswordCredentialIdentity) {
         
-        guard let account = allAccounts.first(where: { $0.username == credentialIdentity.user && $0.domain == credentialIdentity.serviceIdentifier.identifier }) else { extensionContext.cancelRequest(withError: CocoaError(.coderValueNotFound)); return }
+        guard let account = allAccounts.first(where: { $0.username == credentialIdentity.user && $0.domain == credentialIdentity.serviceIdentifier.identifier }) else { extensionContext.cancelRequest(withError: CocoaError(.coderValueNotFound)); fatalError() }
         
         do {
             let decryptedAccount = try decryptedAccount(account)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct SettingsView: View {
     let persistenceController = PersistenceController.shared
@@ -49,6 +50,13 @@ struct SettingsView: View {
                     isImporting.toggle()
                 } label: {
                     Label("Import", systemImage: "square.and.arrow.down")
+                }
+                Button("Reset autofill", role: .destructive) {
+                    ASCredentialIdentityStore.shared.getState { state in
+                        ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
+                            print(success, error as Any)
+                        }
+                    }
                 }
             }
             Section("Appearance") {

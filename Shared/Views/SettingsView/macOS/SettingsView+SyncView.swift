@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 extension SettingsView {
     struct SyncView: View {
@@ -35,6 +36,14 @@ extension SettingsView {
                                     print(error)
                                 }
                             }.disabled(true)
+                        }
+                        
+                        Button("Reset autofill", role: .destructive) {
+                            ASCredentialIdentityStore.shared.getState { state in
+                                ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
+                                    print(success, error as Any)
+                                }
+                            }
                         }
                     }.padding(5)
                 }
