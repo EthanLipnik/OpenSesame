@@ -30,7 +30,6 @@ extension SettingsView {
                 appearanceView
             }
             .padding()
-            .padding(.vertical)
         }
         
         // MARK: - AppearanceView

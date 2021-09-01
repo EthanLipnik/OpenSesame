@@ -30,6 +30,10 @@ struct SettingsView: View {
                 .tabItem {
                     Label("Syncing", systemImage: "arrow.clockwise")
                 }
+            TipJarView()
+                .tabItem {
+                    Label("Tip Jar", systemImage: "heart.fill")
+                }
         }
         .frame(maxWidth: 450)
     }

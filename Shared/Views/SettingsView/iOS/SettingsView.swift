@@ -77,6 +77,18 @@ struct SettingsView: View {
                     Label("Icon", systemImage: "app.fill")
                 }
             }
+            
+            Section {
+                NavigationLink {
+                    TipJarView()
+                        .navigationTitle("Tip Jar")
+                } label: {
+                    Label("Tip Jar", systemImage: "heart.fill")
+                }
+                Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
+                    Label("Source Code", systemImage: "chevron.left.slash.chevron.right")
+                }
+            }
         }
             .navigationTitle("Settings")
             .halfSheet(showSheet: $isImporting) {

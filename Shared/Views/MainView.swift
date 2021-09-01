@@ -22,28 +22,24 @@ struct MainView: View {
     
     // MARK: - View
     var body: some View {
-        ZStack {
-            // MARK: - ContentView
-            /// ContentView is the main page that displays the vaults. Only gets initialized during login to prevent any peeping.
-            if !isLocked {
-                ContentView(isLocked: $isLocked)
-                    .environment(\.managedObjectContext, viewContext)
-                    .opacity(isLocked ? 0 : 1)
-                    .blur(radius: isLocked ? 15 : 0)
-                    .transition(.opacity)
-                    .animation(.default, value: isLocked)
-            }
-            
-            // MARK: - LockView
-            LockView(isLocked: $isLocked) { // Unlock function
-                isLocked = false
-            }
+        // MARK: - ContentView
+        /// ContentView is the main page that displays the vaults. Only shows after login to prevent any peeping.
+        /// Even though it is initialized, they still can't decrypt important data until the user unlocks the app.
+        ContentView(isLocked: $isLocked)
             .environment(\.managedObjectContext, viewContext)
-            .opacity(isLocked ? 1 : 0)
-            .blur(radius: isLocked ? 0 : 25)
-            .allowsHitTesting(isLocked) // Prevent lock screen from being interacted with even though it's in the foreground.
+            .opacity(isLocked ? 0 : 1)
+//            .allowsHitTesting(!isLocked)
+            .overlay(
+                // MARK: - LockView
+                LockView(isLocked: $isLocked) { // Unlock function
+                    isLocked = false
+                }
+                    .environment(\.managedObjectContext, viewContext)
+                    .opacity(isLocked ? 1 : 0)
+                    .blur(radius: isLocked ? 0 : 25)
+                    .allowsHitTesting(isLocked) // Prevent lock screen from being interacted with even though it's in the foreground.
+            )
             .animation(.default, value: isLocked)
-        }
 #if os(macOS)
         .blur(radius: shouldHideApp ? 25 : 0)
 #endif

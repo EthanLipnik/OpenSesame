@@ -75,8 +75,14 @@ struct VaultView: View {
                 Group {
                     if itemToCreate == .account {
                         NewAccountView(selectedVault: vault)
+                            .environment(\.managedObjectContext, viewContext)
+                            .onDisappear {
+                                isCreatingNewItem = false
+                                itemToCreate = .none
+                            }
                     } else if itemToCreate == .card {
                         NewCardView(selectedVault: vault)
+                            .environment(\.managedObjectContext, viewContext)
                     }
                 }
             }
