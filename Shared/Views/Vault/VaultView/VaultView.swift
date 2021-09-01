@@ -68,7 +68,7 @@ struct VaultView: View {
             }
             .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            .navigationTitle("OpenSesame – " + (vault.name ?? "Unknown vault"))
+            .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
             .frame(minWidth: 200)
 #else
             .halfSheet(showSheet: $isCreatingNewItem) {
