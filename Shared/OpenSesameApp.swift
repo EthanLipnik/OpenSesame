@@ -109,6 +109,7 @@ struct OpenSesameApp: SwiftUI.App {
                     print("App is in background")
                     isLocked = true
                     shouldHideApp = true
+                    CryptoSecurityService.encryptionKey = nil
                 case .inactive:
                     shouldHideApp = true
                     multipeer.transceiver.stop()
