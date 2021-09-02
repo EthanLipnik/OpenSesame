@@ -110,11 +110,21 @@ struct PersistenceController {
     func uploadStoreTo(_ service: CloudService) throws {
         switch service {
         case .iCloud:
-            if let iCloudContainer = PersistenceController.containerUrl?.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite") {
-                if FileManager.default.fileExists(atPath: iCloudContainer.path) {
-                    try FileManager.default.removeItem(at: iCloudContainer)
+            if let iCloudContainer = PersistenceController.containerUrl {
+                let destinationURL = iCloudContainer.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite")
+                if FileManager.default.fileExists(atPath: destinationURL.path) {
+                    try FileManager.default.removeItem(at: destinationURL)
                 }
-                try FileManager.default.copyItem(at: PersistenceController.storeURL, to: iCloudContainer)
+                
+                let backup = URL.storeURL(for: "group.OpenSesame.ethanlipnik", databaseName: "backup")
+                print(iCloudContainer.path, backup.path)
+                
+                if FileManager.default.fileExists(atPath: backup.path) {
+                    try FileManager.default.removeItem(at: backup)
+                }
+                
+                try FileManager.default.copyItem(at: PersistenceController.storeURL, to: backup)
+                try FileManager.default.setUbiquitous(true, itemAt: backup, destinationURL: destinationURL)
                 
                 print("Uploaded store to iCloud", iCloudContainer.path)
             } else {
