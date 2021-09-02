@@ -43,7 +43,7 @@ struct FaviconView: View {
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
-                    .overlay(Text(website[0].uppercased())
+                    .overlay(Text(website.isEmpty ? "" : website[0].uppercased())
                                 .font(.system(.largeTitle, design: .rounded).bold()))
                     .onAppear {
                         if let cache = FaviconView.cache.object(forKey: website as NSString) {

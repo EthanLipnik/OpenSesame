@@ -51,10 +51,6 @@ struct PersistenceController {
             storeDescription.setOption(true as NSNumber,
                                        forKey: NSPersistentHistoryTrackingKey)
 
-#if !os(macOS)
-            storeDescription.setOption(FileProtectionType.complete as NSObject, forKey: NSPersistentStoreFileProtectionKey)
-#endif
-
             container.persistentStoreDescriptions = [storeDescription]
             
             print("CoreData location", PersistenceController.storeURL.path)
