@@ -1,0 +1,16 @@
+//
+//  CodeSigningAndProvisioning.xcconfig
+//  CodeSigningAndProvisioning
+//
+//  Created by Robert Shand on 2021-09-02.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// To ease development on device with your own Apple Developer Account
+// set the following to your TEAM ID
+// If this value is empty it will default to B6QG723P8Z
+DEVELOPMENT_TEAM_OVERRIDE = 
+
+DEVELOPMENT_TEAM = $(DEVELOPMENT_TEAM_OVERRIDE:default=B6QG723P8Z)
