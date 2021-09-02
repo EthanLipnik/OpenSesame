@@ -19,7 +19,6 @@ extension SettingsView {
             VStack(spacing: 20) {
                 systemView
             }
-            .padding()
         }
         
         // MARK: - SystemView

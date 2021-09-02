@@ -9,7 +9,7 @@ import SwiftUI
 
 extension VaultView {
     var list: some View {
-        List(selection: $viewModel.selectedItems) {
+        List {
             if !cards.isEmpty {
                 Section("Cards") {
                     ForEach(search.isEmpty ? cards.map({ $0 }) : cards.filter({ $0.name?.lowercased().contains(search.lowercased()) ?? false })) { card in
@@ -60,7 +60,8 @@ extension VaultView {
                                     shouldDeleteAccount.toggle()
                                 }
                             }
-                    }.onDelete { indexSet in
+                    }
+                    .onDelete { indexSet in
                         itemToBeDeleted = .init(accounts[indexSet.first!])
                         shouldDeleteAccount.toggle()
                     }

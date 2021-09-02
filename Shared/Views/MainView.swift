@@ -14,7 +14,6 @@ struct MainView: View {
     
     // MARK: - Variables
     @Binding var isLocked: Bool
-    @Binding var shouldHideApp: Bool
     
     @Binding var isImportingPasswords: Bool
     @Binding var shouldExportPasswords: Bool
@@ -50,10 +49,6 @@ struct MainView: View {
             }
 #endif
         }
-#if os(macOS)
-        .blur(radius: shouldHideApp ? 25 : 0)
-#endif
-        .animation(.default, value: shouldHideApp)
         
         // MARK: - ImportView
         .sheet(isPresented: $isImportingPasswords) {
@@ -91,6 +86,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(isLocked: .constant(true), shouldHideApp: .constant(false), isImportingPasswords: .constant(false), shouldExportPasswords: .constant(false), isExportingPasswords: .constant(false))
+        MainView(isLocked: .constant(true), isImportingPasswords: .constant(false), shouldExportPasswords: .constant(false), isExportingPasswords: .constant(false))
     }
 }

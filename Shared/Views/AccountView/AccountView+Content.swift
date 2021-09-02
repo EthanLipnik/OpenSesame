@@ -81,6 +81,7 @@ extension AccountView {
                 HStack {
                     if let website = ((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain, let url = URL(string: website.withHTTPIfNeeded) {
                         Link("Go to website", destination: url)
+                            .foregroundColor(.accentColor)
 #if os(iOS)
                             .hoverEffect()
 #endif

@@ -30,11 +30,12 @@ struct OpenSesameApp: SwiftUI.App {
         WindowGroup {
             // MARK: - MainView
             MainView(isLocked: $isLocked,
-                     shouldHideApp: $shouldHideApp,
                      isImportingPasswords: $isImportingPasswords,
                      shouldExportPasswords: $shouldExportPasswords,
                      isExportingPasswords: $isExportingPasswords)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .overlay(shouldHideApp ? Rectangle().fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil)
+                .animation(.default, value: shouldHideApp)
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
         }
         .handlesExternalEvents(matching: Set(arrayLiteral: "*"))

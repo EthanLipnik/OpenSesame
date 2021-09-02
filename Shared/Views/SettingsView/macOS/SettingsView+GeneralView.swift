@@ -29,7 +29,7 @@ extension SettingsView {
                 authenticationView
                 appearanceView
             }
-            .padding()
+            .frame(maxHeight: .infinity)
         }
         
         // MARK: - AppearanceView
