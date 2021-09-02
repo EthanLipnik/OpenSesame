@@ -49,7 +49,7 @@ extension AccountView {
         // MARK: - View
         var body: some View {
             GroupBox {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 25) {
                     emailView
                     
                     passwordView
