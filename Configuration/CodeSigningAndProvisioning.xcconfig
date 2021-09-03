@@ -16,8 +16,13 @@ DEVELOPMENT_TEAM = $(DEVELOPMENT_TEAM_OVERRIDE:default=B6QG723P8Z)
 
 // Similiar to the DEVELOPMENT_TEAM - to allow for easier development
 // on a different Apple Developer Account set the PRODUCT_BUNDLE_IDENTIFIER_BASE
-// to be something different e.g. PRODUCT_BUNDLE_IDENTIFIER_BASE_OVERRIDE = com.example.opensesame
+// to be something different e.g. PRODUCT_BUNDLE_IDENTIFIER_BASE = com.example.opensesame
 // This would set the main targets PRODUCT_BUNDLE_IDENTIFIER to com.example.opensesame
 // and set the various sub-targets to things like com.example.opensesame.Autofill-iOS
-PRODUCT_BUNDLE_IDENTIFIER_BASE_OVERRIDE = 
-PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE_OVERRIDE:default=com.ethanlipnik.OpenSesame)
+//
+// NOTE - The PRODUCT_BUNDLE_IDENTIFIER_BASE is also configured to setup the iCloud Container Identifiers,
+// the Ubiquity Container Identifiers and the Keychain access groups.
+// e.g. iCloud.$(PRODUCT_BUNDLE_IDENTIFIER_BASE) and $(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER_BASE)
+// Check in the OpenSesame (macOS and iOS) entitlements files and the Info.plists
+PRODUCT_BUNDLE_IDENTIFIER_BASE = 
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE:default=com.ethanlipnik.OpenSesame)

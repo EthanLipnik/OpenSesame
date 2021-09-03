@@ -29,7 +29,7 @@
 	</array>
 	<key>NSUbiquitousContainers</key>
 	<dict>
-		<key>iCloud.com.ethanlipnik.OpenSesame</key>
+		<key>iCloud.$(PRODUCT_BUNDLE_IDENTIFIER_BASE)</key>
 		<dict>
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>
