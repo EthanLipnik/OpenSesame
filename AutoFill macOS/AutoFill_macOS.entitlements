@@ -21,7 +21,7 @@
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.OpenSesame.ethanlipnik</string>
+		<string>$APP_GROUP)</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

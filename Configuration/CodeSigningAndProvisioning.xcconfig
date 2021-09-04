@@ -26,3 +26,8 @@ DEVELOPMENT_TEAM = $(DEVELOPMENT_TEAM_OVERRIDE:default=B6QG723P8Z)
 // Check in the OpenSesame (macOS and iOS) entitlements files and the Info.plists
 PRODUCT_BUNDLE_IDENTIFIER_BASE = 
 PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE:default=com.ethanlipnik.OpenSesame)
+
+// Finally we allow the configuration of the AppGroup
+APP_GROUP_OVERRIDE = 
+APP_GROUP = $(APP_GROUP_OVERRIDE:default=group.OpenSesame.ethanlipnik)
+
