@@ -38,38 +38,54 @@ struct AccountView: View {
     
     // MARK: - View
     var body: some View {
-//        let otherAccounts = accounts.filter({ $0.username != account.username }).map({ $0 })
+        let otherAccounts = accounts.filter({ $0.username != account.username }).map({ $0 })
+        
+        let columns: [GridItem] = {
+            #if os(macOS)
+            return [.init(), .init()]
+            #else
+            return UIDevice.current.userInterfaceIdiom == .pad ? [.init(), .init()] : [.init()]
+            #endif
+        }()
         
         ScrollView {
             content
             
-//            VStack {
-//                if !otherAccounts.isEmpty {
-//                    Text("Other Accounts")
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                    LazyVStack {
-//                        ForEach(otherAccounts) { account in
-//                            NavigationLink {
-//                                AccountView(account: account)
-//                            } label: {
-//                                GroupBox {
-//                                    HStack {
-//                                        FaviconView(website: "https://" + account.domain)
-//                                            .frame(width: 40, height: 40)
-//                                        VStack(alignment: .leading) {
-//                                            Text(account.domain)
-//                                                .bold()
-//                                                .frame(maxWidth: .infinity, alignment: .leading)
-//                                            Text(account.username)
-//                                                .foregroundColor(Color.secondary)
-//                                        }
-//                                    }
-//                                }
-//                            }.buttonStyle(.plain)
-//                        }
-//                    }
-//                }
-//            }.padding()
+            VStack {
+                if !otherAccounts.isEmpty {
+                    Text("Other Accounts")
+                        .font(.title3.bold())
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    LazyVGrid(columns: columns) {
+                        ForEach(otherAccounts) { account in
+                            NavigationLink {
+                                AccountView(account: account)
+                            } label: {
+                                GroupBox {
+                                    HStack {
+                                        if let domain = account.domain {
+                                            FaviconView(website: domain)
+                                                .frame(width: 40, height: 40)
+                                        }
+                                        VStack(alignment: .leading) {
+                                            Text(account.domain ?? "Unknwon domain")
+                                                .bold()
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                            Text(account.username ?? "Unknown email or username")
+                                                .foregroundColor(Color.secondary)
+                                        }
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                            }.buttonStyle(.plain)
+                        }
+                    }
+                }
+            }
+            .padding()
+            .frame(maxWidth: 800)
         }
 #if os(iOS)
         .navigationTitle(account.domain?.capitalizingFirstLetter() ?? "")

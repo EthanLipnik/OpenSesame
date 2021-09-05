@@ -11,9 +11,9 @@ struct CardView: View {
     // MARK: - Variables
     let card: Card
     
-#if os(iOS)
-    @ObservedObject var manager = MotionManager()
-#endif
+//#if os(iOS)
+//    @ObservedObject var manager = MotionManager()
+//#endif
     
     @State private var isShowingNumber: Bool = false
     @State private var decryptedNumber: String? = nil
@@ -130,7 +130,7 @@ struct CardView: View {
             .frame(width: 400)
 #else
             .frame(maxWidth: 400)
-            .modifier(ParallaxMotionModifier(manager: manager, magnitude: 10))
+//            .modifier(ParallaxMotionModifier(manager: manager, magnitude: 10))
 #endif
         }
 #if os(macOS)

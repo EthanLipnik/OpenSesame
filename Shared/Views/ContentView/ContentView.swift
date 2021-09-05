@@ -43,6 +43,8 @@ struct ContentView: View {
     @State var vaultToBeDeleted: Vault? = nil
     @State var vaultToBeRenamed: Vault? = nil
     
+    @State private var showSettings: Bool = false
+    
     // MARK: - View
     var body: some View {
         NavigationView {
@@ -56,10 +58,22 @@ struct ContentView: View {
                                 Label("Lock", systemImage: "lock.fill")
                             }
 #if os(iOS)
-                            NavigationLink {
-                                SettingsView()
+                            Button {
+                                showSettings.toggle()
                             } label: {
                                 Label("Settings", systemImage: "gearshape.fill")
+                            }
+                            .sheet(isPresented: $showSettings) {
+                                NavigationView {
+                                    SettingsView()
+                                        .toolbar {
+                                            ToolbarItem(placement: .navigationBarTrailing) {
+                                                Button("Done") {
+                                                    showSettings.toggle()
+                                                }
+                                            }
+                                        }
+                                }
                             }
 #endif
                         }

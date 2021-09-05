@@ -55,7 +55,7 @@ extension ImportView {
                             
                             let account = Account(context: viewContext)
                             account.domain = domain
-                            account.url = url.absoluteString
+                            account.url = url.absoluteString.removeHTTP.removeWWW
                             
                             account.username = importedAccount.username
                             account.otpAuth = importedAccount.otpAuth

@@ -55,6 +55,11 @@ extension ContentView {
                             vaultToBeDeleted = vault
                             shouldDeleteVault.toggle()
                         }
+                        Button("Rename") {
+                            isCreatingNewVault = false
+                            newVaultName = vault.name ?? ""
+                            vaultToBeRenamed = vault
+                        }
                     }
                     .swipeActions {
                         Button("Rename") {

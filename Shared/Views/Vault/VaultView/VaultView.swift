@@ -53,6 +53,7 @@ struct VaultView: View {
             viewModel.selectedItems.insert(selectedItem)
         }
         self._viewModel = StateObject(wrappedValue: viewModel)
+        
     }
     
     // MARK: - View
