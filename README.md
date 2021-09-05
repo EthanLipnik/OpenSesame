@@ -8,8 +8,7 @@ Open Sesame
 
 ![Xcode Version](https://img.shields.io/badge/Xcode%2013+-black?logo=xcode)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-black?logo=swift)
-![iOS Version](https://img.shields.io/badge/15+-informational?logo=ios)
-![macOS Version](https://img.shields.io/badge/12+-informational?logo=macOS)
+![Platforms](https://img.shields.io/badge/Platform%20Compatibility-iOS%20|%20macOS-red?logo=apple&?color=red)
 
 [![TestFlight](https://img.shields.io/badge/Join%20The%20TestFlight-blue)](https://testflight.apple.com/join/5ZW0k48j)
 [![Website](https://img.shields.io/badge/Website-blue)](https://opensesamemanager.github.io/Website/)
