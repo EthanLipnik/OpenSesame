@@ -52,7 +52,7 @@ struct CardView: View {
                     HStack {
                         Text(displayedNumber)
                             .allowsTightening(true)
-                            .minimumScaleFactor(0.1)
+                            .minimumScaleFactor(0.7)
                             .lineLimit(1)
                             .font(.system(.title2, design: .monospaced).weight(.semibold))
                             .frame(maxWidth: .infinity, alignment: .leading)

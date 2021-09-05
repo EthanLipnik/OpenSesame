@@ -39,6 +39,7 @@ struct NewAccountView: View {
 #if os(iOS)
                             .keyboardType(.URL)
                             .textInputAutocapitalization(.none)
+                            .textContentType(.URL)
 #endif
                             .disableAutocorrection(true)
                     }
@@ -51,6 +52,9 @@ struct NewAccountView: View {
 #if os(iOS)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
+                            .textContentType(.emailAddress)
+#else
+                            .textContentType(.username)
 #endif
                             .disableAutocorrection(true)
                     }
@@ -66,6 +70,7 @@ struct NewAccountView: View {
                                     .font(.system(.body, design: .monospaced))
 #if os(iOS)
                                     .autocapitalization(.none)
+                                    .textContentType(.newPassword)
 #endif
                                     .disableAutocorrection(true)
                                 Text(password.isEmpty ? " " : password)

@@ -34,11 +34,21 @@ struct NewCardView: View {
                     TextField("Holder", text: $holder)
                         .textFieldStyle(.plain)
                         .font(.title2)
+#if os(iOS)
+                        .textContentType(.name)
+                        .autocapitalization(.words)
+#endif
                     Spacer()
                     HStack {
                         TextField("Card Number", text: $cardNumber)
                             .textFieldStyle(.plain)
                             .font(.system(.title2, design: .monospaced))
+#if os(iOS)
+                            .keyboardType(.numberPad)
+                            .textContentType(.creditCardNumber)
+#endif
+                            .allowsTightening(true)
+                            .minimumScaleFactor(0.7)
                             .frame(maxWidth: .infinity)
                         HStack(alignment: .bottom) {
                             Text("Valid Thru")

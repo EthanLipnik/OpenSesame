@@ -11,7 +11,7 @@ extension AccountView {
     var content: some View {
         
         // Give styling to domain
-        var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain ?? "Unknown website")
+        var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP.removeWWW) ?? account.domain ?? "Unknown website")
         if let domain = account.domain {
             if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
                 attributedDomain.foregroundColor = Color.secondary
