@@ -14,7 +14,7 @@ extension VaultView {
         let account: Account
         
         var body: some View {
-            var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain ?? "Unknown website")
+            var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP.removeWWW) ?? account.domain?.removeHTTP.removeWWW ?? "Unknown website")
             if let domain = account.domain {
                 if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
                     attributedDomain.foregroundColor = Color.secondary

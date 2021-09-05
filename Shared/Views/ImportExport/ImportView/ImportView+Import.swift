@@ -24,7 +24,11 @@ extension ImportView {
                 
                 func finalize() {
                     if self.accountProgress >= accounts.count {
-                        try! viewContext.save()
+                        do {
+                            try viewContext.save()
+                        } catch {
+                            print(error)
+                        }
                         
                         // Save credentials for autofill
                         ASCredentialIdentityStore.shared.getState { state in

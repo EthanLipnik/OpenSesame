@@ -82,12 +82,6 @@
 		AA49EA3126D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA2C26D3EB8600B12838 /* AccountDetailView+OTPView.swift */; };
 		AA49EA3226D3EB8600B12838 /* AccountDetailView+PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA2D26D3EB8600B12838 /* AccountDetailView+PasswordView.swift */; };
 		AA49EA3326D3EB8600B12838 /* AccountDetailView+PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA2D26D3EB8600B12838 /* AccountDetailView+PasswordView.swift */; };
-		AA49EA3726D3EB9700B12838 /* MultipeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3426D3EB9700B12838 /* MultipeerService.swift */; };
-		AA49EA3826D3EB9700B12838 /* MultipeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3426D3EB9700B12838 /* MultipeerService.swift */; };
-		AA49EA3926D3EB9700B12838 /* MultipeerShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3526D3EB9700B12838 /* MultipeerShareSheet.swift */; };
-		AA49EA3A26D3EB9700B12838 /* MultipeerShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3526D3EB9700B12838 /* MultipeerShareSheet.swift */; };
-		AA49EA3B26D3EB9700B12838 /* ShareableAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3626D3EB9700B12838 /* ShareableAccount.swift */; };
-		AA49EA3C26D3EB9700B12838 /* ShareableAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3626D3EB9700B12838 /* ShareableAccount.swift */; };
 		AA49EA3F26D3EBA300B12838 /* Data+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3D26D3EBA300B12838 /* Data+Misc.swift */; };
 		AA49EA4026D3EBA300B12838 /* Data+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3D26D3EBA300B12838 /* Data+Misc.swift */; };
 		AA49EA4126D3EBA300B12838 /* Date+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA3E26D3EBA300B12838 /* Date+Misc.swift */; };
@@ -146,8 +140,6 @@
 		AA8B504A26CD6468003C92AE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8B504926CD6468003C92AE /* CloudKit.framework */; };
 		AA91286826DEBBFE007B9B30 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91286726DEBBFE007B9B30 /* TipJarView.swift */; };
 		AA91286926DEBBFE007B9B30 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91286726DEBBFE007B9B30 /* TipJarView.swift */; };
-		AA980E3D26D2DF05001CFF4E /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA980E3C26D2DF05001CFF4E /* MultipeerKit */; };
-		AA980E4126D2DF0C001CFF4E /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA980E4026D2DF0C001CFF4E /* MultipeerKit */; };
 		AA9B316E26DD6C180042BC58 /* HalfSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B316D26DD6C170042BC58 /* HalfSheetModal.swift */; };
 		AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DB8F26D3258900531E92 /* FaviconView.swift */; };
 		AAD3DB9126D3258900531E92 /* FaviconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DB8F26D3258900531E92 /* FaviconView.swift */; };
@@ -283,9 +275,6 @@
 		AA49EA2B26D3EB8600B12838 /* AccountDetailView+EmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccountDetailView+EmailView.swift"; sourceTree = "<group>"; };
 		AA49EA2C26D3EB8600B12838 /* AccountDetailView+OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccountDetailView+OTPView.swift"; sourceTree = "<group>"; };
 		AA49EA2D26D3EB8600B12838 /* AccountDetailView+PasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccountDetailView+PasswordView.swift"; sourceTree = "<group>"; };
-		AA49EA3426D3EB9700B12838 /* MultipeerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerService.swift; sourceTree = "<group>"; };
-		AA49EA3526D3EB9700B12838 /* MultipeerShareSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerShareSheet.swift; sourceTree = "<group>"; };
-		AA49EA3626D3EB9700B12838 /* ShareableAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareableAccount.swift; sourceTree = "<group>"; };
 		AA49EA3D26D3EBA300B12838 /* Data+Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Misc.swift"; sourceTree = "<group>"; };
 		AA49EA3E26D3EBA300B12838 /* Date+Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Misc.swift"; sourceTree = "<group>"; };
 		AA49EA4326D3EBB000B12838 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -377,7 +366,6 @@
 				AA05CCCC26CDA6BE00E27F6D /* KeychainAccess in Frameworks */,
 				AA12A79F26D0A5DB000418C7 /* CSV in Frameworks */,
 				AAD3DBFC26D3446500531E92 /* SwiftOTP in Frameworks */,
-				AA980E3D26D2DF05001CFF4E /* MultipeerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +380,6 @@
 				AA05CCCE26CDA6C300E27F6D /* KeychainAccess in Frameworks */,
 				AA12A7A126D0A5E2000418C7 /* CSV in Frameworks */,
 				AA41467726D3451900254812 /* SwiftOTP in Frameworks */,
-				AA980E4126D2DF0C001CFF4E /* MultipeerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +586,6 @@
 				AA8B500526CD641C003C92AE /* OpenSesameApp.swift */,
 				AA5EB73926DD7F7200390B85 /* Icons */,
 				AA519A7E26CF283C00C1E354 /* Views */,
-				AA980E4626D2DF11001CFF4E /* Multipeer */,
 				AAD3DBE526D342AB00531E92 /* Extensions */,
 				AA08244E26DDC234006BE956 /* Persistence */,
 				AA8B500826CD641D003C92AE /* Assets.xcassets */,
@@ -649,16 +635,6 @@
 				AA8B504626CD6457003C92AE /* CloudKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		AA980E4626D2DF11001CFF4E /* Multipeer */ = {
-			isa = PBXGroup;
-			children = (
-				AA49EA3426D3EB9700B12838 /* MultipeerService.swift */,
-				AA49EA3526D3EB9700B12838 /* MultipeerShareSheet.swift */,
-				AA49EA3626D3EB9700B12838 /* ShareableAccount.swift */,
-			);
-			path = Multipeer;
 			sourceTree = "<group>";
 		};
 		AAD3DB8026D30D3300531E92 /* ImportExport */ = {
@@ -833,7 +809,6 @@
 				AA05CCCB26CDA6BE00E27F6D /* KeychainAccess */,
 				AA12A79E26D0A5DB000418C7 /* CSV */,
 				AA32ADAC26D17697006791DA /* DomainParser */,
-				AA980E3C26D2DF05001CFF4E /* MultipeerKit */,
 				AAD3DBFB26D3446500531E92 /* SwiftOTP */,
 			);
 			productName = "OpenSesame (iOS)";
@@ -861,7 +836,6 @@
 				AA05CCCD26CDA6C300E27F6D /* KeychainAccess */,
 				AA12A7A026D0A5E2000418C7 /* CSV */,
 				AA32ADAA26D17692006791DA /* DomainParser */,
-				AA980E4026D2DF0C001CFF4E /* MultipeerKit */,
 				AA41467626D3451900254812 /* SwiftOTP */,
 			);
 			productName = "OpenSesame (macOS)";
@@ -950,7 +924,6 @@
 				AA05CCCA26CDA6BE00E27F6D /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				AA05CCF226CDDBFF00E27F6D /* XCRemoteSwiftPackageReference "SwiftDomainParser" */,
 				AA12A79D26D0A5DB000418C7 /* XCRemoteSwiftPackageReference "CSV.swift" */,
-				AA980E3B26D2DF05001CFF4E /* XCRemoteSwiftPackageReference "MultipeerKit" */,
 				AAD3DBFA26D3446500531E92 /* XCRemoteSwiftPackageReference "SwiftOTP" */,
 			);
 			productRefGroup = AA8B500E26CD641D003C92AE /* Products */;
@@ -1077,7 +1050,6 @@
 				AAD3DBE826D342B800531E92 /* URL+Misc.swift in Sources */,
 				AA49EA1126D3EB2600B12838 /* LockView+CreatePassword.swift in Sources */,
 				AA49EA0926D3EB1600B12838 /* ContentView+Add.swift in Sources */,
-				AA49EA3B26D3EB9700B12838 /* ShareableAccount.swift in Sources */,
 				AAD3DBDE26D3417500531E92 /* MainView.swift in Sources */,
 				AA05CD0226CDDDB300E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA519A8626CF453300C1E354 /* AccountView.swift in Sources */,
@@ -1088,7 +1060,6 @@
 				AA3754EC26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
 				AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA05CD0026CDDDA300E27F6D /* CryptoSecurityService.swift in Sources */,
-				AA49EA3726D3EB9700B12838 /* MultipeerService.swift in Sources */,
 				AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */,
 				AAD3DBC826D33D2500531E92 /* AccountView+AccountDetailView.swift in Sources */,
 				AA49EA2926D3EB7500B12838 /* AccountView+Content.swift in Sources */,
@@ -1096,7 +1067,6 @@
 				AA49EA2326D3EB5A00B12838 /* VaultView+List.swift in Sources */,
 				AA49EA0B26D3EB1600B12838 /* ContentView+List.swift in Sources */,
 				AA49EA1A26D3EB4300B12838 /* ImportView+Import.swift in Sources */,
-				AA49EA3926D3EB9700B12838 /* MultipeerShareSheet.swift in Sources */,
 				AA49EA3026D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */,
 				AA3754F526DD3D18007FF26F /* CardView.swift in Sources */,
 				AA49EA4126D3EBA300B12838 /* Date+Misc.swift in Sources */,
@@ -1140,10 +1110,8 @@
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
 				AA49EA2F26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
 				AAD3DBC926D33D2600531E92 /* AccountView+AccountDetailView.swift in Sources */,
-				AA49EA3C26D3EB9700B12838 /* ShareableAccount.swift in Sources */,
 				AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA49EA2426D3EB5A00B12838 /* VaultView+List.swift in Sources */,
-				AA49EA3A26D3EB9700B12838 /* MultipeerShareSheet.swift in Sources */,
 				AA91286926DEBBFE007B9B30 /* TipJarView.swift in Sources */,
 				AA49EA2A26D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AA3754F226DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */,
@@ -1170,7 +1138,6 @@
 				AA8B502F26CD641D003C92AE /* OpenSesameApp.swift in Sources */,
 				AA8B503126CD641D003C92AE /* ContentView.swift in Sources */,
 				AA3754F626DD3D18007FF26F /* CardView.swift in Sources */,
-				AA49EA3826D3EB9700B12838 /* MultipeerService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1816,14 +1783,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		AA980E3B26D2DF05001CFF4E /* XCRemoteSwiftPackageReference "MultipeerKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/insidegui/MultipeerKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.4.0;
-			};
-		};
 		AAD3DBFA26D3446500531E92 /* XCRemoteSwiftPackageReference "SwiftOTP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/EthanLipnik/SwiftOTP.git";
@@ -1899,16 +1858,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA05CCF226CDDBFF00E27F6D /* XCRemoteSwiftPackageReference "SwiftDomainParser" */;
 			productName = DomainParser;
-		};
-		AA980E3C26D2DF05001CFF4E /* MultipeerKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA980E3B26D2DF05001CFF4E /* XCRemoteSwiftPackageReference "MultipeerKit" */;
-			productName = MultipeerKit;
-		};
-		AA980E4026D2DF0C001CFF4E /* MultipeerKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA980E3B26D2DF05001CFF4E /* XCRemoteSwiftPackageReference "MultipeerKit" */;
-			productName = MultipeerKit;
 		};
 		AAD3DBFB26D3446500531E92 /* SwiftOTP */ = {
 			isa = XCSwiftPackageProductDependency;

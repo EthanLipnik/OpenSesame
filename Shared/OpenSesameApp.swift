@@ -14,7 +14,6 @@ struct OpenSesameApp: SwiftUI.App {
     @Environment(\.scenePhase) var scenePhase
     
     // MARK: - Services
-    let multipeer = MultipeerService.shared
     let persistenceController = PersistenceController.shared
     
     // MARK: - Variables
@@ -88,23 +87,12 @@ struct OpenSesameApp: SwiftUI.App {
                 }.disabled(isLocked)
             }
         }
-        .onChange(of: isLocked, perform: { isLocked in
-            if !isLocked {
-                multipeer.transceiver.resume()
-            } else {
-                multipeer.transceiver.stop()
-            }
-        })
         .onChange(of: scenePhase) { phase in
             withAnimation {
                 switch phase {
                 case .active:
                     print("App is active")
                     shouldHideApp = false
-                    
-                    if !isLocked {
-                        multipeer.transceiver.resume()
-                    }
                     break
                 case .background:
                     print("App is in background")
@@ -113,7 +101,6 @@ struct OpenSesameApp: SwiftUI.App {
                     CryptoSecurityService.encryptionKey = nil
                 case .inactive:
                     shouldHideApp = true
-                    multipeer.transceiver.stop()
                 @unknown default:
                     break
                 }

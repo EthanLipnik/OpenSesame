@@ -85,7 +85,7 @@ struct PersistenceController {
     
     func loadStore() {
         let viewContext = container.viewContext
-        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
         viewContext.automaticallyMergesChangesFromParent = true
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -141,12 +141,15 @@ struct PersistenceController {
                 let allContainers = try FileManager.default.contentsOfDirectory(atPath: iCloudContainer.path)
                 let containersToDownload = allContainers
                     .filter({ $0.contains(".icloud") })
-                try containersToDownload.forEach({ try FileManager.default.startDownloadingUbiquitousItem(at: URL(fileURLWithPath: $0)) })
+                let containers = containersToDownload.map({ iCloudContainer.appendingPathComponent($0) })
+                containers.forEach({ let _ = $0.startAccessingSecurityScopedResource() })
+                try containers.forEach({ try FileManager.default.startDownloadingUbiquitousItem(at: $0) })
                 
+                print(allContainers)
                 if FileManager.default.fileExists(atPath: PersistenceController.storeURL.path) {
                     try FileManager.default.removeItem(at: PersistenceController.storeURL)
                 }
-                try FileManager.default.copyItem(at: iCloudContainer.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite"), to: PersistenceController.storeURL)
+                try FileManager.default.copyItem(at: iCloudContainer.appendingPathComponent("backup.sqlite"), to: PersistenceController.storeURL)
                 
                 loadStore()
             }

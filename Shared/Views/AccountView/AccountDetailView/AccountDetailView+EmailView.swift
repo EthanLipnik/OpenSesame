@@ -10,7 +10,7 @@ import SwiftUI
 extension AccountView.AccountDetailsView {
     var emailView: some View {
         VStack(alignment: .leading) {
-            Label((account.username!.contains("@") ? "Email" : "Username"), systemImage: "person.fill")
+            Label(((account.username?.contains("@") ?? false) ? "Email" : "Username"), systemImage: "person.fill")
                 .foregroundColor(Color.secondary)
             if isEditing {
                 TextField("Email or Username", text: $newUsername)

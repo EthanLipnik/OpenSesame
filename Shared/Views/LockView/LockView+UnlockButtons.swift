@@ -35,6 +35,9 @@ extension LockView {
             .keyboardShortcut(.defaultAction)
             .disabled(password.isEmpty)
             .accessibilityIdentifier("loginButton")
+#if os(iOS)
+            .hoverEffect()
+#endif
             
             if let image = image, canAuthenticateWithBiometrics || biometricsFailed {
                 Button {
@@ -62,6 +65,9 @@ extension LockView {
 #endif
                 }
                 .keyboardShortcut("b", modifiers: [.command, .shift])
+#if os(iOS)
+            .hoverEffect()
+#endif
             }
         }
     }

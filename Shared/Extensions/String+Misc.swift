@@ -44,6 +44,34 @@ extension String {
         return urlStr
     }
     
+    var removeHTTP: String {
+        var urlStr = self
+        
+        if urlStr.hasPrefix("https://") {
+            for _ in 0..<8 {
+                urlStr.removeFirst()
+            }
+        } else if urlStr.hasPrefix("http://") {
+            for _ in 0..<7 {
+                urlStr.removeFirst()
+            }
+        }
+        
+        return urlStr
+    }
+    
+    var removeWWW: String {
+        var urlStr = self
+        
+        if urlStr.hasPrefix("www.") {
+            for _ in 0..<4 {
+                urlStr.removeFirst()
+            }
+        }
+        
+        return urlStr
+    }
+    
     func copyToPasteboard() {
 #if os(macOS)
         let pasteboard = NSPasteboard.general

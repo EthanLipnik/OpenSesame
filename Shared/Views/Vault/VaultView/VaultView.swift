@@ -57,38 +57,7 @@ struct VaultView: View {
     
     // MARK: - View
     var body: some View {
-        list
-#if os(macOS)
-            .sheet(isPresented: $isCreatingNewItem) {
-                if itemToCreate == .account {
-                    NewAccountView(selectedVault: vault)
-                } else if itemToCreate == .card {
-                    NewCardView(selectedVault: vault)
-                }
-            }
-            .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
-            .listStyle(.inset(alternatesRowBackgrounds: true))
-            .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
-            .frame(minWidth: 200)
-#else
-            .halfSheet(showSheet: $isCreatingNewItem) {
-                Group {
-                    if itemToCreate == .account {
-                        NewAccountView(selectedVault: vault)
-                            .environment(\.managedObjectContext, viewContext)
-                            .onDisappear {
-                                isCreatingNewItem = false
-                                itemToCreate = .none
-                            }
-                    } else if itemToCreate == .card {
-                        NewCardView(selectedVault: vault)
-                            .environment(\.managedObjectContext, viewContext)
-                    }
-                }
-            }
-            .listStyle(.insetGrouped)
-            .navigationTitle(vault.name ?? "Vault")
-#endif
+        content
             .searchable(text: $search)
             .toolbar {
 #if os(iOS)
@@ -134,6 +103,45 @@ struct VaultView: View {
                     print("Badly formatted URL")
                 }
             }
+    }
+    
+    private var content: some View {
+        list
+#if os(macOS)
+            .sheet(isPresented: $isCreatingNewItem) {
+                if itemToCreate == .account {
+                    NewAccountView(selectedVault: vault)
+                } else if itemToCreate == .card {
+                    NewCardView(selectedVault: vault)
+                }
+            }
+            .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
+            .listStyle(.inset(alternatesRowBackgrounds: true))
+            .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
+            .frame(minWidth: 200)
+#else
+            .halfSheet(showSheet: $isCreatingNewItem) {
+                Group {
+                    if itemToCreate == .account {
+                        NewAccountView(selectedVault: vault)
+                            .environment(\.managedObjectContext, viewContext)
+                            .onDisappear {
+                                isCreatingNewItem = false
+                                itemToCreate = .none
+                            }
+                    } else if itemToCreate == .card {
+                        NewCardView(selectedVault: vault)
+                            .environment(\.managedObjectContext, viewContext)
+                    }
+                }.onDisappear {
+                    isCreatingNewItem = false
+                }
+            } onEnd: {
+                isCreatingNewItem = false
+            }
+            .listStyle(.insetGrouped)
+            .navigationTitle(vault.name ?? "Vault")
+#endif
     }
     
     func deleteItems(offsets: IndexSet, type: ItemCreationType) {

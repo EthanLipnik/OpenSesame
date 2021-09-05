@@ -91,8 +91,13 @@ struct ContentView: View {
                 }
                 .navigationTitle("OpenSesame")
                 .onAppear {
+                    guard selectedVault == nil else { return }
 #if os(macOS)
                     selectedVault = vaults.first
+#else
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        selectedVault = vaults.first
+                    }
 #endif
                 }
             

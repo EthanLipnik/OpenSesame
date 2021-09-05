@@ -71,9 +71,6 @@ struct AccountView: View {
 //                }
 //            }.padding()
         }
-        .sheet(isPresented: $isSharing) {
-            MultipeerShareSheet(account: account)
-        }
 #if os(iOS)
         .navigationTitle(account.domain?.capitalizingFirstLetter() ?? "")
         .toolbar {

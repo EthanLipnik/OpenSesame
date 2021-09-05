@@ -29,15 +29,6 @@
         }
       },
       {
-        "package": "MultipeerKit",
-        "repositoryURL": "https://github.com/insidegui/MultipeerKit.git",
-        "state": {
-          "branch": null,
-          "revision": "ee013fd04f20166ea40ff456a67058c040289c1c",
-          "version": "0.4.0"
-        }
-      },
-      {
         "package": "DomainParser",
         "repositoryURL": "https://github.com/Dashlane/SwiftDomainParser.git",
         "state": {
