@@ -33,19 +33,43 @@ extension ContentView {
                     .focused($isNewVaultFocused)
             }
             ForEach(vaults) { vault in
-                NavigationLink(tag: vault, selection: $selectedVault) {
-                    VaultView(vault: vault)
-                } label: {
-                    Label(vault.name!.capitalized, systemImage: "lock.square.stack.fill")
-                }
-                .contextMenu {
-                    Button("Delete", role: .destructive) {
-                        vaultToBeDeleted = vault
-                        shouldDeleteVault.toggle()
+                if vaultToBeRenamed == vault {
+                    TextField("Vault Name", text: $newVaultName)
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit {
+                            vault.name = newVaultName
+                            
+                            try? viewContext.save()
+                            
+                            newVaultName = ""
+                            vaultToBeRenamed = nil
+                        }
+                } else {
+                    NavigationLink(tag: vault, selection: $selectedVault) {
+                        VaultView(vault: vault)
+                    } label: {
+                        Label(vault.name!.capitalized, systemImage: "lock.square.stack.fill")
+                    }
+                    .contextMenu {
+                        Button("Delete", role: .destructive) {
+                            vaultToBeDeleted = vault
+                            shouldDeleteVault.toggle()
+                        }
+                    }
+                    .swipeActions {
+                        Button("Rename") {
+                            isCreatingNewVault = false
+                            newVaultName = vault.name ?? ""
+                            vaultToBeRenamed = vault
+                        }.tint(.accentColor)
+                        
+                        Button("Delete", role: .destructive) {
+                            vaultToBeDeleted = vault
+                            shouldDeleteVault.toggle()
+                        }
                     }
                 }
-            }
-            .onDelete { indexSet in
+            }.onDelete { indexSet in
                 vaultToBeDeleted = vaults[indexSet.first!]
                 shouldDeleteVault.toggle()
             }

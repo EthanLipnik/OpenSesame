@@ -41,6 +41,7 @@ struct ContentView: View {
     
     @State var shouldDeleteVault: Bool = false
     @State var vaultToBeDeleted: Vault? = nil
+    @State var vaultToBeRenamed: Vault? = nil
     
     // MARK: - View
     var body: some View {

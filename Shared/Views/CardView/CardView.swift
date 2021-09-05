@@ -51,6 +51,9 @@ struct CardView: View {
                     Spacer()
                     HStack {
                         Text(displayedNumber)
+                            .allowsTightening(true)
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
                             .font(.system(.title2, design: .monospaced).weight(.semibold))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .blur(radius: isShowingNumber ? 0 : 8)

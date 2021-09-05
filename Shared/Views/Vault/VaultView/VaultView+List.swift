@@ -68,6 +68,18 @@ extension VaultView {
                         shouldDeleteCard.toggle()
                     }
                 }
+                .swipeActions {
+                    Button(card.isPinned ? "Unpin" : "Pin") {
+                        card.isPinned.toggle()
+                        
+                        try? viewContext.save()
+                    }.tint(card.isPinned ? .orange : .accentColor)
+                    
+                    Button("Delete", role: .destructive) {
+                        itemToBeDeleted = .init(card)
+                        shouldDeleteCard.toggle()
+                    }
+                }
         }.onDelete { indexSet in
             itemToBeDeleted = .init(cards[indexSet.first!])
             shouldDeleteCard.toggle()
@@ -92,6 +104,18 @@ extension VaultView {
                     } label: {
                         Label(account.isPinned ? "Unpin" : "Pin", systemImage: account.isPinned ? "pin.slash" : "pin")
                     }
+                    Button("Delete", role: .destructive) {
+                        itemToBeDeleted = .init(account)
+                        shouldDeleteAccount.toggle()
+                    }
+                }
+                .swipeActions {
+                    Button(account.isPinned ? "Unpin" : "Pin") {
+                        account.isPinned.toggle()
+                        
+                        try? viewContext.save()
+                    }.tint(account.isPinned ? .orange : .accentColor)
+                    
                     Button("Delete", role: .destructive) {
                         itemToBeDeleted = .init(account)
                         shouldDeleteAccount.toggle()
