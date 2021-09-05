@@ -1,21 +1,15 @@
+<img src="Shared/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png" width="192" align="right" hspace="20" />
+
 Open Sesame
 ======
 ![Forks](https://img.shields.io/github/forks/OpenSesameManager/OpenSesame)
-
 ![Stars](https://img.shields.io/github/stars/OpenSesameManager/OpenSesame)
-
 ![License](https://img.shields.io/github/license/OpenSesameManager/OpenSesame)
-
 ![Xcode Version](https://img.shields.io/badge/Xcode%2013+-black?logo=xcode)
-
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-black?logo=swift)
-
 ![iOS Version](https://img.shields.io/badge/15+-informational?logo=ios)
-
 ![macOS Version](https://img.shields.io/badge/15+-informational?logo=macOS)
-
 [![TestFlight](https://img.shields.io/badge/Join%20The%20TestFlight-blue)](https://testflight.apple.com/join/5ZW0k48j)
-
 [![Website](https://img.shields.io/badge/Website-blue)](https://opensesamemanager.github.io/Website/)
 
 Native and encrypted password manager for iOS and macOS.
