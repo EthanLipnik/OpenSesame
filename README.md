@@ -2,13 +2,13 @@
 
 Open Sesame
 ======
-![Forks](https://img.shields.io/github/forks/OpenSesameManager/OpenSesame)
-![Stars](https://img.shields.io/github/stars/OpenSesameManager/OpenSesame)
-![License](https://img.shields.io/github/license/OpenSesameManager/OpenSesame)
+[![Forks](https://img.shields.io/github/forks/OpenSesameManager/OpenSesame)](https://github.com/OpenSesameManager/OpenSesame/network/members)
+[![Stars](https://img.shields.io/github/stars/OpenSesameManager/OpenSesame)](https://github.com/OpenSesameManager/OpenSesame/stargazers)
+[![License](https://img.shields.io/github/license/OpenSesameManager/OpenSesame)](https://github.com/OpenSesameManager/OpenSesame/blob/main/LICENSE.md)
 
 ![Xcode Version](https://img.shields.io/badge/Xcode%2013+-black?logo=xcode)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-black?logo=swift)
-![Platforms](https://img.shields.io/badge/Platform%20Compatibility-iOS%20|%20macOS-red?logo=apple&?color=red)
+![Platforms](https://img.shields.io/badge/Platform%20Compatibility-iOS%2015+%20|%20macOS%2012+-red?logo=apple&?color=red)
 
 [![TestFlight](https://img.shields.io/badge/Join%20The%20TestFlight-blue)](https://testflight.apple.com/join/5ZW0k48j)
 [![Website](https://img.shields.io/badge/Website-blue)](https://opensesamemanager.github.io/Website/)
@@ -25,6 +25,10 @@ OpenSesame is a free and powerful password manager that lets you manage your pas
 
 It syncs with iCloud and encrypts your data to make sure only **you** get access. No more required subscriptions, no more ram hogs, *and no more electron versions.*
 
+## Why use OpenSesame
+
+Now more than ever, what was previously amazing native apps have become slow and big web apps. Big apps take more control away from the user and push subscriptions and other payment models without much reason. OpenSesame aims to fix that by giving a free and open source password manager that is native and performant. Still get all the great features of other password managers without all the baggage.
+
 ## Features
 
 - iCloud Syncing
@@ -39,6 +43,8 @@ It syncs with iCloud and encrypts your data to make sure only **you** get access
 - Password generator
 - Credit/Debit card support
 - Notes field
+- Alternate icons
+- Customizable
 - CoreData
 - 100% SwiftUI
 - Native support for macOS and iOS.
@@ -54,10 +60,6 @@ It syncs with iCloud and encrypts your data to make sure only **you** get access
 - Compromised/breached password notice
 - Chrome & native Windows support
 
-## Why use OpenSesame
-
-Now more than ever, what was previously amazing native apps have become slow and big web apps. Big apps take more control away from the user and push subscriptions and other payment models without much reason. OpenSesame aims to fix that by giving a free and open source password manager that is native and performant. Still get all the great features of other password managers without all the baggage.
-
 ## Requirements
 
 - Xcode 13+
@@ -66,7 +68,7 @@ Now more than ever, what was previously amazing native apps have become slow and
 
 ## License
 
-OpenSesame is available under the MIT license. See the LICENSE file for more info.
+OpenSesame is available under the MIT license. See the LICENSE.md file for more info.
 
 ## Acknowledgements
 
@@ -77,4 +79,3 @@ OpenSesame depends on the following open-source projects:
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess.git) by [kishikawakatsumi](https://github.com/kishikawakatsumi) ([License](https://github.com/kishikawakatsumi/KeychainAccess/blob/master/LICENSE))
 * [DomainParser](https://github.com/Dashlane/SwiftDomainParser.git) by [Dashlane](https://github.com/Dashlane) ([License](https://github.com/Dashlane/SwiftDomainParser/blob/master/LICENSE))
 * [CSV.swift](https://github.com/yaslab/CSV.swift.git) by [yaslab](https://github.com/yaslab) ([License](https://github.com/yaslab/CSV.swift/blob/master/LICENSE))
-* [MultipeerKit](https://github.com/insidegui/MultipeerKit.git) by [insidegui](https://github.com/insidegui) ([License](https://github.com/insidegui/MultipeerKit/blob/main/LICENSE))

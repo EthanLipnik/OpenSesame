@@ -12,6 +12,7 @@ struct SettingsView: View {
     let persistenceController = PersistenceController.shared
     
     @State private var isImporting: Bool = false
+    @State private var isExporting: Bool = false
     
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
@@ -19,47 +20,53 @@ struct SettingsView: View {
     
     var body: some View {
         Form {
-            // MARK: - Syncing
-            Section("Syncing") {
-                HStack {
-                    Label("iCloud", systemImage: "key.icloud.fill")
-                    Spacer()
-                    Button {
-                        try! persistenceController.uploadStoreTo(.iCloud)
-                    } label: {
-                        Image(systemName: "icloud.and.arrow.up")
-                    }
-                    .font(.headline)
-                    .foregroundColor(Color.accentColor)
-                    
-                    Divider()
-                    
-                    Button {
-                        try! persistenceController.downloadStoreFrom(.iCloud)
-                    } label: {
-                        Image(systemName: "icloud.and.arrow.down")
-                    }
-                    .font(.headline)
-                    .foregroundColor(Color.accentColor)
-                    .disabled(true)
-                }.buttonStyle(.plain)
-            }
-            
-            Section {
+            Section("General") {
                 Button {
                     isImporting.toggle()
                 } label: {
-                    Label("Import", systemImage: "square.and.arrow.down")
+                    Label("Import", systemImage: "tray.and.arrow.down.fill")
                 }
-                Button("Reset autofill", role: .destructive) {
-                    ASCredentialIdentityStore.shared.getState { state in
-                        ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
-                            print(success, error as Any)
-                        }
+                Menu {
+                    Button {
+                        
+                    } label: {
+                        Label("Web Browser", systemImage: "globe")
                     }
+                    
+                    Divider()
+                    Button("1Password") {
+                        
+                    }
+                    
+                    Button("Bitwarden") {
+                    }
+                } label: {
+                    Label("Export", systemImage: "tray.and.arrow.up.fill")
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                Toggle(isOn: .constant(true)) {
+                    Label("Load Favicon", systemImage: "photo.fill")
+                }
+                .tint(.accentColor)
+                Toggle(isOn: .constant(true)) {
+                    Label("Sync with iCloud", systemImage: "icloud.fill")
+                }
+                .tint(.accentColor)
             }
             Section("Appearance") {
+                HStack {
+                    Label("Color Scheme", systemImage: "circle.fill")
+                    Spacer()
+                    Picker("Color Scheme", selection: .constant(0)) {
+                        Text("System")
+                            .tag(0)
+                        Text("Light")
+                            .tag(1)
+                        Text("Dark")
+                            .tag(2)
+                    }
+                    .pickerStyle(.menu)
+                }
                 Picker(selection: $userSettings.selectedIcon) {
                     ForEach(icons, id: \.self) { icon in
                         HStack(alignment: .top) {
@@ -78,15 +85,87 @@ struct SettingsView: View {
                 }
             }
             
-            Section {
+            Section("Security") {
+                Toggle(isOn: .constant(true)) {
+                    let biometricTypes = UserAuthenticationService.availableBiometrics()
+                    let image: String = {
+                        if biometricTypes.contains(.faceID) {
+                            return "faceid"
+                        } else if biometricTypes.contains(.touchID) {
+                            return "touchid"
+                        } else if biometricTypes.contains(.watch) {
+                            return "lock.applewatch"
+                        } else {
+                            return "faceid"
+                        }
+                    }()
+                    Label("Allow Biometrics", systemImage: image)
+                }
+                .tint(.accentColor)
+                HStack {
+                    Label("Auto-Lock", systemImage: "lock.fill")
+                    Spacer()
+                    Picker("Auto-lock", selection: .constant(0)) {
+                        Text("Immedietly")
+                            .tag(0)
+                        Text("30s")
+                            .tag(1)
+                        Text("1m")
+                            .tag(2)
+                        Text("3m")
+                            .tag(3)
+                        Text("4m")
+                            .tag(4)
+                        Text("5m")
+                            .tag(5)
+                    }
+                    .pickerStyle(.menu)
+                }
+                Toggle(isOn: .constant(true)) {
+                    Label("Hide when closing app", systemImage: "eye.slash.fill")
+                }
+                .tint(.accentColor)
+                Toggle(isOn: .constant(true)) {
+                    Label("Allow Autofill", systemImage: "text.append")
+                }
+                .tint(.accentColor)
+                Link(destination: URL(string: "https://opensesamemanager.github.com/Website")!) {
+                    Label("Learn more", systemImage: "info.circle.fill")
+                }
+            }
+            
+            Section("About") {
                 NavigationLink {
                     TipJarView()
                         .navigationTitle("Tip Jar")
                 } label: {
                     Label("Tip Jar", systemImage: "heart.fill")
                 }
+                Link(destination: URL(string: "https://opensesamemanager.github.com/Website")!) {
+                    Label("Website", systemImage: "globe")
+                }
                 Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
                     Label("Source Code", systemImage: "chevron.left.slash.chevron.right")
+                }
+                Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
+                    Label("Rate OpenSesame", systemImage: "star.fill")
+                }
+            }
+            
+            Section("Self Destruct") {
+                Button(role: .destructive) {
+                    ASCredentialIdentityStore.shared.getState { state in
+                        ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
+                            print(success, error as Any)
+                        }
+                    }
+                } label: {
+                    Label("Reset Autofill", systemImage: "exclamationmark.arrow.circlepath")
+                }
+                Button(role: .destructive) {
+                    
+                } label: {
+                    Label("Nuke Database", systemImage: "trash.fill")
                 }
             }
         }
@@ -111,6 +190,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        NavigationView {
+            SettingsView()
+        }
     }
 }
