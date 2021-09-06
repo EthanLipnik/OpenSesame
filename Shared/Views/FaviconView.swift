@@ -44,7 +44,7 @@ struct FaviconView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
                     .overlay(Text(website.isEmpty ? "" : website[0].uppercased())
-                                .font(.system(.largeTitle, design: .rounded).bold()))
+                                .font(.system(.title, design: .rounded).bold()))
                     .onAppear {
                         if let cache = FaviconView.cache.object(forKey: website as NSString) {
                             
@@ -52,20 +52,10 @@ struct FaviconView: View {
                         }
                     }
                     .task {
-                        if let cache = FaviconView.cache.object(forKey: website as NSString) {
-                            
-                            self.image = cache
-                            
-                            return
-                        }
-                        
                         guard let url = URL(string: website.withHTTPIfNeeded), UserSettings.default.shouldLoadFavicon else { return }
                         
                         do {
-                            let favicon = try await FaviconFinder(url: url, preferredType: .html, preferences: [
-                                FaviconDownloadType.html: FaviconType.appleTouchIcon.rawValue,
-                                FaviconDownloadType.ico: "favicon.ico"
-                            ]).downloadFavicon()
+                            let favicon = try await FaviconFinder(url: url).downloadFavicon()
                             
                             withAnimation {
                                 self.image = favicon.image

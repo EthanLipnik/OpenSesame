@@ -35,6 +35,9 @@ struct OpenSesameApp: SwiftUI.App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .overlay(shouldHideApp ? Rectangle().fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil)
                 .animation(.default, value: shouldHideApp)
+                .onAppear {
+                    UserSettings.default.updateColorScheme(shouldAnimate: false)
+                }
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
         }
         .handlesExternalEvents(matching: Set(arrayLiteral: "*"))

@@ -99,12 +99,6 @@ class UserSettings: ObservableObject {
 #endif
     }
 #endif
-    
-    init() {
-#if !EXTENSION
-        updateColorScheme()
-#endif
-    }
 }
 
 #if os(iOS)
