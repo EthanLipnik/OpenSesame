@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import KeychainAccess
 #if os(iOS)
 import UIKit
 #elseif os(macOS)
@@ -46,6 +47,24 @@ class UserSettings: ObservableObject {
             
             PersistenceController.shared.container = .create(withSync: shouldSyncWithiCloud)
             PersistenceController.shared.loadStore()
+        }
+    }
+    
+    @Published var shouldUseBiometrics: Bool = {
+        return UserDefaults.group.bool(forKey: "shouldUseBiometrics")
+    }() {
+        didSet(oldValue) {
+            UserDefaults.group.set(shouldUseBiometrics, forKey: "shouldUseBiometrics")
+            
+            guard shouldUseBiometrics != oldValue else { return }
+            
+            if !shouldUseBiometrics {
+                let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                    .synchronizable(true)
+                
+                try! keychain
+                    .remove("masterPassword")
+            }
         }
     }
     
@@ -99,6 +118,12 @@ class UserSettings: ObservableObject {
 #endif
     }
 #endif
+    
+    init() {
+        if UserAuthenticationService.availableBiometrics().isEmpty {
+            shouldUseBiometrics = false
+        }
+    }
 }
 
 #if os(iOS)

@@ -8,6 +8,7 @@
 import SwiftUI
 import AuthenticationServices
 import StoreKit
+import KeychainAccess
 
 struct SettingsView: View {
     let persistenceController = PersistenceController.shared
@@ -16,13 +17,19 @@ struct SettingsView: View {
     @State private var isExporting: Bool = false
     @State private var shouldNukeDatabase: Bool = false
     
+    @State private var shouldResetBiometrics: Bool = false
+    @State private var shouldAuthenticate: Bool = false
+    
+    @State private var authenticatedPassword: String = ""
+    
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
     @StateObject var userSettings = UserSettings.default
     
     var body: some View {
-        Form {
-
+        let availableBiometrics = UserAuthenticationService.availableBiometrics()
+        
+        return Form {
             Section {
                 Toggle(isOn: $userSettings.shouldLoadFavicon) {
                     Label("Load Favicons", systemImage: "photo.fill")
@@ -104,14 +111,13 @@ struct SettingsView: View {
             }
             
             Section("Security") {
-                Toggle(isOn: .constant(true)) {
-                    let biometricTypes = UserAuthenticationService.availableBiometrics()
+                Toggle(isOn: $userSettings.shouldUseBiometrics) {
                     let image: String = {
-                        if biometricTypes.contains(.faceID) {
+                        if availableBiometrics.contains(.faceID) {
                             return "faceid"
-                        } else if biometricTypes.contains(.touchID) {
+                        } else if availableBiometrics.contains(.touchID) {
                             return "touchid"
-                        } else if biometricTypes.contains(.watch) {
+                        } else if availableBiometrics.contains(.watch) {
                             return "lock.applewatch"
                         } else {
                             return "faceid"
@@ -120,6 +126,7 @@ struct SettingsView: View {
                     Label("Allow Biometrics", systemImage: image)
                 }
                 .tint(.accentColor)
+                .disabled(availableBiometrics.isEmpty)
                 HStack {
                     Label("Auto-Lock", systemImage: "lock.fill")
                     Spacer()
@@ -209,22 +216,75 @@ struct SettingsView: View {
                 }
             }
         }
-            .navigationTitle("Settings")
-            .halfSheet(showSheet: $isImporting) {
-                NavigationView {
-                    ImportView()
-                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                        .navigationTitle("Import")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
-                .navigationViewStyle(.stack)
-                .interactiveDismissDisabled()
-                .onDisappear {
-                    isImporting = false
-                }
-            } onEnd: {
-                isImporting = false
+        .navigationTitle("Settings")
+        .sheet(isPresented: $isImporting) {
+            NavigationView {
+                ImportView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .navigationTitle("Import")
+                    .navigationBarTitleDisplayMode(.inline)
             }
+            .navigationViewStyle(.stack)
+            .interactiveDismissDisabled()
+        }
+        .onChange(of: userSettings.shouldUseBiometrics) { value in
+            if value {
+                shouldResetBiometrics = true
+                shouldAuthenticate = true
+            }
+        }
+        .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
+            VStack(spacing: 20) {
+                Image(systemName: "lock.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 70)
+                GroupBox {
+                    HStack {
+                        SecureField("Master password", text: $authenticatedPassword, onCommit: {
+                            guard !authenticatedPassword.isEmpty, runEncryptionTest(authenticatedPassword) else { return }
+                            if shouldResetBiometrics {
+                                try? LockView.updateBiometrics(authenticatedPassword)
+                                shouldResetBiometrics = false
+                            }
+                            
+                            shouldAuthenticate = false
+                        })
+                            .textFieldStyle(.plain)
+                            .frame(maxWidth: 400)
+                        Button {
+                            guard !authenticatedPassword.isEmpty, runEncryptionTest(authenticatedPassword) else { return }
+                            if shouldResetBiometrics {
+                                try? LockView.updateBiometrics(authenticatedPassword)
+                                shouldResetBiometrics = false
+                            }
+                            
+                            shouldAuthenticate = false
+                        } label: {
+                            Image(systemName: "key.fill")
+                        }
+                    }
+                }
+            }.padding()
+        } onEnd: {
+            if shouldResetBiometrics {
+                shouldResetBiometrics = false
+                withAnimation {
+                    userSettings.shouldUseBiometrics = false
+                }
+            }
+        }
+    }
+    
+    func runEncryptionTest(_ password: String) -> Bool {
+        if let test = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+            .synchronizable(true)
+            .getData("encryptionTest") {
+            
+            return (try? CryptoSecurityService.decrypt(test, encryptionKey: CryptoSecurityService.generateKey(fromString: password))) != nil
+        } else {
+            return false
+        }
     }
 }
 

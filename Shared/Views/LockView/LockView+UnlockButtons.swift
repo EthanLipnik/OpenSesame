@@ -39,7 +39,7 @@ extension LockView {
             .hoverEffect()
 #endif
             
-            if let image = image, canAuthenticateWithBiometrics || biometricsFailed {
+            if let image = image, (canAuthenticateWithBiometrics || biometricsFailed) && userSettings.shouldUseBiometrics {
                 Button {
                     do {
 #if targetEnvironment(simulator)

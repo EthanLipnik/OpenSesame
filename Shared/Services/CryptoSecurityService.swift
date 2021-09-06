@@ -21,17 +21,20 @@ class CryptoSecurityService {
     
     static func loadEncryptionKey(_ string: String, completion: (() -> Void)? = nil) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let stringData = string.data(using: .utf8)
-            let base64Encoded = stringData!.base64EncodedData()
-            let keyHash = SHA256.hash(data: base64Encoded)
-            let key = SymmetricKey(data: keyHash)
-            encryptionKey = key
+            encryptionKey = generateKey(fromString: string)
             
             completion?()
         }
     }
     
-    static func decrypt(_ combinedData: Data) throws -> String? {
+    static func generateKey(fromString string: String) -> SymmetricKey? {
+        let stringData = string.data(using: .utf8)
+        let base64Encoded = stringData!.base64EncodedData()
+        let keyHash = SHA256.hash(data: base64Encoded)
+        return SymmetricKey(data: keyHash)
+    }
+    
+    static func decrypt(_ combinedData: Data, encryptionKey: SymmetricKey? = encryptionKey) throws -> String? {
         guard let key = encryptionKey else { throw CocoaError(.coderInvalidValue) }
         
         let sealedBox = try AES.GCM.SealedBox(combined: combinedData)

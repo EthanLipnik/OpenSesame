@@ -33,7 +33,7 @@ extension LockView {
                     .set(test, key: "encryptionTest")
                 
                 encryptionTestDoesntExist = false
-                try? updateBiometrics(password) // Try to update biometrics if available.
+                try? LockView.updateBiometrics(password) // Try to update biometrics if available.
             } catch {
                 fatalError(error.localizedDescription)
             }
@@ -41,7 +41,7 @@ extension LockView {
     }
     
     // Save the master password to Keychain Access with a limited accessibility and requiring biometrics to view.
-    func updateBiometrics(_ password: String) throws {
+    static func updateBiometrics(_ password: String) throws {
         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
         let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .devicePasscode]
         
@@ -62,8 +62,8 @@ extension LockView {
             
             if string != nil { // Passed the encryption test and the password is valid.
                 
-                if method != .biometrics && biometricsFailed {
-                    try? updateBiometrics(password) // Master password may have changed and biometrics have failed. Try to update them with the correct password.
+                if method != .biometrics && biometricsFailed && userSettings.shouldUseBiometrics {
+                    try? LockView.updateBiometrics(password) // Master password may have changed and biometrics have failed. Try to update them with the correct password.
                 } else {
                     print("No need to update biometrics")
                 }
