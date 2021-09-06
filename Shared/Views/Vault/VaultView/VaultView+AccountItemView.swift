@@ -25,14 +25,21 @@ extension VaultView {
             return NavigationLink(tag: .init(account), selection: $viewModel.selectedItem) {
                 AccountView(account: account)
             } label: {
-                VStack(alignment: .leading) {
-                    Text(attributedDomain)
-                        .bold()
-                        .lineLimit(1)
-                    Text(account.username!)
-                        .foregroundColor(Color.secondary)
-                        .lineLimit(1)
-                        .blur(radius: CommandLine.arguments.contains("-marketing") ? 5 : 0)
+                HStack {
+                    if let domain = account.domain, UserSettings.default.shouldShowFaviconInList {
+                        FaviconView(website: domain)
+                            .drawingGroup()
+                            .frame(width: 30, height: 30)
+                    }
+                    VStack(alignment: .leading) {
+                        Text(attributedDomain)
+                            .bold()
+                            .lineLimit(1)
+                        Text(account.username!)
+                            .foregroundColor(Color.secondary)
+                            .lineLimit(1)
+                            .blur(radius: CommandLine.arguments.contains("-marketing") ? 5 : 0)
+                    }
                 }
             }
         }

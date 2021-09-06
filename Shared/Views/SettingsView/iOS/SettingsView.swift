@@ -7,12 +7,14 @@
 
 import SwiftUI
 import AuthenticationServices
+import StoreKit
 
 struct SettingsView: View {
     let persistenceController = PersistenceController.shared
     
     @State private var isImporting: Bool = false
     @State private var isExporting: Bool = false
+    @State private var shouldNukeDatabase: Bool = false
     
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
@@ -20,7 +22,30 @@ struct SettingsView: View {
     
     var body: some View {
         Form {
-            Section("General") {
+
+            Section {
+                Toggle(isOn: $userSettings.shouldLoadFavicon) {
+                    Label("Load Favicons", systemImage: "photo.fill")
+                }
+                .tint(.accentColor)
+                Toggle(isOn: $userSettings.shouldShowFaviconInList) {
+                    Label("Show Favicons in List", systemImage: "list.dash")
+                }
+                .tint(.accentColor)
+                .disabled(!userSettings.shouldLoadFavicon)
+                .animation(.default, value: userSettings.shouldLoadFavicon)
+                Toggle(isOn: $userSettings.shouldSyncWithiCloud) {
+                    Label("Sync with iCloud", systemImage: "icloud.fill")
+                }
+                .tint(.accentColor)
+                .disabled(!PersistenceController.isICloudContainerAvailable())
+            } header: {
+                Text("General")
+            } footer: {
+                Text(PersistenceController.isICloudContainerAvailable() ? "Sync with all your devices securely." : "You are not signed in with iCloud or disabled OpenSesame in iCloud settings.")
+            }
+            
+            Section("Passwords") {
                 Button {
                     isImporting.toggle()
                 } label: {
@@ -44,20 +69,13 @@ struct SettingsView: View {
                     Label("Export", systemImage: "tray.and.arrow.up.fill")
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                Toggle(isOn: .constant(true)) {
-                    Label("Load Favicon", systemImage: "photo.fill")
-                }
-                .tint(.accentColor)
-                Toggle(isOn: .constant(true)) {
-                    Label("Sync with iCloud", systemImage: "icloud.fill")
-                }
-                .tint(.accentColor)
             }
+            
             Section("Appearance") {
                 HStack {
                     Label("Color Scheme", systemImage: "circle.fill")
                     Spacer()
-                    Picker("Color Scheme", selection: .constant(0)) {
+                    Picker("Color Scheme", selection: $userSettings.colorScheme) {
                         Text("System")
                             .tag(0)
                         Text("Light")
@@ -108,15 +126,15 @@ struct SettingsView: View {
                     Picker("Auto-lock", selection: .constant(0)) {
                         Text("Immedietly")
                             .tag(0)
-                        Text("30s")
+                        Text("30 seconds")
                             .tag(1)
-                        Text("1m")
+                        Text("1 minute")
                             .tag(2)
-                        Text("3m")
+                        Text("3 minutes")
                             .tag(3)
-                        Text("4m")
+                        Text("4 minutes")
                             .tag(4)
-                        Text("5m")
+                        Text("5 minutes")
                             .tag(5)
                     }
                     .pickerStyle(.menu)
@@ -141,14 +159,24 @@ struct SettingsView: View {
                 } label: {
                     Label("Tip Jar", systemImage: "heart.fill")
                 }
+                Button {
+                    if let keyWindow = UIApplication.shared.connectedScenes
+                        .filter({$0.activationState == .foregroundActive})
+                        .compactMap({$0 as? UIWindowScene})
+                        .first {
+                        
+                        SKStoreReviewController.requestReview(in: keyWindow)
+                    }
+                } label: {
+                    Label("Rate OpenSesame", systemImage: "star.fill")
+                }
+            }
+            Section {
                 Link(destination: URL(string: "https://opensesamemanager.github.com/Website")!) {
                     Label("Website", systemImage: "globe")
                 }
                 Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
                     Label("Source Code", systemImage: "chevron.left.slash.chevron.right")
-                }
-                Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
-                    Label("Rate OpenSesame", systemImage: "star.fill")
                 }
             }
             
@@ -163,9 +191,21 @@ struct SettingsView: View {
                     Label("Reset Autofill", systemImage: "exclamationmark.arrow.circlepath")
                 }
                 Button(role: .destructive) {
-                    
+                    shouldNukeDatabase.toggle()
                 } label: {
                     Label("Nuke Database", systemImage: "trash.fill")
+                }
+                .confirmationDialog("Would you like to just nuke the local database or include the iCloud database as well?", isPresented: $shouldNukeDatabase) {
+                    Button("Local", role: .destructive) {
+                    }
+                    
+                    Button("Local + iCloud", role: .destructive) {
+                    }
+                    
+                    Button("Cancel", role: .cancel) {
+                        shouldNukeDatabase = false
+                    }
+                    .keyboardShortcut(.defaultAction)
                 }
             }
         }

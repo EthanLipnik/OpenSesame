@@ -59,23 +59,20 @@ struct FaviconView: View {
                             return
                         }
                         
-                        guard let url = URL(string: website.withHTTPIfNeeded) else { return }
-                        FaviconFinder(url: url, preferredType: .html, preferences: [
-                            FaviconDownloadType.html: FaviconType.appleTouchIcon.rawValue,
-                            FaviconDownloadType.ico: "favicon.ico"
-                        ]).downloadFavicon { result in
-                            switch result {
-                            case .success(let favicon):
-                                withAnimation {
-                                    self.image = favicon.image
-                                }
-                                
-                                FaviconView.cache.setObject(favicon.image, forKey: website as NSString)
-                                
-                            case .failure(let error):
-                                print("Error", error, url)
+                        guard let url = URL(string: website.withHTTPIfNeeded), UserSettings.default.shouldLoadFavicon else { return }
+                        
+                        do {
+                            let favicon = try await FaviconFinder(url: url, preferredType: .html, preferences: [
+                                FaviconDownloadType.html: FaviconType.appleTouchIcon.rawValue,
+                                FaviconDownloadType.ico: "favicon.ico"
+                            ]).downloadFavicon()
+                            
+                            withAnimation {
+                                self.image = favicon.image
                             }
-                        }
+                            
+                            FaviconView.cache.setObject(favicon.image, forKey: website as NSString)
+                        } catch { }
                     }
             }
         }

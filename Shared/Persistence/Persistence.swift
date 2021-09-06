@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import KeychainAccess
 
-struct PersistenceController {
+class PersistenceController {
     static let shared = PersistenceController()
     
     static let storeURL = URL.storeURL(for: "group.OpenSesame.ethanlipnik", databaseName: "group.OpenSesame.ethanlipnik")
@@ -30,31 +30,15 @@ struct PersistenceController {
         return FileManager.default.url(forUbiquityContainerIdentifier: nil)
     }
 
-    let container: NSPersistentCloudKitContainer
+    var container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "OpenSesame")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        } else {
-            let storeDescription = NSPersistentStoreDescription(url: PersistenceController.storeURL)
-            storeDescription.shouldMigrateStoreAutomatically = true
-            storeDescription.shouldInferMappingModelAutomatically = true
-
-            let cloudkitOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.ethanlipnik.OpenSesame")
-            storeDescription.cloudKitContainerOptions = cloudkitOptions
-
-            let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
-            storeDescription.setOption(true as NSNumber,
-                                       forKey: remoteChangeKey)
-
-            storeDescription.setOption(true as NSNumber,
-                                       forKey: NSPersistentHistoryTrackingKey)
-
-            container.persistentStoreDescriptions = [storeDescription]
-            
-            print("CoreData location", PersistenceController.storeURL.path)
+        
+        if !PersistenceController.isICloudContainerAvailable() {
+            UserSettings.default.shouldSyncWithiCloud = false
         }
+        
+        container = NSPersistentContainer.create(inMemory: inMemory)
         
         if let coreDataVersion = UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.float(forKey: "coreDataVersion"), coreDataVersion < 1.2 {
             try? FileManager.default.removeItem(at: PersistenceController.storeURL)
@@ -158,6 +142,10 @@ struct PersistenceController {
     
     enum CloudService {
         case iCloud
+    }
+    
+    static func isICloudContainerAvailable()->Bool {
+        return FileManager.default.ubiquityIdentityToken != nil
     }
 }
 

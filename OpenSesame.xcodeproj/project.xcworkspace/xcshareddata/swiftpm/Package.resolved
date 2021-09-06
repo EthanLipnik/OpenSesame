@@ -12,11 +12,11 @@
       },
       {
         "package": "FaviconFinder",
-        "repositoryURL": "https://github.com/will-lumley/FaviconFinder.git",
+        "repositoryURL": "https://github.com/OpenSesameManager/FaviconFinder.git",
         "state": {
-          "branch": null,
-          "revision": "7162634f8b701f21349c42ebf7632720a6ca0987",
-          "version": "3.1.0"
+          "branch": "main",
+          "revision": "d2e953192581303e6f3645c21a7117787e4232cd",
+          "version": null
         }
       },
       {
