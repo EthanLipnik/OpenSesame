@@ -96,11 +96,19 @@ struct NewAccountView: View {
             HStack {
                 Button("Cancel") {
                     dismiss.callAsFunction()
-                }.keyboardShortcut(.cancelAction)
+                }
+                .keyboardShortcut(.cancelAction)
+#if os(iOS)
+                .hoverEffect()
+#endif
+                
                 Spacer()
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
                     .disabled(website.isEmpty || username.isEmpty || password.isEmpty)
+#if os(iOS)
+                .hoverEffect()
+#endif
             }.padding()
         }
 #if os(macOS)

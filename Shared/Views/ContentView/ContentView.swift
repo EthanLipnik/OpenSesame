@@ -124,6 +124,7 @@ struct ContentView: View {
         }
         // URL Actions for keyboard shortcuts.
         .onOpenURL { url in
+            guard !isLocked else { return }
             if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems {
                 if let type = queryItems.first(where: { $0.name == "type" }), type.value == "vault", url == "openSesame://new" {

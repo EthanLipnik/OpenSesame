@@ -50,7 +50,10 @@ struct OpenSesameApp: SwiftUI.App {
                         .keyboardShortcut("n", modifiers: [.shift, .command])
                     Link("New Card...", destination: URL(string: "openSesame://new?type=card")!)
                         .keyboardShortcut("n", modifiers: [.shift, .option, .command])
-                }.disabled(isLocked)
+                }
+#if os(macOS)
+                .disabled(isLocked)
+#endif
             }
             
             CommandGroup(after: .newItem) {
@@ -60,13 +63,19 @@ struct OpenSesameApp: SwiftUI.App {
                     
                 }
                 .keyboardShortcut("b", modifiers: [.command, .shift])
+#if os(macOS)
                 .disabled(!isLocked)
+#endif
                 
                 Button("Lock") {
-                    isLocked = true
+                    if !isLocked {
+                        isLocked = true
+                    }
                 }
                 .keyboardShortcut("l", modifiers: [.command, .shift])
+#if os(macOS)
                 .disabled(isLocked)
+#endif
                 
                 Divider()
                 
@@ -84,7 +93,8 @@ struct OpenSesameApp: SwiftUI.App {
                             
                         }.disabled(true)
                     }
-                }.disabled(isLocked)
+                }
+                .disabled(isLocked)
             }
         }
         .onChange(of: scenePhase) { phase in

@@ -94,12 +94,18 @@ struct NewCardView: View {
                     dismiss.callAsFunction()
                 }
                 .keyboardShortcut(.cancelAction)
+#if os(iOS)
+                .hoverEffect()
+#endif
                 
                 Spacer()
                 
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
                     .disabled(name.isEmpty || holder.isEmpty || cardNumber.isEmpty || cardNumber.count < 15)
+#if os(iOS)
+                .hoverEffect()
+#endif
             }.padding()
         }
 #if os(macOS)
