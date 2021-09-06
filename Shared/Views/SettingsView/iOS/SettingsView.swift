@@ -9,6 +9,7 @@ import SwiftUI
 import AuthenticationServices
 import StoreKit
 import KeychainAccess
+import CoreData
 
 struct SettingsView: View {
     let persistenceController = PersistenceController.shared
@@ -190,8 +191,24 @@ struct SettingsView: View {
             Section("Self Destruct") {
                 Button(role: .destructive) {
                     ASCredentialIdentityStore.shared.getState { state in
-                        ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
-                            print(success, error as Any)
+                        if state.isEnabled {
+                            ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
+                                let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
+                                
+                                do {
+                                    let accounts = try persistenceController.container.viewContext.fetch(accountsFetch)
+                                    let domainIdentifers = accounts.map({ ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
+                                                                                                       user: $0.username!,
+                                                                                                       recordIdentifier: nil) })
+                                    
+                                    
+                                    ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: {(_,error) -> Void in
+                                        print(error?.localizedDescription ?? "No errors in saving credentials")
+                                    })
+                                } catch {
+                                    print(error)
+                                }
+                            }
                         }
                     }
                 } label: {
