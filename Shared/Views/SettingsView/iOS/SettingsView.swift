@@ -107,7 +107,7 @@ struct SettingsView: View {
                         }.tag(icon)
                     }
                 } label: {
-                    Label("Icon", systemImage: "app.fill")
+                    Label("App Icon", systemImage: "app.fill")
                 }
             }
             
@@ -251,38 +251,7 @@ struct SettingsView: View {
             }
         }
         .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
-            VStack(spacing: 20) {
-                Image(systemName: "lock.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 70)
-                GroupBox {
-                    HStack {
-                        SecureField("Master password", text: $authenticatedPassword, onCommit: {
-                            guard !authenticatedPassword.isEmpty, runEncryptionTest(authenticatedPassword) else { return }
-                            if shouldResetBiometrics {
-                                try? LockView.updateBiometrics(authenticatedPassword)
-                                shouldResetBiometrics = false
-                            }
-                            
-                            shouldAuthenticate = false
-                        })
-                            .textFieldStyle(.plain)
-                            .frame(maxWidth: 400)
-                        Button {
-                            guard !authenticatedPassword.isEmpty, runEncryptionTest(authenticatedPassword) else { return }
-                            if shouldResetBiometrics {
-                                try? LockView.updateBiometrics(authenticatedPassword)
-                                shouldResetBiometrics = false
-                            }
-                            
-                            shouldAuthenticate = false
-                        } label: {
-                            Image(systemName: "key.fill")
-                        }
-                    }
-                }
-            }.padding()
+            AuthenticationView(onSuccess: didAuthenticate)
         } onEnd: {
             if shouldResetBiometrics {
                 shouldResetBiometrics = false
@@ -293,15 +262,13 @@ struct SettingsView: View {
         }
     }
     
-    func runEncryptionTest(_ password: String) -> Bool {
-        if let test = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-            .synchronizable(true)
-            .getData("encryptionTest") {
-            
-            return (try? CryptoSecurityService.decrypt(test, encryptionKey: CryptoSecurityService.generateKey(fromString: password))) != nil
-        } else {
-            return false
+    func didAuthenticate() {
+        if shouldResetBiometrics {
+            try? LockView.updateBiometrics(authenticatedPassword)
+            shouldResetBiometrics = false
         }
+        
+        shouldAuthenticate = false
     }
 }
 

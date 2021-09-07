@@ -16,6 +16,12 @@ class CredentialProviderViewController: ASCredentialProviderViewController {
     var accounts: [Account] = []
     var allAccounts: [Account] = []
     
+    lazy var selectedCredential: ASPasswordCredentialIdentity? = nil
+    lazy var isAuthorized: Bool = false
+    
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var lockView: UIStackView!
     /*
      Implement this method if your extension supports showing credentials in the QuickType bar.
      When the user selects a credential from your app, this method will be called with the
@@ -45,12 +51,14 @@ class CredentialProviderViewController: ASCredentialProviderViewController {
      }
      */
     
-    override func prepareInterfaceToProvideCredential(for credentialIdentity: ASPasswordCredentialIdentity) {
-        
-    }
-    
     @IBAction func cancel(_ sender: AnyObject?) {
         self.extensionContext.cancelRequest(withError: NSError(domain: ASExtensionErrorDomain, code: ASExtensionError.userCanceled.rawValue))
+    }
+    @IBAction func loginBtn(_ sender: Any) {
+        authorize()
+    }
+    @IBAction func textFieldEnter(_ sender: Any) {
+        authorize()
     }
 }
 
@@ -103,5 +111,7 @@ extension CredentialProviderViewController: UITableViewDelegate, UITableViewData
         } catch {
             self.extensionContext.cancelRequest(withError: error)
         }
+        
+        isAuthorized = false
     }
 }

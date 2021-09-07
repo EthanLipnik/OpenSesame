@@ -17,6 +17,7 @@ extension AccountView {
         
         @State var account: Account
         @Binding var isEditing: Bool
+        @Binding var isAddingVerificationCode: Bool
         
         @State var isShowingPassword: Bool = false
         
@@ -24,16 +25,15 @@ extension AccountView {
         @State var newPassword: String = ""
         
         @State var decryptedPassword: String? = nil
-        
-        @State var isAddingVerificationCode: Bool = false
         @State var newVerificationURL: String = ""
         
         @State var displayedPassword: String = ""
         
         // MARK: - Init
-        init(account: Account, isEditing: Binding<Bool>) {
+        init(account: Account, isEditing: Binding<Bool>, isAddingVerificationCode: Binding<Bool>) {
             self.account = account
             self._isEditing = isEditing
+            self._isAddingVerificationCode = isAddingVerificationCode
             
             if !(account.otpAuth?.isEmpty ?? true) {
                 if let url = URL(string: account.otpAuth ?? ""), url.isValidURL {
@@ -67,6 +67,10 @@ extension AccountView {
                             print(error)
                         }
                     } else {
+                        withAnimation {
+                            isAddingVerificationCode = false
+                        }
+                        
                         do {
                             account.username = newUsername
                             

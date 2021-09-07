@@ -35,12 +35,15 @@ extension AccountView.AccountDetailsView {
                         }
                     }
                 }
-            } else if isEditing {
+            } else {
                 if !isAddingVerificationCode {
                     Button("Add Verification Code") {
-                        isAddingVerificationCode = true
+                        withAnimation {
+                            isEditing = true
+                            isAddingVerificationCode = true
+                        }
                     }
-                } else {
+                } else if isEditing {
                     TextField("Verification Code URL or Secret", text: $newVerificationURL, onCommit:  {
                         isAddingVerificationCode = false
                         

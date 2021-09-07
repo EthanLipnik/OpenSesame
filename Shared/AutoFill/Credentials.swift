@@ -20,21 +20,24 @@ extension CredentialProviderViewController {
             let fetchedResults = try viewContext.fetch(fetchRequest)
             
             self.allAccounts = fetchedResults
+                .filter({ $0.password != nil && $0.username != nil })
         } catch {
             print(error)
         }
         
-#if os(iOS)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
-#endif
     }
     /*
      Prepare your UI to list available credentials for the user to choose from. The items in
      'serviceIdentifiers' describe the service the user is logging in to, so your extension can
      prioritize the most relevant credentials in the list.
-    */
+     */
+    
+    override func prepareInterfaceToProvideCredential(for credentialIdentity: ASPasswordCredentialIdentity) {
+        self.selectedCredential = credentialIdentity
+    }
     
     override func prepareCredentialList(for serviceIdentifiers: [ASCredentialServiceIdentifier]) {
         print("Preparing credentials")
@@ -48,12 +51,10 @@ extension CredentialProviderViewController {
             guard let mainDomain = domains.first else { return }
             
             let fetchRequest : NSFetchRequest<Account> = Account.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "website contains[c] %@", mainDomain)
+            fetchRequest.predicate = NSPredicate(format: "domain contains[c] %@", mainDomain)
             let fetchedResults = try viewContext.fetch(fetchRequest)
             
             self.accounts = fetchedResults
-            
-            print("Accounts", accounts)
             
 #if os(iOS)
             tableView.reloadData()
@@ -70,7 +71,7 @@ extension CredentialProviderViewController {
         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
 #endif
         if let masterPassword = try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-            .accessibility(accessibility, authenticationPolicy: [.biometryCurrentSet, .or, .devicePasscode])
+            .accessibility(accessibility, authenticationPolicy: .biometryCurrentSet)
             .authenticationPrompt("Authenticate to login to view your accounts")
             .get("masterPassword") {
             
@@ -89,16 +90,72 @@ extension CredentialProviderViewController {
     }
     
     override func provideCredentialWithoutUserInteraction(for credentialIdentity: ASPasswordCredentialIdentity) {
+        self.selectedCredential = credentialIdentity
         
-        guard let account = allAccounts.first(where: { $0.username == credentialIdentity.user && $0.domain == credentialIdentity.serviceIdentifier.identifier }) else { extensionContext.cancelRequest(withError: CocoaError(.coderValueNotFound)); fatalError() }
+        guard let account = credentialIdentity.asAccount(allAccounts) else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
         
+#if os(macOS)
+        extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
+#else
         do {
             let decryptedAccount = try decryptedAccount(account)
             let passwordCredential = ASPasswordCredential(user: decryptedAccount.username, password: decryptedAccount.password)
             
-            self.extensionContext.completeRequest(withSelectedCredential: passwordCredential, completionHandler: nil)
+            extensionContext.completeRequest(withSelectedCredential: passwordCredential, completionHandler: nil)
         } catch {
-            extensionContext.cancelRequest(withError: error)
+            extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
         }
+#endif
+    }
+    
+    func authorize() {
+#if os(macOS)
+        let password = textField.stringValue
+#else
+        let password = textField.text!
+#endif
+        let success = CryptoSecurityService.runEncryptionTest(password)
+        
+        guard success else {
+            
+#if os(macOS)
+            textField.stringValue = ""
+#else
+            textField.text = ""
+#endif
+            
+            return
+        }
+        
+        isAuthorized = true
+        
+        if let selectedCredential = selectedCredential {
+            guard let account = selectedCredential.asAccount(allAccounts),
+                  let username = account.username,
+                  let encryptedPassword = account.password,
+                  let password = try? CryptoSecurityService.decrypt(encryptedPassword, encryptionKey: CryptoSecurityService.generateKey(fromString: password))
+            else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
+            
+            let passwordCredential = ASPasswordCredential(user: username, password: password)
+            self.extensionContext.completeRequest(withSelectedCredential: passwordCredential, completionHandler: nil)
+            
+            isAuthorized = false
+        } else {
+#if os(macOS)
+            scrollView.isHidden = false
+            lockView.isHidden = true
+#else
+            tableView.isHidden = false
+            lockView.isHidden = true
+#endif
+            
+            CryptoSecurityService.loadEncryptionKey(password)
+        }
+    }
+}
+
+extension ASPasswordCredentialIdentity {
+    func asAccount(_ accounts: [Account]) -> Account? {
+        return accounts.first(where: { $0.username == self.user && $0.domain == self.serviceIdentifier.identifier })
     }
 }

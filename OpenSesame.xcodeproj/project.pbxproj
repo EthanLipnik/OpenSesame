@@ -52,6 +52,10 @@
 		AA3754F526DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
 		AA3754F626DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
 		AA41467726D3451900254812 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = AA41467626D3451900254812 /* SwiftOTP */; };
+		AA47A76E26E810DC0038ADD2 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */; };
+		AA47A76F26E810DC0038ADD2 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */; };
+		AA47A77026E810DC0038ADD2 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */; };
+		AA47A77126E810DC0038ADD2 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */; };
 		AA49EA0926D3EB1600B12838 /* ContentView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */; };
 		AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */; };
 		AA49EA0B26D3EB1600B12838 /* ContentView+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0826D3EB1600B12838 /* ContentView+List.swift */; };
@@ -262,6 +266,7 @@
 		AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OpenSesame.xcdatamodel; sourceTree = "<group>"; };
 		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+CardItemView.swift"; sourceTree = "<group>"; };
 		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationView.swift; path = "AuthenticationView.swift"; sourceTree = "<group>"; };
 		AA49EA0026D3EAF000B12838 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA49EA0126D3EAF000B12838 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		AA49EA0726D3EB1600B12838 /* ContentView+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentView+Add.swift"; sourceTree = "<group>"; };
@@ -487,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD3DBDC26D3417500531E92 /* MainView.swift */,
+				AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */,
 				AAD3DB9F26D330A400531E92 /* ContentView */,
 				AAD3DB9226D3265700531E92 /* LockView */,
 				AAD3DB8026D30D3300531E92 /* ImportExport */,
@@ -1022,6 +1028,7 @@
 				AA49EA4626D3EBCE00B12838 /* Data+Misc.swift in Sources */,
 				AA05CD0426CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA340B6C26D2BE33003A2CF9 /* Persistence.swift in Sources */,
+				AA47A77026E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA49EA4726D3EBCE00B12838 /* Date+Misc.swift in Sources */,
 				AA05CD0126CDDDA400E27F6D /* CryptoSecurityService.swift in Sources */,
 				AA5EB75F26DD84E800390B85 /* UserSettings.swift in Sources */,
@@ -1042,6 +1049,7 @@
 				AA519A6126CEE5B700C1E354 /* CredentialProviderViewController.swift in Sources */,
 				AA340B6D26D2BE33003A2CF9 /* Persistence.swift in Sources */,
 				AA49EA4926D3EBCE00B12838 /* Date+Misc.swift in Sources */,
+				AA47A77126E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA519A7B26CEE6E700C1E354 /* UserAuthenticationService.swift in Sources */,
 				AA519A7A26CEE6E500C1E354 /* CryptoSecurityService.swift in Sources */,
 				AA5EB76026DD84E800390B85 /* UserSettings.swift in Sources */,
@@ -1066,6 +1074,7 @@
 				AA91286826DEBBFE007B9B30 /* TipJarView.swift in Sources */,
 				AA49EA2126D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */,
 				AA3754EC26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
+				AA47A76E26E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA05CD0026CDDDA300E27F6D /* CryptoSecurityService.swift in Sources */,
 				AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */,
@@ -1121,6 +1130,7 @@
 				AAD3DBC926D33D2600531E92 /* AccountView+AccountDetailView.swift in Sources */,
 				AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA49EA2426D3EB5A00B12838 /* VaultView+List.swift in Sources */,
+				AA47A76F26E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA91286926DEBBFE007B9B30 /* TipJarView.swift in Sources */,
 				AA49EA2A26D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AA3754F226DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */,
@@ -1219,7 +1229,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1248,7 +1258,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1278,7 +1288,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1308,7 +1318,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1452,7 +1462,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1487,7 +1497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1526,7 +1536,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1563,7 +1573,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;

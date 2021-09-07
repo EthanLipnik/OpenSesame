@@ -45,28 +45,32 @@ extension AccountView {
                         }
                         Spacer()
                         Button(isEditing ? "Done" : "Edit") {
-                            if !isEditing {
-                                UserAuthenticationService.authenticate()
-                                    .sink { success in
-                                        if success {
-                                            withAnimation {
-                                                isEditing = true
-                                            }
-                                        }
-                                    }
-                                    .store(in: &UserAuthenticationService.cancellables)
-                            } else {
-                                withAnimation {
-                                    isEditing = false
-                                }
+                            withAnimation {
+                                isEditing.toggle()
                             }
+                            //                            if !isEditing {
+                            //                                UserAuthenticationService.authenticate()
+                            //                                    .sink { success in
+                            //                                        if success {
+                            //                                            withAnimation {
+                            //                                                isEditing = true
+                            //                                            }
+                            //                                        }
+                            //                                    }
+                            //                                    .store(in: &UserAuthenticationService.cancellables)
+                            //                            } else {
+                            //                                withAnimation {
+                            //                                    isEditing = false
+                            //                                    isAddingVerificationCode = false
+                            //                                }
+                            //                            }
                         }
 #if os(iOS)
                         .hoverEffect()
 #endif
                     }
                 }
-                AccountDetailsView(account: account, isEditing: $isEditing)
+                AccountDetailsView(account: account, isEditing: $isEditing, isAddingVerificationCode: $isAddingVerificationCode)
                     .padding(.vertical)
                 GroupBox {
                     TextField("Notes", text: $newNotes, onCommit: {

@@ -43,7 +43,7 @@ extension LockView {
     // Save the master password to Keychain Access with a limited accessibility and requiring biometrics to view.
     static func updateBiometrics(_ password: String) throws {
         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
-        let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .devicePasscode]
+        let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
         
         try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
             .accessibility(accessibility, authenticationPolicy: authenticationPolicy) // If the biometrics change, this will no longer be accessible.

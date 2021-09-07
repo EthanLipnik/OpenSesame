@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/OpenSesameManager/FaviconFinder.git",
         "state": {
           "branch": "main",
-          "revision": "d2e953192581303e6f3645c21a7117787e4232cd",
+          "revision": "b327d60fd49d0f30bcc4b89473c6087ae07e03cb",
           "version": null
         }
       },
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "774dc9c7213085db8aa59595e27c1cd22e428904",
-          "version": "2.3.2"
+          "revision": "02c63b7be50bda384f22c56c64d347231754a07e",
+          "version": "2.3.3"
         }
       }
     ]

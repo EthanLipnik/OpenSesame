@@ -20,6 +20,7 @@ struct AccountView: View {
     // MARK: - Variables
     let account: Account
     @State var isEditing: Bool = false
+    @State var isAddingVerificationCode: Bool = false
     @State var newNotes: String = ""
     
     @State private var isAddingAlternateDomains: Bool = false

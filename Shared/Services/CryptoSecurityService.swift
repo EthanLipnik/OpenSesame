@@ -102,6 +102,17 @@ class CryptoSecurityService {
         }
     }
     
+    static func runEncryptionTest(_ password: String) -> Bool {
+        if let test = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+            .synchronizable(true)
+            .getData("encryptionTest") {
+            
+            return (try? decrypt(test, encryptionKey: CryptoSecurityService.generateKey(fromString: password))) != nil
+        } else {
+            return false
+        }
+    }
+    
     enum StringGeneratorMethod {
         case regular
         case cryptic
