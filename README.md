@@ -79,3 +79,4 @@ OpenSesame depends on the following open-source projects:
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess.git) by [kishikawakatsumi](https://github.com/kishikawakatsumi) ([License](https://github.com/kishikawakatsumi/KeychainAccess/blob/master/LICENSE))
 * [DomainParser](https://github.com/Dashlane/SwiftDomainParser.git) by [Dashlane](https://github.com/Dashlane) ([License](https://github.com/Dashlane/SwiftDomainParser/blob/master/LICENSE))
 * [CSV.swift](https://github.com/yaslab/CSV.swift.git) by [yaslab](https://github.com/yaslab) ([License](https://github.com/yaslab/CSV.swift/blob/master/LICENSE))
+* [CodeScanner](https://github.com/twostraws/CodeScanner.git) by [twostraws](https://github.com/twostraws) ([License](https://github.com/twostraws/CodeScanner/blob/main/LICENSE))

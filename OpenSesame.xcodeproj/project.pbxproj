@@ -130,6 +130,7 @@
 		AA5EB75E26DD84E800390B85 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EB75C26DD84E800390B85 /* UserSettings.swift */; };
 		AA5EB75F26DD84E800390B85 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EB75C26DD84E800390B85 /* UserSettings.swift */; };
 		AA5EB76026DD84E800390B85 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EB75C26DD84E800390B85 /* UserSettings.swift */; };
+		AA6677A926E96E460053C07B /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = AA6677A826E96E460053C07B /* CodeScanner */; };
 		AA8B501D26CD641D003C92AE /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B501C26CD641D003C92AE /* Tests_iOS.swift */; };
 		AA8B501F26CD641D003C92AE /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B501E26CD641D003C92AE /* Tests_iOSLaunchTests.swift */; };
 		AA8B502926CD641D003C92AE /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B502826CD641D003C92AE /* Tests_macOS.swift */; };
@@ -268,8 +269,8 @@
 		AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OpenSesame.xcdatamodel; sourceTree = "<group>"; };
 		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+CardItemView.swift"; sourceTree = "<group>"; };
 		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		AA413B1626E93D26000CE360 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Credits.rtf; path = "Credits.rtf"; sourceTree = "<group>"; };
-		AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SettingsView+SecurityView.swift"; path = "SettingsView+SecurityView.swift"; sourceTree = "<group>"; };
+		AA413B1626E93D26000CE360 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+SecurityView.swift"; sourceTree = "<group>"; };
 		AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		AA49EA0026D3EAF000B12838 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA49EA0126D3EAF000B12838 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -373,6 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA6677A926E96E460053C07B /* CodeScanner in Frameworks */,
 				AA32ADAD26D17697006791DA /* DomainParser in Frameworks */,
 				AA1F6A2726CD68D4004E1A81 /* AuthenticationServices.framework in Frameworks */,
 				AA8B504726CD6457003C92AE /* CloudKit.framework in Frameworks */,
@@ -828,6 +830,7 @@
 				AA32ADAC26D17697006791DA /* DomainParser */,
 				AAD3DBFB26D3446500531E92 /* SwiftOTP */,
 				AA02F51026E6BFC400A227A9 /* FaviconFinder */,
+				AA6677A826E96E460053C07B /* CodeScanner */,
 			);
 			productName = "OpenSesame (iOS)";
 			productReference = AA8B500D26CD641D003C92AE /* OpenSesame.app */;
@@ -943,6 +946,7 @@
 				AA12A79D26D0A5DB000418C7 /* XCRemoteSwiftPackageReference "CSV.swift" */,
 				AAD3DBFA26D3446500531E92 /* XCRemoteSwiftPackageReference "SwiftOTP" */,
 				AA02F50F26E6BFC400A227A9 /* XCRemoteSwiftPackageReference "FaviconFinder" */,
+				AA6677A726E96E460053C07B /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = AA8B500E26CD641D003C92AE /* Products */;
 			projectDirPath = "";
@@ -1237,7 +1241,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1266,7 +1270,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
@@ -1296,7 +1300,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1326,7 +1330,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1470,7 +1474,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1505,7 +1509,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
@@ -1544,7 +1548,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1581,7 +1585,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1811,6 +1815,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		AA6677A726E96E460053C07B /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		AAD3DBFA26D3446500531E92 /* XCRemoteSwiftPackageReference "SwiftOTP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/EthanLipnik/SwiftOTP.git";
@@ -1886,6 +1898,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA05CCF226CDDBFF00E27F6D /* XCRemoteSwiftPackageReference "SwiftDomainParser" */;
 			productName = DomainParser;
+		};
+		AA6677A826E96E460053C07B /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA6677A726E96E460053C07B /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 		AAD3DBFB26D3446500531E92 /* SwiftOTP */ = {
 			isa = XCSwiftPackageProductDependency;

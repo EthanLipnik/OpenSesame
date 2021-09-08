@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if canImport(CodeScanner)
+import CodeScanner
+#endif
 
 extension AccountView.AccountDetailsView {
     var otpView: some View {
@@ -44,27 +47,55 @@ extension AccountView.AccountDetailsView {
                         }
                     }
                 } else if isEditing {
-                    TextField("Verification Code URL or Secret", text: $newVerificationURL, onCommit:  {
-                        isAddingVerificationCode = false
-                        
-                        account.otpAuth = newVerificationURL
-                        
-                        try? viewContext.save()
-                        
-                        guard !newVerificationURL.isEmpty else { return }
-                        if let url = URL(string: newVerificationURL) {
-                            otpService.initialize(url)
-                        } else {
-                            otpService.initialize(newVerificationURL)
-                        }
-                    })
-                        .textFieldStyle(.roundedBorder)
+                    HStack {
+                        TextField("Verification Code URL or Secret", text: $newVerificationURL, onCommit:  {
+                            addVerificationCode(newVerificationURL)
+                        })
+                            .textFieldStyle(.roundedBorder)
 #if os(iOS)
-                        .autocapitalization(.none)
+                            .autocapitalization(.none)
 #endif
-                        .disableAutocorrection(true)
+                            .disableAutocorrection(true)
+                        
+#if canImport(CodeScanner)
+                    Button {
+                        isScanningQRCode.toggle()
+                    } label: {
+                        Image(systemName: "qrcode.viewfinder")
+                    }
+                    .halfSheet(showSheet: $isScanningQRCode) {
+                        CodeScannerView(codeTypes: [.qr]) { result in
+                            switch result {
+                            case .success(let code):
+                                isScanningQRCode = false
+                                addVerificationCode(code)
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                        .padding()
+                        .shadow(radius: 15)
+                    }
+#endif
+                    }
                 }
             }
+        }
+    }
+    
+    private func addVerificationCode(_ code: String) {
+        isAddingVerificationCode = false
+        
+        account.otpAuth = code
+        
+        try? viewContext.save()
+        
+        guard !code.isEmpty else { return }
+        if let url = URL(string: code) {
+            otpService.initialize(url)
+        } else {
+            otpService.initialize(code)
         }
     }
 }

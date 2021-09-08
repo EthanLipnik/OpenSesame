@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "CodeScanner",
+        "repositoryURL": "https://github.com/twostraws/CodeScanner.git",
+        "state": {
+          "branch": null,
+          "revision": "a2144ddaa7c43a6ee00873edd4cc7815ad97942f",
+          "version": "1.0.7"
+        }
+      },
+      {
         "package": "CSV.swift",
         "repositoryURL": "https://github.com/yaslab/CSV.swift.git",
         "state": {

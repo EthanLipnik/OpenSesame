@@ -17,7 +17,9 @@ extension AccountView {
         
         @State var account: Account
         @Binding var isEditing: Bool
+        
         @Binding var isAddingVerificationCode: Bool
+        @State var isScanningQRCode: Bool = false
         
         @State var isShowingPassword: Bool = false
         

@@ -31,10 +31,10 @@ struct NewAccountView: View {
             GroupBox {
                 VStack(spacing: 10) {
                     VStack(alignment: .leading) {
-                        Label("Website", systemImage: "globe")
+                        Label("Website or Name", systemImage: "globe")
                             .foregroundColor(Color.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        TextField("Website", text: $website)
+                        TextField("Website or Name", text: $website)
                             .textFieldStyle(.roundedBorder)
 #if os(iOS)
                             .keyboardType(.URL)

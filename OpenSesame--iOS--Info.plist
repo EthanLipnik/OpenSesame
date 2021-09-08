@@ -118,5 +118,7 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Scan QR codes for Two Factor Authentication.</string>
 </dict>
 </plist>
