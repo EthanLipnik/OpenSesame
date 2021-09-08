@@ -51,6 +51,8 @@
 		AA3754F226DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */; };
 		AA3754F526DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
 		AA3754F626DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
+		AA413B1726E93D26000CE360 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AA413B1626E93D26000CE360 /* Credits.rtf */; };
+		AA413B1926E94F15000CE360 /* SettingsView+SecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */; };
 		AA41467726D3451900254812 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = AA41467626D3451900254812 /* SwiftOTP */; };
 		AA47A76E26E810DC0038ADD2 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */; };
 		AA47A76F26E810DC0038ADD2 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */; };
@@ -266,6 +268,8 @@
 		AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OpenSesame.xcdatamodel; sourceTree = "<group>"; };
 		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+CardItemView.swift"; sourceTree = "<group>"; };
 		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		AA413B1626E93D26000CE360 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Credits.rtf; path = "Credits.rtf"; sourceTree = "<group>"; };
+		AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SettingsView+SecurityView.swift"; path = "SettingsView+SecurityView.swift"; sourceTree = "<group>"; };
 		AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		AA49EA0026D3EAF000B12838 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA49EA0126D3EAF000B12838 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -603,6 +607,7 @@
 				AA05CCD326CDB84F00E27F6D /* Services */,
 				AA519A6E26CEE5DC00C1E354 /* AutoFill */,
 				AA8B500826CD641D003C92AE /* Assets.xcassets */,
+				AA413B1626E93D26000CE360 /* Credits.rtf */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -726,8 +731,9 @@
 			isa = PBXGroup;
 			children = (
 				AAE4A8BC26CDFB3200D1C58E /* SettingsView.swift */,
-				AA016A3526D586DC007397A7 /* SettingsView+SyncView.swift */,
 				AA49EA4A26D3EBE100B12838 /* SettingsView+GeneralView.swift */,
+				AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */,
+				AA016A3526D586DC007397A7 /* SettingsView+SyncView.swift */,
 				AA49EA4B26D3EBE100B12838 /* SettingsView+MenuBarView.swift */,
 			);
 			path = macOS;
@@ -994,6 +1000,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA8B503526CD641D003C92AE /* Assets.xcassets in Resources */,
+				AA413B1726E93D26000CE360 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1154,6 +1161,7 @@
 				AA49EA3326D3EB8600B12838 /* AccountDetailView+PasswordView.swift in Sources */,
 				AA08245626DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */,
 				AA49EA2226D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */,
+				AA413B1926E94F15000CE360 /* SettingsView+SecurityView.swift in Sources */,
 				AA8B502F26CD641D003C92AE /* OpenSesameApp.swift in Sources */,
 				AA8B503126CD641D003C92AE /* ContentView.swift in Sources */,
 				AADB8A4A26E6A07000B17B66 /* Persistence+Container.swift in Sources */,

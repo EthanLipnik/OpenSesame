@@ -130,7 +130,7 @@ class UserSettings: ObservableObject {
             }
         })
 #elseif os(macOS)
-        NSApplication.shared.windows.forEach({ $0.appearance = .fromInteger(colorScheme) })
+        NSApp.appearance = .fromInteger(colorScheme)
 #endif
     }
 #endif
@@ -145,7 +145,6 @@ class UserSettings: ObservableObject {
 #if os(iOS)
 extension UIUserInterfaceStyle {
     static func fromInteger(_ int: Int) -> UIUserInterfaceStyle {
-        print(int)
         switch int {
         case 0:
             return .unspecified
@@ -161,7 +160,6 @@ extension UIUserInterfaceStyle {
 #elseif os(macOS)
 extension NSAppearance {
     static func fromInteger(_ int: Int) -> NSAppearance? {
-        print(int)
         switch int {
         case 0:
             return .init()

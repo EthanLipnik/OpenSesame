@@ -12,42 +12,24 @@ extension SettingsView {
     struct SyncView: View {
         let persistenceController = PersistenceController.shared
         
+        @EnvironmentObject var userSettings: UserSettings
+        
         var body: some View {
-            VStack {
-                Text("Syncing")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                GroupBox {
+            VStack(spacing: 20) {
+                HStack(alignment: .top) {
+                    Text("iCloud:")
+                        .frame(width: 100, alignment: .trailing)
                     VStack(alignment: .leading) {
-                        HStack {
-                            Label("iCloud", systemImage: "key.icloud.fill")
-                            Spacer()
-                            Button("Upload") {
-                                do {
-                                    try persistenceController.uploadStoreTo(.iCloud)
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                            
-                            Button("Download") {
-                                do {
-                                    try persistenceController.downloadStoreFrom(.iCloud)
-                                } catch {
-                                    print(error)
-                                }
-                            }.disabled(true)
-                        }
-                        
-                        Button("Reset autofill", role: .destructive) {
-                            ASCredentialIdentityStore.shared.getState { state in
-                                ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
-                                    print(success, error as Any)
-                                }
-                            }
-                        }
-                    }.padding(5)
+                        Toggle("Sync with iCloud", isOn: $userSettings.shouldSyncWithiCloud)
+                            .disabled(!PersistenceController.isICloudContainerAvailable())
+                        Text(PersistenceController.isICloudContainerAvailable() ? "Sync with all your devices securely." : "You are not signed in with iCloud or disabled OpenSesame in iCloud settings.")
+                            .font(.caption)
+                            .foregroundColor(Color.secondary)
+                            .padding(.leading)
+                    }
+                    Spacer()
                 }
-            }
+            }.padding()
         }
     }
 }

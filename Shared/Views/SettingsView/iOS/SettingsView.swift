@@ -124,7 +124,7 @@ struct SettingsView: View {
                             return "faceid"
                         }
                     }()
-                    Label("Allow Biometrics", systemImage: image)
+                    Label("Use Biometrics", systemImage: image)
                 }
                 .tint(.accentColor)
                 .disabled(availableBiometrics.isEmpty)
@@ -148,7 +148,7 @@ struct SettingsView: View {
                     .pickerStyle(.menu)
                 }
                 Toggle(isOn: $userSettings.shouldHideApp) {
-                    Label("Hide when closing app", systemImage: "eye.slash.fill")
+                    Label("Hide When Closing App", systemImage: "eye.slash.fill")
                 }
                 .tint(.accentColor)
 //                Toggle(isOn: .constant(true)) {
