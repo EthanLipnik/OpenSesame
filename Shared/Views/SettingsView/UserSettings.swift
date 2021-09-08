@@ -68,6 +68,22 @@ class UserSettings: ObservableObject {
         }
     }
     
+    @Published var autoLockTimer: Int = {
+        return UserDefaults.group.integer(forKey: "autoLockTimer")
+    }() {
+        didSet {
+            UserDefaults.group.set(autoLockTimer, forKey: "autoLockTimer")
+        }
+    }
+    
+    @Published var shouldHideApp: Bool = {
+        return !UserDefaults.group.bool(forKey: "shouldNotHideApp")
+    }() {
+        didSet {
+            UserDefaults.group.set(!shouldHideApp, forKey: "shouldNotHideApp")
+        }
+    }
+    
 #if os(iOS) && !EXTENSION
     @Published var selectedIcon: String = {
         return UserDefaults.group.string(forKey: "selectedIcon") ?? "Default"

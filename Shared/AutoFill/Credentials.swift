@@ -94,16 +94,24 @@ extension CredentialProviderViewController {
         
         guard let account = credentialIdentity.asAccount(allAccounts) else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
         
-#if os(macOS)
-        extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
-#else
-        do {
+        func decrypt() throws {
             let decryptedAccount = try decryptedAccount(account)
             let passwordCredential = ASPasswordCredential(user: decryptedAccount.username, password: decryptedAccount.password)
             
             extensionContext.completeRequest(withSelectedCredential: passwordCredential, completionHandler: nil)
+        }
+        
+#if os(macOS)
+        extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
+#else
+        do {
+            try decrypt()
         } catch {
             extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                try? decrypt()
+            }
         }
 #endif
     }

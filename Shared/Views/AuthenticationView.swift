@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @State private var authenticatedPassword: String = ""
-    let onSuccess: () -> Void
+    let onSuccess: (_ password: String) -> Void
     
     var body: some View {
         VStack(spacing: 20) {
@@ -34,13 +34,13 @@ struct AuthenticationView: View {
     func didAuthenticate() {
         guard !authenticatedPassword.isEmpty, CryptoSecurityService.runEncryptionTest(authenticatedPassword) else { return }
         
-        onSuccess()
+        onSuccess(authenticatedPassword)
     }
 }
 
 struct AuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthenticationView() {
+        AuthenticationView() { password in
             
         }
     }

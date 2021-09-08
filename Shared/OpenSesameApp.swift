@@ -24,6 +24,8 @@ struct OpenSesameApp: SwiftUI.App {
     @State var shouldExportPasswords: Bool = false
     @State var isExportingPasswords: Bool = false
     
+    @State var lastOpenedDate: Date? = nil
+    
     // MARK: - View
     var body: some Scene {
         WindowGroup {
@@ -33,7 +35,7 @@ struct OpenSesameApp: SwiftUI.App {
                      shouldExportPasswords: $shouldExportPasswords,
                      isExportingPasswords: $isExportingPasswords)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .overlay(shouldHideApp ? Rectangle().fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil)
+                .overlay(shouldHideApp && !isLocked && UserSettings.default.shouldHideApp ? Rectangle().fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil)
                 .animation(.default, value: shouldHideApp)
                 .onAppear {
                     UserSettings.default.updateColorScheme(shouldAnimate: false)
@@ -106,10 +108,44 @@ struct OpenSesameApp: SwiftUI.App {
                 case .active:
                     print("App is active")
                     shouldHideApp = false
+                    
+                    if let lastOpenedDate = lastOpenedDate {
+                        let timeInterval = Date().timeIntervalSince(lastOpenedDate)
+                        switch UserSettings.default.autoLockTimer {
+                        case 1:
+                            if timeInterval > 30 {
+                                isLocked = true
+                            }
+                        case 2:
+                            if timeInterval > 60 {
+                                isLocked = true
+                            }
+                        case 3:
+                            if timeInterval > 180 {
+                                isLocked = true
+                            }
+                        case 4:
+                            if timeInterval > 240 {
+                                isLocked = true
+                            }
+                        case 5:
+                            if timeInterval > 300 {
+                                isLocked = true
+                            }
+                        default:
+                            break
+                        }
+                    }
+                    
                     break
                 case .background:
                     print("App is in background")
-                    isLocked = true
+                    
+                    lastOpenedDate = Date()
+                    
+                    if UserSettings.default.autoLockTimer == 0 {
+                        isLocked = true
+                    }
                     shouldHideApp = true
                     CryptoSecurityService.encryptionKey = nil
                 case .inactive:

@@ -14,6 +14,7 @@ import CoreData
 struct SettingsView: View {
     let persistenceController = PersistenceController.shared
     
+    // MARK: - Variables
     @State private var isImporting: Bool = false
     @State private var isExporting: Bool = false
     @State private var shouldNukeDatabase: Bool = false
@@ -21,12 +22,11 @@ struct SettingsView: View {
     @State private var shouldResetBiometrics: Bool = false
     @State private var shouldAuthenticate: Bool = false
     
-    @State private var authenticatedPassword: String = ""
-    
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
     @StateObject var userSettings = UserSettings.default
     
+    // MARK: - View
     var body: some View {
         let availableBiometrics = UserAuthenticationService.availableBiometrics()
         
@@ -131,8 +131,8 @@ struct SettingsView: View {
                 HStack {
                     Label("Auto-Lock", systemImage: "lock.fill")
                     Spacer()
-                    Picker("Auto-lock", selection: .constant(0)) {
-                        Text("Immedietly")
+                    Picker("Auto-lock", selection: $userSettings.autoLockTimer) {
+                        Text("Immediately")
                             .tag(0)
                         Text("30 seconds")
                             .tag(1)
@@ -147,15 +147,15 @@ struct SettingsView: View {
                     }
                     .pickerStyle(.menu)
                 }
-                Toggle(isOn: .constant(true)) {
+                Toggle(isOn: $userSettings.shouldHideApp) {
                     Label("Hide when closing app", systemImage: "eye.slash.fill")
                 }
                 .tint(.accentColor)
-                Toggle(isOn: .constant(true)) {
-                    Label("Allow Autofill", systemImage: "text.append")
-                }
-                .tint(.accentColor)
-                Link(destination: URL(string: "https://opensesamemanager.github.com/Website")!) {
+//                Toggle(isOn: .constant(true)) {
+//                    Label("Allow Autofill", systemImage: "text.append")
+//                }
+//                .tint(.accentColor)
+                Link(destination: URL(string: "https://opensesamemanager.github.com/Website/security")!) {
                     Label("Learn more", systemImage: "info.circle.fill")
                 }
             }
@@ -188,6 +188,7 @@ struct SettingsView: View {
                 }
             }
             
+            #if DEBUG
             Section("Self Destruct") {
                 Button(role: .destructive) {
                     ASCredentialIdentityStore.shared.getState { state in
@@ -221,9 +222,17 @@ struct SettingsView: View {
                 }
                 .confirmationDialog("Would you like to just nuke the local database or include the iCloud database as well?", isPresented: $shouldNukeDatabase) {
                     Button("Local", role: .destructive) {
+                        do {
+                            try FileManager.default.removeItem(at: PersistenceController.storeURL)
+                            persistenceController.container = NSPersistentContainer.create()
+                            persistenceController.loadStore()
+                        } catch {
+                            print(error)
+                        }
                     }
                     
                     Button("Local + iCloud", role: .destructive) {
+                        // TODO: Add iCloud self destruct for debugging
                     }
                     
                     Button("Cancel", role: .cancel) {
@@ -232,6 +241,7 @@ struct SettingsView: View {
                     .keyboardShortcut(.defaultAction)
                 }
             }
+            #endif
         }
         .navigationTitle("Settings")
         .sheet(isPresented: $isImporting) {
@@ -262,9 +272,10 @@ struct SettingsView: View {
         }
     }
     
-    func didAuthenticate() {
+    // MARK: - Functions
+    func didAuthenticate(_ password: String) {
         if shouldResetBiometrics {
-            try? LockView.updateBiometrics(authenticatedPassword)
+            try? LockView.updateBiometrics(password)
             shouldResetBiometrics = false
         }
         
