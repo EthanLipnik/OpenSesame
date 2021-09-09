@@ -66,6 +66,7 @@ struct ContentView: View {
                             .sheet(isPresented: $showSettings) {
                                 NavigationView {
                                     SettingsView()
+                                        .environment(\.managedObjectContext, viewContext)
                                         .toolbar {
                                             ToolbarItem(placement: .navigationBarTrailing) {
                                                 Button("Done") {

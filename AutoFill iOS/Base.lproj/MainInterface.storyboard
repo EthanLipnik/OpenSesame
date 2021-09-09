@@ -77,7 +77,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="wLZ-oy-mvF"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
                                                     <action selector="textFieldEnter:" destination="Xki-Si-B7m" eventType="editingDidEnd" id="IdS-hI-9ET"/>

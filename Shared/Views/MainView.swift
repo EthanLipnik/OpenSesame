@@ -50,6 +50,7 @@ struct MainView: View {
 #endif
         }
         
+#if os(macOS)
         // MARK: - ImportView
         .sheet(isPresented: $isImportingPasswords) {
             ImportView()
@@ -70,6 +71,7 @@ struct MainView: View {
             ExportView()
                 .environment(\.managedObjectContext, viewContext)
         }
+#endif
     }
     
     var lockView: some View {

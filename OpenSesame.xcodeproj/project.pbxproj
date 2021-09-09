@@ -70,8 +70,6 @@
 		AA49EA1626D3EB2600B12838 /* LockView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0F26D3EB2600B12838 /* LockView+TextField.swift */; };
 		AA49EA1726D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1026D3EB2600B12838 /* LockView+UnlockButtons.swift */; };
 		AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1026D3EB2600B12838 /* LockView+UnlockButtons.swift */; };
-		AA49EA1A26D3EB4300B12838 /* ImportView+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1926D3EB4300B12838 /* ImportView+Import.swift */; };
-		AA49EA1B26D3EB4300B12838 /* ImportView+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1926D3EB4300B12838 /* ImportView+Import.swift */; };
 		AA49EA1D26D3EB4E00B12838 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1C26D3EB4E00B12838 /* ExportView.swift */; };
 		AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1C26D3EB4E00B12838 /* ExportView.swift */; };
 		AA49EA2126D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1F26D3EB5A00B12838 /* VaultView+AccountItemView.swift */; };
@@ -166,6 +164,12 @@
 		AAD3DBEE26D342B900531E92 /* URL+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DBE726D342AB00531E92 /* URL+Misc.swift */; };
 		AAD3DBEF26D342B900531E92 /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3DBE626D342AB00531E92 /* String+Misc.swift */; };
 		AAD3DBFC26D3446500531E92 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = AAD3DBFB26D3446500531E92 /* SwiftOTP */; };
+		AAD7131F26EA499D00138640 /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7131E26EA499D00138640 /* ImportManager.swift */; };
+		AAD7132026EA499D00138640 /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7131E26EA499D00138640 /* ImportManager.swift */; };
+		AAD7132226EA4E3600138640 /* Array+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7132126EA4E3600138640 /* Array+Misc.swift */; };
+		AAD7132326EA4E3600138640 /* Array+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7132126EA4E3600138640 /* Array+Misc.swift */; };
+		AAD7132426EA4E3600138640 /* Array+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7132126EA4E3600138640 /* Array+Misc.swift */; };
+		AAD7132526EA4E3600138640 /* Array+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7132126EA4E3600138640 /* Array+Misc.swift */; };
 		AADB8A4926E6A07000B17B66 /* Persistence+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8A4826E6A07000B17B66 /* Persistence+Container.swift */; };
 		AADB8A4A26E6A07000B17B66 /* Persistence+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8A4826E6A07000B17B66 /* Persistence+Container.swift */; };
 		AADB8A4B26E6A07000B17B66 /* Persistence+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8A4826E6A07000B17B66 /* Persistence+Container.swift */; };
@@ -280,7 +284,6 @@
 		AA49EA0E26D3EB2600B12838 /* LockView+Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LockView+Functions.swift"; sourceTree = "<group>"; };
 		AA49EA0F26D3EB2600B12838 /* LockView+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LockView+TextField.swift"; sourceTree = "<group>"; };
 		AA49EA1026D3EB2600B12838 /* LockView+UnlockButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LockView+UnlockButtons.swift"; sourceTree = "<group>"; };
-		AA49EA1926D3EB4300B12838 /* ImportView+Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImportView+Import.swift"; sourceTree = "<group>"; };
 		AA49EA1C26D3EB4E00B12838 /* ExportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		AA49EA1F26D3EB5A00B12838 /* VaultView+AccountItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VaultView+AccountItemView.swift"; sourceTree = "<group>"; };
 		AA49EA2026D3EB5A00B12838 /* VaultView+List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VaultView+List.swift"; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 		AAD3DBDC26D3417500531E92 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		AAD3DBE626D342AB00531E92 /* String+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Misc.swift"; sourceTree = "<group>"; };
 		AAD3DBE726D342AB00531E92 /* URL+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Misc.swift"; sourceTree = "<group>"; };
+		AAD7131E26EA499D00138640 /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportManager.swift; path = "ImportManager.swift"; sourceTree = "<group>"; };
+		AAD7132126EA4E3600138640 /* Array+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Array+Misc.swift"; path = "Array+Misc.swift"; sourceTree = "<group>"; };
 		AADB8A4826E6A07000B17B66 /* Persistence+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+Container.swift"; sourceTree = "<group>"; };
 		AAE4A8BC26CDFB3200D1C58E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AAF56EB126DD6F75003581AC /* NewCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
@@ -440,6 +445,7 @@
 				AA519A9026CF4B3200C1E354 /* OTPAuthenticatorService.swift */,
 				AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */,
 				AA05CCFE26CDDD9D00E27F6D /* CryptoSecurityService.swift */,
+				AAD7131E26EA499D00138640 /* ImportManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -660,7 +666,7 @@
 			isa = PBXGroup;
 			children = (
 				AA49EA1C26D3EB4E00B12838 /* ExportView.swift */,
-				AAD3DBA626D3347B00531E92 /* ImportView */,
+				AAD3DB8126D30D3300531E92 /* ImportView.swift */,
 			);
 			path = ImportExport;
 			sourceTree = "<group>";
@@ -685,15 +691,6 @@
 				AA49EA0826D3EB1600B12838 /* ContentView+List.swift */,
 			);
 			path = ContentView;
-			sourceTree = "<group>";
-		};
-		AAD3DBA626D3347B00531E92 /* ImportView */ = {
-			isa = PBXGroup;
-			children = (
-				AAD3DB8126D30D3300531E92 /* ImportView.swift */,
-				AA49EA1926D3EB4300B12838 /* ImportView+Import.swift */,
-			);
-			path = ImportView;
 			sourceTree = "<group>";
 		};
 		AAD3DBB126D3365100531E92 /* VaultView */ = {
@@ -748,6 +745,7 @@
 				AAD3DBE726D342AB00531E92 /* URL+Misc.swift */,
 				AA49EA3D26D3EBA300B12838 /* Data+Misc.swift */,
 				AA49EA3E26D3EBA300B12838 /* Date+Misc.swift */,
+				AAD7132126EA4E3600138640 /* Array+Misc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1036,6 +1034,7 @@
 				AA08245226DDC304006BE956 /* Item.swift in Sources */,
 				AADB8A4B26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
 				AAD3DBEC26D342B900531E92 /* URL+Misc.swift in Sources */,
+				AAD7132426EA4E3600138640 /* Array+Misc.swift in Sources */,
 				AA49EA4626D3EBCE00B12838 /* Data+Misc.swift in Sources */,
 				AA05CD0426CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA340B6C26D2BE33003A2CF9 /* Persistence.swift in Sources */,
@@ -1057,6 +1056,7 @@
 				AA08245326DDC304006BE956 /* Item.swift in Sources */,
 				AADB8A4C26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
 				AA49EA4826D3EBCE00B12838 /* Data+Misc.swift in Sources */,
+				AAD7132526EA4E3600138640 /* Array+Misc.swift in Sources */,
 				AA519A6126CEE5B700C1E354 /* CredentialProviderViewController.swift in Sources */,
 				AA340B6D26D2BE33003A2CF9 /* Persistence.swift in Sources */,
 				AA49EA4926D3EBCE00B12838 /* Date+Misc.swift in Sources */,
@@ -1092,11 +1092,12 @@
 				AAD3DBC826D33D2500531E92 /* AccountView+AccountDetailView.swift in Sources */,
 				AA49EA2926D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AAD3DBAA26D3351400531E92 /* ImportView.swift in Sources */,
+				AAD7132226EA4E3600138640 /* Array+Misc.swift in Sources */,
 				AA49EA2326D3EB5A00B12838 /* VaultView+List.swift in Sources */,
 				AA49EA0B26D3EB1600B12838 /* ContentView+List.swift in Sources */,
-				AA49EA1A26D3EB4300B12838 /* ImportView+Import.swift in Sources */,
 				AA49EA3026D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */,
 				AA3754F526DD3D18007FF26F /* CardView.swift in Sources */,
+				AAD7131F26EA499D00138640 /* ImportManager.swift in Sources */,
 				AA49EA4126D3EBA300B12838 /* Date+Misc.swift in Sources */,
 				AA08245026DDC304006BE956 /* Item.swift in Sources */,
 				AA519A9126CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */,
@@ -1137,6 +1138,7 @@
 				AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
+				AAD7132326EA4E3600138640 /* Array+Misc.swift in Sources */,
 				AA49EA2F26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
 				AAD3DBC926D33D2600531E92 /* AccountView+AccountDetailView.swift in Sources */,
 				AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */,
@@ -1157,8 +1159,8 @@
 				AA49EA4026D3EBA300B12838 /* Data+Misc.swift in Sources */,
 				AA49EA1426D3EB2600B12838 /* LockView+Functions.swift in Sources */,
 				AA1F6A2A26CD6993004E1A81 /* VaultView.swift in Sources */,
-				AA49EA1B26D3EB4300B12838 /* ImportView+Import.swift in Sources */,
 				AA8B503326CD641D003C92AE /* Persistence.swift in Sources */,
+				AAD7132026EA499D00138640 /* ImportManager.swift in Sources */,
 				AA49EA4226D3EBA300B12838 /* Date+Misc.swift in Sources */,
 				AA49EA1626D3EB2600B12838 /* LockView+TextField.swift in Sources */,
 				AA49EA2726D3EB6400B12838 /* NewAccountView.swift in Sources */,

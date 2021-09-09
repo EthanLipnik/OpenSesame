@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct OpenSesameApp: SwiftUI.App {
+struct OpenSesameApp: App {
     
     // MARK: - Environment
     @Environment(\.scenePhase) var scenePhase

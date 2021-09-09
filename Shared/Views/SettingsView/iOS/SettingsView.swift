@@ -12,10 +12,11 @@ import KeychainAccess
 import CoreData
 
 struct SettingsView: View {
-    let persistenceController = PersistenceController.shared
+    @Environment(\.managedObjectContext) var viewContext
     
     // MARK: - Variables
     @State private var isImporting: Bool = false
+    @State private var appFormat: ImportManager.AppFormat = .browser
     @State private var isExporting: Bool = false
     @State private var shouldNukeDatabase: Bool = false
     
@@ -54,11 +55,29 @@ struct SettingsView: View {
             }
             
             Section("Passwords") {
-                Button {
-                    isImporting.toggle()
+                Menu {
+                    Button {
+                        appFormat = .browser
+                        isImporting.toggle()
+                    } label: {
+                        Label("Web Browser", systemImage: "globe")
+                    }
+                    
+                    Divider()
+                    Button("1Password") {
+                        appFormat = .onePassword
+                        isImporting.toggle()
+                    }
+                    
+                    Button("Bitwarden") {
+                        appFormat = .bitwarden
+                        isImporting.toggle()
+                    }
                 } label: {
                     Label("Import", systemImage: "tray.and.arrow.down.fill")
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                
                 Menu {
                     Button {
                         
@@ -197,7 +216,7 @@ struct SettingsView: View {
                                 let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
                                 
                                 do {
-                                    let accounts = try persistenceController.container.viewContext.fetch(accountsFetch)
+                                    let accounts = try viewContext.fetch(accountsFetch)
                                     let domainIdentifers = accounts.map({ ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
                                                                                                        user: $0.username!,
                                                                                                        recordIdentifier: nil) })
@@ -224,8 +243,8 @@ struct SettingsView: View {
                     Button("Local", role: .destructive) {
                         do {
                             try FileManager.default.removeItem(at: PersistenceController.storeURL)
-                            persistenceController.container = NSPersistentContainer.create()
-                            persistenceController.loadStore()
+                            PersistenceController.shared.container = NSPersistentContainer.create()
+                            PersistenceController.shared.loadStore()
                         } catch {
                             print(error)
                         }
@@ -246,8 +265,8 @@ struct SettingsView: View {
         .navigationTitle("Settings")
         .sheet(isPresented: $isImporting) {
             NavigationView {
-                ImportView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                ImportView(importManager: ImportManager(appFormat: appFormat))
+                    .environment(\.managedObjectContext, viewContext)
                     .navigationTitle("Import")
                     .navigationBarTitleDisplayMode(.inline)
             }
