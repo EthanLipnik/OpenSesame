@@ -31,3 +31,15 @@ PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE:default=com.ethanli
 APP_GROUP_OVERRIDE = 
 APP_GROUP = $(APP_GROUP_OVERRIDE:default=group.OpenSesame.ethanlipnik)
 
+// Expose a number of configured XCCONFIG settings via autogenerating a Swift file
+// The BuildConfiguration target runs a script phase that runs GenerateBuildConfig.sh
+// the script greps for environment variables prefixed with OPENSESAME_BUILDCONFIG_
+// and then using sed generates OpenSesameConfig.generated.swift
+//
+// This allows for the Keychain code to make use of the APP_GROUP
+// Whilst it is possible to get the Bundle Identifier at runtime; it doesn't appear
+// to be possible to get the entitlements
+// See this https://medium.com/@hamdullahshah/generating-code-from-xcode-configurations-6fd203ec69ef
+// https://web.archive.org/web/20210911144926/https://medium.com/@hamdullahshah/generating-code-from-xcode-configurations-6fd203ec69ef
+OPENSESAME_BUILDCONFIG_APP_GROUP = $(APP_GROUP)
+OPENSESAME_BUILDCONFIG_PRODUCT_BUNDLE_IDENTIFIER_BASE = $(PRODUCT_BUNDLE_IDENTIFIER_BASE)
