@@ -16,8 +16,6 @@ struct MainView: View {
     @Binding var isLocked: Bool
     
     @Binding var isImportingPasswords: Bool
-    @Binding var shouldExportPasswords: Bool
-    @Binding var isExportingPasswords: Bool
     
     // MARK: - View
     var body: some View {
@@ -56,21 +54,6 @@ struct MainView: View {
             ImportView(importManager: .init(appFormat: .browser))
                 .environment(\.managedObjectContext, viewContext)
         }
-        
-        // MARK: - ExportView
-        .confirmationDialog("You are about to export your passwords unencrypted. Do not share this file!", isPresented: $shouldExportPasswords, actions: {
-            Button("Export", role: .destructive) {
-                self.isExportingPasswords = true
-            }
-            
-            Button("Cancel", role: .cancel) { }.keyboardShortcut(.defaultAction)
-        })
-        .sheet(isPresented: $isExportingPasswords, onDismiss: {
-            shouldExportPasswords = false
-        }) {
-            ExportView()
-                .environment(\.managedObjectContext, viewContext)
-        }
 #endif
     }
     
@@ -88,6 +71,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(isLocked: .constant(true), isImportingPasswords: .constant(false), shouldExportPasswords: .constant(false), isExportingPasswords: .constant(false))
+        MainView(isLocked: .constant(true), isImportingPasswords: .constant(false))
     }
 }

@@ -62,8 +62,6 @@ class UserSettings: ObservableObject {
                 let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
                     .synchronizable(false)
                 
-                print(try! keychain.get("masterPassword"))
-                
                 do {
                     try keychain
                         .remove("masterPassword")

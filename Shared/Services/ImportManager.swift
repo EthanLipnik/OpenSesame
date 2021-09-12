@@ -25,17 +25,6 @@ class ImportManager: ObservableObject {
     let appFormat: AppFormat
     
     // MARK: - Types
-    enum FileFormat: String {
-        case json
-        case csv
-    }
-    
-    enum AppFormat: String {
-        case onePassword
-        case bitwarden
-        case browser
-    }
-    
     struct ImportedAccount: Identifiable, Hashable {
         let id: UUID = UUID()
         
@@ -162,4 +151,15 @@ class ImportManager: ObservableObject {
             }
         }
     }
+}
+
+enum FileFormat: String {
+    case json
+    case csv
+}
+
+enum AppFormat: String {
+    case onePassword
+    case bitwarden
+    case browser
 }

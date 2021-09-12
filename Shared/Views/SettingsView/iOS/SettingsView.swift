@@ -16,12 +16,14 @@ struct SettingsView: View {
     
     // MARK: - Variables
     @State private var isImporting: Bool = false
-    @State private var appFormat: ImportManager.AppFormat = .browser
-    @State private var isExporting: Bool = false
+    @State private var appFormat: AppFormat = .browser
     @State private var shouldNukeDatabase: Bool = false
     
     @State private var shouldResetBiometrics: Bool = false
     @State private var shouldAuthenticate: Bool = false
+    
+    @State private var exportFile: ExportFile? = nil
+    @State private var shouldExportAccounts: Bool = false
     
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
@@ -78,23 +80,9 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
-                Menu {
-                    Button {
-                        
-                    } label: {
-                        Label("Web Browser", systemImage: "globe")
-                    }
-                    
-                    Divider()
-                    Button("1Password") {
-                        
-                    }
-                    
-                    Button("Bitwarden") {
-                    }
-                } label: {
-                    Label("Export", systemImage: "tray.and.arrow.up.fill")
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                ExportButtons { exportFile in
+                    self.exportFile = exportFile
+                    self.shouldExportAccounts = true
                 }
             }
             
@@ -283,6 +271,14 @@ struct SettingsView: View {
             AuthenticationView(onSuccess: didAuthenticate)
         } onEnd: {
             shouldResetBiometrics = false
+        }
+        .fileExporter(isPresented: $shouldExportAccounts, document: exportFile, contentType: (exportFile?.format ?? .json) == .json ? .json : .commaSeparatedText, defaultFilename: "Passwords") { result in
+            switch result {
+            case .success(let url):
+                print("Exported at path", url.path)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     

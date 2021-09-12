@@ -66,7 +66,7 @@ extension LockView {
             
             if string != nil { // Passed the encryption test and the password is valid.
                 
-                if method != .biometrics && biometricsFailed && userSettings.shouldUseBiometrics {
+                if method != .biometrics && didBiometricsFail && userSettings.shouldUseBiometrics {
                     try? LockView.updateBiometrics(password) // Master password may have changed and biometrics have failed. Try to update them with the correct password.
                 } else {
                     print("No need to update biometrics")
@@ -86,6 +86,7 @@ extension LockView {
                     self.password = ""
                     
                     isAuthenticating = false
+                    didBiometricsFail = false
                     
                     attempts = 0
                 }
@@ -96,9 +97,37 @@ extension LockView {
                 print("Failed to unlock for the", attempts, "time.", "Password used:", password)
                 
                 if method == .biometrics {
-                    biometricsFailed = true
+                    didBiometricsFail = true
                 }
             }
+        }
+    }
+    
+    func unlockWithBiometrics() {
+        do {
+#if targetEnvironment(simulator)
+            let accessibility: Accessibility = .always
+#else
+            let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
+#endif
+#if !os(macOS)
+let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+#else
+let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+#endif
+            if let masterPassword = try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                .synchronizable(false)
+                .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
+                .authenticationPrompt("Authenticate to view your accounts")
+                .get("masterPassword") {
+                unlock(masterPassword, method: .biometrics)
+            } else {
+                print("Biometrics failed")
+                didBiometricsFail = true
+            }
+        } catch {
+            print(error)
+            didBiometricsFail = false
         }
     }
 }
