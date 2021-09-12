@@ -15,8 +15,6 @@ struct SettingsView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     // MARK: - Variables
-    @State private var isImporting: Bool = false
-    @State private var appFormat: AppFormat = .browser
     @State private var shouldNukeDatabase: Bool = false
     
     @State private var shouldResetBiometrics: Bool = false
@@ -24,6 +22,9 @@ struct SettingsView: View {
     
     @State private var exportFile: ExportFile? = nil
     @State private var shouldExportAccounts: Bool = false
+    
+    @State private var isImporting: Bool = false
+    @State private var importAppFormat: AppFormat = .browser
     
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
@@ -57,33 +58,17 @@ struct SettingsView: View {
             }
             
             Section("Passwords") {
-                Menu {
-                    Button {
-                        appFormat = .browser
-                        isImporting.toggle()
-                    } label: {
-                        Label("Web Browser", systemImage: "globe")
-                    }
-                    
-                    Divider()
-                    Button("1Password") {
-                        appFormat = .onePassword
-                        isImporting.toggle()
-                    }
-                    
-                    Button("Bitwarden") {
-                        appFormat = .bitwarden
-                        isImporting.toggle()
-                    }
-                } label: {
-                    Label("Import", systemImage: "tray.and.arrow.down.fill")
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                ImportButtons { appFormat in
+                    importAppFormat = appFormat
+                    isImporting = true
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 ExportButtons { exportFile in
                     self.exportFile = exportFile
                     self.shouldExportAccounts = true
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             
             Section("Appearance") {
@@ -251,16 +236,6 @@ struct SettingsView: View {
             #endif
         }
         .navigationTitle("Settings")
-        .sheet(isPresented: $isImporting) {
-            NavigationView {
-                ImportView(importManager: ImportManager(appFormat: appFormat))
-                    .environment(\.managedObjectContext, viewContext)
-                    .navigationTitle("Import")
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .navigationViewStyle(.stack)
-            .interactiveDismissDisabled()
-        }
         .onChange(of: userSettings.shouldUseBiometrics) { value in
             if value {
                 shouldResetBiometrics = true
@@ -279,6 +254,16 @@ struct SettingsView: View {
             case .failure(let error):
                 print(error)
             }
+        }
+        .sheet(isPresented: $isImporting) {
+            NavigationView {
+                ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                    .environment(\.managedObjectContext, viewContext)
+                    .navigationTitle("Import")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .navigationViewStyle(.stack)
+            .interactiveDismissDisabled()
         }
     }
     

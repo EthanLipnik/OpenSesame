@@ -37,7 +37,6 @@ struct ExportButtons: View {
             }
         } label: {
             Label("Export", systemImage: "tray.and.arrow.up.fill")
-                .frame(maxWidth: .infinity, alignment: .leading)
         }
 #if os(iOS)
         .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {

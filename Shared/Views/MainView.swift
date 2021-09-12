@@ -15,8 +15,6 @@ struct MainView: View {
     // MARK: - Variables
     @Binding var isLocked: Bool
     
-    @Binding var isImportingPasswords: Bool
-    
     // MARK: - View
     var body: some View {
         Group {
@@ -47,14 +45,6 @@ struct MainView: View {
             }
 #endif
         }
-        
-#if os(macOS)
-        // MARK: - ImportView
-        .sheet(isPresented: $isImportingPasswords) {
-            ImportView(importManager: .init(appFormat: .browser))
-                .environment(\.managedObjectContext, viewContext)
-        }
-#endif
     }
     
     var lockView: some View {
@@ -71,6 +61,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(isLocked: .constant(true), isImportingPasswords: .constant(false))
+        MainView(isLocked: .constant(true))
     }
 }
