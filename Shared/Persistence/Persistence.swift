@@ -12,7 +12,8 @@ import KeychainAccess
 class PersistenceController {
     static let shared = PersistenceController()
     
-    static let storeURL = URL.storeURL(for: "group.OpenSesame.ethanlipnik", databaseName: "group.OpenSesame.ethanlipnik")
+    static let storeURL = URL.storeURL(for: OpenSesameConfig.APP_GROUP,
+                                          databaseName: OpenSesameConfig.APP_GROUP)
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
@@ -40,10 +41,10 @@ class PersistenceController {
         
         container = NSPersistentContainer.create(inMemory: inMemory)
         
-        if let coreDataVersion = UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.float(forKey: "coreDataVersion"), coreDataVersion < 1.2 {
+        if let coreDataVersion = UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)?.float(forKey: "coreDataVersion"), coreDataVersion < 1.2 {
             try? FileManager.default.removeItem(at: PersistenceController.storeURL)
             
-            UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")?.set(1.2, forKey: "coreDataVersion")
+            UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)?.set(1.2, forKey: "coreDataVersion")
             
             do {
                 try self.downloadStoreFrom(.iCloud)
@@ -95,12 +96,12 @@ class PersistenceController {
         switch service {
         case .iCloud:
             if let iCloudContainer = PersistenceController.containerUrl {
-                let destinationURL = iCloudContainer.appendingPathComponent("group.OpenSesame.ethanlipnik.sqlite")
+                let destinationURL = iCloudContainer.appendingPathComponent("\(OpenSesameConfig.APP_GROUP).sqlite")
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
                     try FileManager.default.removeItem(at: destinationURL)
                 }
                 
-                let backup = URL.storeURL(for: "group.OpenSesame.ethanlipnik", databaseName: "backup")
+                let backup = URL.storeURL(for: OpenSesameConfig.APP_GROUP, databaseName: "backup")
                 print(iCloudContainer.path, backup.path)
                 
                 if FileManager.default.fileExists(atPath: backup.path) {

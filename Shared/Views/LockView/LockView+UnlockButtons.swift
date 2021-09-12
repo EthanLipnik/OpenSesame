@@ -52,7 +52,7 @@ extension LockView {
 #else
         let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
 #endif
-                        if let masterPassword = try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                        if let masterPassword = try OpenSesameKeychain()
                             .synchronizable(false)
                             .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
                             .authenticationPrompt("Authenticate to view your accounts")

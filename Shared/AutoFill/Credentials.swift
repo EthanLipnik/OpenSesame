@@ -71,11 +71,11 @@ extension CredentialProviderViewController {
         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
 #endif
 #if !os(macOS)
-        let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
 #else
-        let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
 #endif
-        if let masterPassword = try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+        if let masterPassword = try OpenSesameKeychain()
             .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
             .authenticationPrompt("Authenticate to login to view your accounts")
             .get("masterPassword") {

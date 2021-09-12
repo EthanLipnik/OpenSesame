@@ -195,6 +195,10 @@
 		C45CE90E26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
 		C45CE90F26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
 		C45CE91026ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
+		C45CE91226ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
+		C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
+		C45CE91426ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
+		C45CE91526ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +405,7 @@
 		C41CBD2226E12ED600BD2F91 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		C45CE8FC26ECFA4400ECD60D /* GenerateBuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateBuildConfig.sh; sourceTree = "<group>"; };
 		C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSesameConfig.generated.swift; sourceTree = "<group>"; };
+		C45CE91126ED037500ECD60D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -497,6 +502,7 @@
 				AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */,
 				AA05CCFE26CDDD9D00E27F6D /* CryptoSecurityService.swift */,
 				AAD7131E26EA499D00138640 /* ImportManager.swift */,
+				C45CE91126ED037500ECD60D /* KeychainService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1134,6 +1140,7 @@
 				AA340B6C26D2BE33003A2CF9 /* Persistence.swift in Sources */,
 				AA47A77026E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA49EA4726D3EBCE00B12838 /* Date+Misc.swift in Sources */,
+				C45CE91426ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA05CD0126CDDDA400E27F6D /* CryptoSecurityService.swift in Sources */,
 				AA5EB75F26DD84E800390B85 /* UserSettings.swift in Sources */,
 			);
@@ -1157,6 +1164,7 @@
 				AA49EA4926D3EBCE00B12838 /* Date+Misc.swift in Sources */,
 				AA47A77126E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA519A7B26CEE6E700C1E354 /* UserAuthenticationService.swift in Sources */,
+				C45CE91526ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA519A7A26CEE6E500C1E354 /* CryptoSecurityService.swift in Sources */,
 				AA5EB76026DD84E800390B85 /* UserSettings.swift in Sources */,
 			);
@@ -1194,6 +1202,7 @@
 				AA3754F526DD3D18007FF26F /* CardView.swift in Sources */,
 				AAD7131F26EA499D00138640 /* ImportManager.swift in Sources */,
 				AA49EA4126D3EBA300B12838 /* Date+Misc.swift in Sources */,
+				C45CE91226ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA08245026DDC304006BE956 /* Item.swift in Sources */,
 				AA519A9126CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */,
 				AAD3DBE926D342B800531E92 /* String+Misc.swift in Sources */,
@@ -1231,6 +1240,7 @@
 				AA49EA4F26D3EBE100B12838 /* SettingsView+MenuBarView.swift in Sources */,
 				AA49EA4D26D3EBE100B12838 /* SettingsView+GeneralView.swift in Sources */,
 				AA08245126DDC304006BE956 /* Item.swift in Sources */,
+				C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
