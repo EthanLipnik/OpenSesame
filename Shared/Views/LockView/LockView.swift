@@ -21,7 +21,6 @@ struct LockView: View {
     @State var password: String = ""
     @State var attempts: Int = 0
     
-    @State var canAuthenticateWithBiometrics: Bool = true
     @State var biometricsFailed: Bool = false
     
     @State var encryptionTestDoesntExist = false
@@ -92,11 +91,12 @@ struct LockView: View {
         .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
             Button("Reset password", role: .destructive) {
                 let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-                    .synchronizable(true)
                 
                 try! keychain
+                    .synchronizable(false)
                     .remove("masterPassword")
                 try! keychain
+                    .synchronizable(true)
                     .remove("encryptionTest")
                 
                 encryptionTest = nil

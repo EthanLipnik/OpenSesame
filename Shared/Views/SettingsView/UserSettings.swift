@@ -60,10 +60,16 @@ class UserSettings: ObservableObject {
             
             if !shouldUseBiometrics {
                 let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-                    .synchronizable(true)
+                    .synchronizable(false)
                 
-                try! keychain
-                    .remove("masterPassword")
+                print(try! keychain.get("masterPassword"))
+                
+                do {
+                    try keychain
+                        .remove("masterPassword")
+                } catch {
+                    print(error)
+                }
             }
         }
     }

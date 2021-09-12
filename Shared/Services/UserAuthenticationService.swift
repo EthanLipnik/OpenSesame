@@ -77,11 +77,9 @@ class UserAuthenticationService: ObservableObject {
             @unknown default:
                 break
             }
-            
-            return types
-        } else {
-            return []
         }
+        
+        return types
     }
     
     enum BiometricType {

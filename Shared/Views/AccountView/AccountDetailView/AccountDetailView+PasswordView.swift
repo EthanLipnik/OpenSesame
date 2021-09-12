@@ -22,35 +22,17 @@ extension AccountView.AccountDetailsView {
                         .blur(radius: isShowingPassword ? 0 : 8)
                         .contextMenu {
                             Button {
-                                displayedPassword.copyToPasteboard()
+                                decryptedPassword?.copyToPasteboard()
                             } label: {
                                 Label("Copy password", systemImage: "doc.on.doc")
                             }.disabled(!isShowingPassword)
+                            Button(action: togglePassword) {
+                                Label(isShowingPassword ? "Hide password" : "Reveal password", systemImage: isShowingPassword ? "eye.slash" : "eye")
+                            }
+
                         }
                         .animation(.default, value: isShowingPassword)
-                        .onTapGesture {
-                            if !isShowingPassword {
-                                do {
-                                    decryptedPassword = try CryptoSecurityService.decrypt(account.password!)
-                                    
-                                    displayedPassword = decryptedPassword ?? displayedPassword
-                                    isShowingPassword = true
-                                } catch {
-                                    print(error)
-                                    
-#if os(macOS)
-                                    NSAlert(error: error).runModal()
-#endif
-                                }
-                            } else {
-                                isShowingPassword.toggle()
-                                decryptedPassword = nil
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                    displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))!
-                                }
-                            }
-                        }
+                        .onTapGesture(perform: togglePassword)
                         .onHover { isHovering in
 #if os(macOS)
                             if isHovering {
@@ -76,6 +58,30 @@ extension AccountView.AccountDetailsView {
 #if os(iOS)
                 .hoverEffect()
 #endif
+            }
+        }
+    }
+    
+    private func togglePassword() {
+        if !isShowingPassword {
+            do {
+                decryptedPassword = try CryptoSecurityService.decrypt(account.password!)
+                
+                displayedPassword = decryptedPassword ?? displayedPassword
+                isShowingPassword = true
+            } catch {
+                print(error)
+                
+#if os(macOS)
+                NSAlert(error: error).runModal()
+#endif
+            }
+        } else {
+            isShowingPassword.toggle()
+            decryptedPassword = nil
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))!
             }
         }
     }

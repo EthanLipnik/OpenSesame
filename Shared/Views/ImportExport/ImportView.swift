@@ -37,10 +37,10 @@ struct ImportView: View {
             //                TableColumn("OTP Auth", value: \.otpAuth)
             //            }
             List {
+#if os(iOS)
                 if importManager.isImporting {
                     ProgressView("Progress", value: Double(importManager.progress) / Double(importManager.importedAccounts.count))
                 }
-#if os(iOS)
                 Section {
                     Picker("Vault", selection: $selectedVault) {
                         ForEach(0..<vaults.count, id: \.self) {
@@ -71,8 +71,8 @@ struct ImportView: View {
                         dismiss.callAsFunction()
                     }.keyboardShortcut(.cancelAction)
                     
-                    if isImporting {
-                        ProgressView("Progress", value: Double(accountProgress) / Double(accounts.count))
+                    if importManager.isImporting {
+                        ProgressView("Progress", value: Double(importManager.progress) / Double(importManager.importedAccounts.count))
                     } else {
                         Spacer()
                     }
@@ -84,9 +84,18 @@ struct ImportView: View {
                         }
                     }
                     .frame(width: 200)
-                    Button("Import", role: .destructive, action: importAccounts)
-                        .keyboardShortcut(.defaultAction)
-                        .disabled(isImporting)
+                    Button("Import", role: .destructive) {
+                        importManager.save { error in
+                            if let error = error {
+                                fatalError(error.localizedDescription)
+                            } else {
+                                print("Saved all accounts")
+                                dismiss.callAsFunction()
+                            }
+                        }
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(importManager.isImporting)
                 }.padding()
             }
 #endif

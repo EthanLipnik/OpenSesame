@@ -39,7 +39,7 @@ extension LockView {
             .hoverEffect()
 #endif
             
-            if let image = image, (canAuthenticateWithBiometrics || biometricsFailed) && userSettings.shouldUseBiometrics {
+            if let image = image, !biometricsFailed && userSettings.shouldUseBiometrics {
                 Button {
                     do {
 #if targetEnvironment(simulator)
@@ -47,16 +47,24 @@ extension LockView {
 #else
                         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
 #endif
+#if !os(macOS)
+        let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+#else
+        let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+#endif
                         if let masterPassword = try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-                            .accessibility(accessibility, authenticationPolicy: .biometryCurrentSet)
+                            .synchronizable(false)
+                            .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
                             .authenticationPrompt("Authenticate to view your accounts")
                             .get("masterPassword") {
                             unlock(masterPassword, method: .biometrics)
                         } else {
+                            print("Biometrics failed")
                             biometricsFailed = true
                         }
                     } catch {
                         print(error)
+                        biometricsFailed = false
                     }
                 } label: {
                     Image(systemName: image)

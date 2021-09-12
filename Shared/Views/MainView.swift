@@ -53,7 +53,7 @@ struct MainView: View {
 #if os(macOS)
         // MARK: - ImportView
         .sheet(isPresented: $isImportingPasswords) {
-            ImportView()
+            ImportView(importManager: .init(appFormat: .browser))
                 .environment(\.managedObjectContext, viewContext)
         }
         

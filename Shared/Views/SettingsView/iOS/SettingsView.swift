@@ -282,12 +282,7 @@ struct SettingsView: View {
         .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
             AuthenticationView(onSuccess: didAuthenticate)
         } onEnd: {
-            if shouldResetBiometrics {
-                shouldResetBiometrics = false
-                withAnimation {
-                    userSettings.shouldUseBiometrics = false
-                }
-            }
+            shouldResetBiometrics = false
         }
     }
     
