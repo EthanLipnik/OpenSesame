@@ -103,7 +103,7 @@ class CryptoSecurityService {
     }
     
     static func runEncryptionTest(_ password: String) -> Bool {
-        if let test = try? OpenSesameKeychain()
+        if let test = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
             .synchronizable(true)
             .getData("encryptionTest") {
             

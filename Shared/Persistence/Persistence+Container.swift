@@ -17,7 +17,7 @@ extension NSPersistentContainer {
         storeDescription.shouldInferMappingModelAutomatically = true
         
         if iCloudSync {
-            let cloudkitOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.\(OpenSesameConfig.PRODUCT_BUNDLE_IDENTIFIER_BASE)")
+            let cloudkitOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.ethanlipnik.OpenSesame")
             storeDescription.cloudKitContainerOptions = cloudkitOptions
         } else {
             storeDescription.cloudKitContainerOptions = nil

@@ -90,8 +90,8 @@ struct LockView: View {
 #endif
         .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
             Button("Reset password", role: .destructive) {
-                let keychain = OpenSesameKeychain()
-
+                let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                
                 try! keychain
                     .synchronizable(false)
                     .remove("masterPassword")

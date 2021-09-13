@@ -8,7 +8,7 @@
 	<true/>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.$(PRODUCT_BUNDLE_IDENTIFIER_BASE)</string>
+		<string>iCloud.com.ethanlipnik.OpenSesame</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
@@ -17,15 +17,15 @@
 	</array>
 	<key>com.apple.developer.ubiquity-container-identifiers</key>
 	<array>
-		<string>iCloud.$(PRODUCT_BUNDLE_IDENTIFIER_BASE)</string>
+		<string>iCloud.com.ethanlipnik.OpenSesame</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>$(APP_GROUP)</string>
+		<string>group.OpenSesame.ethanlipnik</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER_BASE)</string>
+		<string>$(AppIdentifierPrefix)com.ethanlipnik.OpenSesame</string>
 		<string>$(AppIdentifierPrefix)OpenSesame</string>
 	</array>
 </dict>
