@@ -11,7 +11,7 @@ import KeychainAccess
 extension LockView {
     // Try to load encryption test from Keychain Access.
     func loadEncryptionTest() {
-        if let test = try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+        if let test = try? OpenSesameKeychain()
             .synchronizable(true)
             .getData("encryptionTest") {
             
@@ -28,7 +28,7 @@ extension LockView {
                 guard let randomString = CryptoSecurityService.randomString(length: 32, method: .cryptic), let test = try CryptoSecurityService.encrypt(randomString) else { fatalError() }
                 
                 self.encryptionTest = test
-                try? Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                try? OpenSesameKeychain()
                     .synchronizable(true)
                     .set(test, key: "encryptionTest")
                 
@@ -48,8 +48,7 @@ extension LockView {
 #else
         let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
 #endif
-        
-        try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+        try OpenSesameKeychain()
             .accessibility(accessibility, authenticationPolicy: authenticationPolicy) // If the biometrics change, this will no longer be accessible.
             .authenticationPrompt("Authenticate to view your accounts")
             .set(password, key: "masterPassword")

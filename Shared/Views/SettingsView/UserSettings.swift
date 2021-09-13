@@ -59,7 +59,7 @@ class UserSettings: ObservableObject {
             guard shouldUseBiometrics != oldValue else { return }
             
             if !shouldUseBiometrics {
-                let keychain = Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
+                let keychain = OpenSesameKeychain()
                     .synchronizable(false)
                 
                 do {
@@ -180,6 +180,6 @@ extension NSAppearance {
 
 extension UserDefaults {
     static var group: UserDefaults {
-        return UserDefaults(suiteName: "group.OpenSesame.ethanlipnik")!
+        return UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)!
     }
 }

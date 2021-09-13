@@ -6,6 +6,20 @@
 	objectVersion = 55;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C45CE8FF26ECFF1B00ECD60D /* BuildConfiguration */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C45CE90026ECFF1B00ECD60D /* Build configuration list for PBXAggregateTarget "BuildConfiguration" */;
+			buildPhases = (
+				C45CE90326ECFF2200ECD60D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = BuildConfiguration;
+			productName = BuildConfiguration;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		AA016A3226D577B8007397A7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA016A3126D577B8007397A7 /* SettingsView.swift */; };
 		AA016A3326D581D4007397A7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8B504626CD6457003C92AE /* CloudKit.framework */; };
@@ -183,6 +197,14 @@
 		AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF56EB126DD6F75003581AC /* NewCardView.swift */; };
 		AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF56EB126DD6F75003581AC /* NewCardView.swift */; };
 		AAFAF5EA26DD5E0900CD1B48 /* ParallaxMotionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF5E926DD5E0900CD1B48 /* ParallaxMotionModifier.swift */; };
+		C45CE90D26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
+		C45CE90E26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
+		C45CE90F26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
+		C45CE91026ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
+		C45CE91226ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
+		C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
+		C45CE91426ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
+		C45CE91526ED037500ECD60D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,6 +235,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = AA8B501226CD641D003C92AE;
 			remoteInfo = "OpenSesame (macOS)";
+		};
+		C45CE90426ECFF3800ECD60D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA8B4FFE26CD641C003C92AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C45CE8FF26ECFF1B00ECD60D;
+			remoteInfo = BuildConfiguration;
+		};
+		C45CE90626ECFF4800ECD60D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA8B4FFE26CD641C003C92AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C45CE8FF26ECFF1B00ECD60D;
+			remoteInfo = BuildConfiguration;
+		};
+		C45CE90826ECFF5100ECD60D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA8B4FFE26CD641C003C92AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C45CE8FF26ECFF1B00ECD60D;
+			remoteInfo = BuildConfiguration;
+		};
+		C45CE90A26ECFF5600ECD60D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA8B4FFE26CD641C003C92AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C45CE8FF26ECFF1B00ECD60D;
+			remoteInfo = BuildConfiguration;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -359,6 +409,12 @@
 		AAE4A8BC26CDFB3200D1C58E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AAF56EB126DD6F75003581AC /* NewCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		AAFAF5E926DD5E0900CD1B48 /* ParallaxMotionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxMotionModifier.swift; sourceTree = "<group>"; };
+		C41CBD2026E12E6900BD2F91 /* CodeSigningAndProvisioning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodeSigningAndProvisioning.xcconfig; sourceTree = "<group>"; };
+		C41CBD2126E12EC300BD2F91 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		C41CBD2226E12ED600BD2F91 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		C45CE8FC26ECFA4400ECD60D /* GenerateBuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateBuildConfig.sh; sourceTree = "<group>"; };
+		C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSesameConfig.generated.swift; sourceTree = "<group>"; };
+		C45CE91126ED037500ECD60D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +514,7 @@
 				AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */,
 				AA05CCFE26CDDD9D00E27F6D /* CryptoSecurityService.swift */,
 				AAD7131E26EA499D00138640 /* ImportManager.swift */,
+				C45CE91126ED037500ECD60D /* KeychainService.swift */,
 				AA5CBC0026EE58EB00447E4D /* ExportManager.swift */,
 				AA5CBC0526EE70CF00447E4D /* ExportFile.swift */,
 			);
@@ -601,6 +658,7 @@
 		AA8B4FFD26CD641C003C92AE = {
 			isa = PBXGroup;
 			children = (
+				C41CBD1F26E12E4300BD2F91 /* Configuration */,
 				AA49EA0126D3EAF000B12838 /* LICENSE.md */,
 				AA49EA0026D3EAF000B12838 /* README.md */,
 				AA8B504C26CD6596003C92AE /* OpenSesame--macOS--Info.plist */,
@@ -765,6 +823,18 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
+		C41CBD1F26E12E4300BD2F91 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */,
+				C41CBD2026E12E6900BD2F91 /* CodeSigningAndProvisioning.xcconfig */,
+				C41CBD2126E12EC300BD2F91 /* Debug.xcconfig */,
+				C41CBD2226E12ED600BD2F91 /* Release.xcconfig */,
+				C45CE8FC26ECFA4400ECD60D /* GenerateBuildConfig.sh */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -779,6 +849,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C45CE90926ECFF5100ECD60D /* PBXTargetDependency */,
 			);
 			name = "AutoFill iOS";
 			packageProductDependencies = (
@@ -800,6 +871,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C45CE90B26ECFF5600ECD60D /* PBXTargetDependency */,
 			);
 			name = "AutoFill macOS";
 			packageProductDependencies = (
@@ -823,6 +895,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C45CE90526ECFF3800ECD60D /* PBXTargetDependency */,
 				AA05CCEB26CDDA5200E27F6D /* PBXTargetDependency */,
 			);
 			name = "OpenSesame (iOS)";
@@ -851,6 +924,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C45CE90726ECFF4800ECD60D /* PBXTargetDependency */,
 				AA519A6826CEE5B700C1E354 /* PBXTargetDependency */,
 			);
 			name = "OpenSesame (macOS)";
@@ -931,6 +1005,9 @@
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = AA8B501226CD641D003C92AE;
 					};
+					C45CE8FF26ECFF1B00ECD60D = {
+						CreatedOnToolsVersion = 13.0;
+					};
 				};
 			};
 			buildConfigurationList = AA8B500126CD641C003C92AE /* Build configuration list for PBXProject "OpenSesame" */;
@@ -960,6 +1037,7 @@
 				AA8B502326CD641D003C92AE /* Tests macOS */,
 				AA05CCDF26CDDA5200E27F6D /* AutoFill iOS */,
 				AA519A5C26CEE5B700C1E354 /* AutoFill macOS */,
+				C45CE8FF26ECFF1B00ECD60D /* BuildConfiguration */,
 			);
 		};
 /* End PBXProject section */
@@ -1026,6 +1104,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C45CE90326ECFF2200ECD60D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Configuration/GenerateBuildConfig.sh\" > \"${PROJECT_DIR}/Configuration/OpenSesameConfig.generated.swift\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA05CCDC26CDDA5200E27F6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1035,6 +1134,7 @@
 				AAD3DBED26D342B900531E92 /* String+Misc.swift in Sources */,
 				AA49EA5026D3EBF300B12838 /* Credentials.swift in Sources */,
 				AA3754EE26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
+				C45CE90F26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA08245226DDC304006BE956 /* Item.swift in Sources */,
 				AADB8A4B26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
 				AAD3DBEC26D342B900531E92 /* URL+Misc.swift in Sources */,
@@ -1044,6 +1144,7 @@
 				AA340B6C26D2BE33003A2CF9 /* Persistence.swift in Sources */,
 				AA47A77026E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA49EA4726D3EBCE00B12838 /* Date+Misc.swift in Sources */,
+				C45CE91426ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA05CD0126CDDDA400E27F6D /* CryptoSecurityService.swift in Sources */,
 				AA5EB75F26DD84E800390B85 /* UserSettings.swift in Sources */,
 			);
@@ -1057,6 +1158,7 @@
 				AA49EA5126D3EBF300B12838 /* Credentials.swift in Sources */,
 				AAD3DBEE26D342B900531E92 /* URL+Misc.swift in Sources */,
 				AA3754EF26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
+				C45CE91026ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA08245326DDC304006BE956 /* Item.swift in Sources */,
 				AADB8A4C26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
 				AA49EA4826D3EBCE00B12838 /* Data+Misc.swift in Sources */,
@@ -1066,6 +1168,7 @@
 				AA49EA4926D3EBCE00B12838 /* Date+Misc.swift in Sources */,
 				AA47A77126E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA519A7B26CEE6E700C1E354 /* UserAuthenticationService.swift in Sources */,
+				C45CE91526ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA519A7A26CEE6E500C1E354 /* CryptoSecurityService.swift in Sources */,
 				AA5EB76026DD84E800390B85 /* UserSettings.swift in Sources */,
 			);
@@ -1103,11 +1206,13 @@
 				AA3754F526DD3D18007FF26F /* CardView.swift in Sources */,
 				AAD7131F26EA499D00138640 /* ImportManager.swift in Sources */,
 				AA49EA4126D3EBA300B12838 /* Date+Misc.swift in Sources */,
+				C45CE91226ED037500ECD60D /* KeychainService.swift in Sources */,
 				AA08245026DDC304006BE956 /* Item.swift in Sources */,
 				AA5CBC0626EE70CF00447E4D /* ExportFile.swift in Sources */,
 				AA5CBC0126EE58EB00447E4D /* ExportManager.swift in Sources */,
 				AA519A9126CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */,
 				AAD3DBE926D342B800531E92 /* String+Misc.swift in Sources */,
+				C45CE90D26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA1F6A2926CD6993004E1A81 /* VaultView.swift in Sources */,
 				AA3754F126DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */,
 				AA49EA3F26D3EBA300B12838 /* Data+Misc.swift in Sources */,
@@ -1142,6 +1247,8 @@
 				AA49EA4F26D3EBE100B12838 /* SettingsView+MenuBarView.swift in Sources */,
 				AA49EA4D26D3EBE100B12838 /* SettingsView+GeneralView.swift in Sources */,
 				AA08245126DDC304006BE956 /* Item.swift in Sources */,
+				C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */,
+				AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA5CBC0726EE70CF00447E4D /* ExportFile.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
@@ -1159,6 +1266,7 @@
 				AAD3DBEB26D342B800531E92 /* String+Misc.swift in Sources */,
 				AA519A8526CF2A5000C1E354 /* LockView.swift in Sources */,
 				AA49EA0C26D3EB1600B12838 /* ContentView+List.swift in Sources */,
+				C45CE90E26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA49EA3126D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */,
 				AA49EA1226D3EB2600B12838 /* LockView+CreatePassword.swift in Sources */,
 				AA016A3626D586DC007397A7 /* SettingsView+SyncView.swift in Sources */,
@@ -1226,6 +1334,26 @@
 			target = AA8B501226CD641D003C92AE /* OpenSesame (macOS) */;
 			targetProxy = AA8B502526CD641D003C92AE /* PBXContainerItemProxy */;
 		};
+		C45CE90526ECFF3800ECD60D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C45CE8FF26ECFF1B00ECD60D /* BuildConfiguration */;
+			targetProxy = C45CE90426ECFF3800ECD60D /* PBXContainerItemProxy */;
+		};
+		C45CE90726ECFF4800ECD60D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C45CE8FF26ECFF1B00ECD60D /* BuildConfiguration */;
+			targetProxy = C45CE90626ECFF4800ECD60D /* PBXContainerItemProxy */;
+		};
+		C45CE90926ECFF5100ECD60D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C45CE8FF26ECFF1B00ECD60D /* BuildConfiguration */;
+			targetProxy = C45CE90826ECFF5100ECD60D /* PBXContainerItemProxy */;
+		};
+		C45CE90B26ECFF5600ECD60D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C45CE8FF26ECFF1B00ECD60D /* BuildConfiguration */;
+			targetProxy = C45CE90A26ECFF5600ECD60D /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1254,7 +1382,6 @@
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1266,7 +1393,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.OpenSesame.AutoFill-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1283,7 +1410,6 @@
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1295,7 +1421,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.OpenSesame.AutoFill-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1313,7 +1439,6 @@
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1327,7 +1452,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.OpenSesame.AutoFill-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1343,7 +1468,6 @@
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1357,7 +1481,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.OpenSesame.AutoFill-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1369,6 +1493,7 @@
 		};
 		AA8B503626CD641D003C92AE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C41CBD2126E12EC300BD2F91 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1428,6 +1553,7 @@
 		};
 		AA8B503726CD641D003C92AE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C41CBD2226E12ED600BD2F91 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1487,7 +1613,6 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
@@ -1504,7 +1629,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ethanlipnik.OpenSesame;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = OpenSesame;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1522,7 +1647,6 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1540,7 +1664,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ethanlipnik.OpenSesame;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = OpenSesame;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1561,7 +1685,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1598,7 +1721,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1631,7 +1753,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1640,7 +1761,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1656,7 +1777,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1665,7 +1785,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1683,7 +1803,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1692,7 +1811,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.Tests-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1708,7 +1827,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B6QG723P8Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1717,12 +1835,28 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ethanlipnik.Tests-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "OpenSesame (macOS)";
+			};
+			name = Release;
+		};
+		C45CE90126ECFF1B00ECD60D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C45CE90226ECFF1B00ECD60D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1788,6 +1922,15 @@
 			buildConfigurations = (
 				AA8B504226CD641D003C92AE /* Debug */,
 				AA8B504326CD641D003C92AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C45CE90026ECFF1B00ECD60D /* Build configuration list for PBXAggregateTarget "BuildConfiguration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C45CE90126ECFF1B00ECD60D /* Debug */,
+				C45CE90226ECFF1B00ECD60D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
