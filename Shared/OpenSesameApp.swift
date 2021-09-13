@@ -20,9 +20,11 @@ struct OpenSesameApp: App {
     @State var isLocked: Bool = true
     @State var shouldHideApp: Bool = false
     
-    @State var isImportingPasswords: Bool = false
-    @State var shouldExportPasswords: Bool = false
     @State var isExportingPasswords: Bool = false
+    @State var exportFile: ExportFile? = nil
+    
+    @State var isImporting: Bool = false
+    @State var importAppFormat: AppFormat = .browser
     
     @State var lastOpenedDate: Date? = nil
     
@@ -30,15 +32,35 @@ struct OpenSesameApp: App {
     var body: some Scene {
         WindowGroup {
             // MARK: - MainView
-            MainView(isLocked: $isLocked,
-                     isImportingPasswords: $isImportingPasswords,
-                     shouldExportPasswords: $shouldExportPasswords,
-                     isExportingPasswords: $isExportingPasswords)
+            MainView(isLocked: $isLocked)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .overlay(shouldHideApp && !isLocked && UserSettings.default.shouldHideApp ? Rectangle().fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil)
                 .animation(.default, value: shouldHideApp)
                 .onAppear {
                     UserSettings.default.updateColorScheme(shouldAnimate: false)
+                }
+                .fileExporter(isPresented: $isExportingPasswords, document: exportFile, contentType: (exportFile?.format ?? .json) == .csv ? .commaSeparatedText : .json, defaultFilename: "Passwords") { result in
+                    switch result {
+                    case .success(let url):
+                        print("Exported at path", url.path)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                .sheet(isPresented: $isImporting) {
+                    #if os(iOS)
+                    NavigationView {
+                        ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                            .navigationTitle("Import")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
+                    .navigationViewStyle(.stack)
+                    .interactiveDismissDisabled()
+                    #else
+                    ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    #endif
                 }
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
         }
@@ -59,9 +81,7 @@ struct OpenSesameApp: App {
 #if os(macOS)
                 .disabled(isLocked)
 #endif
-            }
-            
-            CommandGroup(after: .newItem) {
+                
                 Divider()
                 
                 Button("Unlock with Biometrics...") {
@@ -85,21 +105,20 @@ struct OpenSesameApp: App {
                 Divider()
                 
                 Group {
-                    Button("Import...") {
-                        isImportingPasswords.toggle()
+                    ImportButtons { appFormat in
+                        guard !isLocked else { return }
+                        self.importAppFormat = appFormat
+                        self.isImporting = true
                     }
-                    
-                    Menu("Export") {
-                        Button("CSV...") {
-                            shouldExportPasswords = true
-                        }
-                        
-                        Button("JSON...") {
-                            
-                        }.disabled(true)
+                    ExportButtons { exportFile in
+                        guard !isLocked else { return }
+                        self.exportFile = exportFile
+                        self.isExportingPasswords = true
                     }
                 }
+#if os(macOS)
                 .disabled(isLocked)
+#endif
             }
         }
         .onChange(of: scenePhase) { phase in

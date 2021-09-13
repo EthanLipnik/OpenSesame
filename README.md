@@ -43,6 +43,7 @@ Now more than ever, what was previously amazing native apps have become slow and
 - Password generator
 - Credit/Debit card support
 - Notes field
+- OTP QR codes
 - Alternate icons
 - Customizable
 - CoreData
@@ -55,10 +56,10 @@ Now more than ever, what was previously amazing native apps have become slow and
 - Menubar access
 - Dropbox, Google Drive, personal server support
 - OTP Autofill
-- OTP QR codes
 - Password suggestions (detect if password is secure)
 - Compromised/breached password notice
 - Chrome & native Windows support
+- [More](https://github.com/OpenSesameManager/OpenSesame/projects/1)
 
 ## Requirements
 

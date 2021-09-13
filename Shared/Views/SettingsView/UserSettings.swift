@@ -62,8 +62,6 @@ class UserSettings: ObservableObject {
                 let keychain = OpenSesameKeychain()
                     .synchronizable(false)
                 
-                print(try! keychain.get("masterPassword"))
-                
                 do {
                     try keychain
                         .remove("masterPassword")

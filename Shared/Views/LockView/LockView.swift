@@ -21,7 +21,7 @@ struct LockView: View {
     @State var password: String = ""
     @State var attempts: Int = 0
     
-    @State var biometricsFailed: Bool = false
+    @State var didBiometricsFail: Bool = false
     
     @State var encryptionTestDoesntExist = false
     @State var encryptionTest: Data? = nil
@@ -115,6 +115,11 @@ struct LockView: View {
         }
         .onAppear {
             loadEncryptionTest()
+        }
+        .task {
+            if userSettings.shouldUseBiometrics {
+                unlockWithBiometrics()
+            }
         }
     }
 }

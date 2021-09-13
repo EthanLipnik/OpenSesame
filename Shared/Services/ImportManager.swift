@@ -21,21 +21,9 @@ class ImportManager: ObservableObject {
     let viewContext = PersistenceController.shared.container.viewContext
     
     var selectedVault: Vault?
-    var fileFormat: FileFormat?
     let appFormat: AppFormat
     
     // MARK: - Types
-    enum FileFormat: String {
-        case json
-        case csv
-    }
-    
-    enum AppFormat: String {
-        case onePassword
-        case bitwarden
-        case browser
-    }
-    
     struct ImportedAccount: Identifiable, Hashable {
         let id: UUID = UUID()
         
@@ -43,37 +31,36 @@ class ImportManager: ObservableObject {
         var url: String
         var username: String
         var password: String
-        var otpAuth: String
+        var otpAuth: String?
+        var notes: String?
+        var isPinned: Bool = false
     }
     
     // MARK: - Init
-    init(vault: Vault? = nil, fileFormat: FileFormat? = nil, appFormat: AppFormat) {
+    init(vault: Vault? = nil, appFormat: AppFormat) {
         self.selectedVault = vault
-        self.fileFormat = fileFormat
         self.appFormat = appFormat
     }
     
     func importFromFile(_ url: URL) {
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            let fileExtension = url.pathExtension.lowercased()
-            switch fileExtension {
-            case "csv":
-                fileFormat = .csv
-                let stream = InputStream(url: url)!
-                let csv = try! CSVReader(stream: stream, hasHeaderRow: true).lazy
-                
-                let importedAccounts = csv.map({ ImportedAccount(name: $0[0], url: $0[1], username: $0[2], password: $0[3], otpAuth: $0[safe: 4] ?? "") })
-                
-                DispatchQueue.main.async {
-                    self.importedAccounts = importedAccounts.map({ $0 })
-                }
-                stream.close()
-            case "json":
-                fileFormat = .json
-                fatalError()
-            default:
-                break
+            let stream = InputStream(url: url)!
+            var importedAccounts: [ImportedAccount] = []
+            
+            let csv = try! CSVReader(stream: stream, hasHeaderRow: true).lazy
+            switch appFormat {
+            case .browser:
+                importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 0] ?? "", url: $0[safe: 1] ?? "", username: $0[safe: 2] ?? "", password: $0[safe: 3] ?? "", otpAuth: $0[safe: 4]) })
+            case .bitwarden:
+                importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 3] ?? "", url: $0[safe: 6] ?? "", username: $0[safe: 7] ?? "", password: $0[safe: 8] ?? "", otpAuth: $0[safe: 9], notes: $0[safe: 4], isPinned: ($0[safe: 1] ?? "0") == "0" ? false : true) })
+            case .onePassword:
+                importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 2] ?? "", url: $0[safe: 4] ?? "", username: $0[safe: 5] ?? "", password: $0[safe: 1] ?? "", otpAuth: nil, notes: $0[safe: 0]) })
             }
+            
+            DispatchQueue.main.async {
+                self.importedAccounts = importedAccounts.map({ $0 })
+            }
+            stream.close()
         }
     }
     
@@ -126,6 +113,8 @@ class ImportManager: ObservableObject {
                             account.username = importedAccount.username
                             account.otpAuth = importedAccount.otpAuth
                             account.dateAdded = Date()
+                            account.notes = importedAccount.notes
+                            account.isPinned = importedAccount.isPinned
                             
                             guard let encryptedPassword = try CryptoSecurityService.encrypt(importedAccount.password) else {
                                 DispatchQueue.main.async {
@@ -162,4 +151,15 @@ class ImportManager: ObservableObject {
             }
         }
     }
+}
+
+enum FileFormat: String {
+    case json
+    case csv
+}
+
+enum AppFormat: String {
+    case onePassword
+    case bitwarden
+    case browser
 }

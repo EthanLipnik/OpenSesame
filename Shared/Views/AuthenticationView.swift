@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @State private var authenticatedPassword: String = ""
+    var message: String? = nil
     let onSuccess: (_ password: String) -> Void
     
     var body: some View {
@@ -27,6 +28,10 @@ struct AuthenticationView: View {
                         Image(systemName: "key.fill")
                     }
                 }
+            }
+            if let message = message {
+                Text(message)
+                    .foregroundColor(Color.red)
             }
         }.padding()
     }

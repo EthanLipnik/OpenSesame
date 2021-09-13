@@ -44,6 +44,18 @@ extension String {
         return urlStr
     }
     
+    var withWWWIfNeeded: String {
+        var urlStr = self
+        
+        if !urlStr.hasPrefix("https://www.") || !urlStr.hasPrefix("http://www.") {
+            urlStr = "https://www." + self
+        } else if !urlStr.hasPrefix("www.") {
+            urlStr = "www." + self
+        }
+        
+        return urlStr
+    }
+    
     var removeHTTP: String {
         var urlStr = self
         
@@ -70,6 +82,17 @@ extension String {
         }
         
         return urlStr
+    }
+    
+    func addElipsis(platformSpecific: Bool = false) -> String {
+        if platformSpecific {
+#if os(macOS)
+            return self + "..."
+#else
+            return self
+#endif
+        }
+        return self + "..."
     }
     
     func copyToPasteboard() {
