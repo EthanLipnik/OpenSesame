@@ -396,7 +396,7 @@
 		AA91286726DEBBFE007B9B30 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
 		AA9B316D26DD6C170042BC58 /* HalfSheetModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfSheetModal.swift; sourceTree = "<group>"; };
 		AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportElements.swift; sourceTree = "<group>"; };
-		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportElements.swift; path = "ImportElements.swift"; sourceTree = "<group>"; };
+		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportElements.swift; sourceTree = "<group>"; };
 		AAD3DB8126D30D3300531E92 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		AAD3DB8F26D3258900531E92 /* FaviconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaviconView.swift; sourceTree = "<group>"; };
 		AAD3DBC726D33D1D00531E92 /* AccountView+AccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountView+AccountDetailView.swift"; sourceTree = "<group>"; };
@@ -1248,7 +1248,6 @@
 				AA49EA4D26D3EBE100B12838 /* SettingsView+GeneralView.swift in Sources */,
 				AA08245126DDC304006BE956 /* Item.swift in Sources */,
 				C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */,
-				AA49EA1E26D3EB4E00B12838 /* ExportView.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA5CBC0726EE70CF00447E4D /* ExportFile.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
