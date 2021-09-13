@@ -20,19 +20,19 @@ struct ImportButtons: View {
             Button {
                 completion(.browser)
             } label: {
-                Label("Web Browser", systemImage: "globe")
+                Label("Web Browser".addElipsis(platformSpecific: true), systemImage: "globe")
             }
             
             Divider()
-            Button("1Password") {
+            Button("1Password".addElipsis(platformSpecific: true)) {
                 completion(.onePassword)
             }
             
-            Button("Bitwarden") {
+            Button("Bitwarden".addElipsis(platformSpecific: true)) {
                 completion(.bitwarden)
             }
         } label: {
-            Label("Import", systemImage: "tray.and.arrow.down.fill")
+            Label("Import".addElipsis(platformSpecific: true), systemImage: "tray.and.arrow.down.fill")
         }
     }
 }

@@ -84,6 +84,17 @@ extension String {
         return urlStr
     }
     
+    func addElipsis(platformSpecific: Bool = false) -> String {
+        if platformSpecific {
+#if os(macOS)
+            return self + "..."
+#else
+            return self
+#endif
+        }
+        return self + "..."
+    }
+    
     func copyToPasteboard() {
 #if os(macOS)
         let pasteboard = NSPasteboard.general

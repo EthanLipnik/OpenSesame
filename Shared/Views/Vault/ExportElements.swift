@@ -24,19 +24,19 @@ struct ExportButtons: View {
             Menu {
                 export(.browser)
             } label: {
-                Label("Web Browser", systemImage: "globe")
+                Label("Web Browser".addElipsis(platformSpecific: true), systemImage: "globe")
             }
             
             Divider()
-            Menu("1Password") {
+            Menu("1Password".addElipsis(platformSpecific: true)) {
                 export(.onePassword)
             }
             
-            Menu("Bitwarden") {
+            Menu("Bitwarden".addElipsis(platformSpecific: true)) {
                 export(.bitwarden)
             }
         } label: {
-            Label("Export", systemImage: "tray.and.arrow.up.fill")
+            Label("Export".addElipsis(platformSpecific: true), systemImage: "tray.and.arrow.up.fill")
         }
 #if os(iOS)
         .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
@@ -54,7 +54,7 @@ struct ExportButtons: View {
     
     func export(_ appFormat: AppFormat) -> some View {
         Group {
-            Button("JSON") {
+            Button("JSON".addElipsis(platformSpecific: true)) {
                 do {
                     fileFormat = .json
                     exportFile = try ExportManager(vault: nil)
@@ -70,7 +70,7 @@ struct ExportButtons: View {
                 }
             }
             
-            Button("CSV") {
+            Button("CSV".addElipsis(platformSpecific: true)) {
                 do {
                     fileFormat = .csv
                     exportFile = try ExportManager(vault: nil)
