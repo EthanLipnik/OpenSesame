@@ -44,6 +44,18 @@ extension String {
         return urlStr
     }
     
+    var withWWWIfNeeded: String {
+        var urlStr = self
+        
+        if !urlStr.hasPrefix("https://www.") || !urlStr.hasPrefix("http://www.") {
+            urlStr = "https://www." + self
+        } else if !urlStr.hasPrefix("www.") {
+            urlStr = "www." + self
+        }
+        
+        return urlStr
+    }
+    
     var removeHTTP: String {
         var urlStr = self
         

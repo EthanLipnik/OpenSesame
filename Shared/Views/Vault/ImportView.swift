@@ -129,7 +129,7 @@ struct ImportView: View {
             }
         }
 #endif
-        .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: [.commaSeparatedText, .json]) { result in
+        .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: [.json]) { result in
             switch result {
             case .success(let url):
                 importManager.importFromFile(url)

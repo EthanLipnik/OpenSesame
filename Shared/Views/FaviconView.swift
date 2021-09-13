@@ -52,7 +52,7 @@ struct FaviconView: View {
                         }
                     }
                     .task {
-                        guard let url = URL(string: website.withHTTPIfNeeded), UserSettings.default.shouldLoadFavicon else { return }
+                        guard let url = URL(string: website.withWWWIfNeeded.withHTTPIfNeeded), UserSettings.default.shouldLoadFavicon else { return }
                         
                         do {
                             let favicon = try await FaviconFinder(url: url).downloadFavicon()
