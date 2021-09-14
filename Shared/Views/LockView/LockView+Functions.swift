@@ -21,6 +21,12 @@ extension LockView {
         }
     }
     
+    static func encryptionTestExists() -> Bool {
+        return (try? OpenSesameKeychain()
+            .synchronizable(true)
+            .contains("encryptionTest")) ?? false
+    }
+    
     // If a master password doesn't exist, then create one with a given password.
     func createMasterPassword(_ password: String) {
         CryptoSecurityService.loadEncryptionKey(password) {

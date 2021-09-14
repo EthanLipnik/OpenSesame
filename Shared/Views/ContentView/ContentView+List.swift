@@ -15,6 +15,9 @@ extension ContentView {
             pinnedSections
         }
         .listStyle(.sidebar)
+        .overlay(vaults.isEmpty ? Text("Add a new vault")
+                    .font(.title.bold())
+                    .foregroundColor(Color.secondary) : nil)
     }
     
     private var vaultSection: some View {
@@ -29,7 +32,7 @@ extension ContentView {
                         isCreatingNewVault = false
                     }
                 })
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.plain)
                     .focused($isNewVaultFocused)
             }
             ForEach(vaults) { vault in

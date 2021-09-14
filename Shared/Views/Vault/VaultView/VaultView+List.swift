@@ -30,6 +30,9 @@ extension VaultView {
                 }
             }
         }
+        .overlay(accounts.isEmpty || cards.isEmpty ? Text("Add a new account or vault")
+                    .font(.title.bold())
+                    .foregroundColor(Color.secondary) : nil)
         .confirmationDialog("Are you sure you want to delete this account? You cannot retreive it when it is gone.", isPresented: $shouldDeleteAccount) {
             Button("Delete", role: .destructive) {
                 deleteItems(offsets: IndexSet([accounts.firstIndex(of: itemToBeDeleted!.account!)!]), type: .account)

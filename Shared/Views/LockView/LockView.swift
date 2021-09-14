@@ -31,6 +31,9 @@ struct LockView: View {
     
     @StateObject var userSettings = UserSettings.default
     
+    @State private var isShowingBoardingScreen: Bool = !UserDefaults.standard.bool(forKey: "didShowBoardingScreen")
+    @AppStorage("didShowBoardingScreen") var didShowBoardingScreen: Bool = false
+    
     
     // MARK: - Variable Types
     public enum UnlockMethod {
@@ -108,12 +111,31 @@ struct LockView: View {
         }, message: {
             Text("You can change it but you won't be able to decrypt any of your accounts.")
         })
-        
-        // MARK: - Master Password Creation
-        .sheet(isPresented: $encryptionTestDoesntExist) {
-            CreatePasswordView(completionAction: createMasterPassword)
+        .sheet(isPresented: $isShowingBoardingScreen) {
+            BoardingView(encryptionTestDoesntExist: $encryptionTestDoesntExist, masterPasswordCompletion: createMasterPassword)
+#if os(iOS)
+                .interactiveDismissDisabled()
+#endif
+        }
+        .onChange(of: didShowBoardingScreen) { newValue in
+            if newValue {
+                isShowingBoardingScreen = false
+            }
         }
         .onAppear {
+//            let keychain = OpenSesameKeychain()
+//
+//            try! keychain
+//                .synchronizable(false)
+//                .remove("masterPassword")
+//            try! keychain
+//                .synchronizable(true)
+//                .remove("encryptionTest")
+//
+//            encryptionTest = nil
+//            encryptionTestDoesntExist = true
+//            didShowBoardingScreen = false
+            
             loadEncryptionTest()
         }
         .task {
