@@ -15,9 +15,11 @@ extension ContentView {
             pinnedSections
         }
         .listStyle(.sidebar)
+#if !os(macOS)
         .overlay(vaults.isEmpty ? Text("Add a new vault")
                     .font(.title.bold())
                     .foregroundColor(Color.secondary) : nil)
+#endif
     }
     
     private var vaultSection: some View {

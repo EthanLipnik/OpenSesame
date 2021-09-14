@@ -120,6 +120,12 @@ struct OpenSesameApp: App {
                 .disabled(isLocked)
 #endif
             }
+            
+#if os(macOS)
+            CommandGroup(replacing: .help) {
+                Link("OpenSesame Help", destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame/issues/new/choose")!)
+            }
+#endif
         }
         .onChange(of: scenePhase) { phase in
             withAnimation {
