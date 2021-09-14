@@ -13,6 +13,8 @@ struct ImportButtons: View {
     
     @State private var shouldAuthenticate: Bool = false
     
+    var shouldHaveImageLabel: Bool = true
+    var isBold: Bool = false
     let completion: (AppFormat) -> Void
     
     var body: some View {
@@ -32,7 +34,13 @@ struct ImportButtons: View {
                 completion(.bitwarden)
             }
         } label: {
-            Label("Import".addElipsis(platformSpecific: true), systemImage: "tray.and.arrow.down.fill")
+            if shouldHaveImageLabel {
+                Label("Import".addElipsis(platformSpecific: true), systemImage: "tray.and.arrow.down.fill")
+                    .font(isBold ? .headline : .body)
+            } else {
+                Text("Import".addElipsis(platformSpecific: true))
+                    .font(isBold ? .headline : .body)
+            }
         }
     }
 }

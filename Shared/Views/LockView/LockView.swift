@@ -60,7 +60,7 @@ struct LockView: View {
                 .frame(width: 250, height: 250)
                 .animation(.default, value: isLocked)
             textField
-            .blur(radius: isAuthenticating ? 2.5 : 0)
+                .blur(radius: isAuthenticating ? 2.5 : 0)
             Spacer()
         }
         .padding()
@@ -94,7 +94,7 @@ struct LockView: View {
         .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
             Button("Reset password", role: .destructive) {
                 let keychain = OpenSesameKeychain()
-
+                
                 try! keychain
                     .synchronizable(false)
                     .remove("masterPassword")
@@ -113,6 +113,7 @@ struct LockView: View {
         })
         .sheet(isPresented: $isShowingBoardingScreen) {
             BoardingView(encryptionTestDoesntExist: $encryptionTestDoesntExist, masterPasswordCompletion: createMasterPassword)
+                .environment(\.managedObjectContext, viewContext)
 #if os(iOS)
                 .interactiveDismissDisabled()
 #endif
@@ -123,23 +124,23 @@ struct LockView: View {
             }
         }
         .onAppear {
-//            let keychain = OpenSesameKeychain()
-//
-//            try! keychain
-//                .synchronizable(false)
-//                .remove("masterPassword")
-//            try! keychain
-//                .synchronizable(true)
-//                .remove("encryptionTest")
-//
-//            encryptionTest = nil
-//            encryptionTestDoesntExist = true
-//            didShowBoardingScreen = false
+            //            let keychain = OpenSesameKeychain()
+            //            
+            //            try! keychain
+            //                .synchronizable(false)
+            //                .remove("masterPassword")
+            //            try! keychain
+            //                .synchronizable(true)
+            //                .remove("encryptionTest")
+            //            
+            //            encryptionTest = nil
+            //            encryptionTestDoesntExist = true
+            //            didShowBoardingScreen = false
             
             loadEncryptionTest()
         }
         .task {
-            if userSettings.shouldUseBiometrics {
+            if userSettings.shouldUseBiometrics && isLocked {
                 unlockWithBiometrics()
             }
         }

@@ -28,7 +28,6 @@ extension BoardingView {
                     UserDefaults.standard.set(true, forKey: "didShowBoardingScreen")
                 } label: {
                     Text("Finish")
-                        .font(.title.bold())
                         .frame(maxWidth: 300)
                 }
                 .buttonStyle(.borderedProminent)

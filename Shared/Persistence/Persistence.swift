@@ -87,7 +87,20 @@ class PersistenceController {
                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             } else {
-                try? viewContext.setQueryGenerationFrom(.current)
+                do {
+                    try viewContext.setQueryGenerationFrom(.current)
+                    
+                    let vaultsFetch = NSFetchRequest<Vault>(entityName: "Vault")
+                    let vaults = try viewContext.fetch(vaultsFetch)
+                    if vaults.isEmpty {
+                        let vault = Vault(context: viewContext)
+                        vault.name = "Primary"
+                        
+                        try viewContext.save()
+                    }
+                } catch {
+                    print(error)
+                }
             }
         })
     }

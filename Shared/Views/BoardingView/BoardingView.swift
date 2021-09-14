@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct BoardingView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    
     @Binding var encryptionTestDoesntExist: Bool
-    @State private var selectedIndex: Int = 0
+    @State private var selectedIndex: Int = 4
     
     let masterPasswordCompletion: (String) -> Void
     
@@ -30,11 +32,21 @@ struct BoardingView: View {
                     Text("Setup")
                 }
                 .tag(2)
-            CardView(selectedIndex: $selectedIndex)
+            SyncView(selectedIndex: $selectedIndex)
                 .tabItem {
-                    Text("Cards")
+                    Text("Sync")
                 }
                 .tag(3)
+            ImportView(selectedIndex: $selectedIndex)
+                .tabItem {
+                    Text("Import")
+                }
+                .tag(4)
+            //            CardView(selectedIndex: $selectedIndex)
+            //                .tabItem {
+            //                    Text("Cards")
+            //                }
+            //                .tag(5
         }
 #if !os(macOS)
         .tabViewStyle(.page(indexDisplayMode: .never))

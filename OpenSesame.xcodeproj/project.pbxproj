@@ -145,6 +145,10 @@
 		AA5EB75F26DD84E800390B85 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EB75C26DD84E800390B85 /* UserSettings.swift */; };
 		AA5EB76026DD84E800390B85 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EB75C26DD84E800390B85 /* UserSettings.swift */; };
 		AA6677A926E96E460053C07B /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = AA6677A826E96E460053C07B /* CodeScanner */; };
+		AA66C30126F0E9A700985B2F /* BoardingView+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66C30026F0E9A700985B2F /* BoardingView+Sync.swift */; };
+		AA66C30226F0E9A700985B2F /* BoardingView+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66C30026F0E9A700985B2F /* BoardingView+Sync.swift */; };
+		AA66C30426F0EE5D00985B2F /* BoardingView+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66C30326F0EE5D00985B2F /* BoardingView+Import.swift */; };
+		AA66C30526F0EE5D00985B2F /* BoardingView+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66C30326F0EE5D00985B2F /* BoardingView+Import.swift */; };
 		AA8B501D26CD641D003C92AE /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B501C26CD641D003C92AE /* Tests_iOS.swift */; };
 		AA8B501F26CD641D003C92AE /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B501E26CD641D003C92AE /* Tests_iOSLaunchTests.swift */; };
 		AA8B502926CD641D003C92AE /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B502826CD641D003C92AE /* Tests_macOS.swift */; };
@@ -385,6 +389,8 @@
 		AA5EB74826DD805B00390B85 /* PurpleIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PurpleIcon@3x.png"; sourceTree = "<group>"; };
 		AA5EB74926DD805B00390B85 /* RedIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedIcon@3x.png"; sourceTree = "<group>"; };
 		AA5EB75C26DD84E800390B85 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		AA66C30026F0E9A700985B2F /* BoardingView+Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Sync.swift"; path = "../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/BoardingView/BoardingView+Sync.swift"; sourceTree = "<group>"; };
+		AA66C30326F0EE5D00985B2F /* BoardingView+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Import.swift"; path = "../../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Views/BoardingView/BoardingView+Import.swift"; sourceTree = "<group>"; };
 		AA8B500526CD641C003C92AE /* OpenSesameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSesameApp.swift; sourceTree = "<group>"; };
 		AA8B500626CD641C003C92AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA8B500726CD641C003C92AE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -408,8 +414,8 @@
 		AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportElements.swift; sourceTree = "<group>"; };
 		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportElements.swift; sourceTree = "<group>"; };
 		AAD16AC426EFA1FF00CCAB56 /* BoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingView.swift; sourceTree = "<group>"; };
-		AAD16AC526EFA21200CCAB56 /* BoardingView+Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Welcome.swift"; path = "BoardingView+Welcome.swift"; sourceTree = "<group>"; };
-		AAD16ACA26EFA7B100CCAB56 /* BoardingView+Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Security.swift"; path = "BoardingView+Security.swift"; sourceTree = "<group>"; };
+		AAD16AC526EFA21200CCAB56 /* BoardingView+Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Welcome.swift"; sourceTree = "<group>"; };
+		AAD16ACA26EFA7B100CCAB56 /* BoardingView+Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Security.swift"; sourceTree = "<group>"; };
 		AAD3DB8126D30D3300531E92 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		AAD3DB8F26D3258900531E92 /* FaviconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaviconView.swift; sourceTree = "<group>"; };
 		AAD3DBC726D33D1D00531E92 /* AccountView+AccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountView+AccountDetailView.swift"; sourceTree = "<group>"; };
@@ -422,8 +428,8 @@
 		AAE4A8BC26CDFB3200D1C58E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AAF56EB126DD6F75003581AC /* NewCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		AAFAF5E926DD5E0900CD1B48 /* ParallaxMotionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxMotionModifier.swift; sourceTree = "<group>"; };
-		AAFB0EA526EFFF7100A153CD /* BoardingView+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Cards.swift"; path = "BoardingView+Cards.swift"; sourceTree = "<group>"; };
-		AAFB0EA826F0092600A153CD /* BoardingView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Setup.swift"; path = "BoardingView+Setup.swift"; sourceTree = "<group>"; };
+		AAFB0EA526EFFF7100A153CD /* BoardingView+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Cards.swift"; sourceTree = "<group>"; };
+		AAFB0EA826F0092600A153CD /* BoardingView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Setup.swift"; sourceTree = "<group>"; };
 		C41CBD2026E12E6900BD2F91 /* CodeSigningAndProvisioning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodeSigningAndProvisioning.xcconfig; sourceTree = "<group>"; };
 		C41CBD2126E12EC300BD2F91 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		C41CBD2226E12ED600BD2F91 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -525,6 +531,7 @@
 		AA05CCD326CDB84F00E27F6D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AA5EB75C26DD84E800390B85 /* UserSettings.swift */,
 				AA519A9026CF4B3200C1E354 /* OTPAuthenticatorService.swift */,
 				AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */,
 				AA05CCFE26CDDD9D00E27F6D /* CryptoSecurityService.swift */,
@@ -756,6 +763,8 @@
 				AAD16AC526EFA21200CCAB56 /* BoardingView+Welcome.swift */,
 				AAD16ACA26EFA7B100CCAB56 /* BoardingView+Security.swift */,
 				AAFB0EA826F0092600A153CD /* BoardingView+Setup.swift */,
+				AA66C30026F0E9A700985B2F /* BoardingView+Sync.swift */,
+				AA66C30326F0EE5D00985B2F /* BoardingView+Import.swift */,
 				AAFB0EA526EFFF7100A153CD /* BoardingView+Cards.swift */,
 			);
 			path = BoardingView;
@@ -843,7 +852,6 @@
 		AAE4A8BB26CDFB3200D1C58E /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
-				AA5EB75C26DD84E800390B85 /* UserSettings.swift */,
 				AA016A3026D577AC007397A7 /* iOS */,
 				AAD3DBDF26D341BA00531E92 /* macOS */,
 				AA91286726DEBBFE007B9B30 /* TipJarView.swift */,
@@ -1211,6 +1219,7 @@
 				AA519A8426CF2A5000C1E354 /* LockView.swift in Sources */,
 				AAD3DBE826D342B800531E92 /* URL+Misc.swift in Sources */,
 				AAFB0EA626EFFF7100A153CD /* BoardingView+Cards.swift in Sources */,
+				AA66C30426F0EE5D00985B2F /* BoardingView+Import.swift in Sources */,
 				AA49EA1126D3EB2600B12838 /* LockView+CreatePassword.swift in Sources */,
 				AA49EA0926D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AAD3DBDE26D3417500531E92 /* MainView.swift in Sources */,
@@ -1250,6 +1259,7 @@
 				AA49EA3F26D3EBA300B12838 /* Data+Misc.swift in Sources */,
 				AA49EA2E26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
 				AA08245526DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */,
+				AA66C30126F0E9A700985B2F /* BoardingView+Sync.swift in Sources */,
 				AA9B316E26DD6C180042BC58 /* HalfSheetModal.swift in Sources */,
 				AAFAF5EA26DD5E0900CD1B48 /* ParallaxMotionModifier.swift in Sources */,
 				AA8B503226CD641D003C92AE /* Persistence.swift in Sources */,
@@ -1300,6 +1310,7 @@
 				AA5EB75E26DD84E800390B85 /* UserSettings.swift in Sources */,
 				AAD3DBAB26D3351400531E92 /* ImportView.swift in Sources */,
 				AAD3DBEB26D342B800531E92 /* String+Misc.swift in Sources */,
+				AA66C30526F0EE5D00985B2F /* BoardingView+Import.swift in Sources */,
 				AA519A8526CF2A5000C1E354 /* LockView.swift in Sources */,
 				AA49EA0C26D3EB1600B12838 /* ContentView+List.swift in Sources */,
 				C45CE90E26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
@@ -1323,6 +1334,7 @@
 				AA49EA2226D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */,
 				AA413B1926E94F15000CE360 /* SettingsView+SecurityView.swift in Sources */,
 				AA8B502F26CD641D003C92AE /* OpenSesameApp.swift in Sources */,
+				AA66C30226F0E9A700985B2F /* BoardingView+Sync.swift in Sources */,
 				AAFB0EA726EFFF7100A153CD /* BoardingView+Cards.swift in Sources */,
 				AA8B503126CD641D003C92AE /* ContentView.swift in Sources */,
 				AADB8A4A26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
@@ -1418,7 +1430,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1446,7 +1458,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1475,7 +1487,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1504,7 +1516,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1649,7 +1661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
@@ -1684,7 +1696,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1723,7 +1735,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1759,7 +1771,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

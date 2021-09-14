@@ -17,27 +17,20 @@ extension BoardingView {
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)
                 Spacer()
-                VStack {
-                    HStack(spacing: 20) {
-                        Image(systemName: "laptopcomputer.and.iphone")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        Image(systemName: "arrow.left.arrow.right")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        Image(systemName: "lock.square")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    Text("Sensitive information is encrypted and decrypted on-device only. This means that only you can read your data.")
-                        .font(.title3)
+                HStack(spacing: 20) {
+                    Image(systemName: "laptopcomputer.and.iphone")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Image(systemName: "arrow.left.arrow.right")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Image(systemName: "lock.square")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                 }
                 .frame(maxWidth: 300)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("Tertiary"))
-                )
+                Text("Sensitive information is encrypted and decrypted on-device only. This means that only you can read your data.")
+                    .foregroundColor(Color.secondary)
                 Spacer()
                 Button {
                     withAnimation {
@@ -45,7 +38,6 @@ extension BoardingView {
                     }
                 } label: {
                     Text("Continue")
-                        .font(.title.bold())
                         .frame(maxWidth: 300)
                 }
                 .buttonStyle(.borderedProminent)

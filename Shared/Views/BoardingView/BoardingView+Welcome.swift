@@ -31,7 +31,6 @@ extension BoardingView {
                     }
                 } label: {
                     Text("Continue")
-                        .font(.title.bold())
                         .frame(maxWidth: 300)
                 }
                 .buttonStyle(.borderedProminent)
