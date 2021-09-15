@@ -31,6 +31,8 @@ struct LockView: View {
     
     @StateObject var userSettings = UserSettings.default
     
+    @FocusState var isTextFieldFocussed: Bool
+    
     @State private var isShowingBoardingScreen: Bool = !UserDefaults.standard.bool(forKey: "didShowBoardingScreen")
     @AppStorage("didShowBoardingScreen") var didShowBoardingScreen: Bool = false
     
@@ -67,7 +69,7 @@ struct LockView: View {
             Spacer()
         }
         .padding()
-#if os(macOS)
+#if os(macOS) && !EXTENSION
         .frame(minWidth: 500, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
 #endif
         .allowsHitTesting(!isAuthenticating)
@@ -75,6 +77,7 @@ struct LockView: View {
         .padding()
         .navigationTitle("OpenSesame")
         
+#if !EXTENSION
 #if os(macOS)
         .toolbar { // LockView only toolbar
             ToolbarItem(placement: .primaryAction) {
@@ -131,28 +134,32 @@ struct LockView: View {
                 isShowingBoardingScreen = false
             }
         }
+#endif
         .onAppear {
-//            let keychain = OpenSesameKeychain()
-//            
-//            try! keychain
-//                .synchronizable(false)
-//                .remove("masterPassword")
-//            try! keychain
-//                .synchronizable(true)
-//                .remove("encryptionTest")
-//            
-//            encryptionTest = nil
-//            encryptionTestDoesntExist = true
-//            didShowBoardingScreen = false
-//            isShowingBoardingScreen = true
+            //            let keychain = OpenSesameKeychain()
+            //
+            //            try! keychain
+            //                .synchronizable(false)
+            //                .remove("masterPassword")
+            //            try! keychain
+            //                .synchronizable(true)
+            //                .remove("encryptionTest")
+            //
+            //            encryptionTest = nil
+            //            encryptionTestDoesntExist = true
+            //            didShowBoardingScreen = false
+            //            isShowingBoardingScreen = true
             
             loadEncryptionTest()
-            
+#if !EXTENSION
             shouldShowCreatePassword = encryptionTest == nil && !isShowingBoardingScreen
+#endif
         }
         .task {
             if userSettings.shouldUseBiometrics && isLocked {
                 unlockWithBiometrics()
+            } else {
+                isTextFieldFocussed = true
             }
         }
     }

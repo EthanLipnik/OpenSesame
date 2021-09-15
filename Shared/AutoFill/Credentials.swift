@@ -12,23 +12,6 @@ import KeychainAccess
 
 extension CredentialProviderViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        do {
-            let fetchRequest : NSFetchRequest<Account> = Account.fetchRequest()
-            let fetchedResults = try viewContext.fetch(fetchRequest)
-            
-            self.allAccounts = fetchedResults
-                .filter({ $0.password != nil && $0.username != nil })
-        } catch {
-            print(error)
-        }
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
-    }
     /*
      Prepare your UI to list available credentials for the user to choose from. The items in
      'serviceIdentifiers' describe the service the user is logging in to, so your extension can
@@ -36,29 +19,13 @@ extension CredentialProviderViewController {
      */
     
     override func prepareInterfaceToProvideCredential(for credentialIdentity: ASPasswordCredentialIdentity) {
-        self.selectedCredential = credentialIdentity
+        self.autoFillService.selectedCredential = credentialIdentity
     }
     
     override func prepareCredentialList(for serviceIdentifiers: [ASCredentialServiceIdentifier]) {
         print("Preparing credentials")
         do {
-            let domainParse = try DomainParser()
-            
-            let hosts = serviceIdentifiers
-                .compactMap({ URL(string: $0.identifier)?.host })
-            let domains = hosts
-                .compactMap({ domainParse.parse(host: $0)?.domain?.lowercased() })
-            guard let mainDomain = domains.first else { return }
-            
-            let fetchRequest : NSFetchRequest<Account> = Account.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "domain contains[c] %@", mainDomain)
-            let fetchedResults = try viewContext.fetch(fetchRequest)
-            
-            self.accounts = fetchedResults
-            
-#if os(iOS)
-            tableView.reloadData()
-#endif
+            try autoFillService.loadAccountsForServiceIdentifiers(serviceIdentifiers)
         } catch {
             print(error)
         }
@@ -95,9 +62,9 @@ let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .wat
     }
     
     override func provideCredentialWithoutUserInteraction(for credentialIdentity: ASPasswordCredentialIdentity) {
-        self.selectedCredential = credentialIdentity
+        autoFillService.selectedCredential = credentialIdentity
         
-        guard let account = credentialIdentity.asAccount(allAccounts) else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
+        guard let account = credentialIdentity.asAccount(autoFillService.allAccounts) else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
         
         func decrypt() throws {
             let decryptedAccount = try decryptedAccount(account)
@@ -119,51 +86,6 @@ let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .wat
             }
         }
 #endif
-    }
-    
-    func authorize() {
-#if os(macOS)
-        let password = textField.stringValue
-#else
-        let password = textField.text!
-#endif
-        let success = CryptoSecurityService.runEncryptionTest(password)
-        
-        guard success else {
-            
-#if os(macOS)
-            textField.stringValue = ""
-#else
-            textField.text = ""
-#endif
-            
-            return
-        }
-        
-        isAuthorized = true
-        
-        if let selectedCredential = selectedCredential {
-            guard let account = selectedCredential.asAccount(allAccounts),
-                  let username = account.username,
-                  let encryptedPassword = account.password,
-                  let password = try? CryptoSecurityService.decrypt(encryptedPassword, encryptionKey: CryptoSecurityService.generateKey(fromString: password))
-            else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
-            
-            let passwordCredential = ASPasswordCredential(user: username, password: password)
-            self.extensionContext.completeRequest(withSelectedCredential: passwordCredential, completionHandler: nil)
-            
-            isAuthorized = false
-        } else {
-#if os(macOS)
-            scrollView.isHidden = false
-            lockView.isHidden = true
-#else
-            tableView.isHidden = false
-            lockView.isHidden = true
-#endif
-            
-            CryptoSecurityService.loadEncryptionKey(password)
-        }
     }
 }
 

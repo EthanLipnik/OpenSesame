@@ -53,7 +53,7 @@ extension BoardingView {
             .padding(30)
             .sheet(item: $importAppFormat) { format in
 #if os(macOS)
-                ImportView(importManager: ImportManager(appFormat: format))
+                OpenSesame.ImportView(importManager: ImportManager(appFormat: format))
                     .environment(\.managedObjectContext, viewContext)
 #else
                 NavigationView {

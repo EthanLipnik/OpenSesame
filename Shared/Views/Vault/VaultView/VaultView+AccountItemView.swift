@@ -14,14 +14,6 @@ extension VaultView {
         let account: Account
         
         var body: some View {
-            var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP.removeWWW) ?? account.domain ?? "Unknown website")
-            if let domain = account.domain {
-                if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
-                    attributedDomain.foregroundColor = Color.secondary
-                    attributedDomain[match].foregroundColor = Color("Label")
-                }
-            }
-            
             return NavigationLink(tag: .init(account), selection: $viewModel.selectedItem) {
                 AccountView(account: account)
             } label: {
@@ -32,7 +24,7 @@ extension VaultView {
                             .frame(width: 30, height: 30)
                     }
                     VStack(alignment: .leading) {
-                        Text(attributedDomain)
+                        Text(AttributedString(account: account))
                             .bold()
                             .lineLimit(1)
                         Text(account.username!)

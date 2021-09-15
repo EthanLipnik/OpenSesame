@@ -17,7 +17,12 @@ extension LockView {
                     unlock(password)
                 })
                     .textFieldStyle(.plain)
+                    .focused($isTextFieldFocussed)
+#if EXTENSION
+                    .frame(maxWidth: .infinity)
+#else
                     .frame(maxWidth: 400)
+#endif
                     .accessibilityIdentifier("masterPassword")
 #if os(macOS) // macOS should display differently since a red background looks weird.
                 if attempts > 0 {

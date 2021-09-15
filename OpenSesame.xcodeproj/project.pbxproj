@@ -65,6 +65,26 @@
 		AA3754F226DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */; };
 		AA3754F526DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
 		AA3754F626DD3D18007FF26F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3754F426DD3D18007FF26F /* CardView.swift */; };
+		AA3EBA9926F23C9C00C1C289 /* AutoFillService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBA9826F23C9C00C1C289 /* AutoFillService.swift */; };
+		AA3EBA9A26F23C9C00C1C289 /* AutoFillService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBA9826F23C9C00C1C289 /* AutoFillService.swift */; };
+		AA3EBA9C26F23F9F00C1C289 /* AutoFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBA9B26F23F9F00C1C289 /* AutoFillView.swift */; };
+		AA3EBA9D26F23F9F00C1C289 /* AutoFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBA9B26F23F9F00C1C289 /* AutoFillView.swift */; };
+		AA3EBAA126F2412C00C1C289 /* AttributedString+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */; };
+		AA3EBAA226F2412C00C1C289 /* AttributedString+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */; };
+		AA3EBAA326F2412C00C1C289 /* AttributedString+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */; };
+		AA3EBAA426F2412C00C1C289 /* AttributedString+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */; };
+		AA3EBAA526F2425500C1C289 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA8B500826CD641D003C92AE /* Assets.xcassets */; };
+		AA3EBAA626F2425600C1C289 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA8B500826CD641D003C92AE /* Assets.xcassets */; };
+		AA3EBAA726F2457A00C1C289 /* LockView+CreatePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0D26D3EB2500B12838 /* LockView+CreatePassword.swift */; };
+		AA3EBAA826F2457A00C1C289 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA519A8026CF283C00C1E354 /* LockView.swift */; };
+		AA3EBAA926F2457A00C1C289 /* LockView+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0E26D3EB2600B12838 /* LockView+Functions.swift */; };
+		AA3EBAAA26F2457A00C1C289 /* LockView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0F26D3EB2600B12838 /* LockView+TextField.swift */; };
+		AA3EBAAB26F2457A00C1C289 /* LockView+UnlockButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1026D3EB2600B12838 /* LockView+UnlockButtons.swift */; };
+		AA3EBAAC26F2457A00C1C289 /* LockView+CreatePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0D26D3EB2500B12838 /* LockView+CreatePassword.swift */; };
+		AA3EBAAD26F2457A00C1C289 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA519A8026CF283C00C1E354 /* LockView.swift */; };
+		AA3EBAAE26F2457A00C1C289 /* LockView+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0E26D3EB2600B12838 /* LockView+Functions.swift */; };
+		AA3EBAAF26F2457A00C1C289 /* LockView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA0F26D3EB2600B12838 /* LockView+TextField.swift */; };
+		AA3EBAB026F2457A00C1C289 /* LockView+UnlockButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49EA1026D3EB2600B12838 /* LockView+UnlockButtons.swift */; };
 		AA413B1726E93D26000CE360 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AA413B1626E93D26000CE360 /* Credits.rtf */; };
 		AA413B1926E94F15000CE360 /* SettingsView+SecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */; };
 		AA41467726D3451900254812 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = AA41467626D3451900254812 /* SwiftOTP */; };
@@ -343,6 +363,9 @@
 		AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OpenSesame.xcdatamodel; sourceTree = "<group>"; };
 		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+CardItemView.swift"; sourceTree = "<group>"; };
 		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		AA3EBA9826F23C9C00C1C289 /* AutoFillService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoFillService.swift; path = "../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/AutoFill/AutoFillService.swift"; sourceTree = "<group>"; };
+		AA3EBA9B26F23F9F00C1C289 /* AutoFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoFillView.swift; path = "../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/AutoFill/AutoFillView.swift"; sourceTree = "<group>"; };
+		AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AttributedString+Misc.swift"; path = "../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Extensions/AttributedString+Misc.swift"; sourceTree = "<group>"; };
 		AA413B1626E93D26000CE360 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+SecurityView.swift"; sourceTree = "<group>"; };
 		AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
@@ -589,6 +612,8 @@
 			isa = PBXGroup;
 			children = (
 				AA49EA4326D3EBB000B12838 /* Credentials.swift */,
+				AA3EBA9826F23C9C00C1C289 /* AutoFillService.swift */,
+				AA3EBA9B26F23F9F00C1C289 /* AutoFillView.swift */,
 			);
 			path = AutoFill;
 			sourceTree = "<group>";
@@ -845,6 +870,7 @@
 				AA49EA3D26D3EBA300B12838 /* Data+Misc.swift */,
 				AA49EA3E26D3EBA300B12838 /* Date+Misc.swift */,
 				AAD7132126EA4E3600138640 /* Array+Misc.swift */,
+				AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1083,6 +1109,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3EBAA626F2425600C1C289 /* Assets.xcassets in Resources */,
 				AA05CCE726CDDA5200E27F6D /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1091,6 +1118,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3EBAA526F2425500C1C289 /* Assets.xcassets in Resources */,
 				AA519A6426CEE5B700C1E354 /* CredentialProviderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1167,22 +1195,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA05CCE426CDDA5200E27F6D /* CredentialProviderViewController.swift in Sources */,
+				AA3EBAA826F2457A00C1C289 /* LockView.swift in Sources */,
 				AAD3DBED26D342B900531E92 /* String+Misc.swift in Sources */,
 				AA49EA5026D3EBF300B12838 /* Credentials.swift in Sources */,
+				AA3EBA9926F23C9C00C1C289 /* AutoFillService.swift in Sources */,
+				AA3EBAA326F2412C00C1C289 /* AttributedString+Misc.swift in Sources */,
 				AA3754EE26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
 				C45CE90F26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA08245226DDC304006BE956 /* Item.swift in Sources */,
 				AADB8A4B26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
+				AA3EBAA726F2457A00C1C289 /* LockView+CreatePassword.swift in Sources */,
 				AAD3DBEC26D342B900531E92 /* URL+Misc.swift in Sources */,
 				AAD7132426EA4E3600138640 /* Array+Misc.swift in Sources */,
+				AA3EBA9C26F23F9F00C1C289 /* AutoFillView.swift in Sources */,
 				AA49EA4626D3EBCE00B12838 /* Data+Misc.swift in Sources */,
 				AA05CD0426CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA340B6C26D2BE33003A2CF9 /* Persistence.swift in Sources */,
 				AA47A77026E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA49EA4726D3EBCE00B12838 /* Date+Misc.swift in Sources */,
+				AA3EBAAA26F2457A00C1C289 /* LockView+TextField.swift in Sources */,
 				C45CE91426ED037500ECD60D /* KeychainService.swift in Sources */,
+				AA3EBAA926F2457A00C1C289 /* LockView+Functions.swift in Sources */,
 				AA05CD0126CDDDA400E27F6D /* CryptoSecurityService.swift in Sources */,
 				AA5EB75F26DD84E800390B85 /* UserSettings.swift in Sources */,
+				AA3EBAAB26F2457A00C1C289 /* LockView+UnlockButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,22 +1227,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD3DBEF26D342B900531E92 /* String+Misc.swift in Sources */,
+				AA3EBAAD26F2457A00C1C289 /* LockView.swift in Sources */,
 				AA49EA5126D3EBF300B12838 /* Credentials.swift in Sources */,
 				AAD3DBEE26D342B900531E92 /* URL+Misc.swift in Sources */,
+				AA3EBA9A26F23C9C00C1C289 /* AutoFillService.swift in Sources */,
+				AA3EBAA426F2412C00C1C289 /* AttributedString+Misc.swift in Sources */,
 				AA3754EF26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
 				C45CE91026ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA08245326DDC304006BE956 /* Item.swift in Sources */,
 				AADB8A4C26E6A07000B17B66 /* Persistence+Container.swift in Sources */,
+				AA3EBAAC26F2457A00C1C289 /* LockView+CreatePassword.swift in Sources */,
 				AA49EA4826D3EBCE00B12838 /* Data+Misc.swift in Sources */,
 				AAD7132526EA4E3600138640 /* Array+Misc.swift in Sources */,
+				AA3EBA9D26F23F9F00C1C289 /* AutoFillView.swift in Sources */,
 				AA519A6126CEE5B700C1E354 /* CredentialProviderViewController.swift in Sources */,
 				AA340B6D26D2BE33003A2CF9 /* Persistence.swift in Sources */,
 				AA49EA4926D3EBCE00B12838 /* Date+Misc.swift in Sources */,
 				AA47A77126E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AA519A7B26CEE6E700C1E354 /* UserAuthenticationService.swift in Sources */,
+				AA3EBAAF26F2457A00C1C289 /* LockView+TextField.swift in Sources */,
 				C45CE91526ED037500ECD60D /* KeychainService.swift in Sources */,
+				AA3EBAAE26F2457A00C1C289 /* LockView+Functions.swift in Sources */,
 				AA519A7A26CEE6E500C1E354 /* CryptoSecurityService.swift in Sources */,
 				AA5EB76026DD84E800390B85 /* UserSettings.swift in Sources */,
+				AA3EBAB026F2457A00C1C289 /* LockView+UnlockButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1226,6 +1270,7 @@
 				AA05CD0226CDDDB300E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA519A8626CF453300C1E354 /* AccountView.swift in Sources */,
 				AA49EA1526D3EB2600B12838 /* LockView+TextField.swift in Sources */,
+				AA3EBAA126F2412C00C1C289 /* AttributedString+Misc.swift in Sources */,
 				AA49EA2626D3EB6400B12838 /* NewAccountView.swift in Sources */,
 				AA91286826DEBBFE007B9B30 /* TipJarView.swift in Sources */,
 				AA49EA2126D3EB5A00B12838 /* VaultView+AccountItemView.swift in Sources */,
@@ -1294,6 +1339,7 @@
 				AA08245126DDC304006BE956 /* Item.swift in Sources */,
 				C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */,
 				AAD16AC726EFA2E900CCAB56 /* BoardingView.swift in Sources */,
+				AA3EBAA226F2412C00C1C289 /* AttributedString+Misc.swift in Sources */,
 				AA49EA0A26D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AA5CBC0726EE70CF00447E4D /* ExportFile.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
@@ -1430,7 +1476,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1458,7 +1504,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1661,7 +1707,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
@@ -1696,7 +1742,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
