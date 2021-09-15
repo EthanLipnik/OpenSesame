@@ -47,6 +47,7 @@ extension BoardingView {
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
                     .keyboardShortcut(.defaultAction)
+                    .disabled(!PersistenceController.isICloudContainerAvailable())
                 }
             }
             .padding(30)

@@ -34,6 +34,8 @@ struct LockView: View {
     @State private var isShowingBoardingScreen: Bool = !UserDefaults.standard.bool(forKey: "didShowBoardingScreen")
     @AppStorage("didShowBoardingScreen") var didShowBoardingScreen: Bool = false
     
+    @State private var shouldShowCreatePassword: Bool = false
+    
     
     // MARK: - Variable Types
     public enum UnlockMethod {
@@ -104,6 +106,8 @@ struct LockView: View {
                 
                 encryptionTest = nil
                 encryptionTestDoesntExist = true
+                
+                shouldShowCreatePassword = true
             }
             Button("Cancel", role: .cancel) {
                 needsToResetPassword = false
@@ -118,26 +122,32 @@ struct LockView: View {
                 .interactiveDismissDisabled()
 #endif
         }
+        .sheet(isPresented: $shouldShowCreatePassword) {
+            CreatePasswordView(completionAction: createMasterPassword)
+        }
         .onChange(of: didShowBoardingScreen) { newValue in
             if newValue {
                 isShowingBoardingScreen = false
             }
         }
         .onAppear {
-            //            let keychain = OpenSesameKeychain()
-            //            
-            //            try! keychain
-            //                .synchronizable(false)
-            //                .remove("masterPassword")
-            //            try! keychain
-            //                .synchronizable(true)
-            //                .remove("encryptionTest")
-            //            
-            //            encryptionTest = nil
-            //            encryptionTestDoesntExist = true
-            //            didShowBoardingScreen = false
+//            let keychain = OpenSesameKeychain()
+//            
+//            try! keychain
+//                .synchronizable(false)
+//                .remove("masterPassword")
+//            try! keychain
+//                .synchronizable(true)
+//                .remove("encryptionTest")
+//            
+//            encryptionTest = nil
+//            encryptionTestDoesntExist = true
+//            didShowBoardingScreen = false
+//            isShowingBoardingScreen = true
             
             loadEncryptionTest()
+            
+            shouldShowCreatePassword = encryptionTest == nil && !isShowingBoardingScreen
         }
         .task {
             if userSettings.shouldUseBiometrics && isLocked {

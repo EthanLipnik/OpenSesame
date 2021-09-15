@@ -130,11 +130,13 @@ struct ImportView: View {
                 Button("Import", role: .destructive) {
                     importManager.save { error in
                         if let error = error {
-                            fatalError(error.localizedDescription)
+                            print(error)
                         } else {
                             print("Saved all accounts")
-                            dismiss.callAsFunction()
                         }
+                        
+                        dismiss.callAsFunction()
+                        UserDefaults.standard.set(true, forKey: "didShowBoardingScreen")
                     }
                 }
                 .keyboardShortcut(.defaultAction)

@@ -13,8 +13,7 @@ extension BoardingView {
         
         @Binding var selectedIndex: Int
         
-        @State private var isImporting: Bool = false
-        @State private var importAppFormat: AppFormat = .browser
+        @State private var importAppFormat: AppFormat? = nil
         
         var body: some View {
             VStack(spacing: 30) {
@@ -39,7 +38,6 @@ extension BoardingView {
                     .controlSize(.large)
                     ImportButtons(shouldHaveImageLabel: false, isBold: true) { appFormat in
                         importAppFormat = appFormat
-                        isImporting = true
                     }
                     .environment(\.managedObjectContext, viewContext)
                     .foregroundColor(Color.white)
@@ -49,16 +47,17 @@ extension BoardingView {
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
                     .keyboardShortcut(.defaultAction)
+                    .disabled(CryptoSecurityService.encryptionKey == nil)
                 }
             }
             .padding(30)
-            .sheet(isPresented: $isImporting) {
+            .sheet(item: $importAppFormat) { format in
 #if os(macOS)
-                ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                ImportView(importManager: ImportManager(appFormat: format))
                     .environment(\.managedObjectContext, viewContext)
 #else
                 NavigationView {
-                    OpenSesame.ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                    OpenSesame.ImportView(importManager: ImportManager(appFormat: format))
                         .environment(\.managedObjectContext, viewContext)
                         .navigationTitle("Import")
                         .navigationBarTitleDisplayMode(.inline)

@@ -36,7 +36,7 @@ class PersistenceController {
     init(inMemory: Bool = false) {
         
         if !PersistenceController.isICloudContainerAvailable() {
-            UserSettings.default.shouldSyncWithiCloud = false
+            UserDefaults.group.set(true, forKey: "shouldNotSyncWithiCloud")
         }
         
         container = NSPersistentContainer.create(inMemory: inMemory)

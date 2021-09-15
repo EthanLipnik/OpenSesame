@@ -389,8 +389,8 @@
 		AA5EB74826DD805B00390B85 /* PurpleIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PurpleIcon@3x.png"; sourceTree = "<group>"; };
 		AA5EB74926DD805B00390B85 /* RedIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedIcon@3x.png"; sourceTree = "<group>"; };
 		AA5EB75C26DD84E800390B85 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		AA66C30026F0E9A700985B2F /* BoardingView+Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Sync.swift"; path = "BoardingView+Sync.swift"; sourceTree = "<group>"; };
-		AA66C30326F0EE5D00985B2F /* BoardingView+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardingView+Import.swift"; path = "BoardingView+Import.swift"; sourceTree = "<group>"; };
+		AA66C30026F0E9A700985B2F /* BoardingView+Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Sync.swift"; sourceTree = "<group>"; };
+		AA66C30326F0EE5D00985B2F /* BoardingView+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Import.swift"; sourceTree = "<group>"; };
 		AA8B500526CD641C003C92AE /* OpenSesameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSesameApp.swift; sourceTree = "<group>"; };
 		AA8B500626CD641C003C92AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA8B500726CD641C003C92AE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -1430,7 +1430,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1458,7 +1458,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1487,7 +1487,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1516,7 +1516,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1661,7 +1661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
@@ -1696,7 +1696,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1735,7 +1735,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1771,7 +1771,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

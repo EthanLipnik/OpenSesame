@@ -11,7 +11,7 @@ struct BoardingView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @Binding var encryptionTestDoesntExist: Bool
-    @State private var selectedIndex: Int = 4
+    @State private var selectedIndex: Int = 0
     
     let masterPasswordCompletion: (String) -> Void
     
