@@ -14,36 +14,43 @@ struct AutoFillView: View {
     let completion: (Account) -> Void
     
     @State private var isLocked: Bool = true
+    @State private var search: String = ""
     
     var body: some View {
-        #if os(iOS)
+#if os(iOS)
         NavigationView {
             content
-            .navigationTitle("OpenSesame")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: cancel)
+                .navigationTitle("OpenSesame")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel", action: cancel)
+                    }
                 }
-            }
         }
-        #else
+#else
         content
-        #endif
+#endif
     }
     
     var content: some View {
-        ZStack {
+        let suggestions = search.isEmpty ? autoFill.suggestedAccounts : autoFill.suggestedAccounts
+            .filter({ $0.domain?.contains(search, caseInsentive: true) ?? false || $0.username?.contains(search, caseInsentive: true) ?? false })
+        
+        return ZStack {
             if !isLocked {
                 List {
-                    Section("Suggestions") {
-                        ForEach(autoFill.suggestedAccounts) { account in
-                            ItemView(account: account, completion: completion)
+                    if !suggestions.isEmpty {
+                        Section("Suggestions") {
+                            ForEach(suggestions) { account in
+                                ItemView(account: account, completion: completion)
+                            }
                         }
                     }
                     
-                    Section {
-                        ForEach(autoFill.allAccounts) { account in
+                    Section("All Accounts") {
+                        ForEach(search.isEmpty ? autoFill.allAccounts : autoFill.allAccounts
+                                    .filter({ $0.domain?.contains(search, caseInsentive: true) ?? false || $0.username?.contains(search, caseInsentive: true) ?? false })) { account in
                             ItemView(account: account, completion: completion)
                         }
                     }
@@ -51,16 +58,17 @@ struct AutoFillView: View {
 #if os(macOS)
                 .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
+                .searchable(text: $search)
                 .opacity(isLocked ? 0 : 1)
                 .blur(radius: isLocked ? 25 : 0)
                 .allowsHitTesting(!isLocked)
                 .animation(.default, value: isLocked)
             }
             LockView(isLocked: $isLocked) {
-                isLocked = false
-                
                 if let selectedCredential = autoFill.selectedCredential, let account = selectedCredential.asAccount(autoFill.allAccounts) {
                     completion(account)
+                } else {
+                    isLocked = false
                 }
             }
             .zIndex(1)

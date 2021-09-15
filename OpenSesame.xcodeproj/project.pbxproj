@@ -363,9 +363,9 @@
 		AA3754EB26DD28E4007FF26F /* OpenSesame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OpenSesame.xcdatamodel; sourceTree = "<group>"; };
 		AA3754F026DD38D2007FF26F /* VaultView+CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+CardItemView.swift"; sourceTree = "<group>"; };
 		AA3754F426DD3D18007FF26F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		AA3EBA9826F23C9C00C1C289 /* AutoFillService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoFillService.swift; path = "../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/AutoFill/AutoFillService.swift"; sourceTree = "<group>"; };
-		AA3EBA9B26F23F9F00C1C289 /* AutoFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoFillView.swift; path = "../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/AutoFill/AutoFillView.swift"; sourceTree = "<group>"; };
-		AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AttributedString+Misc.swift"; path = "../../../../../../../../Macintosh HD/Users/ethan/Projects/OpenSesame/OpenSesame/Shared/Extensions/AttributedString+Misc.swift"; sourceTree = "<group>"; };
+		AA3EBA9826F23C9C00C1C289 /* AutoFillService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoFillService.swift; path = "AutoFillService.swift"; sourceTree = "<group>"; };
+		AA3EBA9B26F23F9F00C1C289 /* AutoFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoFillView.swift; path = "AutoFillView.swift"; sourceTree = "<group>"; };
+		AA3EBAA026F2412C00C1C289 /* AttributedString+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AttributedString+Misc.swift"; path = "AttributedString+Misc.swift"; sourceTree = "<group>"; };
 		AA413B1626E93D26000CE360 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		AA413B1826E94F15000CE360 /* SettingsView+SecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+SecurityView.swift"; sourceTree = "<group>"; };
 		AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
@@ -1533,7 +1533,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1562,7 +1562,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1781,7 +1781,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1817,7 +1817,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

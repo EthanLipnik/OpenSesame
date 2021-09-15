@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import KeychainAccess
+import AuthenticationServices
 
 class PersistenceController {
     static let shared = PersistenceController()
@@ -97,6 +98,28 @@ class PersistenceController {
                         vault.name = "Primary"
                         
                         try viewContext.save()
+                    }
+                    
+                    ASCredentialIdentityStore.shared.getState { state in
+                        if state.isEnabled {
+                            ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
+                                let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
+                                
+                                do {
+                                    let accounts = try viewContext.fetch(accountsFetch)
+                                    let domainIdentifers = accounts.map({ ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
+                                                                                                       user: $0.username!,
+                                                                                                       recordIdentifier: nil) })
+                                    
+                                    
+                                    ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: {(_,error) -> Void in
+                                        print(error?.localizedDescription ?? "No errors in saving credentials")
+                                    })
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                        }
                     }
                 } catch {
                     print(error)

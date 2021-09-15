@@ -105,4 +105,11 @@ extension String {
         pasteboard.string = self
 #endif
     }
+    
+    func contains(_ string: String, caseInsentive: Bool) -> Bool {
+        if caseInsentive {
+            return lowercased().contains(string.lowercased())
+        }
+        return contains(string)
+    }
 }
