@@ -23,8 +23,7 @@ struct SettingsView: View {
     @State private var exportFile: ExportFile? = nil
     @State private var shouldExportAccounts: Bool = false
     
-    @State private var isImporting: Bool = false
-    @State private var importAppFormat: AppFormat = .browser
+    @State private var importAppFormat: AppFormat? = nil
     
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
     
@@ -60,7 +59,6 @@ struct SettingsView: View {
             Section("Passwords") {
                 ImportButtons { appFormat in
                     importAppFormat = appFormat
-                    isImporting = true
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -255,9 +253,9 @@ struct SettingsView: View {
                 print(error)
             }
         }
-        .sheet(isPresented: $isImporting) {
+        .sheet(item: $importAppFormat) { format in
             NavigationView {
-                ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                ImportView(importManager: ImportManager(appFormat: format))
                     .environment(\.managedObjectContext, viewContext)
                     .navigationTitle("Import")
                     .navigationBarTitleDisplayMode(.inline)

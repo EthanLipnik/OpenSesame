@@ -23,8 +23,7 @@ struct OpenSesameApp: App {
     @State var isExportingPasswords: Bool = false
     @State var exportFile: ExportFile? = nil
     
-    @State var isImporting: Bool = false
-    @State var importAppFormat: AppFormat = .browser
+    @State var importAppFormat: AppFormat? = nil
     
     @State var lastOpenedDate: Date? = nil
     
@@ -47,10 +46,10 @@ struct OpenSesameApp: App {
                         print(error)
                     }
                 }
-                .sheet(isPresented: $isImporting) {
+                .sheet(item: $importAppFormat) { format in
                     #if os(iOS)
                     NavigationView {
-                        ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                        ImportView(importManager: ImportManager(appFormat: format))
                             .environment(\.managedObjectContext, persistenceController.container.viewContext)
                             .navigationTitle("Import")
                             .navigationBarTitleDisplayMode(.inline)
@@ -58,7 +57,7 @@ struct OpenSesameApp: App {
                     .navigationViewStyle(.stack)
                     .interactiveDismissDisabled()
                     #else
-                    ImportView(importManager: ImportManager(appFormat: importAppFormat))
+                    ImportView(importManager: ImportManager(appFormat: format))
                         .environment(\.managedObjectContext, persistenceController.container.viewContext)
                     #endif
                 }
@@ -108,7 +107,6 @@ struct OpenSesameApp: App {
                     ImportButtons { appFormat in
                         guard !isLocked else { return }
                         self.importAppFormat = appFormat
-                        self.isImporting = true
                     }
                     ExportButtons { exportFile in
                         guard !isLocked else { return }

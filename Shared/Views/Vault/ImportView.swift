@@ -57,8 +57,21 @@ struct ImportView: View {
                     }
                 }
 #endif
-                ForEach(importManager.importedAccounts) {
-                    Text($0.name)
+                ForEach(importManager.importedAccounts) { account in
+                    HStack {
+                        if account.isPinned {
+                            Image(systemName: "pin.fill")
+                                .foregroundColor(.accentColor)
+                        }
+                        VStack(alignment: .leading) {
+                            Text(account.name)
+                                .font(.headline)
+                            if !account.username.isEmpty {
+                                Text(account.username)
+                                    .foregroundColor(Color.secondary)
+                            }
+                        }
+                    }
                 }
             }
 #if os(macOS)
@@ -129,7 +142,7 @@ struct ImportView: View {
             }
         }
 #endif
-        .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: [.json]) { result in
+        .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: [.json, .commaSeparatedText]) { result in
             switch result {
             case .success(let url):
                 importManager.importFromFile(url)

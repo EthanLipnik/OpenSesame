@@ -40,6 +40,8 @@ class ImportManager: ObservableObject {
     init(vault: Vault? = nil, appFormat: AppFormat) {
         self.selectedVault = vault
         self.appFormat = appFormat
+        
+        print(appFormat)
     }
     
     func importFromFile(_ url: URL) {
@@ -52,7 +54,7 @@ class ImportManager: ObservableObject {
             case .browser:
                 importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 0] ?? "", url: $0[safe: 1] ?? "", username: $0[safe: 2] ?? "", password: $0[safe: 3] ?? "", otpAuth: $0[safe: 4]) })
             case .bitwarden:
-                importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 3] ?? "", url: $0[safe: 6] ?? "", username: $0[safe: 7] ?? "", password: $0[safe: 8] ?? "", otpAuth: $0[safe: 9], notes: $0[safe: 4], isPinned: ($0[safe: 1] ?? "0") == "0" ? false : true) })
+                importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 3] ?? "", url: $0[safe: 6] ?? "", username: $0[safe: 7] ?? "", password: $0[safe: 8] ?? "", otpAuth: $0[safe: 9], notes: $0[safe: 4], isPinned: ($0[safe: 1] ?? "0") == "1" ? true : false) })
             case .onePassword:
                 importedAccounts = csv.map({ ImportedAccount(name: $0[safe: 2] ?? "", url: $0[safe: 4] ?? "", username: $0[safe: 5] ?? "", password: $0[safe: 1] ?? "", otpAuth: nil, notes: $0[safe: 0]) })
             }
@@ -102,13 +104,19 @@ class ImportManager: ObservableObject {
                     }
                 }
                 
-                for importedAccount in importedAccounts {
+                for i in 0..<importedAccounts.count {
+                    let importedAccount = importedAccounts[i]
                     do {
-                        if let url = URL(string: importedAccount.url), let host = url.host, let domain = domainParser.parse(host: host)?.domain?.lowercased(), !addedAccounts.contains(where: { $0.domain == domain && $0.username == importedAccount.username }) {
+                        var domain: String = importedAccount.name.isEmpty ? "Account\(i == 0 ? "" :  " \(i + 1)")" : importedAccount.name
+                        
+                        if let url = URL(string: importedAccount.url), let host = url.host, let parsedDomain = domainParser.parse(host: host)?.domain?.lowercased() {
+                            domain = parsedDomain
+                        }
+                        if !addedAccounts.contains(where: { $0.domain == domain && $0.username == importedAccount.username }) {
                             
                             let account = Account(context: viewContext)
                             account.domain = domain
-                            account.url = url.absoluteString.removeHTTP.removeWWW
+                            account.url = importedAccount.url.removeHTTP.removeWWW
                             
                             account.username = importedAccount.username
                             account.otpAuth = importedAccount.otpAuth
@@ -158,7 +166,11 @@ enum FileFormat: String {
     case csv
 }
 
-enum AppFormat: String {
+enum AppFormat: String, Identifiable {
+    var id: String {
+        return self.rawValue
+    }
+    
     case onePassword
     case bitwarden
     case browser
