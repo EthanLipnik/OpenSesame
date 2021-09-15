@@ -59,7 +59,8 @@ struct LockView: View {
             Image("\(userSettings.selectedIcon)Icon")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 250, height: 250)
+                .frame(maxWidth: 250, maxHeight: 250)
+                .minimumScaleFactor(0.7)
                 .animation(.default, value: isLocked)
             textField
                 .blur(radius: isAuthenticating ? 2.5 : 0)

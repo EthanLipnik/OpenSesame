@@ -48,7 +48,7 @@ struct NewCardView: View {
                             .textContentType(.creditCardNumber)
 #endif
                             .allowsTightening(true)
-                            .minimumScaleFactor(0.7)
+                            .minimumScaleFactor(0.6)
                             .frame(maxWidth: .infinity)
                         HStack(alignment: .bottom) {
                             Text("Valid Thru")
@@ -79,7 +79,7 @@ struct NewCardView: View {
                         .fill(Color(white: 0.5, opacity: 0.25))
                 }.compositingGroup()
             )
-            .padding()
+            .padding([.top, .horizontal])
             .aspectRatio(1.6, contentMode: .fit)
 #if os(macOS)
             .frame(height: 250)

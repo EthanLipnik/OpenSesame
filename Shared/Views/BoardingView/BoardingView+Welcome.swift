@@ -12,10 +12,12 @@ extension BoardingView {
         @Binding var selectedIndex: Int
         
         var body: some View {
-            VStack(spacing: 30) {
+            VStack {
                 Text("Welcome to OpenSesame")
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)
+                    .allowsTightening(true)
+                    .minimumScaleFactor(0.7)
                 Spacer()
                 VStack {
                     ItemView(message: "Vaults", image: "lock.square.stack.fill")
@@ -47,6 +49,7 @@ extension BoardingView {
                     .frame(height: 60)
                 Label(message, systemImage: image)
                     .font(.title3.bold())
+                    .allowsTightening(true)
                     .frame(maxWidth: 300)
             }
         }

@@ -151,12 +151,12 @@ struct SettingsView: View {
             }
             
             Section("About") {
-                NavigationLink {
-                    TipJarView()
-                        .navigationTitle("Tip Jar")
-                } label: {
-                    Label("Tip Jar", systemImage: "heart.fill")
-                }
+//                NavigationLink {
+//                    TipJarView()
+//                        .navigationTitle("Tip Jar")
+//                } label: {
+//                    Label("Tip Jar", systemImage: "heart.fill")
+//                }
                 Button {
                     if let keyWindow = UIApplication.shared.connectedScenes
                         .filter({$0.activationState == .foregroundActive})
@@ -168,14 +168,21 @@ struct SettingsView: View {
                 } label: {
                     Label("Rate OpenSesame", systemImage: "star.fill")
                 }
-            }
-            Section {
                 Link(destination: URL(string: "https://opensesamemanager.github.com/Website")!) {
                     Label("Website", systemImage: "globe")
                 }
                 Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
                     Label("Source Code", systemImage: "chevron.left.slash.chevron.right")
                 }
+            }
+            
+            Section {
+                NavigationLink {
+                    Text("Acknowledgements")
+                } label: {
+                    Label("Acknowledgements", systemImage: "list.star")
+                }
+
             }
             
             #if DEBUG

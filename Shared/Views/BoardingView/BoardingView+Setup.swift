@@ -16,7 +16,7 @@ extension BoardingView {
         @State private var masterPassword: String = ""
         
         var body: some View {
-            VStack(spacing: 30) {
+            VStack {
                 Text("Setup")
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)

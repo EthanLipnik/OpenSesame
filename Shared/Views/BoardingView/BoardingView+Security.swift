@@ -12,7 +12,7 @@ extension BoardingView {
         @Binding var selectedIndex: Int
         
         var body: some View {
-            VStack(spacing: 30) {
+            VStack {
                 Text("Security")
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)
