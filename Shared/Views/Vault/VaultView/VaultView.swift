@@ -35,6 +35,7 @@ struct VaultView: View {
     enum ItemCreationType: String {
         case account = "account"
         case card = "card"
+        case note = "note"
         case none = "none"
     }
     
@@ -80,6 +81,13 @@ struct VaultView: View {
                         } label: {
                             Label("Add Card", systemImage: "creditcard")
                         }
+//                        Button {
+//                            itemToCreate = .note
+//                            isCreatingNewItem.toggle()
+//                            print(itemToCreate, isCreatingNewItem)
+//                        } label: {
+//                            Label("Add Note", systemImage: "note.text")
+//                        }
                     } label: {
                         Label("Add", systemImage: "plus")
                     }
@@ -114,6 +122,8 @@ struct VaultView: View {
                     NewAccountView(selectedVault: vault)
                 } else if itemToCreate == .card {
                     NewCardView(selectedVault: vault)
+                } else if itemToCreate == .note {
+                    NewNoteView(selectedVault: vault)
                 }
             }
             .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
@@ -132,6 +142,9 @@ struct VaultView: View {
                             }
                     } else if itemToCreate == .card {
                         NewCardView(selectedVault: vault)
+                            .environment(\.managedObjectContext, viewContext)
+                    } else if itemToCreate == .note {
+                        NewNoteView(selectedVault: vault)
                             .environment(\.managedObjectContext, viewContext)
                     }
                 }.onDisappear {

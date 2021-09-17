@@ -86,7 +86,7 @@ struct ContentView: View {
 #endif
                     ToolbarItem {
                         Button(action: addItem) {
-                            Label("Add Vault", systemImage: "plus")
+                            Label("Add Vault", systemImage: "rectangle.stack.fill.badge.plus")
                         }
                     }
                 }

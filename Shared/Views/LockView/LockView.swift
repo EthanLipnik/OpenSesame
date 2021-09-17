@@ -161,7 +161,14 @@ struct LockView: View {
         }
         .task {
             if userSettings.shouldUseBiometrics && isLocked {
+                
+#if EXTENSION
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    unlockWithBiometrics()
+                }
+#else
                 unlockWithBiometrics()
+#endif
             }
         }
     }

@@ -38,9 +38,9 @@ extension CredentialProviderViewController {
         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
 #endif
 #if !os(macOS)
-let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+        let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
 #else
-let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+        let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
 #endif
         if let masterPassword = try OpenSesameKeychain()
             .accessibility(accessibility, authenticationPolicy: authenticationPolicy)

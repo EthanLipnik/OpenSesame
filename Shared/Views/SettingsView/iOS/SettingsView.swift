@@ -178,7 +178,7 @@ struct SettingsView: View {
             
             Section {
                 NavigationLink {
-                    Text("Acknowledgements")
+                    CreditsView()
                 } label: {
                     Label("Acknowledgements", systemImage: "list.star")
                 }

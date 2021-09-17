@@ -10,15 +10,15 @@ import CoreData
 
 struct Item: Identifiable, Hashable {
     var id: NSManagedObjectID {
-        return account?.objectID ?? card!.objectID
+        return account?.objectID ?? card?.objectID ?? note!.objectID
     }
     
-    let account: Account?
-    let card: Card?
+    private(set) var account: Account?
+    private(set) var card: Card?
+    private(set) var note: Note?
     
     init?(_ account: Account?) {
         self.account = account
-        self.card = nil
         
         if account == nil {
             return nil
@@ -27,12 +27,10 @@ struct Item: Identifiable, Hashable {
     
     init(_ account: Account) {
         self.account = account
-        self.card = nil
     }
     
     init?(_ card: Card?) {
         self.card = card
-        self.account = nil
         
         if card == nil {
             return nil
@@ -41,11 +39,19 @@ struct Item: Identifiable, Hashable {
     
     init(_ card: Card) {
         self.card = card
-        self.account = nil
     }
     
-    private init() {
-        self.card = nil
-        self.account = nil
+    init(_ note: Note) {
+        self.note = note
     }
+    
+    init?(_ note: Note?) {
+        self.note = note
+        
+        if note == nil {
+            return nil
+        }
+    }
+    
+    private init() { }
 }

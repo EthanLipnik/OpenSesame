@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19197" systemVersion="21A5304g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A5506j" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="domain" attributeType="String" defaultValueString=""/>
@@ -23,14 +23,23 @@
         <attribute name="onAppleWatch" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="vault" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vault" inverseName="cards" inverseEntity="Vault"/>
     </entity>
+    <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
+        <attribute name="body" optional="YES" attributeType="Binary"/>
+        <attribute name="bodyLength" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isPinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="vault" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vault" inverseName="notes" inverseEntity="Vault"/>
+    </entity>
     <entity name="Vault" representedClassName="Vault" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Account" inverseName="vault" inverseEntity="Account"/>
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="vault" inverseEntity="Card"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="vault" inverseEntity="Note"/>
     </entity>
     <elements>
         <element name="Account" positionX="-36" positionY="18" width="128" height="209"/>
         <element name="Card" positionX="-9" positionY="117" width="128" height="134"/>
-        <element name="Vault" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="Vault" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Note" positionX="-36" positionY="99" width="128" height="104"/>
     </elements>
 </model>

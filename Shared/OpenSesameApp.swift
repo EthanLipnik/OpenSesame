@@ -47,7 +47,7 @@ struct OpenSesameApp: App {
                     }
                 }
                 .sheet(item: $importAppFormat) { format in
-                    #if os(iOS)
+#if os(iOS)
                     NavigationView {
                         ImportView(importManager: ImportManager(appFormat: format))
                             .environment(\.managedObjectContext, persistenceController.container.viewContext)
@@ -56,10 +56,10 @@ struct OpenSesameApp: App {
                     }
                     .navigationViewStyle(.stack)
                     .interactiveDismissDisabled()
-                    #else
+#else
                     ImportView(importManager: ImportManager(appFormat: format))
                         .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    #endif
+#endif
                 }
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
         }
@@ -180,11 +180,17 @@ struct OpenSesameApp: App {
         }
         
         // MARK: - Settings
-        #if os(macOS)
+#if os(macOS)
         Settings {
             SettingsView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-        #endif
+#endif
     }
+    
+#if os(iOS)
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
+#endif
 }
