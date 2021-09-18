@@ -39,10 +39,9 @@ struct ExportButtons: View {
             Label("Export".addElipsis(platformSpecific: true), systemImage: "tray.and.arrow.up.fill")
         }
 #if os(iOS)
-        #warning("Add bottom sheet")
-//        .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
-//            AuthenticationView(message: "You are exporting your passwords without any encryption. Do this at your own risk.", onSuccess: didAuthenticate)
-//        }
+        .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
+            AuthenticationView(message: "You are exporting your passwords without any encryption. Do this at your own risk.", onSuccess: didAuthenticate)
+        }
 #endif
     }
     

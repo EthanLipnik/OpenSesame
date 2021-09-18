@@ -157,21 +157,20 @@ struct LockView: View {
             
             if !isLocked {
                 isTextFieldFocussed = false
-            }
-        }
-        .task {
-            if userSettings.shouldUseBiometrics && isLocked {
-                
-#if EXTENSION
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            } else {
+                if userSettings.shouldUseBiometrics {
+                    
+    #if EXTENSION
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        unlockWithBiometrics()
+                    }
+    #else
                     unlockWithBiometrics()
-                }
-#else
-                unlockWithBiometrics()
-#endif
-            } else if isLocked {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                    isTextFieldFocussed = true
+    #endif
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        isTextFieldFocussed = true
+                    }
                 }
             }
         }

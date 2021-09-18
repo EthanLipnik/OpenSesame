@@ -138,22 +138,27 @@ struct OpenSesameApp: App {
                         case 1:
                             if timeInterval > 30 {
                                 isLocked = true
+                                CryptoSecurityService.encryptionKey = nil
                             }
                         case 2:
                             if timeInterval > 60 {
                                 isLocked = true
+                                CryptoSecurityService.encryptionKey = nil
                             }
                         case 3:
                             if timeInterval > 180 {
                                 isLocked = true
+                                CryptoSecurityService.encryptionKey = nil
                             }
                         case 4:
                             if timeInterval > 240 {
                                 isLocked = true
+                                CryptoSecurityService.encryptionKey = nil
                             }
                         case 5:
                             if timeInterval > 300 {
                                 isLocked = true
+                                CryptoSecurityService.encryptionKey = nil
                             }
                         default:
                             break
@@ -168,9 +173,9 @@ struct OpenSesameApp: App {
                     
                     if UserSettings.default.autoLockTimer == 0 {
                         isLocked = true
+                        CryptoSecurityService.encryptionKey = nil
                     }
                     shouldHideApp = true
-                    CryptoSecurityService.encryptionKey = nil
                 case .inactive:
                     shouldHideApp = true
                 @unknown default:
