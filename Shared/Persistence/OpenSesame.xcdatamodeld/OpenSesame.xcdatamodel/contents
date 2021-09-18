@@ -15,7 +15,7 @@
         <relationship name="vault" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vault" inverseName="accounts" inverseEntity="Vault"/>
     </entity>
     <entity name="Card" representedClassName="Card" syncable="YES" codeGenerationType="class">
-        <attribute name="expirationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expirationDate" optional="YES" attributeType="String"/>
         <attribute name="holder" optional="YES" attributeType="String"/>
         <attribute name="isPinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -39,7 +39,7 @@
     <elements>
         <element name="Account" positionX="-36" positionY="18" width="128" height="209"/>
         <element name="Card" positionX="-9" positionY="117" width="128" height="134"/>
-        <element name="Vault" positionX="-63" positionY="-18" width="128" height="89"/>
         <element name="Note" positionX="-36" positionY="99" width="128" height="104"/>
+        <element name="Vault" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

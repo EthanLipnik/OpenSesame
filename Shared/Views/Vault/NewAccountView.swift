@@ -13,12 +13,13 @@ import DomainParser
 struct NewAccountView: View {
     // MARK: - Environment
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.dismiss) var dismiss
     
     // MARK: - Variables
     @State private var website: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
+    
+    @Binding var isPresented: Bool
     let selectedVault: Vault
     
     // MARK: - View
@@ -91,11 +92,9 @@ struct NewAccountView: View {
                 .padding(5)
 #endif
             }
-            .padding([.top, .horizontal])
-            Spacer()
             HStack {
                 Button("Cancel") {
-                    dismiss.callAsFunction()
+                    isPresented = false
                 }
                 .keyboardShortcut(.cancelAction)
 #if os(iOS)
@@ -123,8 +122,8 @@ struct NewAccountView: View {
             let encryptedPassword = try CryptoSecurityService.encrypt(password)
             print("Encrypted password")
             
-            let domainParser = try DomainParser()
-            let domain = domainParser.parse(host: URL(string: website)?.host ?? website)?.domain
+            let domainParser = try? DomainParser()
+            let domain = domainParser?.parse(host: URL(string: website)?.host ?? website)?.domain
             
             let newAccount = Account(context: viewContext)
             newAccount.dateAdded = Date()
@@ -154,7 +153,7 @@ struct NewAccountView: View {
                 }
             }
             
-            dismiss.callAsFunction()
+            isPresented = false
         } catch {
             print(error)
             
@@ -167,6 +166,6 @@ struct NewAccountView: View {
 
 struct NewAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        NewAccountView(selectedVault: .init())
+        NewAccountView(isPresented: .constant(true), selectedVault: .init())
     }
 }

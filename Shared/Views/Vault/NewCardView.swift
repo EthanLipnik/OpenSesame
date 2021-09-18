@@ -9,15 +9,15 @@ import SwiftUI
 
 struct NewCardView: View {
     // MARK: - Environment
-    @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var viewContext
     
     // MARK: - Variables
     @State private var name: String = ""
     @State private var holder: String = ""
     @State private var cardNumber: String = ""
-    @State private var expirationDate: Date = Date()
+    @State private var expirationDate: String = ""
     
+    @Binding var isPresented: Bool
     let selectedVault: Vault
     
     // MARK: - View
@@ -54,12 +54,9 @@ struct NewCardView: View {
                             Text("Valid Thru")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            DatePicker("Expiration Date", selection: $expirationDate, displayedComponents: [.date])
-#if os(macOS)
-                                .datePickerStyle(.field)
-#endif
-                                .font(.title3)
-                                .labelsHidden()
+                            TextField("9/12", text: $expirationDate)
+                                .keyboardType(.numbersAndPunctuation)
+                                .frame(width: 50)
                         }
                     }
                 }
@@ -69,29 +66,25 @@ struct NewCardView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(LinearGradient(colors: [Color("Tertiary"), Color("Tertiary").opacity(0.7)], startPoint: .top, endPoint: .bottom))
-#if os(macOS)
+//#if os(macOS)
                         .shadow(radius: 15, y: 8)
-#else
-                        .shadow(radius: 30, y: 8)
-#endif
+//#else
+//                        .shadow(radius: 30, y: 8)
+//#endif
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .stroke(lineWidth: 2)
                         .fill(Color(white: 0.5, opacity: 0.25))
                 }.compositingGroup()
             )
-            .padding([.top, .horizontal])
             .aspectRatio(1.6, contentMode: .fit)
 #if os(macOS)
             .frame(height: 250)
 #else
             .padding(.top)
 #endif
-#if os(iOS)
-            Spacer()
-#endif
             HStack {
                 Button("Cancel", role: .cancel) {
-                    dismiss.callAsFunction()
+                    isPresented = false
                 }
                 .keyboardShortcut(.cancelAction)
 #if os(iOS)
@@ -128,7 +121,7 @@ struct NewCardView: View {
             
             try viewContext.save()
             
-            dismiss.callAsFunction()
+            isPresented = false
         } catch {
             print(error)
         }
@@ -137,6 +130,6 @@ struct NewCardView: View {
 
 struct NewCardView_Previews: PreviewProvider {
     static var previews: some View {
-        NewCardView(selectedVault: .init())
+        NewCardView(isPresented: .constant(false), selectedVault: .init())
     }
 }

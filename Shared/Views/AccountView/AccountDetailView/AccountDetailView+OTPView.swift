@@ -63,6 +63,20 @@ extension AccountView.AccountDetailsView {
                     } label: {
                         Image(systemName: "qrcode.viewfinder")
                     }
+//                    .bottomSheet(isPresented: $isScanningQRCode) {
+//                        CodeScannerView(codeTypes: [.qr]) { result in
+//                            switch result {
+//                            case .success(let code):
+//                                isScanningQRCode = false
+//                                addVerificationCode(code)
+//                            case .failure(let error):
+//                                print(error)
+//                            }
+//                        }
+//                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+//                        .padding()
+//                        .shadow(radius: 15)
+//                    }
                     .halfSheet(showSheet: $isScanningQRCode) {
                         CodeScannerView(codeTypes: [.qr]) { result in
                             switch result {

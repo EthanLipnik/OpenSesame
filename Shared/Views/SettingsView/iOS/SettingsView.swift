@@ -182,7 +182,6 @@ struct SettingsView: View {
                 } label: {
                     Label("Acknowledgements", systemImage: "list.star")
                 }
-
             }
             
             #if DEBUG
@@ -247,8 +246,22 @@ struct SettingsView: View {
                 shouldAuthenticate = true
             }
         }
+//        .bottomSheet(isPresented: $shouldAuthenticate, isInteractiveDismissEnabled: false) {
+//            AuthenticationView(onSuccess: didAuthenticate) {
+//                shouldResetBiometrics = false
+//                userSettings.shouldUseBiometrics = false
+//                shouldAuthenticate = false
+//            }
+//        }
         .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
-            AuthenticationView(onSuccess: didAuthenticate)
+            AuthenticationView(onSuccess: didAuthenticate) {
+                shouldResetBiometrics = false
+                shouldAuthenticate = false
+                
+                withAnimation {
+                    userSettings.shouldUseBiometrics = false
+                }
+            }
         } onEnd: {
             shouldResetBiometrics = false
         }

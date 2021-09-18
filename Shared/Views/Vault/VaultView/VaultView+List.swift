@@ -19,7 +19,7 @@ extension VaultView {
                     }
                 }
             }
-            
+
             if !accounts.isEmpty {
                 if cards.isEmpty {
                     accountsList
@@ -56,7 +56,8 @@ extension VaultView {
     }
     
     private var cardsList: some View {
-        ForEach(search.isEmpty ? cards.map({ $0 }) : cards.filter({ $0.name?.lowercased().contains(search.lowercased()) ?? false })) { card in
+        //        ForEach(search.isEmpty ? cards.map({ $0 }) : cards.filter({ $0.name?.contains(search, caseInsentive: true) ?? false })) { card in
+        ForEach(cards) { card in
             CardItemView(card: card)
                 .environmentObject(viewModel)
                 .contextMenu {
@@ -92,12 +93,14 @@ extension VaultView {
     }
     
     private var accountsList: some View {
-        ForEach(search.isEmpty ? accounts.map({ $0 }) : accounts.filter({ account in
-            let website = account.domain?.lowercased() ?? ""
-            let username = account.username?.lowercased() ?? ""
-            
-            return website.contains(search.lowercased()) || username.contains(search.lowercased())
-        })) { account in
+        //        let results = search.isEmpty ? accounts.map({ $0 }) : accounts.filter({ account in
+        //            let website = account.domain?.lowercased() ?? ""
+        //            let username = account.username?.lowercased() ?? ""
+        //
+        //            return website.contains(search.lowercased()) || username.contains(search.lowercased())
+        //        })
+        //        return ForEach(results) { account in
+        ForEach(accounts) { account in
             AccountItemView(account: account)
                 .environmentObject(viewModel)
                 .contextMenu {

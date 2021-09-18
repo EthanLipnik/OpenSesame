@@ -56,7 +56,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
      
         if showSheet{
             
-            if uiViewController.presentedViewController == nil{
+            if uiViewController.presentedViewController == nil {
                 
                 // presenting Modal View....
                 
@@ -67,7 +67,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
         }
         else{
             // closing view when showSheet toggled again...
-            if uiViewController.presentedViewController != nil{
+            if uiViewController.presentedViewController != nil {
                 uiViewController.dismiss(animated: true)
             }
         }

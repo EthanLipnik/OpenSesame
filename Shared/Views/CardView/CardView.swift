@@ -28,10 +28,7 @@ struct CardView: View {
     
     // MARK: - View
     var body: some View {
-        let calendar = Calendar.current
-        let expirationDate = "\(calendar.component(.month, from: card.expirationDate!))/" + "\(calendar.component(.year, from: card.expirationDate!))".suffix(2)
-        
-        return ScrollView {
+        ScrollView {
             VStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                     .fill(Color.secondary.opacity(0.25))
@@ -101,11 +98,11 @@ struct CardView: View {
                             Text("Valid Thru")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            Text(expirationDate)
+                            Text(card.expirationDate ?? "")
                                 .font(.system(.title3, design: .monospaced).bold())
                                 .contextMenu {
                                     Button {
-                                        expirationDate.copyToPasteboard()
+                                        card.expirationDate?.copyToPasteboard()
                                     } label: {
                                         Label("Copy expiration date", systemImage: "doc.on.doc")
                                     }

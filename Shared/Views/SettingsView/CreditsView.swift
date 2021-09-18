@@ -46,6 +46,7 @@ struct CreditsView: View {
                 Text("[DomainParser](https://github.com/Dashlane/SwiftDomainParser.git) by [Dashlane](https://github.com/Dashlane) ([License](https://github.com/Dashlane/SwiftDomainParser/blob/master/LICENSE))")
                 Text("[CSV.swift](https://github.com/yaslab/CSV.swift.git) by [yaslab](https://github.com/yaslab) ([License](https://github.com/yaslab/CSV.swift/blob/master/LICENSE))")
                 Text("[CodeScanner](https://github.com/twostraws/CodeScanner.git) by [twostraws](https://github.com/twostraws) ([License](https://github.com/twostraws/CodeScanner/blob/main/LICENSE))")
+                Text("[ScreenCorners](https://github.com/kylebshr/ScreenCorners.git) by [kylebshr](https://github.com/kylebshr) ([License](https://github.com/kylebshr/ScreenCorners/blob/main/LICENSE))")
             }
         }.navigationTitle("Acknowledgements")
     }

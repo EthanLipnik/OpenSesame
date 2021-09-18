@@ -11,6 +11,7 @@ struct AuthenticationView: View {
     @State private var authenticatedPassword: String = ""
     var message: String? = nil
     let onSuccess: (_ password: String) -> Void
+    var onCancel: () -> Void = {}
     
     var body: some View {
         VStack(spacing: 20) {
@@ -24,6 +25,7 @@ struct AuthenticationView: View {
                         .onSubmit(didAuthenticate)
                         .textFieldStyle(.plain)
                         .frame(maxWidth: 400)
+                    Button("Cancel", action: onCancel)
                     Button(action: didAuthenticate) {
                         Image(systemName: "key.fill")
                     }
@@ -33,7 +35,8 @@ struct AuthenticationView: View {
                 Text(message)
                     .foregroundColor(Color.red)
             }
-        }.padding()
+        }
+        .padding()
     }
     
     func didAuthenticate() {

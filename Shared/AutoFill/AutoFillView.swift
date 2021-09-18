@@ -97,7 +97,10 @@ struct AutoFillView: View {
                         .lineLimit(1)
                         .blur(radius: CommandLine.arguments.contains("-marketing") ? 5 : 0)
                 }
-            }.buttonStyle(.plain)
+            }
+#if os(macOS)
+            .buttonStyle(.plain)
+#endif
         }
     }
 }

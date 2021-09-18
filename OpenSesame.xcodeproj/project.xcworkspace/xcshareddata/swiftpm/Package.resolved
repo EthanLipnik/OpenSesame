@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "ScreenCorners",
+        "repositoryURL": "https://github.com/kylebshr/ScreenCorners.git",
+        "state": {
+          "branch": null,
+          "revision": "1b71897c8d9091cad34bf10a47e3810c0c10e1e8",
+          "version": "1.0.1"
+        }
+      },
+      {
         "package": "DomainParser",
         "repositoryURL": "https://github.com/Dashlane/SwiftDomainParser.git",
         "state": {

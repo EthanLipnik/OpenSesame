@@ -30,7 +30,7 @@ struct VaultView: View {
     @State var isCreatingNewItem: Bool = false
     @State var itemToCreate: ItemCreationType = .none
     
-    @State var search: String = ""
+    @State private var search: String = ""
     
     enum ItemCreationType: String {
         case account = "account"
@@ -59,8 +59,78 @@ struct VaultView: View {
     
     // MARK: - View
     var body: some View {
-        content
+        list
+#if os(macOS)
+            .sheet(isPresented: $isCreatingNewItem) {
+                if itemToCreate == .account {
+                    NewAccountView(selectedVault: vault)
+                } else if itemToCreate == .card {
+                    NewCardView(selectedVault: vault)
+                } else if itemToCreate == .note {
+                    NewNoteView(selectedVault: vault)
+                }
+            }
+            .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
+            .listStyle(.inset(alternatesRowBackgrounds: true))
+            .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
+            .frame(minWidth: 200)
+#else
+            .bottomSheet(isPresented: $isCreatingNewItem) {
+                if itemToCreate == .account {
+                    NewAccountView(isPresented: $isCreatingNewItem, selectedVault: vault)
+                        .environment(\.managedObjectContext, viewContext)
+                } else if itemToCreate == .card {
+                    NewCardView(isPresented: $isCreatingNewItem, selectedVault: vault)
+                        .environment(\.managedObjectContext, viewContext)
+                } else if itemToCreate == .note {
+                    NewNoteView(selectedVault: vault)
+                        .environment(\.managedObjectContext, viewContext)
+                }
+            }
+//            .halfSheet(showSheet: $isCreatingNewItem) {
+//                Group {
+//                    if itemToCreate == .account {
+//                        NewAccountView(selectedVault: vault)
+//                            .environment(\.managedObjectContext, viewContext)
+//                            .onDisappear {
+//                                isCreatingNewItem = false
+//                                itemToCreate = .none
+//                            }
+//                    } else if itemToCreate == .card {
+//                        NewCardView(selectedVault: vault)
+//                            .environment(\.managedObjectContext, viewContext)
+//                    } else if itemToCreate == .note {
+//                        NewNoteView(selectedVault: vault)
+//                            .environment(\.managedObjectContext, viewContext)
+//                    }
+//                }.onDisappear {
+//                    isCreatingNewItem = false
+//                }
+//            } onEnd: {
+//                isCreatingNewItem = false
+//            }
+            .listStyle(.insetGrouped)
+            .navigationTitle(vault.name ?? "Vault")
+#endif
             .searchable(text: $search)
+            .onChange(of: search, perform: { search in
+                let vaultPredicate = NSPredicate(format: "vault == %@", vault)
+                if !search.isEmpty {
+                    let accountPredicate: NSCompoundPredicate = {
+                        let domainPredicate = NSPredicate(format: "domain contains[c] %@", search)
+                        let namePredicate = NSPredicate(format: "username contains[c] %@", search)
+                        let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: [domainPredicate, namePredicate])
+                        
+                        return NSCompoundPredicate(type: .and, subpredicates: [compoundPredicate, vaultPredicate])
+                    }()
+                    accounts.nsPredicate = accountPredicate
+                    
+                    cards.nsPredicate = NSPredicate(format: "name contains[c] %@ AND vault == %@", search, vault)
+                } else {
+                    accounts.nsPredicate = vaultPredicate
+                    cards.nsPredicate = vaultPredicate
+                }
+            })
             .toolbar {
 #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -112,50 +182,6 @@ struct VaultView: View {
                     print("Badly formatted URL")
                 }
             }
-    }
-    
-    private var content: some View {
-        list
-#if os(macOS)
-            .sheet(isPresented: $isCreatingNewItem) {
-                if itemToCreate == .account {
-                    NewAccountView(selectedVault: vault)
-                } else if itemToCreate == .card {
-                    NewCardView(selectedVault: vault)
-                } else if itemToCreate == .note {
-                    NewNoteView(selectedVault: vault)
-                }
-            }
-            .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
-            .listStyle(.inset(alternatesRowBackgrounds: true))
-            .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
-            .frame(minWidth: 200)
-#else
-            .halfSheet(showSheet: $isCreatingNewItem) {
-                Group {
-                    if itemToCreate == .account {
-                        NewAccountView(selectedVault: vault)
-                            .environment(\.managedObjectContext, viewContext)
-                            .onDisappear {
-                                isCreatingNewItem = false
-                                itemToCreate = .none
-                            }
-                    } else if itemToCreate == .card {
-                        NewCardView(selectedVault: vault)
-                            .environment(\.managedObjectContext, viewContext)
-                    } else if itemToCreate == .note {
-                        NewNoteView(selectedVault: vault)
-                            .environment(\.managedObjectContext, viewContext)
-                    }
-                }.onDisappear {
-                    isCreatingNewItem = false
-                }
-            } onEnd: {
-                isCreatingNewItem = false
-            }
-            .listStyle(.insetGrouped)
-            .navigationTitle(vault.name ?? "Vault")
-#endif
     }
     
     func deleteItems(offsets: IndexSet, type: ItemCreationType) {

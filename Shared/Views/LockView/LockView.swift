@@ -155,8 +155,8 @@ struct LockView: View {
             shouldShowCreatePassword = encryptionTest == nil && !isShowingBoardingScreen
 #endif
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                isTextFieldFocussed = true
+            if !isLocked {
+                isTextFieldFocussed = false
             }
         }
         .task {
@@ -169,6 +169,10 @@ struct LockView: View {
 #else
                 unlockWithBiometrics()
 #endif
+            } else if isLocked {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    isTextFieldFocussed = true
+                }
             }
         }
     }
