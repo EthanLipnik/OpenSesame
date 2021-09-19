@@ -145,9 +145,9 @@ struct SettingsView: View {
 //                    Label("Allow Autofill", systemImage: "text.append")
 //                }
 //                .tint(.accentColor)
-                Link(destination: URL(string: "https://opensesamemanager.github.com/Website/security")!) {
-                    Label("Learn more", systemImage: "info.circle.fill")
-                }
+//                Link(destination: URL(string: "https://opensesame.vercel.app/security")!) {
+//                    Label("Learn more", systemImage: "info.circle.fill")
+//                }
             }
             
             Section("About") {
@@ -168,7 +168,7 @@ struct SettingsView: View {
                 } label: {
                     Label("Rate OpenSesame", systemImage: "star.fill")
                 }
-                Link(destination: URL(string: "https://opensesamemanager.github.com/Website")!) {
+                Link(destination: URL(string: "https://opensesame.vercel.app")!) {
                     Label("Website", systemImage: "globe")
                 }
                 Link(destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame")!) {
@@ -181,6 +181,9 @@ struct SettingsView: View {
                     CreditsView()
                 } label: {
                     Label("Acknowledgements", systemImage: "list.star")
+                }
+                Link(destination: URL(string: "https://opensesame.vercel.app/privacy")!) {
+                    Label("Privacy Policy", systemImage: "hand.raised.fill")
                 }
             }
             
