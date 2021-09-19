@@ -75,7 +75,7 @@ class PersistenceController {
         viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
         viewContext.automaticallyMergesChangesFromParent = true
         
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { [weak self] (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -101,32 +101,51 @@ class PersistenceController {
                         try viewContext.save()
                     }
                     
-                    ASCredentialIdentityStore.shared.getState { state in
-                        if state.isEnabled {
-                            ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
-                                let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
-                                
-                                do {
-                                    let accounts = try viewContext.fetch(accountsFetch)
-                                    let domainIdentifers = accounts.map({ ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
-                                                                                                       user: $0.username!,
-                                                                                                       recordIdentifier: nil) })
-                                    
-                                    
-                                    ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: {(_,error) -> Void in
-                                        print(error?.localizedDescription ?? "No errors in saving credentials")
-                                    })
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                        }
-                    }
+                    try? self?.addMissingAccountsToPrimaryVault(viewContext: viewContext)
+                    self?.updateCredentials(viewContext: viewContext)
                 } catch {
                     print(error)
                 }
             }
         })
+    }
+    
+    func updateCredentials(viewContext: NSManagedObjectContext) {
+        ASCredentialIdentityStore.shared.getState { state in
+            if state.isEnabled {
+                ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
+                    let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
+                    
+                    do {
+                        let accounts = try viewContext.fetch(accountsFetch)
+                        let domainIdentifers = accounts.map({ ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
+                                                                                           user: $0.username!,
+                                                                                           recordIdentifier: nil) })
+                        
+                        
+                        ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: {(_,error) -> Void in
+                            print(error?.localizedDescription ?? "No errors in saving credentials")
+                        })
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        }
+    }
+    
+    func addMissingAccountsToPrimaryVault(viewContext: NSManagedObjectContext) throws {
+        let vaultsFetch = NSFetchRequest<Vault>(entityName: "Vault")
+        vaultsFetch.predicate = NSPredicate(format: "name == %@", "Primary")
+        let vaults = try viewContext.fetch(vaultsFetch)
+        guard let vault = vaults.first else { return }
+        
+        let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
+        accountsFetch.predicate = NSPredicate(format: "vault == nil")
+        let accounts = try viewContext.fetch(accountsFetch)
+        accounts.forEach({ vault.addToAccounts($0) })
+        
+        try viewContext.save()
     }
     
     func uploadStoreTo(_ service: CloudService) throws {

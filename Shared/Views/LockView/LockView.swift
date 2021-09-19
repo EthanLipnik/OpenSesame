@@ -161,7 +161,7 @@ struct LockView: View {
                 if userSettings.shouldUseBiometrics {
                     
     #if EXTENSION
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         unlockWithBiometrics()
                     }
     #else
