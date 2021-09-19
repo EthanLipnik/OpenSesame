@@ -60,33 +60,33 @@ struct VaultView: View {
     // MARK: - View
     var body: some View {
         list
-#if os(macOS)
             .sheet(isPresented: $isCreatingNewItem) {
                 if itemToCreate == .account {
-                    NewAccountView(selectedVault: vault)
+                    NewAccountView(isPresented: $isCreatingNewItem, selectedVault: vault)
                 } else if itemToCreate == .card {
-                    NewCardView(selectedVault: vault)
+                    NewCardView(isPresented: $isCreatingNewItem, selectedVault: vault)
                 } else if itemToCreate == .note {
                     NewNoteView(selectedVault: vault)
                 }
             }
             .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
+#if os(macOS)
             .listStyle(.inset(alternatesRowBackgrounds: true))
             .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
             .frame(minWidth: 200)
 #else
-            .bottomSheet(isPresented: $isCreatingNewItem) {
-                if itemToCreate == .account {
-                    NewAccountView(isPresented: $isCreatingNewItem, selectedVault: vault)
-                        .environment(\.managedObjectContext, viewContext)
-                } else if itemToCreate == .card {
-                    NewCardView(isPresented: $isCreatingNewItem, selectedVault: vault)
-                        .environment(\.managedObjectContext, viewContext)
-                } else if itemToCreate == .note {
-                    NewNoteView(selectedVault: vault)
-                        .environment(\.managedObjectContext, viewContext)
-                }
-            }
+//            .bottomSheet(isPresented: $isCreatingNewItem) {
+//                if itemToCreate == .account {
+//                    NewAccountView(isPresented: $isCreatingNewItem, selectedVault: vault)
+//                        .environment(\.managedObjectContext, viewContext)
+//                } else if itemToCreate == .card {
+//                    NewCardView(isPresented: $isCreatingNewItem, selectedVault: vault)
+//                        .environment(\.managedObjectContext, viewContext)
+//                } else if itemToCreate == .note {
+//                    NewNoteView(selectedVault: vault)
+//                        .environment(\.managedObjectContext, viewContext)
+//                }
+//            }
 //            .halfSheet(showSheet: $isCreatingNewItem) {
 //                Group {
 //                    if itemToCreate == .account {

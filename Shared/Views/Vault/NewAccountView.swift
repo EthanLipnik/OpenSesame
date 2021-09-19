@@ -92,6 +92,8 @@ struct NewAccountView: View {
                 .padding(5)
 #endif
             }
+            .padding()
+            Spacer()
             HStack {
                 Button("Cancel") {
                     isPresented = false

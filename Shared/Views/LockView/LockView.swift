@@ -157,7 +157,7 @@ struct LockView: View {
             
             if !isLocked {
                 isTextFieldFocussed = false
-            } else {
+            } else if !(isShowingBoardingScreen || shouldShowCreatePassword || didShowBoardingScreen) {
                 if userSettings.shouldUseBiometrics {
                     
     #if EXTENSION

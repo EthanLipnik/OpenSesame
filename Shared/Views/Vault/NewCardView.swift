@@ -80,8 +80,9 @@ struct NewCardView: View {
 #if os(macOS)
             .frame(height: 250)
 #else
-            .padding(.top)
+            .padding()
 #endif
+            Spacer()
             HStack {
                 Button("Cancel", role: .cancel) {
                     isPresented = false
