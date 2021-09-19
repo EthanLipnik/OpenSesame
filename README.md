@@ -11,7 +11,7 @@ Open Sesame
 ![Platforms](https://img.shields.io/badge/Platform%20Compatibility-iOS%2015+%20|%20macOS%2012+-red?logo=apple&?color=red)
 
 [![TestFlight](https://img.shields.io/badge/Join%20The%20TestFlight-blue)](https://testflight.apple.com/join/5ZW0k48j)
-[![Website](https://img.shields.io/badge/Website-blue)](https://opensesamemanager.github.io/Website/)
+[![Website](https://img.shields.io/badge/Website-blue)](https://opensesame.vercel.app)
 
 Native and encrypted password manager for iOS and macOS.
 
