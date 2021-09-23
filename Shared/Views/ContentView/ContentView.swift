@@ -45,6 +45,16 @@ struct ContentView: View {
     
     @State private var showSettings: Bool = false
     
+#if !os(macOS) && !os(watchOS) && !os(tvOS)
+    @Environment(\.horizontalSizeClass) var horizontalClass
+#else
+    enum HorizontalClass {
+        case compact
+        case large
+    }
+    let horizontalClass = HorizontalClass.large
+#endif
+    
     // MARK: - View
     var body: some View {
         NavigationView {
@@ -117,11 +127,15 @@ struct ContentView: View {
 #endif
                 }
             
-#if os(macOS) // Add empty views for when the NavigationView is empty.
-            List {}.listStyle(.inset(alternatesRowBackgrounds: true))
-            EmptyView()
-                .frame(minWidth: 300)
+            // Add empty views for when the NavigationView is empty.
+            if horizontalClass != .compact {
+                List {}
+#if os(macOS)
+                .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
+                EmptyView()
+                    .frame(minWidth: 300)
+            }
         }
         // URL Actions for keyboard shortcuts.
         .onOpenURL { url in
@@ -168,5 +182,12 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(isLocked: .constant(false))
+    }
+}
+
+extension UISplitViewController {
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.show(.primary)
     }
 }

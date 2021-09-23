@@ -356,7 +356,7 @@
 /* Begin PBXFileReference section */
 		AA016A3126D577B8007397A7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA016A3526D586DC007397A7 /* SettingsView+SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+SyncView.swift"; sourceTree = "<group>"; };
-		AA02F83126FC276800D25A1A /* VaultView+NoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VaultView+NoteItemView.swift"; path = "VaultView+NoteItemView.swift"; sourceTree = "<group>"; };
+		AA02F83126FC276800D25A1A /* VaultView+NoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+NoteItemView.swift"; sourceTree = "<group>"; };
 		AA05CCD426CDB85000E27F6D /* UserAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationService.swift; sourceTree = "<group>"; };
 		AA05CCE026CDDA5200E27F6D /* AutoFill iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AutoFill iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA05CCE326CDDA5200E27F6D /* CredentialProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialProviderViewController.swift; sourceTree = "<group>"; };
@@ -1504,7 +1504,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1515,7 +1515,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1532,7 +1532,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1543,7 +1543,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1561,7 +1561,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1574,7 +1574,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1590,7 +1590,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1603,7 +1603,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).AutoFill-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1735,7 +1735,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
@@ -1752,7 +1752,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = OpenSesame;
 				SDKROOT = iphoneos;
@@ -1770,7 +1770,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1788,7 +1788,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = OpenSesame;
 				SDKROOT = iphoneos;
@@ -1809,7 +1809,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1825,7 +1825,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=500 -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ethanlipnik.OpenSesame;
 				PRODUCT_NAME = OpenSesame;
@@ -1845,7 +1845,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1861,7 +1861,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=500";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ethanlipnik.OpenSesame;
 				PRODUCT_NAME = OpenSesame;

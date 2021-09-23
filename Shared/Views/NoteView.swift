@@ -73,7 +73,9 @@ struct NoteView: View {
                 .padding()
             }
             .padding()
-            .frame(minHeight: 300)
+            .frame(maxWidth: 400, minHeight: 300)
+            Spacer()
+                .frame(maxWidth: .infinity)
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
