@@ -157,16 +157,14 @@ struct LockView: View {
             
             if !isLocked {
                 isTextFieldFocussed = false
-            } else if !(isShowingBoardingScreen || shouldShowCreatePassword || didShowBoardingScreen) {
+            } else if !(isShowingBoardingScreen || shouldShowCreatePassword) {
                 if userSettings.shouldUseBiometrics {
                     
-    #if EXTENSION
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+#if !EXTENSION
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                         unlockWithBiometrics()
                     }
-    #else
-                    unlockWithBiometrics()
-    #endif
+#endif
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                         isTextFieldFocussed = true

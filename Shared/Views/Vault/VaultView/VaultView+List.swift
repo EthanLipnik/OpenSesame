@@ -10,8 +10,17 @@ import SwiftUI
 extension VaultView {
     var list: some View {
         List {
+            if !notes.isEmpty {
+                if accounts.isEmpty && cards.isEmpty {
+                    notesList
+                } else {
+                    Section("Notes") {
+                        notesList
+                    }
+                }
+            }
             if !cards.isEmpty {
-                if accounts.isEmpty {
+                if accounts.isEmpty && notes.isEmpty {
                     cardsList
                 } else {
                     Section("Cards") {
@@ -21,7 +30,7 @@ extension VaultView {
             }
 
             if !accounts.isEmpty {
-                if cards.isEmpty {
+                if cards.isEmpty && notes.isEmpty {
                     accountsList
                 } else {
                     Section("Accounts") {
@@ -31,9 +40,10 @@ extension VaultView {
             }
         }
 #if !os(macOS)
-        .overlay(accounts.isEmpty && cards.isEmpty ? Text("Add a new account or vault")
+        .overlay(accounts.isEmpty && cards.isEmpty ? Text("Add a new account or card")
                     .font(.title.bold())
-                    .foregroundColor(Color.secondary) : nil)
+                    .foregroundColor(Color.secondary)
+                    .padding(.horizontal) : nil)
 #endif
         .confirmationDialog("Are you sure you want to delete this account? You cannot retreive it when it is gone.", isPresented: $shouldDeleteAccount) {
             Button("Delete", role: .destructive) {
@@ -53,10 +63,54 @@ extension VaultView {
                 shouldDeleteCard = false
             }.keyboardShortcut(.defaultAction)
         }
+        .confirmationDialog("Are you sure you want to delete this note? You cannot retreive it when it is gone.", isPresented: $shouldDeleteNote) {
+            Button("Delete", role: .destructive) {
+                deleteItems(offsets: IndexSet([notes.firstIndex(of: itemToBeDeleted!.note!)!]), type: .note)
+            }
+            
+            Button("Cancel", role: .cancel) {
+                shouldDeleteNote = false
+            }.keyboardShortcut(.defaultAction)
+        }
+    }
+    
+    private var notesList: some View {
+        ForEach(notes) { note in
+            NoteItemView(note: note)
+                .environmentObject(viewModel)
+                .contextMenu {
+                    Button {
+                        
+                        note.isPinned.toggle()
+                        
+                        try? viewContext.save()
+                    } label: {
+                        Label(note.isPinned ? "Unpin" : "Pin", systemImage: note.isPinned ? "pin.slash" : "pin")
+                    }
+                    Button("Delete", role: .destructive) {
+                        itemToBeDeleted = .init(note)
+                        shouldDeleteNote.toggle()
+                    }
+                }
+                .swipeActions {
+                    Button(note.isPinned ? "Unpin" : "Pin") {
+                        note.isPinned.toggle()
+                        
+                        try? viewContext.save()
+                    }.tint(note.isPinned ? .orange : .accentColor)
+                    
+                    Button("Delete", role: .destructive) {
+                        itemToBeDeleted = .init(note)
+                        shouldDeleteNote.toggle()
+                    }
+                }
+        }.onDelete { indexSet in
+            itemToBeDeleted = .init(notes[indexSet.first!])
+            shouldDeleteNote.toggle()
+        }
     }
     
     private var cardsList: some View {
-        //        ForEach(search.isEmpty ? cards.map({ $0 }) : cards.filter({ $0.name?.contains(search, caseInsentive: true) ?? false })) { card in
         ForEach(cards) { card in
             CardItemView(card: card)
                 .environmentObject(viewModel)
@@ -93,13 +147,6 @@ extension VaultView {
     }
     
     private var accountsList: some View {
-        //        let results = search.isEmpty ? accounts.map({ $0 }) : accounts.filter({ account in
-        //            let website = account.domain?.lowercased() ?? ""
-        //            let username = account.username?.lowercased() ?? ""
-        //
-        //            return website.contains(search.lowercased()) || username.contains(search.lowercased())
-        //        })
-        //        return ForEach(results) { account in
         ForEach(accounts) { account in
             AccountItemView(account: account)
                 .environmentObject(viewModel)

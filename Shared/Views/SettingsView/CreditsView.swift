@@ -11,32 +11,36 @@ struct CreditsView: View {
     var body: some View {
         Form {
             Section("Creator & Maintainer") {
-                VStack {
-                    AsyncImage(url: URL(string: "https://pbs.twimg.com/profile_images/1384494074955173888/EkfIwNyD_400x400.jpg")) { phase in
-                        switch phase {
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                                .shadow(radius: 15, y: 10)
-                        case .failure:
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.red)
-                                .shadow(color: Color.red.opacity(0.4), radius: 15, y: 10)
-                        case .empty:
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.secondary)
-                                .shadow(radius: 15, y: 10)
-                        @unknown default:
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.secondary)
-                                .shadow(radius: 15, y: 30)
+                Link(destination: URL(string: "https://www.ethanlipnik.com")!) {
+                    HStack {
+                        Label {
+                            Text("Ethan Lipnik")
+                                .font(.headline)
+                        } icon: {
+                            AsyncImage(url: URL(string: "https://pbs.twimg.com/profile_images/1384494074955173888/EkfIwNyD.jpg")) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                                case .failure:
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color.red)
+                                case .empty:
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color.secondary)
+                                @unknown default:
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color.secondary)
+                                }
+                            }
+                            .aspectRatio(1/1, contentMode: .fit)
                         }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.bold())
+                            .foregroundColor(Color.secondary)
                     }
-                        .aspectRatio(1/1, contentMode: .fit)
-                        .padding(.vertical)
-                    Link("Ethan Lipnik", destination: URL(string: "https://www.ethanlipnik.com")!)
-                        .font(.title.bold())
                 }
             }
             Section("OpenSesame depends on the following open-source projects:") {

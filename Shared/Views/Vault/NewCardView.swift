@@ -55,7 +55,9 @@ struct NewCardView: View {
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             TextField("9/12", text: $expirationDate)
+#if os(iOS)
                                 .keyboardType(.numbersAndPunctuation)
+#endif
                                 .frame(width: 50)
                         }
                     }

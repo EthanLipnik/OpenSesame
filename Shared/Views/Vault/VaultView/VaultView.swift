@@ -17,6 +17,7 @@ struct VaultView: View {
     // MARK: - CoreData Variables
     @FetchRequest var accounts: FetchedResults<Account>
     @FetchRequest var cards: FetchedResults<Card>
+    @FetchRequest var notes: FetchedResults<Note>
     
     // MARK: - Variables
     let vault: Vault
@@ -25,6 +26,7 @@ struct VaultView: View {
     
     @State var shouldDeleteAccount: Bool = false
     @State var shouldDeleteCard: Bool = false
+    @State var shouldDeleteNote: Bool = false
     @State var itemToBeDeleted: Item? = nil
     
     @State var isCreatingNewItem: Bool = false
@@ -46,6 +48,8 @@ struct VaultView: View {
         self._accounts = FetchRequest(sortDescriptors: [.init(key: "domain", ascending: true)],
                                       predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
         self._cards = FetchRequest(sortDescriptors: [],
+                                   predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
+        self._notes = FetchRequest(sortDescriptors: [],
                                    predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
         
         let viewModel = ViewModel()
@@ -115,6 +119,8 @@ struct VaultView: View {
             .searchable(text: $search)
             .onChange(of: search, perform: { search in
                 let vaultPredicate = NSPredicate(format: "vault == %@", vault)
+                let cardAndNotePredicate = NSPredicate(format: "name contains[c] %@ AND vault == %@", search, vault)
+                
                 if !search.isEmpty {
                     let accountPredicate: NSCompoundPredicate = {
                         let domainPredicate = NSPredicate(format: "domain contains[c] %@", search)
@@ -125,10 +131,12 @@ struct VaultView: View {
                     }()
                     accounts.nsPredicate = accountPredicate
                     
-                    cards.nsPredicate = NSPredicate(format: "name contains[c] %@ AND vault == %@", search, vault)
+                    cards.nsPredicate = cardAndNotePredicate
+                    notes.nsPredicate = cardAndNotePredicate
                 } else {
                     accounts.nsPredicate = vaultPredicate
                     cards.nsPredicate = vaultPredicate
+                    notes.nsPredicate = vaultPredicate
                 }
             })
             .toolbar {
@@ -151,13 +159,12 @@ struct VaultView: View {
                         } label: {
                             Label("Add Card", systemImage: "creditcard")
                         }
-//                        Button {
-//                            itemToCreate = .note
-//                            isCreatingNewItem.toggle()
-//                            print(itemToCreate, isCreatingNewItem)
-//                        } label: {
-//                            Label("Add Note", systemImage: "note.text")
-//                        }
+                        Button {
+                            itemToCreate = .note
+                            isCreatingNewItem.toggle()
+                        } label: {
+                            Label("Add Note", systemImage: "note.text")
+                        }
                     } label: {
                         Label("Add", systemImage: "plus")
                     }
@@ -205,8 +212,10 @@ struct VaultView: View {
                     
                     viewContext.delete(account)
                 }
-            } else {
+            } else if type == .card {
                 offsets.map { cards[$0] }.forEach(viewContext.delete)
+            } else if type == .note {
+                offsets.map { notes[$0] }.forEach(viewContext.delete)
             }
             
             do {

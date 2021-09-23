@@ -125,7 +125,9 @@ let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .wat
                 .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
                 .authenticationPrompt("Authenticate to view your accounts")
                 .get("masterPassword") {
-                unlock(masterPassword, method: .biometrics)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    unlock(masterPassword, method: .biometrics)
+                }
             } else {
                 print("Biometrics failed")
                 didBiometricsFail = true

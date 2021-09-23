@@ -89,17 +89,18 @@ struct AccountView: View {
             .frame(maxWidth: 800)
         }
 #if os(iOS)
-        .navigationTitle(account.domain?.capitalizingFirstLetter() ?? "")
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    isSharing.toggle()
-                } label: {
-                    Label("Share", systemImage: "square.and.arrow.up")
-                }
-                
-            }
-        }
+//        .navigationTitle(account.domain?.capitalizingFirstLetter() ?? "")
+        .navigationBarTitleDisplayMode(.inline)
+//        .toolbar {
+//            ToolbarItem {
+//                Button {
+//                    isSharing.toggle()
+//                } label: {
+//                    Label("Share", systemImage: "square.and.arrow.up")
+//                }
+//
+//            }
+//        }
 #else
         .frame(minWidth: 300)
 #endif

@@ -27,6 +27,8 @@ struct NewNoteView: View {
                 return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
             case 1:
                 return [Color("Note-BlueTop"), Color("Note-BlueBottom")]
+            case 2:
+                return [Color("Note-OrangeTop"), Color("Note-OrangeBottom")]
             default:
                 return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
             }
@@ -51,7 +53,11 @@ struct NewNoteView: View {
                             .tag(0)
                         Text("Blue")
                             .tag(1)
-                    }.pickerStyle(.segmented)
+                        Text("Orange")
+                            .tag(2)
+                    }
+                    .pickerStyle(.segmented)
+                    .colorScheme(.light)
                     TextEditor(text: $bodyTxt)
                         .padding(5)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay))
@@ -84,8 +90,25 @@ struct NewNoteView: View {
         }
     }
     
-    func add() {
-        
+    // MARK: - Functions
+    private func add() {
+        do {
+            let note = Note(context: viewContext)
+            note.name = name
+            
+            note.body = try CryptoSecurityService.encrypt(bodyTxt)
+            note.bodyLength = Int16(bodyTxt.count)
+            
+            note.color = Int16(selectedColor)
+            
+            selectedVault.addToNotes(note)
+            
+            try viewContext.save()
+            
+            dismiss.callAsFunction()
+        } catch {
+            print(error)
+        }
     }
 }
 
