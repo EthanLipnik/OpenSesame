@@ -14,6 +14,7 @@ struct NoteView: View {
     @State private var isShowingBody: Bool = false
     @State private var isEditing: Bool = false
     @State private var decryptedBody: String? = nil
+    @State private var isSharing: Bool = false
     
     var body: some View {
         let colors: [Color] = {
@@ -81,6 +82,27 @@ struct NoteView: View {
         .onAppear {
             displayedBody = CryptoSecurityService.randomString(length: Int(note.bodyLength))!
         }
+#if os(iOS)
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    isSharing.toggle()
+                } label: {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+                .halfSheet(isPresented: $isSharing) {
+                    ShareSheet(
+                        activityItems: [try! NoteDocument(note).save()],
+                        excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
+                    )
+                        .ignoresSafeArea()
+                        .onDisappear {
+                            isSharing = false
+                        }
+                }
+            }
+        }
+#endif
     }
     
     private func togglePassword() {

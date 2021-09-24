@@ -55,6 +55,26 @@ extension AccountDocument {
     }
 }
 
+extension CardDocument {
+    func data() throws -> Data {
+        return try Document.data(object: self)
+    }
+    
+    @discardableResult func save(_ url: URL? = nil) throws -> URL {
+        return try Document.save(url, object: self, fileName: "Card", fileExtension: "osc")
+    }
+}
+
+extension NoteDocument {
+    func data() throws -> Data {
+        return try Document.data(object: self)
+    }
+    
+    @discardableResult func save(_ url: URL? = nil) throws -> URL {
+        return try Document.save(url, object: self, fileName: "Note", fileExtension: "osn")
+    }
+}
+
 extension UTType {
     static var accountDocument: UTType {
         UTType(importedAs: "com.opensesame.account")
@@ -62,5 +82,13 @@ extension UTType {
     
     static var encryptedAccountDocument: UTType {
         UTType(importedAs: "com.opensesame.account-encrypted")
+    }
+    
+    static var cardDocument: UTType {
+        UTType(importedAs: "com.opensesame.card")
+    }
+    
+    static var noteDocument: UTType {
+        UTType(importedAs: "com.opensesame.note")
     }
 }

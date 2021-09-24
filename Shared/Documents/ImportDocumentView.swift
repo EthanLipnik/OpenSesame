@@ -94,6 +94,26 @@ struct ImportDocumentView: View {
             account.passwordLength = Int16(accountDoc.password.count)
             
             selectedVault?.addToAccounts(account)
+        case .cardDocument:
+            let cardDoc = try JSONDecoder().decode(CardDocument.self, from: data)
+            
+            let card = Card(context: viewContext)
+            card.expirationDate = cardDoc.expirationDate
+            card.holder = cardDoc.holder
+            card.name = cardDoc.name
+            
+            card.number = try CryptoSecurityService.encrypt(cardDoc.number, encryptionKey: encryptionKey)
+            
+            selectedVault?.addToCards(card)
+        case .noteDocument:
+            let noteDoc = try JSONDecoder().decode(NoteDocument.self, from: data)
+            
+            let note = Note(context: viewContext)
+            note.name = noteDoc.name
+            note.color = Int16(noteDoc.color)
+            note.body = try CryptoSecurityService.encrypt(noteDoc.body, encryptionKey: encryptionKey)
+            
+            selectedVault?.addToNotes(note)
         default:
             break
         }

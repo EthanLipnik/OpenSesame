@@ -194,6 +194,10 @@
 		AA8B504A26CD6468003C92AE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8B504926CD6468003C92AE /* CloudKit.framework */; };
 		AA91286826DEBBFE007B9B30 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91286726DEBBFE007B9B30 /* TipJarView.swift */; };
 		AA91286926DEBBFE007B9B30 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91286726DEBBFE007B9B30 /* TipJarView.swift */; };
+		AAADDF5726FE1B6E002172D4 /* CardDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5626FE1B6E002172D4 /* CardDocument.swift */; };
+		AAADDF5826FE1B6E002172D4 /* CardDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5626FE1B6E002172D4 /* CardDocument.swift */; };
+		AAADDF5A26FE1E78002172D4 /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5926FE1E78002172D4 /* NoteDocument.swift */; };
+		AAADDF5B26FE1E78002172D4 /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5926FE1E78002172D4 /* NoteDocument.swift */; };
 		AAC63F0526EE8BB300F9A7D6 /* ExportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */; };
 		AAC63F0626EE8BB400F9A7D6 /* ExportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */; };
 		AAC63F0826EE973500F9A7D6 /* ImportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0726EE973500F9A7D6 /* ImportElements.swift */; };
@@ -456,6 +460,8 @@
 		AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--iOS--Info.plist"; sourceTree = "<group>"; };
 		AA8B504C26CD6596003C92AE /* OpenSesame--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--macOS--Info.plist"; sourceTree = "<group>"; };
 		AA91286726DEBBFE007B9B30 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
+		AAADDF5626FE1B6E002172D4 /* CardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardDocument.swift; path = "CardDocument.swift"; sourceTree = "<group>"; };
+		AAADDF5926FE1E78002172D4 /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoteDocument.swift; path = "NoteDocument.swift"; sourceTree = "<group>"; };
 		AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportElements.swift; sourceTree = "<group>"; };
 		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportElements.swift; sourceTree = "<group>"; };
 		AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedAccountDocument.swift; sourceTree = "<group>"; };
@@ -818,6 +824,8 @@
 			isa = PBXGroup;
 			children = (
 				AACFCDBA26FD290900778D78 /* AccountDocument.swift */,
+				AAADDF5626FE1B6E002172D4 /* CardDocument.swift */,
+				AAADDF5926FE1E78002172D4 /* NoteDocument.swift */,
 				AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */,
 				AACFCDB726FD1EFA00778D78 /* Document.swift */,
 				AACFCDBD26FD4D1E00778D78 /* ImportDocumentView.swift */,
@@ -1307,6 +1315,7 @@
 				AA5EB75D26DD84E800390B85 /* UserSettings.swift in Sources */,
 				AA49EA3226D3EB8600B12838 /* AccountDetailView+PasswordView.swift in Sources */,
 				AA519A8426CF2A5000C1E354 /* LockView.swift in Sources */,
+				AAADDF5A26FE1E78002172D4 /* NoteDocument.swift in Sources */,
 				AAD3DBE826D342B800531E92 /* URL+Misc.swift in Sources */,
 				AAFB0EA626EFFF7100A153CD /* BoardingView+Cards.swift in Sources */,
 				AA66C30426F0EE5D00985B2F /* BoardingView+Import.swift in Sources */,
@@ -1318,6 +1327,7 @@
 				AA05CD0226CDDDB300E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA519A8626CF453300C1E354 /* AccountView.swift in Sources */,
 				AA49EA1526D3EB2600B12838 /* LockView+TextField.swift in Sources */,
+				AAADDF5726FE1B6E002172D4 /* CardDocument.swift in Sources */,
 				AA3EBAA126F2412C00C1C289 /* AttributedString+Misc.swift in Sources */,
 				AA49EA2626D3EB6400B12838 /* NewAccountView.swift in Sources */,
 				AA91286826DEBBFE007B9B30 /* TipJarView.swift in Sources */,
@@ -1383,6 +1393,7 @@
 				AA519A8726CF453300C1E354 /* AccountView.swift in Sources */,
 				AAD3DBDD26D3417500531E92 /* MainView.swift in Sources */,
 				AA519A9226CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */,
+				AAADDF5B26FE1E78002172D4 /* NoteDocument.swift in Sources */,
 				AA05CD0326CDDDB400E27F6D /* UserAuthenticationService.swift in Sources */,
 				AAD3DBEA26D342B800531E92 /* URL+Misc.swift in Sources */,
 				AA05CCFF26CDDDA300E27F6D /* CryptoSecurityService.swift in Sources */,
@@ -1394,6 +1405,7 @@
 				AA49EA4D26D3EBE100B12838 /* SettingsView+GeneralView.swift in Sources */,
 				AAD16ACC26EFA7B100CCAB56 /* BoardingView+Security.swift in Sources */,
 				AA08245126DDC304006BE956 /* Item.swift in Sources */,
+				AAADDF5826FE1B6E002172D4 /* CardDocument.swift in Sources */,
 				C45CE91326ED037500ECD60D /* KeychainService.swift in Sources */,
 				AAD16AC726EFA2E900CCAB56 /* BoardingView.swift in Sources */,
 				AA3EBAA226F2412C00C1C289 /* AttributedString+Misc.swift in Sources */,
@@ -1540,7 +1552,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1568,7 +1580,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill iOS/AutoFill_iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AutoFill iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "AutoFill iOS";
@@ -1597,7 +1609,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1626,7 +1638,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "AutoFill macOS/AutoFill_macOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1771,7 +1783,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
@@ -1807,7 +1819,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1847,7 +1859,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1884,7 +1896,7 @@
 				CODE_SIGN_ENTITLEMENTS = "OpenSesame (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

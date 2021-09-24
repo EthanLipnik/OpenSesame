@@ -18,6 +18,7 @@ struct CardView: View {
     @State private var isShowingNumber: Bool = false
     @State private var decryptedNumber: String? = nil
     @State private var displayedNumber: String = ""
+    @State private var isSharing: Bool = false
     
     // MARK: - Init
     init(card: Card) {
@@ -127,7 +128,6 @@ struct CardView: View {
             .frame(width: 400)
 #else
             .frame(maxWidth: 400)
-//            .modifier(ParallaxMotionModifier(manager: manager, magnitude: 10))
 #endif
             Spacer()
                 .frame(maxWidth: .infinity)
@@ -136,8 +136,26 @@ struct CardView: View {
         .shadow(radius: 15, y: 8)
 #else
         .shadow(radius: 30, y: 8)
-//        .navigationTitle(card.name ?? card.holder ?? "Card")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    isSharing.toggle()
+                } label: {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+                .halfSheet(isPresented: $isSharing) {
+                    ShareSheet(
+                        activityItems: [try! CardDocument(card).save()],
+                        excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
+                    )
+                        .ignoresSafeArea()
+                        .onDisappear {
+                            isSharing = false
+                        }
+                }
+            }
+        }
 #endif
     }
 }

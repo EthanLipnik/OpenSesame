@@ -5,7 +5,6 @@
 //  Created by Ethan Lipnik on 9/23/21.
 //
 
-import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
