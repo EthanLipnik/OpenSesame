@@ -60,7 +60,7 @@ class CryptoSecurityService {
         return String(decoding: decryptedData, as: UTF8.self)
     }
     
-    static func encrypt(_ string: String) throws -> Data? {
+    static func encrypt(_ string: String, encryptionKey: SymmetricKey? = encryptionKey) throws -> Data? {
         guard let key = encryptionKey else { throw CocoaError(.coderValueNotFound) }
         
         let plainData = string.data(using: .utf8)

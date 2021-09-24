@@ -17,15 +17,7 @@ extension VaultView {
             NavigationLink(tag: .init(card), selection: $viewModel.selectedItem) {
                 CardView(card: card)
             } label: {
-                VStack(alignment: .leading) {
-                    Text(card.name!)
-                        .bold()
-                        .lineLimit(1)
-                    Text(card.holder!)
-                        .foregroundColor(Color.secondary)
-                        .lineLimit(1)
-                        .blur(radius: CommandLine.arguments.contains("-marketing") ? 5 : 0)
-                }
+                Label(card.name!, systemImage: "creditcard.fill")
             }
         }
     }

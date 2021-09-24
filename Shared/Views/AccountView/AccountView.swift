@@ -39,7 +39,7 @@ struct AccountView: View {
     
     // MARK: - View
     var body: some View {
-        let otherAccounts = accounts.filter({ $0.username != account.username }).map({ $0 })
+        let otherAccounts = accounts.filter({ $0.objectID != account.objectID }).map({ $0 })
         
         let columns: [GridItem] = {
             #if os(macOS)
@@ -89,18 +89,26 @@ struct AccountView: View {
             .frame(maxWidth: 800)
         }
 #if os(iOS)
-//        .navigationTitle(account.domain?.capitalizingFirstLetter() ?? "")
         .navigationBarTitleDisplayMode(.inline)
-//        .toolbar {
-//            ToolbarItem {
-//                Button {
-//                    isSharing.toggle()
-//                } label: {
-//                    Label("Share", systemImage: "square.and.arrow.up")
-//                }
-//
-//            }
-//        }
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    isSharing.toggle()
+                } label: {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+                .halfSheet(isPresented: $isSharing) {
+                    ShareSheet(
+                        activityItems: [try! AccountDocument(account).save()],
+                        excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
+                    )
+                        .ignoresSafeArea()
+                        .onDisappear {
+                            isSharing = false
+                        }
+                }
+            }
+        }
 #else
         .frame(minWidth: 300)
 #endif

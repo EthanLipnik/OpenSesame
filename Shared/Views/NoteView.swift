@@ -45,7 +45,7 @@ struct NoteView: View {
                     Divider()
                     Text(displayedBody)
                         .font(.system(.body, design: .monospaced))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .frame(maxWidth: .infinity, minHeight: 250, maxHeight: .infinity, alignment: .topLeading)
                         .blur(radius: isShowingBody ? 0 : 8)
                         .contextMenu {
                             Button {
@@ -73,7 +73,7 @@ struct NoteView: View {
                 .padding()
             }
             .padding()
-            .frame(maxWidth: 400, minHeight: 300)
+            .frame(maxWidth: 400)
             Spacer()
                 .frame(maxWidth: .infinity)
         }

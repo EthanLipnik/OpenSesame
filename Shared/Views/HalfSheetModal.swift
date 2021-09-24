@@ -14,15 +14,15 @@ import SwiftUI
 extension View{
     
     // Binding Show Variable...
-    func halfSheet<SheetView: View>(showSheet: Binding<Bool>, supportsLargeView: Bool = true, @ViewBuilder sheetView: @escaping () -> SheetView, onEnd: (() -> ())? = nil) -> some View {
+    func halfSheet<SheetView: View>(isPresented: Binding<Bool>, supportsLargeView: Bool = true, @ViewBuilder sheetView: @escaping () -> SheetView, onEnd: (() -> ())? = nil) -> some View {
         
         // why we using overlay or background...
         // bcz it will automatically use the swiftui frame Size only....
         return self
             .background(
-                HalfSheetHelper(sheetView: sheetView(), supportsLargeView: supportsLargeView, showSheet: showSheet, onEnd: onEnd ?? {})
+                HalfSheetHelper(sheetView: sheetView(), supportsLargeView: supportsLargeView, showSheet: isPresented, onEnd: onEnd ?? {})
             )
-            .onChange(of: showSheet.wrappedValue) { newValue in
+            .onChange(of: isPresented.wrappedValue) { newValue in
                 if !newValue {
                     onEnd?()
                 }

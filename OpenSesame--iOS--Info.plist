@@ -20,6 +20,20 @@
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
+			<string>OpenSesame Account Encrypted</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.opensesame.account-encrypted</string>
+			</array>
+			<key>NSUbiquitousDocumentUserActivityType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).account-encrypted</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
 			<string>OpenSesame Card</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -257,6 +271,26 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
+			<string>OpenSesame Account Encrypted</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>com.opensesame.account-encrypted</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>osa</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.content</string>
+			</array>
+			<key>UTTypeDescription</key>
 			<string>OpenSesame Card</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
@@ -305,6 +339,26 @@
 			<array/>
 			<key>UTTypeIdentifier</key>
 			<string>com.opensesame.account</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>osa</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.content</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>OpenSesame Account Encrypted</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>com.opensesame.account-encrypted</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

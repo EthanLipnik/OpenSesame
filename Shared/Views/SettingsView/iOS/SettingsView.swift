@@ -256,7 +256,7 @@ struct SettingsView: View {
 //                shouldAuthenticate = false
 //            }
 //        }
-        .halfSheet(showSheet: $shouldAuthenticate, supportsLargeView: false) {
+        .halfSheet(isPresented: $shouldAuthenticate, supportsLargeView: false) {
             AuthenticationView(onSuccess: didAuthenticate) {
                 shouldResetBiometrics = false
                 shouldAuthenticate = false

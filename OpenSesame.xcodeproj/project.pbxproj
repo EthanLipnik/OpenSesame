@@ -198,6 +198,15 @@
 		AAC63F0626EE8BB400F9A7D6 /* ExportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */; };
 		AAC63F0826EE973500F9A7D6 /* ImportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0726EE973500F9A7D6 /* ImportElements.swift */; };
 		AAC63F0926EE973500F9A7D6 /* ImportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0726EE973500F9A7D6 /* ImportElements.swift */; };
+		AACFCD7126FD02DC00778D78 /* EncryptedAccountDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */; };
+		AACFCD7226FD02DC00778D78 /* EncryptedAccountDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */; };
+		AACFCDB626FD0A3800778D78 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDB526FD0A3800778D78 /* ShareSheet.swift */; };
+		AACFCDB826FD1EFA00778D78 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDB726FD1EFA00778D78 /* Document.swift */; };
+		AACFCDB926FD1EFA00778D78 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDB726FD1EFA00778D78 /* Document.swift */; };
+		AACFCDBB26FD290900778D78 /* AccountDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDBA26FD290900778D78 /* AccountDocument.swift */; };
+		AACFCDBC26FD290900778D78 /* AccountDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDBA26FD290900778D78 /* AccountDocument.swift */; };
+		AACFCDBE26FD4D1E00778D78 /* ImportDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDBD26FD4D1E00778D78 /* ImportDocumentView.swift */; };
+		AACFCDBF26FD4D1E00778D78 /* ImportDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDBD26FD4D1E00778D78 /* ImportDocumentView.swift */; };
 		AAD16AC626EFA2E900CCAB56 /* BoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD16AC426EFA1FF00CCAB56 /* BoardingView.swift */; };
 		AAD16AC726EFA2E900CCAB56 /* BoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD16AC426EFA1FF00CCAB56 /* BoardingView.swift */; };
 		AAD16AC826EFA2EC00CCAB56 /* BoardingView+Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD16AC526EFA21200CCAB56 /* BoardingView+Welcome.swift */; };
@@ -449,6 +458,11 @@
 		AA91286726DEBBFE007B9B30 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
 		AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportElements.swift; sourceTree = "<group>"; };
 		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportElements.swift; sourceTree = "<group>"; };
+		AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedAccountDocument.swift; sourceTree = "<group>"; };
+		AACFCDB526FD0A3800778D78 /* ShareSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		AACFCDB726FD1EFA00778D78 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Document.swift; path = "Document.swift"; sourceTree = "<group>"; };
+		AACFCDBA26FD290900778D78 /* AccountDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountDocument.swift; path = "AccountDocument.swift"; sourceTree = "<group>"; };
+		AACFCDBD26FD4D1E00778D78 /* ImportDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportDocumentView.swift; path = "ImportDocumentView.swift"; sourceTree = "<group>"; };
 		AAD16AC426EFA1FF00CCAB56 /* BoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingView.swift; sourceTree = "<group>"; };
 		AAD16AC526EFA21200CCAB56 /* BoardingView+Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Welcome.swift"; sourceTree = "<group>"; };
 		AAD16ACA26EFA7B100CCAB56 /* BoardingView+Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardingView+Security.swift"; sourceTree = "<group>"; };
@@ -649,6 +663,7 @@
 				AA34199126F6319B00161B4E /* BottomSheet.swift */,
 				AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */,
 				AA2BAC1C26F6486700D99DA3 /* HalfSheetModal.swift */,
+				AACFCDB526FD0A3800778D78 /* ShareSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -750,6 +765,7 @@
 				AA08244E26DDC234006BE956 /* Persistence */,
 				AA05CCD326CDB84F00E27F6D /* Services */,
 				AA519A6E26CEE5DC00C1E354 /* AutoFill */,
+				AACFCD6C26FD024F00778D78 /* Documents */,
 				AA8B500826CD641D003C92AE /* Assets.xcassets */,
 				AA413B1626E93D26000CE360 /* Credits.rtf */,
 			);
@@ -796,6 +812,17 @@
 				AA8B504626CD6457003C92AE /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AACFCD6C26FD024F00778D78 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				AACFCDBA26FD290900778D78 /* AccountDocument.swift */,
+				AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */,
+				AACFCDB726FD1EFA00778D78 /* Document.swift */,
+				AACFCDBD26FD4D1E00778D78 /* ImportDocumentView.swift */,
+			);
+			path = Documents;
 			sourceTree = "<group>";
 		};
 		AAD16AC326EFA1FF00CCAB56 /* BoardingView */ = {
@@ -1286,6 +1313,7 @@
 				AA49EA1126D3EB2600B12838 /* LockView+CreatePassword.swift in Sources */,
 				AA49EA0926D3EB1600B12838 /* ContentView+Add.swift in Sources */,
 				AAD3DBDE26D3417500531E92 /* MainView.swift in Sources */,
+				AACFCDB826FD1EFA00778D78 /* Document.swift in Sources */,
 				AA02F83226FC276800D25A1A /* VaultView+NoteItemView.swift in Sources */,
 				AA05CD0226CDDDB300E27F6D /* UserAuthenticationService.swift in Sources */,
 				AA519A8626CF453300C1E354 /* AccountView.swift in Sources */,
@@ -1300,6 +1328,7 @@
 				AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA05CD0026CDDDA300E27F6D /* CryptoSecurityService.swift in Sources */,
 				AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */,
+				AACFCDBB26FD290900778D78 /* AccountDocument.swift in Sources */,
 				AAD3DBC826D33D2500531E92 /* AccountView+AccountDetailView.swift in Sources */,
 				AA49EA2926D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AAD3DBAA26D3351400531E92 /* ImportView.swift in Sources */,
@@ -1308,6 +1337,7 @@
 				AA49EA2326D3EB5A00B12838 /* VaultView+List.swift in Sources */,
 				AA49EA0B26D3EB1600B12838 /* ContentView+List.swift in Sources */,
 				AA49EA3026D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */,
+				AACFCDBE26FD4D1E00778D78 /* ImportDocumentView.swift in Sources */,
 				AA3754F526DD3D18007FF26F /* CardView.swift in Sources */,
 				AA73D81526F5159B006CA13A /* CreditsView.swift in Sources */,
 				AAD7131F26EA499D00138640 /* ImportManager.swift in Sources */,
@@ -1316,9 +1346,11 @@
 				C45CE91226ED037500ECD60D /* KeychainService.swift in Sources */,
 				AAD16ACB26EFA7B100CCAB56 /* BoardingView+Security.swift in Sources */,
 				AA08245026DDC304006BE956 /* Item.swift in Sources */,
+				AACFCD7126FD02DC00778D78 /* EncryptedAccountDocument.swift in Sources */,
 				AA34199226F6319B00161B4E /* BottomSheet.swift in Sources */,
 				AA5CBC0626EE70CF00447E4D /* ExportFile.swift in Sources */,
 				AA5CBC0126EE58EB00447E4D /* ExportManager.swift in Sources */,
+				AACFCDB626FD0A3800778D78 /* ShareSheet.swift in Sources */,
 				AA519A9126CF4B3800C1E354 /* OTPAuthenticatorService.swift in Sources */,
 				AAD16AC826EFA2EC00CCAB56 /* BoardingView+Welcome.swift in Sources */,
 				AA07049426F284E00039A7FE /* NewNoteView.swift in Sources */,
@@ -1357,6 +1389,7 @@
 				AAD3DBE226D341D300531E92 /* SettingsView.swift in Sources */,
 				AAD3DB9126D3258900531E92 /* FaviconView.swift in Sources */,
 				AA49EA4F26D3EBE100B12838 /* SettingsView+MenuBarView.swift in Sources */,
+				AACFCDB926FD1EFA00778D78 /* Document.swift in Sources */,
 				AAFB0EAA26F0092600A153CD /* BoardingView+Setup.swift in Sources */,
 				AA49EA4D26D3EBE100B12838 /* SettingsView+GeneralView.swift in Sources */,
 				AAD16ACC26EFA7B100CCAB56 /* BoardingView+Security.swift in Sources */,
@@ -1371,6 +1404,7 @@
 				AA49EA2F26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
 				AA73D81626F5159B006CA13A /* CreditsView.swift in Sources */,
 				AAD3DBC926D33D2600531E92 /* AccountView+AccountDetailView.swift in Sources */,
+				AACFCDBC26FD290900778D78 /* AccountDocument.swift in Sources */,
 				AAF56EB326DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA49EA2426D3EB5A00B12838 /* VaultView+List.swift in Sources */,
 				AA47A76F26E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
@@ -1379,6 +1413,7 @@
 				AA49EA2A26D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AA3754F226DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */,
 				AA5EB75E26DD84E800390B85 /* UserSettings.swift in Sources */,
+				AACFCDBF26FD4D1E00778D78 /* ImportDocumentView.swift in Sources */,
 				AAD3DBAB26D3351400531E92 /* ImportView.swift in Sources */,
 				AAD3DBEB26D342B800531E92 /* String+Misc.swift in Sources */,
 				AA02F83326FC276800D25A1A /* VaultView+NoteItemView.swift in Sources */,
@@ -1388,6 +1423,7 @@
 				C45CE90E26ECFFC800ECD60D /* OpenSesameConfig.generated.swift in Sources */,
 				AA49EA3126D3EB8600B12838 /* AccountDetailView+OTPView.swift in Sources */,
 				AA49EA1226D3EB2600B12838 /* LockView+CreatePassword.swift in Sources */,
+				AACFCD7226FD02DC00778D78 /* EncryptedAccountDocument.swift in Sources */,
 				AA016A3626D586DC007397A7 /* SettingsView+SyncView.swift in Sources */,
 				AA3754ED26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
 				AA49EA4026D3EBA300B12838 /* Data+Misc.swift in Sources */,

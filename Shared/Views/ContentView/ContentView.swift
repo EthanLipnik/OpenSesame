@@ -30,6 +30,12 @@ struct ContentView: View {
         animation: .default)
     var pinnedCards: FetchedResults<Card>
     
+    @FetchRequest(
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "isPinned == %i", 1),
+        animation: .default)
+    var pinnedNotes: FetchedResults<Note>
+    
     // MARK: - Variables
     @Binding var isLocked: Bool
     
@@ -44,6 +50,8 @@ struct ContentView: View {
     @State var vaultToBeRenamed: Vault? = nil
     
     @State private var showSettings: Bool = false
+    
+    @State private var openedFile: File? = nil
     
 #if !os(macOS) && !os(watchOS) && !os(tvOS)
     @Environment(\.horizontalSizeClass) var horizontalClass
@@ -137,9 +145,18 @@ struct ContentView: View {
                     .frame(minWidth: 300)
             }
         }
-        // URL Actions for keyboard shortcuts.
+        // URL Actions for keyboard shortcuts and documents.
         .onOpenURL { url in
+            selectedVault = nil
+            
+            guard !url.isFileURL else {
+                self.openedFile = File(url: url)
+                
+                return
+            }
+            
             guard !isLocked else { return }
+            
             if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems {
                 if let type = queryItems.first(where: { $0.name == "type" }), type.value == "vault", url == "openSesame://new" {
@@ -148,6 +165,17 @@ struct ContentView: View {
             } else {
                 print("Badly formatted URL")
             }
+        }
+        .sheet(item: $openedFile) { file in
+#if os(macOS)
+            ImportDocumentView(file: file)
+                .environment(\.managedObjectContext, viewContext)
+#else
+            NavigationView {
+                ImportDocumentView(file: file)
+                    .environment(\.managedObjectContext, viewContext)
+            }.navigationViewStyle(.stack)
+#endif
         }
     }
     

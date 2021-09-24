@@ -40,7 +40,7 @@ extension VaultView {
             }
         }
 #if !os(macOS)
-        .overlay(accounts.isEmpty && cards.isEmpty ? Text("Add a new account or card")
+        .overlay(accounts.isEmpty && cards.isEmpty && notes.isEmpty ? Text("Add a new account, note, or card")
                     .font(.title.bold())
                     .foregroundColor(Color.secondary)
                     .padding(.horizontal) : nil)

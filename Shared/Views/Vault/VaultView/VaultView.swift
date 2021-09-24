@@ -91,7 +91,7 @@ struct VaultView: View {
 //                        .environment(\.managedObjectContext, viewContext)
 //                }
 //            }
-//            .halfSheet(showSheet: $isCreatingNewItem) {
+//            .halfSheet(isPresented: $isCreatingNewItem) {
 //                Group {
 //                    if itemToCreate == .account {
 //                        NewAccountView(selectedVault: vault)

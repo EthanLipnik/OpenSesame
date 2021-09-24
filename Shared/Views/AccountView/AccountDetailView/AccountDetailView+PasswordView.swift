@@ -29,7 +29,6 @@ extension AccountView.AccountDetailsView {
                             Button(action: togglePassword) {
                                 Label(isShowingPassword ? "Hide password" : "Reveal password", systemImage: isShowingPassword ? "eye.slash" : "eye")
                             }
-
                         }
                         .animation(.default, value: isShowingPassword)
                         .onTapGesture(perform: togglePassword)

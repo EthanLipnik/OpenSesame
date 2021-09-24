@@ -95,11 +95,15 @@ extension ContentView {
             if !pinnedCards.isEmpty {
                 pinnedCardsView
             }
+            
+            if !pinnedNotes.isEmpty {
+                pinnedNotesView
+            }
         }
     }
     
     private var pinnedAccountsView: some View {
-        Section(pinnedCards.isEmpty ? "Pinned" : "Pinned Accounts") {
+        Section(pinnedCards.isEmpty && pinnedNotes.isEmpty ? "Pinned" : "Pinned Accounts") {
             ForEach(pinnedAccounts) { account in
                 VaultView.AccountItemView(account: account)
                     .environmentObject(VaultView.ViewModel.init())
@@ -113,14 +117,24 @@ extension ContentView {
                         }
                         
                     }
-            }.onDelete { index in
+                    .swipeActions {
+                        Button {
+                            account.isPinned = false
+                            
+                            try? viewContext.save()
+                        } label: {
+                            Label("Unpin", systemImage: "pin.slash")
+                        }.tint(account.isPinned ? .orange : .accentColor)
+                    }
+            }
+            .onDelete { index in
                 index.map({ pinnedAccounts[$0] }).forEach({ $0.isPinned = false })
             }
         }
     }
     
     private var pinnedCardsView: some View {
-        Section(pinnedAccounts.isEmpty ? "Pinned" : "Pinned Cards") {
+        Section(pinnedAccounts.isEmpty && pinnedNotes.isEmpty ? "Pinned" : "Pinned Cards") {
             ForEach(pinnedCards) { card in
                 VaultView.CardItemView(card: card)
                     .environmentObject(VaultView.ViewModel.init())
@@ -134,8 +148,42 @@ extension ContentView {
                         }
                         
                     }
-            }.onDelete { index in
-                index.map({ pinnedCards[$0] }).forEach({ $0.isPinned = false })
+                    .swipeActions {
+                        Button {
+                            card.isPinned = false
+                            
+                            try? viewContext.save()
+                        } label: {
+                            Label("Unpin", systemImage: "pin.slash")
+                        }.tint(card.isPinned ? .orange : .accentColor)
+                    }
+            }
+        }
+    }
+    
+    private var pinnedNotesView: some View {
+        Section(pinnedAccounts.isEmpty && pinnedCards.isEmpty ? "Pinned" : "Pinned Notes") {
+            ForEach(pinnedNotes) { note in
+                VaultView.NoteItemView(note: note)
+                    .environmentObject(VaultView.ViewModel.init())
+                    .contextMenu {
+                        Button {
+                            note.isPinned = false
+                            
+                            try? viewContext.save()
+                        } label: {
+                            Label("Unpin", systemImage: "pin.slash")
+                        }
+                    }
+                    .swipeActions {
+                        Button {
+                            note.isPinned = false
+                            
+                            try? viewContext.save()
+                        } label: {
+                            Label("Unpin", systemImage: "pin.slash")
+                        }.tint(note.isPinned ? .orange : .accentColor)
+                    }
             }
         }
     }

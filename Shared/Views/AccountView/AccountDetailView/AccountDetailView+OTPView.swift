@@ -77,7 +77,7 @@ extension AccountView.AccountDetailsView {
 //                        .padding()
 //                        .shadow(radius: 15)
 //                    }
-                    .halfSheet(showSheet: $isScanningQRCode) {
+                    .halfSheet(isPresented: $isScanningQRCode) {
                         CodeScannerView(codeTypes: [.qr]) { result in
                             switch result {
                             case .success(let code):
