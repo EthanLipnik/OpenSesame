@@ -87,6 +87,9 @@ struct AccountView: View {
             }
             .padding()
             .frame(maxWidth: 800)
+            
+            Spacer()
+                .frame(maxWidth: .infinity)
         }
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)

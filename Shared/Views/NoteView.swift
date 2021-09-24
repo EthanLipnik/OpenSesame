@@ -44,7 +44,7 @@ struct NoteView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Divider()
                     Text(displayedBody)
-                        .font(.system(.body, design: .monospaced))
+                        .font(.system(.title3, design: .monospaced))
                         .frame(maxWidth: .infinity, minHeight: 250, maxHeight: .infinity, alignment: .topLeading)
                         .blur(radius: isShowingBody ? 0 : 8)
                         .contextMenu {

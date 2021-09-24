@@ -129,6 +129,8 @@ struct CardView: View {
             .frame(maxWidth: 400)
 //            .modifier(ParallaxMotionModifier(manager: manager, magnitude: 10))
 #endif
+            Spacer()
+                .frame(maxWidth: .infinity)
         }
 #if os(macOS)
         .shadow(radius: 15, y: 8)

@@ -61,7 +61,7 @@ struct NewNoteView: View {
                     TextEditor(text: $bodyTxt)
                         .padding(5)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay))
-                        .font(.system(.body, design: .monospaced))
+                        .font(.system(.title3, design: .monospaced))
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
                 .padding()
