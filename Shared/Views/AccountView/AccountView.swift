@@ -26,6 +26,7 @@ struct AccountView: View {
     @State private var isAddingAlternateDomains: Bool = false
     @State private var newAlternateDomains: String = ""
     @State private var isSharing: Bool = false
+    @State private var isAddingPerson: Bool = false
     
     // MARK: - Init
     init(account: Account) {
@@ -94,6 +95,11 @@ struct AccountView: View {
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem {
+                if let record = PersistenceController.shared.container.record(for: account.objectID) {
+                    CloudKitShareButton(toShare: account, share: .init(rootRecord: record))
+                }
+            }
             ToolbarItem {
                 Button {
                     isSharing.toggle()

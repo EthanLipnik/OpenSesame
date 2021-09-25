@@ -198,6 +198,8 @@
 		AAADDF5826FE1B6E002172D4 /* CardDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5626FE1B6E002172D4 /* CardDocument.swift */; };
 		AAADDF5A26FE1E78002172D4 /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5926FE1E78002172D4 /* NoteDocument.swift */; };
 		AAADDF5B26FE1E78002172D4 /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5926FE1E78002172D4 /* NoteDocument.swift */; };
+		AAADDF5D26FE2684002172D4 /* CloudKitShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5C26FE2684002172D4 /* CloudKitShareView.swift */; };
+		AAADDF5E26FE2684002172D4 /* CloudKitShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADDF5C26FE2684002172D4 /* CloudKitShareView.swift */; };
 		AAC63F0526EE8BB300F9A7D6 /* ExportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */; };
 		AAC63F0626EE8BB400F9A7D6 /* ExportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */; };
 		AAC63F0826EE973500F9A7D6 /* ImportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0726EE973500F9A7D6 /* ImportElements.swift */; };
@@ -460,8 +462,9 @@
 		AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--iOS--Info.plist"; sourceTree = "<group>"; };
 		AA8B504C26CD6596003C92AE /* OpenSesame--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--macOS--Info.plist"; sourceTree = "<group>"; };
 		AA91286726DEBBFE007B9B30 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
-		AAADDF5626FE1B6E002172D4 /* CardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardDocument.swift; path = "CardDocument.swift"; sourceTree = "<group>"; };
-		AAADDF5926FE1E78002172D4 /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoteDocument.swift; path = "NoteDocument.swift"; sourceTree = "<group>"; };
+		AAADDF5626FE1B6E002172D4 /* CardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDocument.swift; sourceTree = "<group>"; };
+		AAADDF5926FE1E78002172D4 /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDocument.swift; sourceTree = "<group>"; };
+		AAADDF5C26FE2684002172D4 /* CloudKitShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CloudKitShareView.swift; path = "CloudKitShareView.swift"; sourceTree = "<group>"; };
 		AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportElements.swift; sourceTree = "<group>"; };
 		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportElements.swift; sourceTree = "<group>"; };
 		AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedAccountDocument.swift; sourceTree = "<group>"; };
@@ -619,6 +622,7 @@
 				AADB8A4826E6A07000B17B66 /* Persistence+Container.swift */,
 				AA08244F26DDC304006BE956 /* Item.swift */,
 				AA3754EA26DD28E4007FF26F /* OpenSesame.xcdatamodeld */,
+				AAADDF5C26FE2684002172D4 /* CloudKitShareView.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1335,6 +1339,7 @@
 				AA3754EC26DD28E4007FF26F /* OpenSesame.xcdatamodeld in Sources */,
 				AAD16AC626EFA2E900CCAB56 /* BoardingView.swift in Sources */,
 				AA47A76E26E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
+				AAADDF5D26FE2684002172D4 /* CloudKitShareView.swift in Sources */,
 				AAF56EB226DD6F75003581AC /* NewCardView.swift in Sources */,
 				AA05CD0026CDDDA300E27F6D /* CryptoSecurityService.swift in Sources */,
 				AAD3DB9026D3258900531E92 /* FaviconView.swift in Sources */,
@@ -1413,6 +1418,7 @@
 				AA5CBC0726EE70CF00447E4D /* ExportFile.swift in Sources */,
 				AA49EA1826D3EB2600B12838 /* LockView+UnlockButtons.swift in Sources */,
 				AAD7132326EA4E3600138640 /* Array+Misc.swift in Sources */,
+				AAADDF5E26FE2684002172D4 /* CloudKitShareView.swift in Sources */,
 				AA49EA2F26D3EB8600B12838 /* AccountDetailView+EmailView.swift in Sources */,
 				AA73D81626F5159B006CA13A /* CreditsView.swift in Sources */,
 				AAD3DBC926D33D2600531E92 /* AccountView+AccountDetailView.swift in Sources */,
