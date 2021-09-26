@@ -12,8 +12,41 @@ extension VaultView {
         @EnvironmentObject var viewModel: ViewModel
         
         let note: Note
+        var isPopover: Bool = false
+        
+        @State private var isPresenting: Bool = false
         
         var body: some View {
+            Group {
+                if isPopover {
+                    Button {
+                        isPresenting.toggle()
+                    } label: {
+                        content
+                    }.popover(isPresented: $isPresenting) {
+                        NavigationView {
+                            NoteView(note: note)
+                                .toolbar {
+                                    ToolbarItem(placement: .navigation) {
+                                        Button("Done") {
+                                            isPresenting = false
+                                        }
+                                    }
+                                }
+                        }
+                        .frame(minWidth: 400, minHeight: 600)
+                    }
+                } else {
+                    NavigationLink(tag: .init(note), selection: $viewModel.selectedItem) {
+                        NoteView(note: note)
+                    } label: {
+                        content
+                    }
+                }
+            }
+        }
+        
+        var content: some View {
             let color: Color = {
                 switch note.color {
                 case 0:
@@ -27,16 +60,12 @@ extension VaultView {
                 }
             }()
             
-            return NavigationLink(tag: .init(note), selection: $viewModel.selectedItem) {
-                NoteView(note: note)
-            } label: {
-                Label {
-                    Text(note.name!)
-                        .bold()
-                } icon: {
-                    Image(systemName: "rectangle.fill")
-                        .foregroundColor(color)
-                }
+            return Label {
+                Text(note.name!)
+                    .bold()
+            } icon: {
+                Image(systemName: "rectangle.fill")
+                    .foregroundColor(color)
             }
         }
     }

@@ -92,13 +92,9 @@ extension ContentView {
         .overlay(
             didRequestReview || !shouldShowReviewRequest ? nil :
             Button {
-                if let keyWindow = UIApplication.shared.connectedScenes
-                    .filter({$0.activationState == .foregroundActive})
-                    .compactMap({$0 as? UIWindowScene})
-                    .first {
-                    
-                    SKStoreReviewController.requestReview(in: keyWindow)
-                }
+                guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
+                        else { fatalError("Expected a valid URL") }
+                    UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
                 
                 UserDefaults.standard.set(true, forKey: "didRequestReview")
             } label: {
@@ -211,7 +207,7 @@ extension ContentView {
     private var pinnedAccountsView: some View {
         Section(pinnedCards.isEmpty && pinnedNotes.isEmpty ? "Pinned" : "Pinned Accounts") {
             ForEach(pinnedAccounts) { account in
-                VaultView.AccountItemView(account: account)
+                VaultView.AccountItemView(account: account, isPopover: true)
                     .environmentObject(VaultView.ViewModel.init())
                     .contextMenu {
                         Button {
@@ -242,7 +238,7 @@ extension ContentView {
     private var pinnedCardsView: some View {
         Section(pinnedAccounts.isEmpty && pinnedNotes.isEmpty ? "Pinned" : "Pinned Cards") {
             ForEach(pinnedCards) { card in
-                VaultView.CardItemView(card: card)
+                VaultView.CardItemView(card: card, isPopover: true)
                     .environmentObject(VaultView.ViewModel.init())
                     .contextMenu {
                         Button {
@@ -270,7 +266,7 @@ extension ContentView {
     private var pinnedNotesView: some View {
         Section(pinnedAccounts.isEmpty && pinnedCards.isEmpty ? "Pinned" : "Pinned Notes") {
             ForEach(pinnedNotes) { note in
-                VaultView.NoteItemView(note: note)
+                VaultView.NoteItemView(note: note, isPopover: true)
                     .environmentObject(VaultView.ViewModel.init())
                     .contextMenu {
                         Button {

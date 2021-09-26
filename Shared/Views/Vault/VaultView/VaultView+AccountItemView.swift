@@ -12,26 +12,56 @@ extension VaultView {
         @EnvironmentObject var viewModel: ViewModel
         
         let account: Account
+        var isPopover: Bool = false
+        
+        @State private var isPresenting: Bool = false
         
         var body: some View {
-            return NavigationLink(tag: .init(account), selection: $viewModel.selectedItem) {
-                AccountView(account: account)
-            } label: {
-                HStack {
-                    if let domain = account.domain, UserSettings.default.shouldShowFaviconInList {
-                        FaviconView(website: domain)
-                            .drawingGroup()
-                            .frame(width: 30, height: 30)
+            Group {
+                if isPopover {
+                    Button {
+                        isPresenting.toggle()
+                    } label: {
+                        content
+                    }.popover(isPresented: $isPresenting) {
+                        NavigationView {
+                            AccountView(account: account)
+                                .toolbar {
+                                    ToolbarItem(placement: .navigation) {
+                                        Button("Done") {
+                                            isPresenting = false
+                                        }
+                                    }
+                                }
+                        }
+                        .frame(minWidth: 400, minHeight: 600)
                     }
-                    VStack(alignment: .leading) {
-                        Text(AttributedString(account: account))
-                            .bold()
-                            .lineLimit(1)
-                        Text(account.username!)
-                            .foregroundColor(Color.secondary)
-                            .lineLimit(1)
-                            .blur(radius: CommandLine.arguments.contains("-marketing") ? 5 : 0)
+                } else {
+                    NavigationLink(tag: .init(account), selection: $viewModel.selectedItem) {
+                        AccountView(account: account)
+                    } label: {
+                        content
                     }
+                }
+            }
+        }
+        
+        var content: some View {
+            HStack {
+                if let domain = account.domain, UserSettings.default.shouldShowFaviconInList {
+                    FaviconView(website: domain)
+                        .drawingGroup()
+                        .frame(width: 30, height: 30)
+                }
+                VStack(alignment: .leading) {
+                    Text(AttributedString(account: account))
+                        .bold()
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(account.username!)
+                        .foregroundColor(Color.secondary)
+                        .lineLimit(1)
+                        .blur(radius: CommandLine.arguments.contains("-marketing") ? 5 : 0)
                 }
             }
         }

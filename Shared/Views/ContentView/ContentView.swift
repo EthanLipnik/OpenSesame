@@ -127,6 +127,11 @@ struct ContentView: View {
             } else {
                 UserDefaults.standard.set(true, forKey: "hasBeenlaunched")
             }
+            
+#if DEBUG
+            shouldShowReviewRequest = true
+            didRequestReview = false
+#endif
         }
     }
 }

@@ -18,9 +18,11 @@ struct NoteView: View {
     @State private var decryptedBody: String? = nil
     @State private var isSharing: Bool = false
     
+    @State private var newColor: Int = 0
+    
     var body: some View {
         let colors: [Color] = {
-            switch note.color {
+            switch newColor {
             case 0:
                 return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
             case 1:
@@ -47,6 +49,16 @@ struct NoteView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Divider()
                     if isEditing {
+                        Picker("Color", selection: $newColor) {
+                            Text("Yellow")
+                                .tag(0)
+                            Text("Blue")
+                                .tag(1)
+                            Text("Orange")
+                                .tag(2)
+                        }
+                        .pickerStyle(.segmented)
+                        .colorScheme(.light)
                         TextEditor(text: $displayedBody)
                             .padding(5)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay))
@@ -91,6 +103,11 @@ struct NoteView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             displayedBody = CryptoSecurityService.randomString(length: Int(note.bodyLength))!
+            newColor = Int(note.color)
+        }
+        .onChange(of: newColor) { color in
+            note.color = Int16(color)
+            print(color)
         }
 #if os(iOS)
         .toolbar {
@@ -98,6 +115,7 @@ struct NoteView: View {
                 Button {
                     if !isEditing {
                         displayBody()
+                        newColor = Int(note.color)
                     } else {
                         do {
                             note.body = try CryptoSecurityService.encrypt(displayedBody)

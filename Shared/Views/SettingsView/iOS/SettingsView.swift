@@ -158,13 +158,11 @@ struct SettingsView: View {
 //                    Label("Tip Jar", systemImage: "heart.fill")
 //                }
                 Button {
-                    if let keyWindow = UIApplication.shared.connectedScenes
-                        .filter({$0.activationState == .foregroundActive})
-                        .compactMap({$0 as? UIWindowScene})
-                        .first {
-                        
-                        SKStoreReviewController.requestReview(in: keyWindow)
-                    }
+                    guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
+                            else { fatalError("Expected a valid URL") }
+                        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+                    
+                    UserDefaults.standard.set(true, forKey: "didRequestReview")
                 } label: {
                     Label("Rate OpenSesame", systemImage: "star.fill")
                 }
