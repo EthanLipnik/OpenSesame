@@ -94,6 +94,15 @@ struct AccountView: View {
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    withAnimation {
+                        isEditing.toggle()
+                    }
+                } label: {
+                    Label(isEditing ? "Done" : "Edit", systemImage: isEditing ? "checkmark.circle.fill" : "pencil")
+                }
+            }
             ToolbarItem {
                 Button {
                     isSharing.toggle()

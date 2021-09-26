@@ -43,6 +43,7 @@ extension AccountView {
                                     .foregroundColor(.secondary)
                             }
                         }
+#if os(macOS)
                         Spacer()
                         Button(isEditing ? "Done" : "Edit") {
                             withAnimation {
@@ -65,8 +66,6 @@ extension AccountView {
                             //                                }
                             //                            }
                         }
-#if os(iOS)
-                        .hoverEffect()
 #endif
                     }
                 }
@@ -91,26 +90,26 @@ extension AccountView {
 #endif
                     }
                     Spacer()
-//                    if isEditing {
-//                        if !isAddingAlternateDomains {
-//                            Button("Alternate Domains") {
-//                                newAlternateDomains = String((account.alternateDomains?
-//                                                                .map({ String($0) }) ?? [])
-//                                                                .joined(separator: ","))
-//                                isAddingAlternateDomains = true
-//                            }
-//                        } else {
-//                            TextField("Alternate Domains", text: $newAlternateDomains, onCommit: {
-//                                isAddingAlternateDomains = false
-//                                account.alternateDomains = newAlternateDomains.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ",").map({ $0 as NSString })
-//                            })
-//                                .textFieldStyle(.roundedBorder)
-//#if os(iOS)
-//                                .autocapitalization(.none)
-//#endif
-//                                .disableAutocorrection(true)
-//                        }
-//                    }
+                    //                    if isEditing {
+                    //                        if !isAddingAlternateDomains {
+                    //                            Button("Alternate Domains") {
+                    //                                newAlternateDomains = String((account.alternateDomains?
+                    //                                                                .map({ String($0) }) ?? [])
+                    //                                                                .joined(separator: ","))
+                    //                                isAddingAlternateDomains = true
+                    //                            }
+                    //                        } else {
+                    //                            TextField("Alternate Domains", text: $newAlternateDomains, onCommit: {
+                    //                                isAddingAlternateDomains = false
+                    //                                account.alternateDomains = newAlternateDomains.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ",").map({ $0 as NSString })
+                    //                            })
+                    //                                .textFieldStyle(.roundedBorder)
+                    //#if os(iOS)
+                    //                                .autocapitalization(.none)
+                    //#endif
+                    //                                .disableAutocorrection(true)
+                    //                        }
+                    //                    }
                 }
             }
 #if os(macOS)

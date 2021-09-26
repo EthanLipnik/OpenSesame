@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NoteView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    
     let note: Note
     
     @State private var displayedBody: String = ""
@@ -44,32 +46,40 @@ struct NoteView: View {
                         .font(.system(.title, design: .rounded).bold())
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Divider()
-                    Text(displayedBody)
-                        .font(.system(.title3, design: .monospaced))
-                        .frame(maxWidth: .infinity, minHeight: 250, maxHeight: .infinity, alignment: .topLeading)
-                        .blur(radius: isShowingBody ? 0 : 8)
-                        .contextMenu {
-                            Button {
-                                decryptedBody?.copyToPasteboard()
-                            } label: {
-                                Label("Copy note", systemImage: "doc.on.doc")
-                            }.disabled(!isShowingBody)
-                            Button(action: togglePassword) {
-                                Label(isShowingBody ? "Hide note" : "Reveal note", systemImage: isShowingBody ? "eye.slash" : "eye")
+                    if isEditing {
+                        TextEditor(text: $displayedBody)
+                            .padding(5)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay))
+                            .font(.system(.title3, design: .monospaced))
+                            .frame(maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+                    } else {
+                        Text(displayedBody)
+                            .font(.system(.title3, design: .monospaced))
+                            .frame(maxWidth: .infinity, minHeight: 250, maxHeight: .infinity, alignment: .topLeading)
+                            .blur(radius: isShowingBody ? 0 : 8)
+                            .contextMenu {
+                                Button {
+                                    decryptedBody?.copyToPasteboard()
+                                } label: {
+                                    Label("Copy note", systemImage: "doc.on.doc")
+                                }.disabled(!isShowingBody)
+                                Button(action: toggleBody) {
+                                    Label(isShowingBody ? "Hide note" : "Reveal note", systemImage: isShowingBody ? "eye.slash" : "eye")
+                                }
+                                
                             }
-
-                        }
-                        .animation(.default, value: isShowingBody)
-                        .onTapGesture(perform: togglePassword)
-                        .onHover { isHovering in
+                            .animation(.default, value: isShowingBody)
+                            .onTapGesture(perform: toggleBody)
+                            .onHover { isHovering in
 #if os(macOS)
-                            if isHovering {
-                                NSCursor.pointingHand.set()
-                            } else {
-                                NSCursor.arrow.set()
-                            }
+                                if isHovering {
+                                    NSCursor.pointingHand.set()
+                                } else {
+                                    NSCursor.arrow.set()
+                                }
 #endif
-                        }
+                            }
+                    }
                 }
                 .padding()
             }
@@ -84,6 +94,28 @@ struct NoteView: View {
         }
 #if os(iOS)
         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    if !isEditing {
+                        displayBody()
+                    } else {
+                        do {
+                            note.body = try CryptoSecurityService.encrypt(displayedBody)
+                            note.bodyLength = Int16(displayedBody.count)
+                            
+                            try viewContext.save()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    
+                    withAnimation {
+                        isEditing.toggle()
+                    }
+                } label: {
+                    Label(isEditing ? "Done" : "Edit", systemImage: isEditing ? "checkmark.circle.fill" : "pencil")
+                }
+            }
             ToolbarItem {
                 Button {
                     isSharing.toggle()
@@ -105,21 +137,9 @@ struct NoteView: View {
 #endif
     }
     
-    private func togglePassword() {
+    private func toggleBody() {
         if !isShowingBody {
-            do {
-                decryptedBody = try CryptoSecurityService.decrypt(note.body!)
-                
-                displayedBody = decryptedBody ?? displayedBody
-                
-                isShowingBody = true
-            } catch {
-                print(error)
-                
-#if os(macOS)
-                NSAlert(error: error).runModal()
-#endif
-            }
+            displayBody()
         } else {
             isShowingBody.toggle()
             decryptedBody = nil
@@ -127,6 +147,22 @@ struct NoteView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 displayedBody = CryptoSecurityService.randomString(length: Int(note.bodyLength))!
             }
+        }
+    }
+    
+    private func displayBody() {
+        do {
+            decryptedBody = try CryptoSecurityService.decrypt(note.body!)
+            
+            displayedBody = decryptedBody ?? displayedBody
+            
+            isShowingBody = true
+        } catch {
+            print(error)
+            
+#if os(macOS)
+            NSAlert(error: error).runModal()
+#endif
         }
     }
 }
