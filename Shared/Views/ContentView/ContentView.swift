@@ -56,6 +56,9 @@ struct ContentView: View {
     
     @State private var openedFile: File? = nil
     
+    @AppStorage("didRequestReview") var didRequestReview: Bool = false
+    @State var shouldShowReviewRequest: Bool = false
+    
 #if !os(macOS)
     @Environment(\.horizontalSizeClass) var horizontalClass
 #else
@@ -117,6 +120,13 @@ struct ContentView: View {
                     .environment(\.managedObjectContext, viewContext)
             }.navigationViewStyle(.stack)
 #endif
+        }
+        .onAppear {
+            if UserDefaults.standard.bool(forKey: "hasBeenlaunched") {
+                shouldShowReviewRequest = true
+            } else {
+                UserDefaults.standard.set(true, forKey: "hasBeenlaunched")
+            }
         }
     }
 }

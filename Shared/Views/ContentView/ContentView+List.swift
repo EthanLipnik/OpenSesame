@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import StoreKit
 
 extension ContentView {
     var list: some View {
@@ -88,6 +89,43 @@ extension ContentView {
                     .font(.title.bold())
                     .foregroundColor(Color.secondary) : nil)
 #endif
+        .overlay(
+            didRequestReview || !shouldShowReviewRequest ? nil :
+            Button {
+                if let keyWindow = UIApplication.shared.connectedScenes
+                    .filter({$0.activationState == .foregroundActive})
+                    .compactMap({$0 as? UIWindowScene})
+                    .first {
+                    
+                    SKStoreReviewController.requestReview(in: keyWindow)
+                }
+                
+                UserDefaults.standard.set(true, forKey: "didRequestReview")
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Material.thin)
+                        .shadow(radius: 30)
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color.accentColor)
+                        VStack(alignment: .leading) {
+                            Text("Enjoing OpenSesame?")
+                                .font(.headline)
+                            Text("Consider giving it a review!")
+                                .allowsTightening(true)
+                                .minimumScaleFactor(0.8)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }.padding()
+                }
+            }
+                .frame(height: 60)
+                .padding()
+                .transition(.scale)
+                .animation(.default, value: didRequestReview)
+            ,
+            alignment: .bottom)
     }
     
     private var vaultSection: some View {
