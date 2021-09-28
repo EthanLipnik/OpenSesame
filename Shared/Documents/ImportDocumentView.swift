@@ -79,6 +79,7 @@ struct ImportDocumentView: View {
     }
     
     private func add(encryptionKey: SymmetricKey) throws {
+        let _ = file.url.startAccessingSecurityScopedResource()
         guard let data = FileManager.default.contents(atPath: file.url.path) else { throw CocoaError(.fileReadCorruptFile) }
         
         let type = UTType(filenameExtension: file.url.pathExtension)!
@@ -92,6 +93,8 @@ struct ImportDocumentView: View {
             account.username = accountDoc.username
             account.password = try CryptoSecurityService.encrypt(accountDoc.password, encryptionKey: encryptionKey)
             account.passwordLength = Int16(accountDoc.password.count)
+            
+            print(accountDoc)
             
             selectedVault?.addToAccounts(account)
         case .cardDocument:

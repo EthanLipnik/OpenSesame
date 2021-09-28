@@ -43,10 +43,10 @@ class PersistenceController {
         container = NSPersistentContainer.create(inMemory: inMemory)
         
         let coreDataVersion = UserDefaults.group.float(forKey: "coreDataVersion")
-        if coreDataVersion < 1.3 {
+        if coreDataVersion < 1.4 {
             try? FileManager.default.removeItem(at: PersistenceController.storeURL)
             
-            UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)?.set(1.3, forKey: "coreDataVersion")
+            UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)?.set(1.4, forKey: "coreDataVersion")
             
             do {
                 try self.downloadStoreFrom(.iCloud)
