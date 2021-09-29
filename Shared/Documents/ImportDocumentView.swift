@@ -55,6 +55,7 @@ struct ImportDocumentView: View {
                 }
             }
         }
+#if os(iOS)
         .listStyle(.insetGrouped)
         .navigationTitle(file.url.lastPathComponent)
         .navigationBarTitleDisplayMode(.inline)
@@ -76,6 +77,9 @@ struct ImportDocumentView: View {
                 dismiss.callAsFunction()
             }
         }
+#else
+        .listStyle(.inset(alternatesRowBackgrounds: true))
+#endif
     }
     
     private func add(encryptionKey: SymmetricKey) throws {

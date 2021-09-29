@@ -142,9 +142,11 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+#if os(iOS)
 extension UISplitViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.show(.primary)
     }
 }
+#endif

@@ -100,7 +100,6 @@ struct NoteView: View {
             Spacer()
                 .frame(maxWidth: .infinity)
         }
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             displayedBody = CryptoSecurityService.randomString(length: Int(note.bodyLength))!
             newColor = Int(note.color)
@@ -110,6 +109,7 @@ struct NoteView: View {
             print(color)
         }
 #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {

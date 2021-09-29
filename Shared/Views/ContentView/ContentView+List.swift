@@ -94,7 +94,11 @@ extension ContentView {
             Button {
                 guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
                         else { fatalError("Expected a valid URL") }
-                    UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+#if os(iOS)
+                UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+#else
+                NSWorkspace.shared.open(writeReviewURL)
+#endif
                 
                 UserDefaults.standard.set(true, forKey: "didRequestReview")
             } label: {
