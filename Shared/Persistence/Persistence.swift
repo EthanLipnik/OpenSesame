@@ -47,12 +47,6 @@ class PersistenceController {
             try? FileManager.default.removeItem(at: PersistenceController.storeURL)
             
             UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)?.set(1.4, forKey: "coreDataVersion")
-            
-            do {
-                try self.downloadStoreFrom(.iCloud)
-            } catch {
-                print(error)
-            }
         }
         
         loadStore()
@@ -87,7 +81,10 @@ class PersistenceController {
                 * The store could not be migrated to the current model version.
                 Check the error message to determine what the actual problem was.
                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+//                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Failed to load stores", error, error.userInfo)
+                
+                self?.loadStore()
             } else {
                 do {
                     try viewContext.setQueryGenerationFrom(.current)
