@@ -82,6 +82,7 @@ struct ContentView: View {
                     .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
                     EmptyView()
+                        .toolbar {ToolbarItem {Spacer()}}
                 }
             } else {
                 NavigationView {
