@@ -10,6 +10,15 @@ import CoreData
 import StoreKit
 
 extension ContentView {
+    
+    var lockButton: some View {
+        Button {
+            isLocked = true
+        } label: {
+            Label("Lock", systemImage: "lock.fill")
+        }
+    }
+    
     var list: some View {
         List {
             vaultSection
@@ -18,14 +27,9 @@ extension ContentView {
         }
         .listStyle(.sidebar)
         .toolbar {
+#if os(iOS)
             ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                 HStack {
-                    Button {
-                        isLocked = true
-                    } label: {
-                        Label("Lock", systemImage: "lock.fill")
-                    }
-#if os(iOS)
                     Button {
                         showSettings.toggle()
                     } label: {
@@ -44,9 +48,9 @@ extension ContentView {
                                 }
                         }
                     }
-#endif
                 }
             }
+#endif
 #if os(iOS)
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
@@ -158,6 +162,9 @@ extension ContentView {
                 } else {
                     NavigationLink(tag: vault, selection: $selectedVault) {
                         VaultView(vault: vault)
+                            .toolbar {ToolbarItem(placement: .navigation) {
+                                lockButton
+                            }}
                     } label: {
                         Label(vault.name!.capitalized, systemImage: "lock.square.stack.fill")
                     }
