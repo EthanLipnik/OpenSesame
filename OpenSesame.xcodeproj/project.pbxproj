@@ -213,6 +213,9 @@
 		AAC63F0626EE8BB400F9A7D6 /* ExportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */; };
 		AAC63F0826EE973500F9A7D6 /* ImportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0726EE973500F9A7D6 /* ImportElements.swift */; };
 		AAC63F0926EE973500F9A7D6 /* ImportElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC63F0726EE973500F9A7D6 /* ImportElements.swift */; };
+		AAC82B0F2708B95500F4C251 /* OpenSesameConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE90C26ECFFC800ECD60D /* OpenSesameConfig.generated.swift */; };
+		AAC82B102708B95800F4C251 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EB75C26DD84E800390B85 /* UserSettings.swift */; };
+		AAC82B112708BC1000F4C251 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45CE91126ED037500ECD60D /* KeychainService.swift */; };
 		AACFCD7126FD02DC00778D78 /* EncryptedAccountDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */; };
 		AACFCD7226FD02DC00778D78 /* EncryptedAccountDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */; };
 		AACFCDB626FD0A3800778D78 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFCDB526FD0A3800778D78 /* ShareSheet.swift */; };
@@ -539,6 +542,7 @@
 		AAADDF5926FE1E78002172D4 /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDocument.swift; sourceTree = "<group>"; };
 		AAC63F0426EE8BB300F9A7D6 /* ExportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportElements.swift; sourceTree = "<group>"; };
 		AAC63F0726EE973500F9A7D6 /* ImportElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportElements.swift; sourceTree = "<group>"; };
+		AAC82B122708BC1600F4C251 /* watchOS WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watchOS WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		AACFCD7026FD02DC00778D78 /* EncryptedAccountDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedAccountDocument.swift; sourceTree = "<group>"; };
 		AACFCDB526FD0A3800778D78 /* ShareSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		AACFCDB726FD1EFA00778D78 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -739,6 +743,7 @@
 		AA3D1A0E270509B800BED9E6 /* watchOS WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AAC82B122708BC1600F4C251 /* watchOS WatchKit Extension.entitlements */,
 				AA3D1A0F270509B800BED9E6 /* ContentView.swift */,
 				AA3D1A11270509B900BED9E6 /* OpenSesameApp.swift */,
 				AA3D1A13270509B900BED9E6 /* ComplicationController.swift */,
@@ -1552,9 +1557,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC82B0F2708B95500F4C251 /* OpenSesameConfig.generated.swift in Sources */,
 				AA3D1A10270509B900BED9E6 /* ContentView.swift in Sources */,
 				AA3D1A12270509B900BED9E6 /* OpenSesameApp.swift in Sources */,
+				AAC82B102708B95800F4C251 /* UserSettings.swift in Sources */,
 				AA3D1A14270509B900BED9E6 /* ComplicationController.swift in Sources */,
+				AAC82B112708BC1000F4C251 /* KeychainService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1977,6 +1985,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "watchOS WatchKit Extension/watchOS WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS WatchKit Extension/Preview Content\"";
@@ -2008,6 +2017,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "watchOS WatchKit Extension/watchOS WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS WatchKit Extension/Preview Content\"";

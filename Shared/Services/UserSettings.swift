@@ -140,9 +140,11 @@ class UserSettings: ObservableObject {
 #endif
     
     init() {
+#if !os(watchOS)
         if UserAuthenticationService.availableBiometrics().isEmpty {
             shouldUseBiometrics = false
         }
+#endif
     }
 }
 
