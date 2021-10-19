@@ -75,6 +75,7 @@ struct ContentView: View {
             if horizontalClass == .regular {
                 NavigationView {
                     list
+                        .frame(minWidth: 150)
                     
                     // Add empty views for when the NavigationView is empty.
                     List {}
@@ -82,7 +83,14 @@ struct ContentView: View {
                     .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
                     EmptyView()
-                        .toolbar {ToolbarItem {Spacer()}}
+#if os(macOS)
+                        .frame(minWidth: 300)
+                        .toolbar {
+                            ToolbarItem {
+                                Spacer()
+                            }
+                        }
+#endif
                 }
             } else {
                 NavigationView {

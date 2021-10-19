@@ -152,6 +152,13 @@ struct NoteView: View {
                 }
             }
         }
+#else
+        .toolbar {
+            ToolbarItem {
+                Spacer()
+            }
+        }
+        .frame(minWidth: 300)
 #endif
     }
     

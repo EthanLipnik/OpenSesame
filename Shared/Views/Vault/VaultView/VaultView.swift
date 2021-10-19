@@ -170,6 +170,9 @@ struct VaultView: View {
                     }
                 }
             }
+#if os(macOS)
+            .frame(minWidth: 300)
+#endif
             .onOpenURL { url in
                 if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                    let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems {

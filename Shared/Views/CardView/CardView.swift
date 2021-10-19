@@ -134,6 +134,12 @@ struct CardView: View {
         }
 #if os(macOS)
         .shadow(radius: 15, y: 8)
+        .toolbar {
+            ToolbarItem {
+                Spacer()
+            }
+        }
+        .frame(minWidth: 300)
 #else
         .shadow(radius: 30, y: 8)
         .navigationBarTitleDisplayMode(.inline)

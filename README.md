@@ -63,7 +63,7 @@ Now more than ever, what was previously amazing native apps have become slow and
 
 ## Requirements
 
-- Xcode 13+
+- Xcode 13.1+
 - macOS 12+
 - iOS 15+
 
