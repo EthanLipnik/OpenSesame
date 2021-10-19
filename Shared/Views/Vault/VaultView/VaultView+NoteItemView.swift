@@ -23,7 +23,8 @@ extension VaultView {
                         isPresenting.toggle()
                     } label: {
                         content
-                    }.popover(isPresented: $isPresenting) {
+                    }
+                    .popover(isPresented: $isPresenting) {
                         NavigationView {
                             NoteView(note: note)
                                 .toolbar {
@@ -36,6 +37,7 @@ extension VaultView {
                         }
                         .frame(minWidth: 400, minHeight: 600)
                     }
+                    .buttonStyle(.plain)
                 } else {
                     NavigationLink(tag: .init(note), selection: $viewModel.selectedItem) {
                         NoteView(note: note)

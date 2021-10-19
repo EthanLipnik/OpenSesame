@@ -90,7 +90,7 @@ extension ContentView {
                     .foregroundColor(Color.secondary) : nil)
 #endif
         .overlay(
-            didRequestReview || !shouldShowReviewRequest ? nil :
+            (didRequestReview || !shouldShowReviewRequest) || OpenSesameApp.isMac ? nil :
             Button {
                 guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
                         else { fatalError("Expected a valid URL") }

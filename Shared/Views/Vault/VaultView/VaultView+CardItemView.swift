@@ -23,7 +23,8 @@ extension VaultView {
                         isPresenting.toggle()
                     } label: {
                         content
-                    }.popover(isPresented: $isPresenting) {
+                    }
+                    .popover(isPresented: $isPresenting) {
                         NavigationView {
                             CardView(card: card)
                                 .toolbar {
@@ -36,6 +37,7 @@ extension VaultView {
                         }
                         .frame(minWidth: 400, minHeight: 325)
                     }
+                    .buttonStyle(.plain)
                 } else {
                     NavigationLink(tag: .init(card), selection: $viewModel.selectedItem) {
                         CardView(card: card)

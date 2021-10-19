@@ -23,7 +23,8 @@ extension VaultView {
                         isPresenting.toggle()
                     } label: {
                         content
-                    }.popover(isPresented: $isPresenting) {
+                    }
+                    .popover(isPresented: $isPresenting) {
                         NavigationView {
                             AccountView(account: account)
                                 .toolbar {
@@ -34,8 +35,13 @@ extension VaultView {
                                     }
                                 }
                         }
+#if os(iOS)
                         .frame(minWidth: 400, minHeight: 600)
+#else
+                        .frame(minHeight: 500)
+#endif
                     }
+                    .buttonStyle(.plain)
                 } else {
                     NavigationLink(tag: .init(account), selection: $viewModel.selectedItem) {
                         AccountView(account: account)

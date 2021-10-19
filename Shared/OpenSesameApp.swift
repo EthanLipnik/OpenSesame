@@ -198,4 +198,12 @@ struct OpenSesameApp: App {
         UITextView.appearance().backgroundColor = .clear
     }
 #endif
+    
+    static var isMac: Bool {
+#if os(macOS)
+        return true
+#else
+        return false
+#endif
+    }
 }
