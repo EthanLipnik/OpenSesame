@@ -43,7 +43,7 @@ struct AccountView: View {
         
         let columns: [GridItem] = {
             #if os(macOS)
-            return [.init(), .init()]
+            return [.init()]
             #else
             return UIDevice.current.userInterfaceIdiom == .pad ? [.init(), .init()] : [.init()]
             #endif
@@ -59,28 +59,36 @@ struct AccountView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     LazyVGrid(columns: columns) {
                         ForEach(otherAccounts) { account in
+                            let content = GroupBox {
+                                HStack {
+                                    if let domain = account.domain {
+                                        FaviconView(website: domain)
+                                            .frame(width: 40, height: 40)
+                                    }
+                                    VStack(alignment: .leading) {
+                                        Text(account.domain ?? "Unknwon domain")
+                                            .bold()
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Text(account.username ?? "Unknown email or username")
+                                            .foregroundColor(Color.secondary)
+                                    }
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            
+#if os(iOS)
                             NavigationLink {
                                 AccountView(account: account)
                             } label: {
-                                GroupBox {
-                                    HStack {
-                                        if let domain = account.domain {
-                                            FaviconView(website: domain)
-                                                .frame(width: 40, height: 40)
-                                        }
-                                        VStack(alignment: .leading) {
-                                            Text(account.domain ?? "Unknwon domain")
-                                                .bold()
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                            Text(account.username ?? "Unknown email or username")
-                                                .foregroundColor(Color.secondary)
-                                        }
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
+                                content
                             }.buttonStyle(.plain)
+#else
+                            Link(destination: URL(string: "opensesame://account")!) {
+                                content
+                            }.buttonStyle(.plain)
+#endif
                         }
                     }
                 }

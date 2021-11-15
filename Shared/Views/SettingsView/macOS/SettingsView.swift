@@ -37,11 +37,11 @@ struct SettingsView: View {
                     Label("Syncing", systemImage: "cloud.fill")
                 }
                 .tag(2)
-            TipJarView()
-                .tabItem {
-                    Label("Tip Jar", systemImage: "heart.fill")
-                }
-                .tag(3)
+//            TipJarView()
+//                .tabItem {
+//                    Label("Tip Jar", systemImage: "heart.fill")
+//                }
+//                .tag(3)
         }
         .frame(width: 450, height: selectedTab == 3 ? 200 : nil)
     }
