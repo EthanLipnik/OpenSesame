@@ -10,6 +10,7 @@ Open Sesame
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-black?logo=swift)
 ![Platforms](https://img.shields.io/badge/Platform%20Compatibility-iOS%2015+%20|%20macOS%2012+-red?logo=apple&?color=red)
 
+[![App Store](https://img.shields.io/badge/App%20Store-blue)](https://apps.apple.com/us/app/opensesame-password-manager/id1581907821)
 [![TestFlight](https://img.shields.io/badge/Join%20The%20TestFlight-blue)](https://testflight.apple.com/join/5ZW0k48j)
 [![Website](https://img.shields.io/badge/Website-blue)](https://opensesame.vercel.app)
 
