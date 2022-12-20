@@ -9,17 +9,17 @@ import SwiftUI
 
 struct NoteView: View {
     @Environment(\.managedObjectContext) var viewContext
-    
+
     let note: Note
-    
+
     @State private var displayedBody: String = ""
     @State private var isShowingBody: Bool = false
     @State private var isEditing: Bool = false
-    @State private var decryptedBody: String? = nil
+    @State private var decryptedBody: String?
     @State private var isSharing: Bool = false
-    
+
     @State private var newColor: Int = 0
-    
+
     var body: some View {
         let colors: [Color] = {
             switch newColor {
@@ -33,16 +33,16 @@ struct NoteView: View {
                 return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
             }
         }()
-        
+
         return ScrollView {
             ZStack {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom))
-#if os(macOS)
+                #if os(macOS)
                     .shadow(radius: 15, y: 8)
-#else
+                #else
                     .shadow(radius: 30, y: 8)
-#endif
+                #endif
                 VStack {
                     Text(note.name!)
                         .font(.system(.title, design: .rounded).bold())
@@ -78,18 +78,17 @@ struct NoteView: View {
                                 Button(action: toggleBody) {
                                     Label(isShowingBody ? "Hide note" : "Reveal note", systemImage: isShowingBody ? "eye.slash" : "eye")
                                 }
-                                
                             }
                             .animation(.default, value: isShowingBody)
                             .onTapGesture(perform: toggleBody)
                             .onHover { isHovering in
-#if os(macOS)
-                                if isHovering {
-                                    NSCursor.pointingHand.set()
-                                } else {
-                                    NSCursor.arrow.set()
-                                }
-#endif
+                                #if os(macOS)
+                                    if isHovering {
+                                        NSCursor.pointingHand.set()
+                                    } else {
+                                        NSCursor.arrow.set()
+                                    }
+                                #endif
                             }
                     }
                 }
@@ -108,7 +107,7 @@ struct NoteView: View {
             note.color = Int16(color)
             print(color)
         }
-#if os(iOS)
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -120,13 +119,13 @@ struct NoteView: View {
                         do {
                             note.body = try CryptoSecurityService.encrypt(displayedBody)
                             note.bodyLength = Int16(displayedBody.count)
-                            
+
                             try viewContext.save()
                         } catch {
                             print(error)
                         }
                     }
-                    
+
                     withAnimation {
                         isEditing.toggle()
                     }
@@ -145,49 +144,49 @@ struct NoteView: View {
                         activityItems: [try! NoteDocument(note).save()],
                         excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
                     )
-                        .ignoresSafeArea()
-                        .onDisappear {
-                            isSharing = false
-                        }
+                    .ignoresSafeArea()
+                    .onDisappear {
+                        isSharing = false
+                    }
                 }
             }
         }
-#else
-        .toolbar {
-            ToolbarItem {
-                Spacer()
-            }
-        }
-        .frame(minWidth: 300)
-#endif
+        #else
+                .toolbar {
+                    ToolbarItem {
+                        Spacer()
+                    }
+                }
+                .frame(minWidth: 300)
+        #endif
     }
-    
+
     private func toggleBody() {
         if !isShowingBody {
             displayBody()
         } else {
             isShowingBody.toggle()
             decryptedBody = nil
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 displayedBody = CryptoSecurityService.randomString(length: Int(note.bodyLength))!
             }
         }
     }
-    
+
     private func displayBody() {
         do {
             decryptedBody = try CryptoSecurityService.decrypt(note.body!)
-            
+
             displayedBody = decryptedBody ?? displayedBody
-            
+
             isShowingBody = true
         } catch {
             print(error)
-            
-#if os(macOS)
-            NSAlert(error: error).runModal()
-#endif
+
+            #if os(macOS)
+                NSAlert(error: error).runModal()
+            #endif
         }
     }
 }

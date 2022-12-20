@@ -5,15 +5,17 @@
 //  Created by Ethan Lipnik on 8/18/21.
 //
 
-import SwiftUI
 import KeychainAccess
+import SwiftUI
 
 struct SettingsView: View {
     // MARK: - Environment
+
     @StateObject var userSettings = UserSettings.default
     @State private var selectedTab: Int = 0
-    
+
     // MARK: - View
+
     var body: some View {
         TabView(selection: $selectedTab) {
             GeneralView()

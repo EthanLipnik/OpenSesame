@@ -5,34 +5,36 @@
 //  Created by Ethan Lipnik on 8/24/21.
 //
 
-import SwiftUI
 import AuthenticationServices
-import StoreKit
-import KeychainAccess
 import CoreData
+import KeychainAccess
+import StoreKit
+import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.managedObjectContext) var viewContext
-    
+
     // MARK: - Variables
+
     @State private var shouldNukeDatabase: Bool = false
-    
+
     @State private var shouldResetBiometrics: Bool = false
     @State private var shouldAuthenticate: Bool = false
-    
-    @State private var exportFile: ExportFile? = nil
+
+    @State private var exportFile: ExportFile?
     @State private var shouldExportAccounts: Bool = false
-    
-    @State private var importAppFormat: AppFormat? = nil
-    
+
+    @State private var importAppFormat: AppFormat?
+
     private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
-    
+
     @StateObject var userSettings = UserSettings.default
-    
+
     // MARK: - View
+
     var body: some View {
         let availableBiometrics = UserAuthenticationService.availableBiometrics()
-        
+
         return Form {
             Section {
                 Toggle(isOn: $userSettings.shouldLoadFavicon) {
@@ -55,20 +57,20 @@ struct SettingsView: View {
             } footer: {
                 Text(PersistenceController.isICloudContainerAvailable() ? "Sync with all your devices securely." : "You are not signed in with iCloud or disabled OpenSesame in iCloud settings.")
             }
-            
+
             Section("Passwords") {
                 ImportButtons { appFormat in
                     importAppFormat = appFormat
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
+
                 ExportButtons { exportFile in
                     self.exportFile = exportFile
                     self.shouldExportAccounts = true
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            
+
             Section("Appearance") {
                 HStack {
                     Label("Color Scheme", systemImage: "circle.fill")
@@ -100,7 +102,7 @@ struct SettingsView: View {
                     Label("App Icon", systemImage: "app.fill")
                 }
             }
-            
+
             Section("Security") {
                 Toggle(isOn: $userSettings.shouldUseBiometrics) {
                     let image: String = {
@@ -149,7 +151,7 @@ struct SettingsView: View {
 //                    Label("Learn more", systemImage: "info.circle.fill")
 //                }
             }
-            
+
             Section("About") {
 //                NavigationLink {
 //                    TipJarView()
@@ -159,9 +161,9 @@ struct SettingsView: View {
 //                }
                 Button {
                     guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
-                            else { fatalError("Expected a valid URL") }
-                        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-                    
+                    else { fatalError("Expected a valid URL") }
+                    UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+
                     UserDefaults.standard.set(true, forKey: "didRequestReview")
                 } label: {
                     Label("Rate OpenSesame", systemImage: "star.fill")
@@ -173,7 +175,7 @@ struct SettingsView: View {
                     Label("Source Code", systemImage: "chevron.left.slash.chevron.right")
                 }
             }
-            
+
             Section {
                 NavigationLink {
                     CreditsView()
@@ -184,60 +186,59 @@ struct SettingsView: View {
                     Label("Privacy Policy", systemImage: "hand.raised.fill")
                 }
             }
-            
+
             #if DEBUG
-            Section("Self Destruct") {
-                Button(role: .destructive) {
-                    ASCredentialIdentityStore.shared.getState { state in
-                        if state.isEnabled {
-                            ASCredentialIdentityStore.shared.removeAllCredentialIdentities { success, error in
-                                let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
-                                
-                                do {
-                                    let accounts = try viewContext.fetch(accountsFetch)
-                                    let domainIdentifers = accounts.map({ ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
-                                                                                                       user: $0.username!,
-                                                                                                       recordIdentifier: nil) })
-                                    
-                                    
-                                    ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: {(_,error) -> Void in
-                                        print(error?.localizedDescription ?? "No errors in saving credentials")
-                                    })
-                                } catch {
-                                    print(error)
+                Section("Self Destruct") {
+                    Button(role: .destructive) {
+                        ASCredentialIdentityStore.shared.getState { state in
+                            if state.isEnabled {
+                                ASCredentialIdentityStore.shared.removeAllCredentialIdentities { _, error in
+                                    let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
+
+                                    do {
+                                        let accounts = try viewContext.fetch(accountsFetch)
+                                        let domainIdentifers = accounts.map { ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
+                                                                                                           user: $0.username!,
+                                                                                                           recordIdentifier: nil) }
+
+                                        ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: { _, error in
+                                            print(error?.localizedDescription ?? "No errors in saving credentials")
+                                        })
+                                    } catch {
+                                        print(error)
+                                    }
                                 }
                             }
                         }
+                    } label: {
+                        Label("Reset Autofill", systemImage: "exclamationmark.arrow.circlepath")
                     }
-                } label: {
-                    Label("Reset Autofill", systemImage: "exclamationmark.arrow.circlepath")
-                }
-                Button(role: .destructive) {
-                    shouldNukeDatabase.toggle()
-                } label: {
-                    Label("Nuke Database", systemImage: "trash.fill")
-                }
-                .confirmationDialog("Would you like to just nuke the local database or include the iCloud database as well?", isPresented: $shouldNukeDatabase) {
-                    Button("Local", role: .destructive) {
-                        do {
-                            try FileManager.default.removeItem(at: PersistenceController.storeURL)
-                            PersistenceController.shared.container = NSPersistentContainer.create()
-                            PersistenceController.shared.loadStore()
-                        } catch {
-                            print(error)
+                    Button(role: .destructive) {
+                        shouldNukeDatabase.toggle()
+                    } label: {
+                        Label("Nuke Database", systemImage: "trash.fill")
+                    }
+                    .confirmationDialog("Would you like to just nuke the local database or include the iCloud database as well?", isPresented: $shouldNukeDatabase) {
+                        Button("Local", role: .destructive) {
+                            do {
+                                try FileManager.default.removeItem(at: PersistenceController.storeURL)
+                                PersistenceController.shared.container = NSPersistentContainer.create()
+                                PersistenceController.shared.loadStore()
+                            } catch {
+                                print(error)
+                            }
                         }
+
+                        Button("Local + iCloud", role: .destructive) {
+                            // TODO: Add iCloud self destruct for debugging
+                        }
+
+                        Button("Cancel", role: .cancel) {
+                            shouldNukeDatabase = false
+                        }
+                        .keyboardShortcut(.defaultAction)
                     }
-                    
-                    Button("Local + iCloud", role: .destructive) {
-                        // TODO: Add iCloud self destruct for debugging
-                    }
-                    
-                    Button("Cancel", role: .cancel) {
-                        shouldNukeDatabase = false
-                    }
-                    .keyboardShortcut(.defaultAction)
                 }
-            }
             #endif
         }
         .navigationTitle("Settings")
@@ -258,7 +259,7 @@ struct SettingsView: View {
             AuthenticationView(onSuccess: didAuthenticate) {
                 shouldResetBiometrics = false
                 shouldAuthenticate = false
-                
+
                 withAnimation {
                     userSettings.shouldUseBiometrics = false
                 }
@@ -268,9 +269,9 @@ struct SettingsView: View {
         }
         .fileExporter(isPresented: $shouldExportAccounts, document: exportFile, contentType: (exportFile?.format ?? .json) == .json ? .json : .commaSeparatedText, defaultFilename: "Passwords") { result in
             switch result {
-            case .success(let url):
+            case let .success(url):
                 print("Exported at path", url.path)
-            case .failure(let error):
+            case let .failure(error):
                 print(error)
             }
         }
@@ -285,14 +286,15 @@ struct SettingsView: View {
             .interactiveDismissDisabled()
         }
     }
-    
+
     // MARK: - Functions
+
     func didAuthenticate(_ password: String) {
         if shouldResetBiometrics {
             try? LockView.updateBiometrics(password)
             shouldResetBiometrics = false
         }
-        
+
         shouldAuthenticate = false
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 extension BoardingView {
     struct SecurityView: View {
         @Binding var selectedIndex: Int
-        
+
         var body: some View {
             VStack {
                 Text("Security")

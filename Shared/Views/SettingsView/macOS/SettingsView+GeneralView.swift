@@ -5,16 +5,18 @@
 //  Created by Ethan Lipnik on 8/22/21.
 //
 
-import SwiftUI
 import CoreData
 import KeychainAccess
+import SwiftUI
 
 extension SettingsView {
     struct GeneralView: View {
         // MARK: - Environment
+
         @EnvironmentObject var userSettings: UserSettings
-        
+
         // MARK: - View
+
         var body: some View {
             VStack(spacing: 20) {
                 HStack(alignment: .top) {

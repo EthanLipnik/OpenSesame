@@ -10,12 +10,12 @@ import SwiftUI
 extension VaultView {
     struct NoteItemView: View {
         @EnvironmentObject var viewModel: ViewModel
-        
+
         let note: Note
         var isPopover: Bool = false
-        
+
         @State private var isPresenting: Bool = false
-        
+
         var body: some View {
             Group {
                 if isPopover {
@@ -47,7 +47,7 @@ extension VaultView {
                 }
             }
         }
-        
+
         var content: some View {
             let color: Color = {
                 switch note.color {
@@ -61,7 +61,7 @@ extension VaultView {
                     return Color("Note-YellowTop")
                 }
             }()
-            
+
             return Label {
                 Text(note.name!)
                     .bold()

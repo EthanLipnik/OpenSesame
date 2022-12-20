@@ -5,50 +5,56 @@
 //  Created by Ethan Lipnik on 8/22/21.
 //
 
-import SwiftUI
 import KeychainAccess
+import SwiftUI
 
 struct MainView: View {
     // MARK: - Environment
+
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     // MARK: - Variables
+
     @Binding var isLocked: Bool
-    
+
     // MARK: - View
+
     var body: some View {
         Group {
-#if os(iOS)
-            // MARK: - ContentView
-            /// ContentView is the main page that displays the vaults. Only shows after login to prevent any peeping.
-            /// Even though it is initialized, they still can't decrypt important data until the user unlocks the app.
-            ContentView(isLocked: $isLocked)
-                .environment(\.managedObjectContext, viewContext)
-                .opacity(isLocked ? 0 : 1)
-                .overlay(
+            #if os(iOS)
+
+                // MARK: - ContentView
+
+                /// ContentView is the main page that displays the vaults. Only shows after login to prevent any peeping.
+                /// Even though it is initialized, they still can't decrypt important data until the user unlocks the app.
+                ContentView(isLocked: $isLocked)
+                    .environment(\.managedObjectContext, viewContext)
+                    .opacity(isLocked ? 0 : 1)
+                    .overlay(
+                        lockView
+                    )
+                    .animation(.default, value: isLocked)
+            #else
+                ZStack {
+                    if !isLocked {
+                        ContentView(isLocked: $isLocked)
+                            .environment(\.managedObjectContext, viewContext)
+                            .opacity(isLocked ? 0 : 1)
+                            .blur(radius: isLocked ? 25 : 0)
+                            .allowsHitTesting(!isLocked)
+                            .animation(.default, value: isLocked)
+                    }
                     lockView
-                )
-                .animation(.default, value: isLocked)
-#else
-            ZStack {
-                if !isLocked {
-                    ContentView(isLocked: $isLocked)
-                        .environment(\.managedObjectContext, viewContext)
-                        .opacity(isLocked ? 0 : 1)
-                        .blur(radius: isLocked ? 25 : 0)
-                        .allowsHitTesting(!isLocked)
+                        .allowsHitTesting(isLocked)
                         .animation(.default, value: isLocked)
                 }
-                lockView
-                    .allowsHitTesting(isLocked)
-                    .animation(.default, value: isLocked)
-            }
-#endif
+            #endif
         }
     }
-    
+
     var lockView: some View {
         // MARK: - LockView
+
         LockView(isLocked: $isLocked) { // Unlock function
             isLocked = false
         }

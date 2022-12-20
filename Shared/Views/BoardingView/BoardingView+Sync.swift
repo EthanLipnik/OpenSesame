@@ -10,7 +10,7 @@ import SwiftUI
 extension BoardingView {
     struct SyncView: View {
         @Binding var selectedIndex: Int
-        
+
         var body: some View {
             VStack(spacing: 30) {
                 Text("Sync")
@@ -27,7 +27,7 @@ extension BoardingView {
                 VStack {
                     Button {
                         UserSettings.default.shouldSyncWithiCloud = false
-                        
+
                         withAnimation {
                             selectedIndex += 1
                         }

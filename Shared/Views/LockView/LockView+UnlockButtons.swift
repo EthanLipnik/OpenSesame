@@ -5,8 +5,8 @@
 //  Created by Ethan Lipnik on 8/22/21.
 //
 
-import SwiftUI
 import KeychainAccess
+import SwiftUI
 
 extension LockView {
     var unlockButtons: some View {
@@ -22,34 +22,34 @@ extension LockView {
                 return nil
             }
         }()
-        
+
         return Group {
             Button {
                 unlock(password)
             } label: {
                 Image(systemName: "key.fill")
-#if os(iOS)
+                #if os(iOS)
                     .imageScale(.large)
-#endif
+                #endif
             }
             .keyboardShortcut(.defaultAction)
             .disabled(password.isEmpty)
             .accessibilityIdentifier("loginButton")
-#if os(iOS)
-            .hoverEffect()
-#endif
-            
+            #if os(iOS)
+                .hoverEffect()
+            #endif
+
             if let image = image, userSettings.shouldUseBiometrics {
                 Button(action: unlockWithBiometrics) {
                     Image(systemName: image)
-#if os(iOS)
+                    #if os(iOS)
                         .imageScale(.large)
-#endif
+                    #endif
                 }
                 .keyboardShortcut("b", modifiers: [.command, .shift])
-#if os(iOS)
-            .hoverEffect()
-#endif
+                #if os(iOS)
+                    .hoverEffect()
+                #endif
             }
         }
     }

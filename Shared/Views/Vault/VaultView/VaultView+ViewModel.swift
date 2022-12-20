@@ -5,13 +5,13 @@
 //  Created by Ethan Lipnik on 8/30/21.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 extension VaultView {
     class ViewModel: ObservableObject {
-        @Published var selectedItem: Item? = nil
-        
+        @Published var selectedItem: Item?
+
         @Published var selectedItems: Set<Item> = []
     }
 }

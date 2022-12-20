@@ -10,7 +10,7 @@ import SwiftUI
 extension BoardingView {
     struct CardView: View {
         @Binding var selectedIndex: Int
-        
+
         var body: some View {
             VStack(spacing: 30) {
                 Text("Cards")
@@ -36,7 +36,7 @@ extension BoardingView {
             }
             .padding(30)
         }
-        
+
         var cardView: some View {
             VStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -71,16 +71,16 @@ extension BoardingView {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(LinearGradient(colors: [Color("Tertiary"), Color("Tertiary").opacity(0.7)], startPoint: .top, endPoint: .bottom))
-#if os(macOS)
+                    #if os(macOS)
                         .shadow(radius: 15, y: 8)
-#else
+                    #else
                         .shadow(radius: 30, y: 8)
-#endif
+                    #endif
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .stroke(lineWidth: 2)
                         .fill(Color(white: 0.5, opacity: 0.25))
                 }
-                    .compositingGroup()
+                .compositingGroup()
             )
             .aspectRatio(1.6, contentMode: .fit)
         }

@@ -5,15 +5,15 @@
 //  Created by Ethan Lipnik on 8/24/21.
 //
 
-import SwiftUI
 import AuthenticationServices
+import SwiftUI
 
 extension SettingsView {
     struct SyncView: View {
         let persistenceController = PersistenceController.shared
-        
+
         @EnvironmentObject var userSettings: UserSettings
-        
+
         var body: some View {
             VStack(spacing: 20) {
                 HStack(alignment: .top) {

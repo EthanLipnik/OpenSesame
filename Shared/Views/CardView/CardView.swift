@@ -9,25 +9,28 @@ import SwiftUI
 
 struct CardView: View {
     // MARK: - Variables
+
     let card: Card
-    
-//#if os(iOS)
+
+    // #if os(iOS)
 //    @ObservedObject var manager = MotionManager()
-//#endif
-    
+    // #endif
+
     @State private var isShowingNumber: Bool = false
-    @State private var decryptedNumber: String? = nil
+    @State private var decryptedNumber: String?
     @State private var displayedNumber: String = ""
     @State private var isSharing: Bool = false
-    
+
     // MARK: - Init
+
     init(card: Card) {
         self.card = card
-        
-        self._displayedNumber = .init(initialValue: CryptoSecurityService.randomString(length: 15, numbersOnly: true)!)
+
+        _displayedNumber = .init(initialValue: CryptoSecurityService.randomString(length: 15, numbersOnly: true)!)
     }
-    
+
     // MARK: - View
+
     var body: some View {
         ScrollView {
             VStack {
@@ -67,33 +70,33 @@ struct CardView: View {
                                 if !isShowingNumber {
                                     do {
                                         decryptedNumber = try CryptoSecurityService.decrypt(card.number!)
-                                        
+
                                         displayedNumber = decryptedNumber ?? displayedNumber
                                         isShowingNumber = true
                                     } catch {
                                         print(error)
-                                        
-    #if os(macOS)
-                                        NSAlert(error: error).runModal()
-    #endif
+
+                                        #if os(macOS)
+                                            NSAlert(error: error).runModal()
+                                        #endif
                                     }
                                 } else {
                                     isShowingNumber.toggle()
                                     decryptedNumber = nil
-                                    
+
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                                         displayedNumber = CryptoSecurityService.randomString(length: 15, numbersOnly: true)!
                                     }
                                 }
                             }
                             .onHover { isHovering in
-    #if os(macOS)
-                                if isHovering {
-                                    NSCursor.pointingHand.set()
-                                } else {
-                                    NSCursor.arrow.set()
-                                }
-    #endif
+                                #if os(macOS)
+                                    if isHovering {
+                                        NSCursor.pointingHand.set()
+                                    } else {
+                                        NSCursor.arrow.set()
+                                    }
+                                #endif
                             }
                         HStack(alignment: .bottom) {
                             Text("Valid Thru")
@@ -124,15 +127,15 @@ struct CardView: View {
             )
             .padding()
             .aspectRatio(1.6, contentMode: .fill)
-#if os(macOS)
-            .frame(width: 400)
-#else
-            .frame(maxWidth: 400)
-#endif
+            #if os(macOS)
+                .frame(width: 400)
+            #else
+                .frame(maxWidth: 400)
+            #endif
             Spacer()
                 .frame(maxWidth: .infinity)
         }
-#if os(macOS)
+        #if os(macOS)
         .shadow(radius: 15, y: 8)
         .toolbar {
             ToolbarItem {
@@ -140,7 +143,7 @@ struct CardView: View {
             }
         }
         .frame(minWidth: 300)
-#else
+        #else
         .shadow(radius: 30, y: 8)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -155,14 +158,14 @@ struct CardView: View {
                         activityItems: [try! CardDocument(card).save()],
                         excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
                     )
-                        .ignoresSafeArea()
-                        .onDisappear {
-                            isSharing = false
-                        }
+                    .ignoresSafeArea()
+                    .onDisappear {
+                        isSharing = false
+                    }
                 }
             }
         }
-#endif
+        #endif
     }
 }
 

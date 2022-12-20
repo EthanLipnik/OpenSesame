@@ -10,7 +10,7 @@ import SwiftUI
 extension BoardingView {
     struct WelcomeView: View {
         @Binding var selectedIndex: Int
-        
+
         var body: some View {
             VStack {
                 Text("Welcome to OpenSesame")
@@ -41,7 +41,7 @@ extension BoardingView {
             }
             .padding(30)
         }
-        
+
         func ItemView(message: String, image: String) -> some View {
             return ZStack {
                 RoundedRectangle(cornerRadius: 10)

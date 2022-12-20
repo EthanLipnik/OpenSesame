@@ -9,22 +9,23 @@ import SwiftUI
 
 struct ShareSheet: UIViewControllerRepresentable {
     typealias Callback = (_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ error: Error?) -> Void
-    
+
     let activityItems: [Any]
-    var callback: Callback? = nil
-    var applicationActivities: [UIActivity]? = nil
-    var excludedActivityTypes: [UIActivity.ActivityType]? = nil
-    
-    func makeUIViewController(context: Context) -> UIActivityViewController {
+    var callback: Callback?
+    var applicationActivities: [UIActivity]?
+    var excludedActivityTypes: [UIActivity.ActivityType]?
+
+    func makeUIViewController(context _: Context) -> UIActivityViewController {
         let controller = UIActivityViewController(
             activityItems: activityItems,
-            applicationActivities: applicationActivities)
+            applicationActivities: applicationActivities
+        )
         controller.excludedActivityTypes = excludedActivityTypes
         controller.completionWithItemsHandler = callback
         return controller
     }
-    
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+
+    func updateUIViewController(_: UIActivityViewController, context _: Context) {
         // nothing to do here
     }
 }

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import UniformTypeIdentifiers
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ExportFile: FileDocument {
     // tell the system we support only plain text
@@ -32,7 +32,7 @@ struct ExportFile: FileDocument {
     }
 
     // this will be called when the system wants to write our data to disk
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    func fileWrapper(configuration _: WriteConfiguration) throws -> FileWrapper {
         let data = Data(text.utf8)
         return FileWrapper(regularFileWithContents: data)
     }

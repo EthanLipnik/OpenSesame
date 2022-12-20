@@ -33,13 +33,13 @@ extension AccountView.AccountDetailsView {
                         .animation(.default, value: isShowingPassword)
                         .onTapGesture(perform: togglePassword)
                         .onHover { isHovering in
-#if os(macOS)
-                            if isHovering {
-                                NSCursor.pointingHand.set()
-                            } else {
-                                NSCursor.arrow.set()
-                            }
-#endif
+                            #if os(macOS)
+                                if isHovering {
+                                    NSCursor.pointingHand.set()
+                                } else {
+                                    NSCursor.arrow.set()
+                                }
+                            #endif
                         }
                 }
             }
@@ -54,31 +54,31 @@ extension AccountView.AccountDetailsView {
                 .blur(radius: isShowingPassword ? 0 : 5)
                 .animation(.default, value: isShowingPassword)
                 .allowsHitTesting(isShowingPassword)
-#if os(iOS)
-                .hoverEffect()
-#endif
+                #if os(iOS)
+                    .hoverEffect()
+                #endif
             }
         }
     }
-    
+
     private func togglePassword() {
         if !isShowingPassword {
             do {
                 decryptedPassword = try CryptoSecurityService.decrypt(account.password!)
-                
+
                 displayedPassword = decryptedPassword ?? displayedPassword
                 isShowingPassword = true
             } catch {
                 print(error)
-                
-#if os(macOS)
-                NSAlert(error: error).runModal()
-#endif
+
+                #if os(macOS)
+                    NSAlert(error: error).runModal()
+                #endif
             }
         } else {
             isShowingPassword.toggle()
             decryptedPassword = nil
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))!
             }

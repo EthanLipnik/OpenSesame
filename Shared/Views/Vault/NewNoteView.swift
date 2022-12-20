@@ -9,17 +9,20 @@ import SwiftUI
 
 struct NewNoteView: View {
     // MARK: - Environment
+
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var viewContext
-    
+
     // MARK: - Variables
+
     let selectedVault: Vault
-    
+
     @State private var name: String = ""
     @State private var bodyTxt: String = ""
     @State private var selectedColor: Int = 0
-    
+
     // MARK: - View
+
     var body: some View {
         let colors: [Color] = {
             switch selectedColor {
@@ -33,16 +36,16 @@ struct NewNoteView: View {
                 return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
             }
         }()
-        
+
         VStack {
             ZStack {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom))
-#if os(macOS)
+                #if os(macOS)
                     .shadow(radius: 15, y: 8)
-#else
+                #else
                     .shadow(radius: 30, y: 8)
-#endif
+                #endif
                 VStack {
                     TextField("Name", text: $name)
                         .font(.system(.title, design: .rounded).bold())
@@ -74,37 +77,38 @@ struct NewNoteView: View {
                     dismiss.callAsFunction()
                 }
                 .keyboardShortcut(.cancelAction)
-#if os(iOS)
-                .hoverEffect()
-#endif
-                
+                #if os(iOS)
+                    .hoverEffect()
+                #endif
+
                 Spacer()
-                
+
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
                     .disabled(name.isEmpty || bodyTxt.isEmpty)
-#if os(iOS)
-                .hoverEffect()
-#endif
+                #if os(iOS)
+                    .hoverEffect()
+                #endif
             }.padding()
         }
     }
-    
+
     // MARK: - Functions
+
     private func add() {
         do {
             let note = Note(context: viewContext)
             note.name = name
-            
+
             note.body = try CryptoSecurityService.encrypt(bodyTxt)
             note.bodyLength = Int16(bodyTxt.count)
-            
+
             note.color = Int16(selectedColor)
-            
+
             selectedVault.addToNotes(note)
-            
+
             try viewContext.save()
-            
+
             dismiss.callAsFunction()
         } catch {
             print(error)

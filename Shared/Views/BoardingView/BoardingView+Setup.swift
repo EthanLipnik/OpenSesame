@@ -12,9 +12,9 @@ extension BoardingView {
         @Binding var encryptionTestDoesntExist: Bool
         @Binding var selectedIndex: Int
         let completion: (String) -> Void
-        
+
         @State private var masterPassword: String = ""
-        
+
         var body: some View {
             VStack {
                 Text("Setup")
@@ -42,7 +42,7 @@ extension BoardingView {
                     withAnimation {
                         selectedIndex += 1
                     }
-                    
+
                     guard !masterPassword.isEmpty && encryptionTestDoesntExist else { return }
                     completion(masterPassword)
                 } label: {

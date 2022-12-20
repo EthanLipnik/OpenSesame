@@ -9,10 +9,10 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @State private var authenticatedPassword: String = ""
-    var message: String? = nil
+    var message: String?
     let onSuccess: (_ password: String) -> Void
     var onCancel: () -> Void = {}
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "lock.fill")
@@ -38,18 +38,17 @@ struct AuthenticationView: View {
         }
         .padding()
     }
-    
+
     func didAuthenticate() {
         guard !authenticatedPassword.isEmpty, CryptoSecurityService.runEncryptionTest(authenticatedPassword) else { return }
-        
+
         onSuccess(authenticatedPassword)
     }
 }
 
 struct AuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthenticationView() { password in
-            
+        AuthenticationView { _ in
         }
     }
 }

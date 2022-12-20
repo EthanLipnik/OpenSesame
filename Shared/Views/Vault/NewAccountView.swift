@@ -5,24 +5,27 @@
 //  Created by Ethan Lipnik on 8/18/21.
 //
 
-import SwiftUI
 import AuthenticationServices
-import KeychainAccess
 import DomainParser
+import KeychainAccess
+import SwiftUI
 
 struct NewAccountView: View {
     // MARK: - Environment
+
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     // MARK: - Variables
+
     @State private var website: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
-    
+
     @Binding var isPresented: Bool
     let selectedVault: Vault
-    
+
     // MARK: - View
+
     var body: some View {
         VStack {
 //            Text("New Account")
@@ -37,11 +40,11 @@ struct NewAccountView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("Website or Name", text: $website)
                             .textFieldStyle(.roundedBorder)
-#if os(iOS)
+                        #if os(iOS)
                             .keyboardType(.URL)
                             .textInputAutocapitalization(.none)
                             .textContentType(.URL)
-#endif
+                        #endif
                             .disableAutocorrection(true)
                     }
                     VStack(alignment: .leading) {
@@ -50,16 +53,16 @@ struct NewAccountView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("Email or Username", text: $username)
                             .textFieldStyle(.roundedBorder)
-#if os(iOS)
+                        #if os(iOS)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                             .textContentType(.emailAddress)
-#else
+                        #else
                             .textContentType(.username)
-#endif
+                        #endif
                             .disableAutocorrection(true)
                     }
-                    
+
                     VStack(alignment: .leading) {
                         Label("Password", systemImage: "key.fill")
                             .foregroundColor(Color.secondary)
@@ -69,28 +72,28 @@ struct NewAccountView: View {
                                 SecureField("Password", text: $password)
                                     .textFieldStyle(.roundedBorder)
                                     .font(.system(.body, design: .monospaced))
-#if os(iOS)
+                                #if os(iOS)
                                     .autocapitalization(.none)
                                     .textContentType(.newPassword)
-#endif
+                                #endif
                                     .disableAutocorrection(true)
                                 Text(password.isEmpty ? " " : password)
                                     .font(.system(.body, design: .monospaced))
                             }
-#if os(iOS)
-                            Button {
-                                password = Keychain.generatePassword()
-                            } label: {
-                                Image(systemName: "arrow.clockwise")
-                                    .imageScale(.large)
-                            }
-#endif
+                            #if os(iOS)
+                                Button {
+                                    password = Keychain.generatePassword()
+                                } label: {
+                                    Image(systemName: "arrow.clockwise")
+                                        .imageScale(.large)
+                                }
+                            #endif
                         }
                     }
                 }
-#if os(macOS)
+                #if os(macOS)
                 .padding(5)
-#endif
+                #endif
             }
             .padding()
             Spacer()
@@ -99,69 +102,67 @@ struct NewAccountView: View {
                     isPresented = false
                 }
                 .keyboardShortcut(.cancelAction)
-#if os(iOS)
-                .hoverEffect()
-#endif
-                
+                #if os(iOS)
+                    .hoverEffect()
+                #endif
+
                 Spacer()
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
                     .disabled(website.isEmpty || username.isEmpty || password.isEmpty)
-#if os(iOS)
-                .hoverEffect()
-#endif
+                #if os(iOS)
+                    .hoverEffect()
+                #endif
             }.padding()
         }
-#if os(macOS)
+        #if os(macOS)
         .frame(width: 300)
-#endif
+        #endif
     }
-    
-    
+
     // MARK: - Functions
+
     private func add() {
         do {
             let encryptedPassword = try CryptoSecurityService.encrypt(password)
             print("Encrypted password")
-            
+
             let domainParser = try? DomainParser()
             let domain = domainParser?.parse(host: URL(string: website)?.host ?? website)?.domain
-            
+
             let newAccount = Account(context: viewContext)
             newAccount.dateAdded = Date()
-            
+
             newAccount.passwordLength = Int16(password.count)
             newAccount.password = encryptedPassword
-            
+
             newAccount.domain = domain ?? website
             newAccount.url = website
             newAccount.username = username
-            
+
             selectedVault.addToAccounts(newAccount)
-            
+
             try viewContext.save()
-            
+
             ASCredentialIdentityStore.shared.getState { state in
                 if state.isEnabled {
-                    
                     let domainIdentifer = ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: website, type: .domain),
                                                                        user: username,
                                                                        recordIdentifier: nil)
-                    
-                    
-                    ASCredentialIdentityStore.shared.saveCredentialIdentities([domainIdentifer], completion: {(_,error) -> Void in
+
+                    ASCredentialIdentityStore.shared.saveCredentialIdentities([domainIdentifer], completion: { _, error in
                         print(error?.localizedDescription ?? "No errors in saving credentials")
                     })
                 }
             }
-            
+
             isPresented = false
         } catch {
             print(error)
-            
-#if os(macOS)
-            NSAlert(error: error).runModal()
-#endif
+
+            #if os(macOS)
+                NSAlert(error: error).runModal()
+            #endif
         }
     }
 }

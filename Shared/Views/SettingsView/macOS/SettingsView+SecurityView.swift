@@ -10,12 +10,14 @@ import SwiftUI
 extension SettingsView {
     struct SecurityView: View {
         // MARK: - Environment
+
         @EnvironmentObject var userSettings: UserSettings
-        
+
         @State private var shouldResetBiometrics: Bool = false
         @State private var shouldAuthenticate: Bool = false
-        
+
         // MARK: - View
+
         var body: some View {
             VStack(spacing: 20) {
                 HStack(alignment: .top) {
@@ -49,8 +51,9 @@ extension SettingsView {
                     .frame(minWidth: 300)
             }
         }
-        
+
         // MARK: - Functions
+
         func didAuthenticate(_ password: String) {
             if shouldResetBiometrics {
                 do {
@@ -61,7 +64,7 @@ extension SettingsView {
                 }
                 shouldResetBiometrics = false
             }
-            
+
             shouldAuthenticate = false
         }
     }

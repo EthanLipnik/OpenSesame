@@ -10,18 +10,21 @@ import SwiftUI
 extension SettingsView {
     struct MenuBarView: View {
         // MARK: - Variables
+
         @State var shouldShowInMenuBar: Bool = false
         @State var shouldOpenOnStartup: Bool = false
         @State var shouldKeepAppInDock: Bool = true
-        
+
         // MARK: - View
+
         var body: some View {
             VStack(spacing: 20) {
                 systemView
             }
         }
-        
+
         // MARK: - SystemView
+
         var systemView: some View {
             VStack(spacing: 20) {
                 Toggle("Show in Menu Bar", isOn: $shouldShowInMenuBar)

@@ -19,7 +19,7 @@ struct CreditsView: View {
                         } icon: {
                             AsyncImage(url: URL(string: "https://pbs.twimg.com/profile_images/1384494074955173888/EkfIwNyD.jpg")) { phase in
                                 switch phase {
-                                case .success(let image):
+                                case let .success(image):
                                     image
                                         .resizable()
                                         .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
@@ -34,7 +34,7 @@ struct CreditsView: View {
                                         .fill(Color.secondary)
                                 }
                             }
-                            .aspectRatio(1/1, contentMode: .fit)
+                            .aspectRatio(1 / 1, contentMode: .fit)
                         }
                         Spacer()
                         Image(systemName: "chevron.right")

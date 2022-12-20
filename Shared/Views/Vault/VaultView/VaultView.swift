@@ -5,63 +5,67 @@
 //  Created by Ethan Lipnik on 8/18/21.
 //
 
-import SwiftUI
 import AuthenticationServices
 import Foundation
+import SwiftUI
 
 struct VaultView: View {
     // MARK: - Environment
+
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.colorScheme) var colorScheme
-    
+
     // MARK: - CoreData Variables
+
     @FetchRequest var accounts: FetchedResults<Account>
     @FetchRequest var cards: FetchedResults<Card>
     @FetchRequest var notes: FetchedResults<Note>
-    
+
     // MARK: - Variables
+
     let vault: Vault
-    
+
     @StateObject var viewModel: ViewModel
-    
+
     @State var shouldDeleteAccount: Bool = false
     @State var shouldDeleteCard: Bool = false
     @State var shouldDeleteNote: Bool = false
-    @State var itemToBeDeleted: Item? = nil
-    
+    @State var itemToBeDeleted: Item?
+
     @State var isCreatingNewItem: Bool = false
     @State var itemToCreate: ItemCreationType = .none
-    
+
     @State private var search: String = ""
-    
+
     enum ItemCreationType: String {
-        case account = "account"
-        case card = "card"
-        case note = "note"
-        case none = "none"
+        case account
+        case card
+        case note
+        case none
     }
-    
+
     // MARK: - Init
+
     init(vault: Vault, selectedItem: Item? = nil) {
         self.vault = vault
-        
-        self._accounts = FetchRequest(sortDescriptors: [.init(key: "domain", ascending: true)],
-                                      predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
-        self._cards = FetchRequest(sortDescriptors: [],
-                                   predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
-        self._notes = FetchRequest(sortDescriptors: [],
-                                   predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
-        
+
+        _accounts = FetchRequest(sortDescriptors: [.init(key: "domain", ascending: true)],
+                                 predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
+        _cards = FetchRequest(sortDescriptors: [],
+                              predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
+        _notes = FetchRequest(sortDescriptors: [],
+                              predicate: NSPredicate(format: "vault == %@", vault), animation: .default)
+
         let viewModel = ViewModel()
         if let selectedItem = selectedItem {
             viewModel.selectedItem = selectedItem
             viewModel.selectedItems.insert(selectedItem)
         }
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     // MARK: - View
+
     var body: some View {
         list
             .sheet(isPresented: $isCreatingNewItem) {
@@ -74,11 +78,11 @@ struct VaultView: View {
                 }
             }
             .onChange(of: itemToCreate) { print("Creating item", $0.rawValue) } // This line is for some reason required for the sheet to display properly in macOS
-#if os(macOS)
+        #if os(macOS)
             .listStyle(.inset(alternatesRowBackgrounds: true))
             .navigationTitle((vault.name ?? "Unknown vault") + " – OpenSesame")
             .frame(minWidth: 200)
-#else
+        #else
 //            .bottomSheet(isPresented: $isCreatingNewItem) {
 //                if itemToCreate == .account {
 //                    NewAccountView(isPresented: $isCreatingNewItem, selectedVault: vault)
@@ -115,22 +119,22 @@ struct VaultView: View {
 //            }
             .listStyle(.insetGrouped)
             .navigationTitle(vault.name ?? "Vault")
-#endif
+        #endif
             .searchable(text: $search)
             .onChange(of: search, perform: { search in
                 let vaultPredicate = NSPredicate(format: "vault == %@", vault)
                 let cardAndNotePredicate = NSPredicate(format: "name contains[c] %@ AND vault == %@", search, vault)
-                
+
                 if !search.isEmpty {
                     let accountPredicate: NSCompoundPredicate = {
                         let domainPredicate = NSPredicate(format: "domain contains[c] %@", search)
                         let namePredicate = NSPredicate(format: "username contains[c] %@", search)
                         let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: [domainPredicate, namePredicate])
-                        
+
                         return NSCompoundPredicate(type: .and, subpredicates: [compoundPredicate, vaultPredicate])
                     }()
                     accounts.nsPredicate = accountPredicate
-                    
+
                     cards.nsPredicate = cardAndNotePredicate
                     notes.nsPredicate = cardAndNotePredicate
                 } else {
@@ -140,11 +144,11 @@ struct VaultView: View {
                 }
             })
             .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
+                #if os(iOS)
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                #endif
                 ToolbarItem {
                     Menu {
                         Button {
@@ -170,12 +174,13 @@ struct VaultView: View {
                     }
                 }
             }
-#if os(macOS)
+        #if os(macOS)
             .frame(minWidth: 300)
-#endif
+        #endif
             .onOpenURL { url in
                 if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-                   let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems {
+                   let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems
+                {
                     if let type = queryItems.first(where: { $0.name == "type" }), url == "openSesame://new" {
                         switch type.value {
                         case "account":
@@ -193,26 +198,26 @@ struct VaultView: View {
                 }
             }
     }
-    
+
     func deleteItems(offsets: IndexSet, type: ItemCreationType) {
         withAnimation {
             if type == .account {
                 offsets.map { accounts[$0] }.forEach { account in
-                    
+
                     let domainIdentifer = ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: account.domain!, type: .domain),
                                                                        user: account.username!,
                                                                        recordIdentifier: nil)
-                    
-                    ASCredentialIdentityStore.shared.removeCredentialIdentities([domainIdentifer]) { success, error in
+
+                    ASCredentialIdentityStore.shared.removeCredentialIdentities([domainIdentifer]) { _, error in
                         if let error = error {
                             print("Failed to remove credential", error)
-                            
-#if os(macOS)
-                            NSAlert(error: NSError(domain: "Failed to delete credential for autofill: \(error.localizedDescription)", code: 0, userInfo: nil)).runModal()
-#endif
+
+                            #if os(macOS)
+                                NSAlert(error: NSError(domain: "Failed to delete credential for autofill: \(error.localizedDescription)", code: 0, userInfo: nil)).runModal()
+                            #endif
                         }
                     }
-                    
+
                     viewContext.delete(account)
                 }
             } else if type == .card {
@@ -220,7 +225,7 @@ struct VaultView: View {
             } else if type == .note {
                 offsets.map { notes[$0] }.forEach(viewContext.delete)
             }
-            
+
             do {
                 try viewContext.save()
             } catch {

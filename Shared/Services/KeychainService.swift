@@ -8,7 +8,7 @@
 import Foundation
 import KeychainAccess
 
-typealias OpenSesameKeychain = Keychain  
+typealias OpenSesameKeychain = Keychain
 
 extension Keychain {
     convenience init() {

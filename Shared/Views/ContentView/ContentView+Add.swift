@@ -14,13 +14,12 @@ extension ContentView {
             isNewVaultFocused = true
         }
     }
-    
+
     func addItem(withName name: String) {
-        
         do {
             let vault = Vault(context: viewContext)
             vault.name = name
-            
+
             try viewContext.save()
         } catch {
             print(error)
