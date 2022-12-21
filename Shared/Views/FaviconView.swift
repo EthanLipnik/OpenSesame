@@ -21,28 +21,29 @@ struct FaviconView: View {
     // MARK: - View
 
     var body: some View {
-        Group {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color.white)
             if let existingCompany = websiteToExistingCompany() {
                 existingCompany
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .padding(5)
-                    .background(Color.white)
-                    .cornerRadius(10)
             } else if let image {
                 Group {
 #if canImport(UIKit)
                     Image(uiImage: image)
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
 #else
                     Image(nsImage: image)
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
 #endif
                 }
                 .transition(.opacity)
-                .cornerRadius(8)
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .padding(5)
-                .background(Color.white)
-                .cornerRadius(10)
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
@@ -72,6 +73,7 @@ struct FaviconView: View {
                     }
             }
         }
+        .aspectRatio(1, contentMode: .fit)
     }
 
     // MARK: - Local Company Logos
@@ -79,13 +81,13 @@ struct FaviconView: View {
     func websiteToExistingCompany() -> Image? {
         switch website.lowercased() {
         case "apple.com", "apple.co.uk":
-            return Image("Apple")
+            return Image("Websites/Apple")
         case "google.com", "google.co.uk", "goo.gl":
-            return Image("Google")
+            return Image("Websites/Google")
         case "github.com", "github.co.uk":
-            return Image("GitHub")
+            return Image("Websites/GitHub")
         case "twitter.com", "twitter.co.uk", "t.co":
-            return Image("Twitter")
+            return Image("Websites/Twitter")
         default:
             return nil
         }

@@ -310,12 +310,10 @@
 		AA8B502426CD641D003C92AE /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8B502826CD641D003C92AE /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		AA8B502A26CD641D003C92AE /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
-		AA8B504426CD6454003C92AE /* OpenSesame (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OpenSesame (iOS).entitlements"; sourceTree = "<group>"; };
+		AA8B504426CD6454003C92AE /* OpenSesame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenSesame.entitlements; sourceTree = "<group>"; };
 		AA8B504626CD6457003C92AE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
-		AA8B504826CD6465003C92AE /* OpenSesame (macOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OpenSesame (macOS).entitlements"; sourceTree = "<group>"; };
 		AA8B504926CD6468003C92AE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--iOS--Info.plist"; sourceTree = "<group>"; };
-		AA8B504C26CD6596003C92AE /* OpenSesame--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--macOS--Info.plist"; sourceTree = "<group>"; };
 		AA91286726DEBBFE007B9B30 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
 		AAADDF5626FE1B6E002172D4 /* CardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDocument.swift; sourceTree = "<group>"; };
 		AAADDF5926FE1E78002172D4 /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDocument.swift; sourceTree = "<group>"; };
@@ -591,10 +589,8 @@
 				C41CBD1F26E12E4300BD2F91 /* Configuration */,
 				AA49EA0126D3EAF000B12838 /* LICENSE.md */,
 				AA49EA0026D3EAF000B12838 /* README.md */,
-				AA8B504C26CD6596003C92AE /* OpenSesame--macOS--Info.plist */,
 				AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */,
-				AA8B504826CD6465003C92AE /* OpenSesame (macOS).entitlements */,
-				AA8B504426CD6454003C92AE /* OpenSesame (iOS).entitlements */,
+				AA8B504426CD6454003C92AE /* OpenSesame.entitlements */,
 				AA8B500226CD641C003C92AE /* Shared */,
 				AA8B501B26CD641D003C92AE /* Tests iOS */,
 				AA8B502726CD641D003C92AE /* Tests macOS */,
@@ -1464,7 +1460,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
+				CODE_SIGN_ENTITLEMENTS = OpenSesame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 34;
 				ENABLE_PREVIEWS = YES;
@@ -1505,7 +1501,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "OpenSesame (iOS).entitlements";
+				CODE_SIGN_ENTITLEMENTS = OpenSesame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 34;
 				ENABLE_PREVIEWS = YES;

@@ -1,23 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "Google@1x.heic",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Google@2x.heic",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Google@3x.heic",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Google_\"G\"_Logo.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "original"
   }
 }

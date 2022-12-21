@@ -28,5 +28,13 @@
 		<string>$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER_BASE)</string>
 		<string>$(AppIdentifierPrefix)OpenSesame</string>
 	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.network.server</key>
+	<true/>
 </dict>
 </plist>

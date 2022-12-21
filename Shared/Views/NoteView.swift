@@ -31,13 +31,13 @@ struct NoteView: View {
         let colors: [Color] = {
             switch newColor {
             case 0:
-                return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
+                return [Color("Notes/Yellow/Top"), Color("Notes/Yellow/Bottom")]
             case 1:
-                return [Color("Note-BlueTop"), Color("Note-BlueBottom")]
+                return [Color("Notes/Blue/Top"), Color("Notes/Blue/Bottom")]
             case 2:
-                return [Color("Note-OrangeTop"), Color("Note-OrangeBottom")]
+                return [Color("Notes/Orange/Top"), Color("Notes/Orange/Bottom")]
             default:
-                return [Color("Note-YellowTop"), Color("Note-YellowBottom")]
+                return [Color("Notes/Yellow/Top"), Color("Notes/Yellow/Bottom")]
             }
         }()
 

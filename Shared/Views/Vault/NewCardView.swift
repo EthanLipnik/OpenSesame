@@ -93,10 +93,9 @@ struct NewCardView: View {
             )
             .aspectRatio(1.6, contentMode: .fit)
 #if os(macOS)
-                .frame(height: 250)
-#else
-                .padding()
+            .frame(height: 250)
 #endif
+            .padding()
             Spacer()
             HStack {
                 Button("Cancel", role: .cancel) {

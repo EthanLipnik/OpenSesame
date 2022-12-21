@@ -75,7 +75,7 @@ struct LockView: View {
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
-            Image("\(userSettings.selectedIcon)Icon")
+            Image("Icons/\(userSettings.selectedIcon)")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 250, maxHeight: 250)

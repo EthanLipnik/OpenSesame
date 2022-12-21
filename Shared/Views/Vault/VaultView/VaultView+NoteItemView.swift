@@ -54,13 +54,13 @@ extension VaultView {
             let color: Color = {
                 switch note.color {
                 case 0:
-                    return Color("Note-YellowTop")
+                    return Color("Notes/Yellow/Top")
                 case 1:
-                    return Color("Note-BlueTop")
+                    return Color("Notes/Blue/Top")
                 case 2:
-                    return Color("Note-OrangeTop")
+                    return Color("Notes/Orange/Top")
                 default:
-                    return Color("Note-YellowTop")
+                    return Color("Notes/Yellow/Top")
                 }
             }()
 

@@ -110,11 +110,11 @@ struct SettingsView: View {
                     ForEach(icons, id: \.self) { icon in
                         HStack(alignment: .top) {
                             HStack {
-                                Image("\(icon)Icon")
+                                Image("Icons/\(icon)")
                                     .renderingMode(.original)
                                     .resizable()
                                     .frame(width: 60, height: 60)
-                                    .cornerRadius(15)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                                 Text(icon)
                             }
                         }.tag(icon)
