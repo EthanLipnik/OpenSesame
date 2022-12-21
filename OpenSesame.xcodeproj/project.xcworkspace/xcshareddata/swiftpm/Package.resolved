@@ -1,79 +1,77 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "CodeScanner",
-        "repositoryURL": "https://github.com/twostraws/CodeScanner.git",
-        "state": {
-          "branch": null,
-          "revision": "a2144ddaa7c43a6ee00873edd4cc7815ad97942f",
-          "version": "1.0.7"
-        }
-      },
-      {
-        "package": "CSV.swift",
-        "repositoryURL": "https://github.com/yaslab/CSV.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "81d2874c51db364d7e1d71b0d99018a294c87ac1",
-          "version": "2.4.3"
-        }
-      },
-      {
-        "package": "FaviconFinder",
-        "repositoryURL": "https://github.com/OpenSesameManager/FaviconFinder.git",
-        "state": {
-          "branch": "main",
-          "revision": "b327d60fd49d0f30bcc4b89473c6087ae07e03cb",
-          "version": null
-        }
-      },
-      {
-        "package": "KeychainAccess",
-        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
-        "state": {
-          "branch": null,
-          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
-          "version": "4.2.2"
-        }
-      },
-      {
-        "package": "ScreenCorners",
-        "repositoryURL": "https://github.com/kylebshr/ScreenCorners.git",
-        "state": {
-          "branch": null,
-          "revision": "1b71897c8d9091cad34bf10a47e3810c0c10e1e8",
-          "version": "1.0.1"
-        }
-      },
-      {
-        "package": "DomainParser",
-        "repositoryURL": "https://github.com/Dashlane/SwiftDomainParser.git",
-        "state": {
-          "branch": "master",
-          "revision": "9ea8c15c666d7fe6ba97f82d52961ac08babf1bd",
-          "version": null
-        }
-      },
-      {
-        "package": "SwiftOTP",
-        "repositoryURL": "https://github.com/EthanLipnik/SwiftOTP.git",
-        "state": {
-          "branch": null,
-          "revision": "be0c91ba2f197a033a44a6af836bc03eeef77422",
-          "version": "3.0.2"
-        }
-      },
-      {
-        "package": "SwiftSoup",
-        "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
-        "state": {
-          "branch": null,
-          "revision": "02c63b7be50bda384f22c56c64d347231754a07e",
-          "version": "2.3.3"
-        }
+  "pins" : [
+    {
+      "identity" : "codescanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/CodeScanner.git",
+      "state" : {
+        "revision" : "8a9ce909a4ea502d4a2ccf327ae8c16b7e48e740",
+        "version" : "1.1.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "csv.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yaslab/CSV.swift.git",
+      "state" : {
+        "revision" : "81d2874c51db364d7e1d71b0d99018a294c87ac1",
+        "version" : "2.4.3"
+      }
+    },
+    {
+      "identity" : "faviconfinder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OpenSesameManager/FaviconFinder.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3d6e27515504ca4598e5a4db942849c347780f47"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess.git",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
+      }
+    },
+    {
+      "identity" : "screencorners",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kylebshr/ScreenCorners.git",
+      "state" : {
+        "revision" : "1b71897c8d9091cad34bf10a47e3810c0c10e1e8",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "swiftdomainparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Dashlane/SwiftDomainParser.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ac1df3211011ad44c20457412eeb45beb318f847"
+      }
+    },
+    {
+      "identity" : "swiftotp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EthanLipnik/SwiftOTP.git",
+      "state" : {
+        "revision" : "be0c91ba2f197a033a44a6af836bc03eeef77422",
+        "version" : "3.0.2"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
+      "state" : {
+        "revision" : "6778575285177365cbad3e5b8a72f2a20583cfec",
+        "version" : "2.4.3"
+      }
+    }
+  ],
+  "version" : 2
 }
