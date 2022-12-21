@@ -15,7 +15,8 @@ struct FaviconView: View {
 
     static let cache = NSCache<NSString, FaviconImage>()
 
-    @State private var image: FaviconImage?
+    @State
+    private var image: FaviconImage?
 
     // MARK: - View
 
@@ -27,15 +28,15 @@ struct FaviconView: View {
                     .padding(5)
                     .background(Color.white)
                     .cornerRadius(10)
-            } else if let image = image {
+            } else if let image {
                 Group {
-                    #if canImport(UIKit)
-                        Image(uiImage: image)
-                            .resizable()
-                    #else
-                        Image(nsImage: image)
-                            .resizable()
-                    #endif
+#if canImport(UIKit)
+                    Image(uiImage: image)
+                        .resizable()
+#else
+                    Image(nsImage: image)
+                        .resizable()
+#endif
                 }
                 .transition(.opacity)
                 .cornerRadius(8)
@@ -45,16 +46,19 @@ struct FaviconView: View {
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
-                    .overlay(Text(website.isEmpty ? "" : website[0].uppercased())
-                        .font(.system(.title, design: .rounded).bold())
-                        .foregroundColor(.black))
+                    .overlay(
+                        Text(website.isEmpty ? "" : website[0].uppercased())
+                            .font(.system(.title, design: .rounded).bold())
+                            .foregroundColor(.black)
+                    )
                     .onAppear {
                         if let cache = FaviconView.cache.object(forKey: website as NSString) {
                             self.image = cache
                         }
                     }
                     .task {
-                        guard let url = URL(string: website.withWWWIfNeeded.withHTTPIfNeeded), UserSettings.default.shouldLoadFavicon else { return }
+                        guard let url = URL(string: website.withWWWIfNeeded.withHTTPIfNeeded),
+                              UserSettings.default.shouldLoadFavicon else { return }
 
                         do {
                             let favicon = try await FaviconFinder(url: url).downloadFavicon()

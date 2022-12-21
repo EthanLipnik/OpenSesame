@@ -7,7 +7,7 @@
 
 import SwiftUI
 #if canImport(CodeScanner)
-    import CodeScanner
+import CodeScanner
 #endif
 
 extension AccountView.AccountDetailsView {
@@ -48,21 +48,25 @@ extension AccountView.AccountDetailsView {
                     }
                 } else if isEditing {
                     HStack {
-                        TextField("Verification Code URL or Secret", text: $newVerificationURL, onCommit: {
-                            addVerificationCode(newVerificationURL)
-                        })
+                        TextField(
+                            "Verification Code URL or Secret",
+                            text: $newVerificationURL,
+                            onCommit: {
+                                addVerificationCode(newVerificationURL)
+                            }
+                        )
                         .textFieldStyle(.roundedBorder)
-                        #if os(iOS)
+#if os(iOS)
                             .autocapitalization(.none)
-                        #endif
+#endif
                             .disableAutocorrection(true)
 
-                        #if canImport(CodeScanner)
-                            Button {
-                                isScanningQRCode.toggle()
-                            } label: {
-                                Image(systemName: "qrcode.viewfinder")
-                            }
+#if canImport(CodeScanner)
+                        Button {
+                            isScanningQRCode.toggle()
+                        } label: {
+                            Image(systemName: "qrcode.viewfinder")
+                        }
 //                    .bottomSheet(isPresented: $isScanningQRCode) {
 //                        CodeScannerView(codeTypes: [.qr]) { result in
 //                            switch result {
@@ -77,21 +81,21 @@ extension AccountView.AccountDetailsView {
 //                        .padding()
 //                        .shadow(radius: 15)
 //                    }
-                            .halfSheet(isPresented: $isScanningQRCode) {
-                                CodeScannerView(codeTypes: [.qr]) { result in
-                                    switch result {
-                                    case let .success(code):
-                                        isScanningQRCode = false
-                                        addVerificationCode(code)
-                                    case let .failure(error):
-                                        print(error)
-                                    }
+                        .halfSheet(isPresented: $isScanningQRCode) {
+                            CodeScannerView(codeTypes: [.qr]) { result in
+                                switch result {
+                                case let .success(code):
+                                    isScanningQRCode = false
+                                    addVerificationCode(code)
+                                case let .failure(error):
+                                    print(error)
                                 }
-                                .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-                                .padding()
-                                .shadow(radius: 15)
                             }
-                        #endif
+                            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                            .padding()
+                            .shadow(radius: 15)
+                        }
+#endif
                     }
                 }
             }

@@ -9,12 +9,18 @@ import SwiftUI
 
 extension AttributedString {
     init(account: Account) {
-        self = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP.removeWWW) ?? account.domain ?? "Unknown website")
+        var string =
+            AttributedString((
+                (account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP
+                    .removeWWW
+            ) ?? account.domain ?? "Unknown website")
         if let domain = account.domain {
-            if let match = self.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
-                self.foregroundColor = Color.secondary
-                self[match].foregroundColor = Color("Label")
+            if let match = string.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
+                string.foregroundColor = Color.secondary
+                string[match].foregroundColor = Color("Label")
             }
         }
+
+        self = string
     }
 }

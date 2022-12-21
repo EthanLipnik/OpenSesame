@@ -13,8 +13,10 @@ import KeychainAccess
 class PersistenceController {
     static let shared = PersistenceController()
 
-    static let storeURL = URL.storeURL(for: OpenSesameConfig.APP_GROUP,
-                                       databaseName: OpenSesameConfig.APP_GROUP)
+    static let storeURL = URL.storeURL(
+        for: OpenSesameConfig.APP_GROUP,
+        databaseName: OpenSesameConfig.APP_GROUP
+    )
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
@@ -29,7 +31,7 @@ class PersistenceController {
     }()
 
     static var containerUrl: URL? {
-        return FileManager.default.url(forUbiquityContainerIdentifier: nil)
+        FileManager.default.url(forUbiquityContainerIdentifier: nil)
     }
 
     var container: NSPersistentCloudKitContainer
@@ -51,9 +53,16 @@ class PersistenceController {
         loadStore()
 
         // Check if iCloud Drive folder exists, if not, create one.
-        if let url = PersistenceController.containerUrl, !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
+        if let url = PersistenceController.containerUrl, !FileManager.default.fileExists(
+            atPath: url.path,
+            isDirectory: nil
+        ) {
             do {
-                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(
+                    at: url,
+                    withIntermediateDirectories: true,
+                    attributes: nil
+                )
             } catch {
                 print(error.localizedDescription)
             }
@@ -70,7 +79,9 @@ class PersistenceController {
         container.loadPersistentStores(completionHandler: { [weak self] _, error in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // fatalError() causes the application to generate a crash log and terminate. You
+                // should not use this function in a shipping application, although it may be useful
+                // during development.
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -113,13 +124,24 @@ class PersistenceController {
 
                     do {
                         let accounts = try viewContext.fetch(accountsFetch)
-                        let domainIdentifers = accounts.map { ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
-                                                                                           user: $0.username!,
-                                                                                           recordIdentifier: nil) }
+                        let domainIdentifers = accounts.map { ASPasswordCredentialIdentity(
+                            serviceIdentifier: ASCredentialServiceIdentifier(
+                                identifier: $0.domain!,
+                                type: .domain
+                            ),
+                            user: $0.username!,
+                            recordIdentifier: nil
+                        ) }
 
-                        ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: { _, error in
-                            print(error?.localizedDescription ?? "No errors in saving credentials")
-                        })
+                        ASCredentialIdentityStore.shared.saveCredentialIdentities(
+                            domainIdentifers,
+                            completion: { _, error in
+                                print(
+                                    error?
+                                        .localizedDescription ?? "No errors in saving credentials"
+                                )
+                            }
+                        )
                     } catch {
                         print(error)
                     }
@@ -146,7 +168,8 @@ class PersistenceController {
         switch service {
         case .iCloud:
             if let iCloudContainer = PersistenceController.containerUrl {
-                let destinationURL = iCloudContainer.appendingPathComponent("\(OpenSesameConfig.APP_GROUP).sqlite")
+                let destinationURL = iCloudContainer
+                    .appendingPathComponent("\(OpenSesameConfig.APP_GROUP).sqlite")
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
                     try FileManager.default.removeItem(at: destinationURL)
                 }
@@ -159,7 +182,11 @@ class PersistenceController {
                 }
 
                 try FileManager.default.copyItem(at: PersistenceController.storeURL, to: backup)
-                try FileManager.default.setUbiquitous(true, itemAt: backup, destinationURL: destinationURL)
+                try FileManager.default.setUbiquitous(
+                    true,
+                    itemAt: backup,
+                    destinationURL: destinationURL
+                )
 
                 print("Uploaded store to iCloud", iCloudContainer.path)
             } else {
@@ -172,18 +199,24 @@ class PersistenceController {
         switch service {
         case .iCloud:
             if let iCloudContainer = PersistenceController.containerUrl {
-                let allContainers = try FileManager.default.contentsOfDirectory(atPath: iCloudContainer.path)
+                let allContainers = try FileManager.default
+                    .contentsOfDirectory(atPath: iCloudContainer.path)
                 let containersToDownload = allContainers
                     .filter { $0.contains(".icloud") }
-                let containers = containersToDownload.map { iCloudContainer.appendingPathComponent($0) }
+                let containers = containersToDownload
+                    .map { iCloudContainer.appendingPathComponent($0) }
                 containers.forEach { _ = $0.startAccessingSecurityScopedResource() }
-                try containers.forEach { try FileManager.default.startDownloadingUbiquitousItem(at: $0) }
+                try containers
+                    .forEach { try FileManager.default.startDownloadingUbiquitousItem(at: $0) }
 
                 print(allContainers)
                 if FileManager.default.fileExists(atPath: PersistenceController.storeURL.path) {
                     try FileManager.default.removeItem(at: PersistenceController.storeURL)
                 }
-                try FileManager.default.copyItem(at: iCloudContainer.appendingPathComponent("backup.sqlite"), to: PersistenceController.storeURL)
+                try FileManager.default.copyItem(
+                    at: iCloudContainer.appendingPathComponent("backup.sqlite"),
+                    to: PersistenceController.storeURL
+                )
 
                 loadStore()
             }
@@ -195,13 +228,15 @@ class PersistenceController {
     }
 
     static func isICloudContainerAvailable() -> Bool {
-        return FileManager.default.ubiquityIdentityToken != nil
+        FileManager.default.ubiquityIdentityToken != nil
     }
 }
 
 public extension URL {
     static func storeURL(for appGroup: String, databaseName: String) -> URL {
-        guard let fileContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+        guard let fileContainer = FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: appGroup)
+        else {
             fatalError("Shared file container could not be created.")
         }
         return fileContainer.appendingPathComponent("\(databaseName).sqlite")

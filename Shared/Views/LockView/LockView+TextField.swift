@@ -18,32 +18,33 @@ extension LockView {
                 })
                 .textFieldStyle(.plain)
                 .focused($isTextFieldFocussed)
-                #if EXTENSION
+#if EXTENSION
                     .frame(maxWidth: .infinity)
-                #else
+#else
                     .frame(maxWidth: 400)
-                #endif
+#endif
                     .accessibilityIdentifier("masterPassword")
-                #if os(macOS) // macOS should display differently since a red background looks weird.
-                    if attempts > 0 {
-                        Text(attempts, format: .number)
-                            .bold()
-                            .foregroundColor(Color.red)
-                            .frame(width: 20)
-                    }
-                #else
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5).fill(Color.red).aspectRatio(1 / 1, contentMode: .fit)
-                        Text(attempts, format: .number)
-                            .bold()
-                            .foregroundColor(Color.white)
-                            .animation(.none, value: attempts)
-                    }
-                    .frame(height: 35)
-                    .opacity(attempts > 0 ? 1 : 0)
-                    .blur(radius: attempts > 0 ? 0 : 10)
-                    .animation(.default, value: attempts)
-                #endif
+#if os(macOS) // macOS should display differently since a red background looks weird.
+                if attempts > 0 {
+                    Text(attempts, format: .number)
+                        .bold()
+                        .foregroundColor(Color.red)
+                        .frame(width: 20)
+                }
+#else
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5).fill(Color.red)
+                        .aspectRatio(1 / 1, contentMode: .fit)
+                    Text(attempts, format: .number)
+                        .bold()
+                        .foregroundColor(Color.white)
+                        .animation(.none, value: attempts)
+                }
+                .frame(height: 35)
+                .opacity(attempts > 0 ? 1 : 0)
+                .blur(radius: attempts > 0 ? 0 : 10)
+                .animation(.default, value: attempts)
+#endif
                 unlockButtons
             }
         }

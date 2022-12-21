@@ -9,15 +9,18 @@ import Combine
 import Foundation
 import KeychainAccess
 #if os(iOS)
-    import UIKit
+import UIKit
 #elseif os(macOS)
-    import AppKit
+import AppKit
 #endif
 
 class UserSettings: ObservableObject {
     static let `default` = UserSettings()
 
-    @Published var shouldLoadFavicon: Bool = !UserDefaults.group.bool(forKey: "shouldNotLoadFavicon") {
+    @Published
+    var shouldLoadFavicon: Bool = !UserDefaults.group
+        .bool(forKey: "shouldNotLoadFavicon")
+    {
         didSet {
             UserDefaults.group.set(!shouldLoadFavicon, forKey: "shouldNotLoadFavicon")
 
@@ -27,13 +30,19 @@ class UserSettings: ObservableObject {
         }
     }
 
-    @Published var shouldShowFaviconInList: Bool = UserDefaults.group.bool(forKey: "shouldShowFaviconInList") {
+    @Published
+    var shouldShowFaviconInList: Bool = UserDefaults.group
+        .bool(forKey: "shouldShowFaviconInList")
+    {
         didSet {
             UserDefaults.group.set(shouldShowFaviconInList, forKey: "shouldShowFaviconInList")
         }
     }
 
-    @Published var shouldSyncWithiCloud: Bool = !UserDefaults.group.bool(forKey: "shouldNotSyncWithiCloud") {
+    @Published
+    var shouldSyncWithiCloud: Bool = !UserDefaults.group
+        .bool(forKey: "shouldNotSyncWithiCloud")
+    {
         didSet(oldValue) {
             UserDefaults.group.set(!shouldSyncWithiCloud, forKey: "shouldNotSyncWithiCloud")
 
@@ -44,7 +53,10 @@ class UserSettings: ObservableObject {
         }
     }
 
-    @Published var shouldUseBiometrics: Bool = UserDefaults.group.bool(forKey: "shouldUseBiometrics") {
+    @Published
+    var shouldUseBiometrics: Bool = UserDefaults.group
+        .bool(forKey: "shouldUseBiometrics")
+    {
         didSet(oldValue) {
             UserDefaults.group.set(shouldUseBiometrics, forKey: "shouldUseBiometrics")
 
@@ -64,62 +76,75 @@ class UserSettings: ObservableObject {
         }
     }
 
-    @Published var autoLockTimer: Int = UserDefaults.group.integer(forKey: "autoLockTimer") {
+    @Published
+    var autoLockTimer: Int = UserDefaults.group.integer(forKey: "autoLockTimer") {
         didSet {
             UserDefaults.group.set(autoLockTimer, forKey: "autoLockTimer")
         }
     }
 
-    @Published var shouldHideApp: Bool = !UserDefaults.group.bool(forKey: "shouldNotHideApp") {
+    @Published
+    var shouldHideApp: Bool = !UserDefaults.group.bool(forKey: "shouldNotHideApp") {
         didSet {
             UserDefaults.group.set(!shouldHideApp, forKey: "shouldNotHideApp")
         }
     }
 
-    #if os(iOS) && !EXTENSION
-        @Published var selectedIcon: String = UserDefaults.group.string(forKey: "selectedIcon") ?? "Default" {
-            didSet {
-                UserDefaults.group.set(selectedIcon, forKey: "selectedIcon")
+#if os(iOS) && !EXTENSION
+    @Published
+    var selectedIcon: String = UserDefaults.group
+        .string(forKey: "selectedIcon") ?? "Default"
+    {
+        didSet {
+            UserDefaults.group.set(selectedIcon, forKey: "selectedIcon")
 
-                UIApplication.shared.setAlternateIconName(selectedIcon != "Default" ? selectedIcon : nil)
-            }
+            UIApplication.shared
+                .setAlternateIconName(selectedIcon != "Default" ? selectedIcon : nil)
         }
-    #else
-        var selectedIcon: String {
-            return "Default"
+    }
+#else
+    var selectedIcon: String {
+        "Default"
+    }
+#endif
+
+#if !EXTENSION
+    @Published
+    var colorScheme: Int = UserDefaults.group.integer(forKey: "colorScheme") {
+        didSet(oldValue) {
+            UserDefaults.group.set(colorScheme, forKey: "colorScheme")
+
+            guard colorScheme != oldValue else { return }
+            updateColorScheme()
         }
-    #endif
+    }
 
-    #if !EXTENSION
-        @Published var colorScheme: Int = UserDefaults.group.integer(forKey: "colorScheme") {
-            didSet(oldValue) {
-                UserDefaults.group.set(colorScheme, forKey: "colorScheme")
+    func updateColorScheme(shouldAnimate animate: Bool = true) {
+#if os(iOS)
+        let windows = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
 
-                guard colorScheme != oldValue else { return }
-                updateColorScheme()
-            }
-        }
-
-        func updateColorScheme(shouldAnimate animate: Bool = true) {
-            #if os(iOS)
-                let windows = UIApplication.shared.connectedScenes
-                    .compactMap { $0 as? UIWindowScene }
-                    .flatMap { $0.windows }
-
-                windows.forEach { window in
-                    if animate {
-                        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: { [colorScheme] in
-                            window.overrideUserInterfaceStyle = .fromInteger(colorScheme)
-                        }, completion: nil)
-                    } else {
+        windows.forEach { window in
+            if animate {
+                UIView.transition(
+                    with: window,
+                    duration: 0.3,
+                    options: .transitionCrossDissolve,
+                    animations: { [colorScheme] in
                         window.overrideUserInterfaceStyle = .fromInteger(colorScheme)
-                    }
-                }
-            #elseif os(macOS)
-                NSApp.appearance = .fromInteger(colorScheme)
-            #endif
+                    },
+                    completion: nil
+                )
+            } else {
+                window.overrideUserInterfaceStyle = .fromInteger(colorScheme)
+            }
         }
-    #endif
+#elseif os(macOS)
+        NSApp.appearance = .fromInteger(colorScheme)
+#endif
+    }
+#endif
 
     init() {
         if UserAuthenticationService.availableBiometrics().isEmpty {
@@ -129,40 +154,40 @@ class UserSettings: ObservableObject {
 }
 
 #if os(iOS)
-    extension UIUserInterfaceStyle {
-        static func fromInteger(_ int: Int) -> UIUserInterfaceStyle {
-            switch int {
-            case 0:
-                return .unspecified
-            case 1:
-                return .light
-            case 2:
-                return .dark
-            default:
-                return .unspecified
-            }
+extension UIUserInterfaceStyle {
+    static func fromInteger(_ int: Int) -> UIUserInterfaceStyle {
+        switch int {
+        case 0:
+            return .unspecified
+        case 1:
+            return .light
+        case 2:
+            return .dark
+        default:
+            return .unspecified
         }
     }
+}
 
 #elseif os(macOS)
-    extension NSAppearance {
-        static func fromInteger(_ int: Int) -> NSAppearance? {
-            switch int {
-            case 0:
-                return .init()
-            case 1:
-                return .init(named: .aqua)
-            case 2:
-                return .init(named: .darkAqua)
-            default:
-                return .init()
-            }
+extension NSAppearance {
+    static func fromInteger(_ int: Int) -> NSAppearance? {
+        switch int {
+        case 0:
+            return .init()
+        case 1:
+            return .init(named: .aqua)
+        case 2:
+            return .init(named: .darkAqua)
+        default:
+            return .init()
         }
     }
+}
 #endif
 
 extension UserDefaults {
     static var group: UserDefaults {
-        return UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)!
+        UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)!
     }
 }

@@ -12,32 +12,47 @@ import SwiftUI
 struct LockView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext)
+    private var viewContext
 
     // MARK: - Variables
 
-    @Binding var isLocked: Bool
+    @Binding
+    var isLocked: Bool
     let onSuccessfulUnlock: () -> Void
 
-    @State var password: String = ""
-    @State var attempts: Int = 0
+    @State
+    var password: String = ""
+    @State
+    var attempts: Int = 0
 
-    @State var didBiometricsFail: Bool = false
+    @State
+    var didBiometricsFail: Bool = false
 
-    @State var encryptionTestDoesntExist = false
-    @State var encryptionTest: Data?
+    @State
+    var encryptionTestDoesntExist = false
+    @State
+    var encryptionTest: Data?
 
-    @State var isAuthenticating: Bool = false
-    @State var needsToResetPassword: Bool = false
+    @State
+    var isAuthenticating: Bool = false
+    @State
+    var needsToResetPassword: Bool = false
 
-    @StateObject var userSettings = UserSettings.default
+    @StateObject
+    var userSettings = UserSettings.default
 
-    @FocusState var isTextFieldFocussed: Bool
+    @FocusState
+    var isTextFieldFocussed: Bool
 
-    @State private var isShowingBoardingScreen: Bool = !UserDefaults.standard.bool(forKey: "didShowBoardingScreen")
-    @AppStorage("didShowBoardingScreen") var didShowBoardingScreen: Bool = false
+    @State
+    private var isShowingBoardingScreen: Bool = !UserDefaults.standard
+        .bool(forKey: "didShowBoardingScreen")
+    @AppStorage("didShowBoardingScreen")
+    var didShowBoardingScreen: Bool = false
 
-    @State private var shouldShowCreatePassword: Bool = false
+    @State
+    private var shouldShowCreatePassword: Bool = false
 
     // MARK: - Variable Types
 
@@ -71,108 +86,111 @@ struct LockView: View {
             Spacer()
         }
         .padding()
-        #if os(macOS) && !EXTENSION
+#if os(macOS) && !EXTENSION
             .frame(minWidth: 500, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
-        #endif
+#endif
             .allowsHitTesting(!isAuthenticating)
             .animation(.default, value: isAuthenticating)
             .padding()
             .navigationTitle("OpenSesame")
 
-        #if !EXTENSION
-            #if os(macOS)
-                .toolbar { // LockView only toolbar
-                    ToolbarItem(placement: .primaryAction) {
-                        if isLocked {
-                            Button {
-                                needsToResetPassword.toggle()
-                            } label: {
-                                Label("Info", systemImage: "info")
-                            }
+#if !EXTENSION
+#if os(macOS)
+            .toolbar { // LockView only toolbar
+                ToolbarItem(placement: .primaryAction) {
+                    if isLocked {
+                        Button {
+                            needsToResetPassword.toggle()
+                        } label: {
+                            Label("Info", systemImage: "info")
                         }
                     }
                 }
-            #else
-                    .overlay(Button(action: {
-                        needsToResetPassword.toggle()
-                    }, label: {
-                        Image(systemName: "info")
-                    }).padding(), alignment: .topTrailing)
-            #endif
-                .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
-                    Button("Reset password", role: .destructive) {
-                        let keychain = OpenSesameKeychain()
+            }
+#else
+            .overlay(Button(action: {
+                needsToResetPassword.toggle()
+            }, label: {
+                Image(systemName: "info")
+            }).padding(), alignment: .topTrailing)
+#endif
+            .alert("Forgot your password?", isPresented: $needsToResetPassword, actions: {
+                Button("Reset password", role: .destructive) {
+                    let keychain = OpenSesameKeychain()
 
-                        try! keychain
-                            .synchronizable(false)
-                            .remove("masterPassword")
-                        try! keychain
-                            .synchronizable(true)
-                            .remove("encryptionTest")
+                    try! keychain
+                        .synchronizable(false)
+                        .remove("masterPassword")
+                    try! keychain
+                        .synchronizable(true)
+                        .remove("encryptionTest")
 
-                        encryptionTest = nil
-                        encryptionTestDoesntExist = true
+                    encryptionTest = nil
+                    encryptionTestDoesntExist = true
 
-                        shouldShowCreatePassword = true
-                    }
-                    Button("Cancel", role: .cancel) {
-                        needsToResetPassword = false
-                    }.keyboardShortcut(.cancelAction)
-                }, message: {
-                    Text("You can change it but you won't be able to decrypt any of your accounts.")
-                })
-                .sheet(isPresented: $isShowingBoardingScreen) {
-                    BoardingView(encryptionTestDoesntExist: $encryptionTestDoesntExist, masterPasswordCompletion: createMasterPassword)
-                        .environment(\.managedObjectContext, viewContext)
-                    #if os(iOS)
-                        .interactiveDismissDisabled()
-                    #endif
+                    shouldShowCreatePassword = true
                 }
-                .sheet(isPresented: $shouldShowCreatePassword) {
-                    CreatePasswordView(completionAction: createMasterPassword)
+                Button("Cancel", role: .cancel) {
+                    needsToResetPassword = false
+                }.keyboardShortcut(.cancelAction)
+            }, message: {
+                Text("You can change it but you won't be able to decrypt any of your accounts.")
+            })
+            .sheet(isPresented: $isShowingBoardingScreen) {
+                BoardingView(
+                    encryptionTestDoesntExist: $encryptionTestDoesntExist,
+                    masterPasswordCompletion: createMasterPassword
+                )
+                .environment(\.managedObjectContext, viewContext)
+#if os(iOS)
+                    .interactiveDismissDisabled()
+#endif
+            }
+            .sheet(isPresented: $shouldShowCreatePassword) {
+                CreatePasswordView(completionAction: createMasterPassword)
+            }
+            .onChange(of: didShowBoardingScreen) { newValue in
+                if newValue {
+                    isShowingBoardingScreen = false
                 }
-                .onChange(of: didShowBoardingScreen) { newValue in
-                    if newValue {
-                        isShowingBoardingScreen = false
-                    }
-                }
-        #endif
-                .onAppear {
-                    //            let keychain = OpenSesameKeychain()
-                    //
-                    //            try! keychain
-                    //                .synchronizable(false)
-                    //                .remove("masterPassword")
-                    //            try! keychain
-                    //                .synchronizable(true)
-                    //                .remove("encryptionTest")
-                    //
-                    //            encryptionTest = nil
-                    //            encryptionTestDoesntExist = true
-                    //            didShowBoardingScreen = false
-                    //            isShowingBoardingScreen = true
+            }
+#endif
+            .onAppear {
+                //            let keychain = OpenSesameKeychain()
+                //
+                //            try! keychain
+                //                .synchronizable(false)
+                //                .remove("masterPassword")
+                //            try! keychain
+                //                .synchronizable(true)
+                //                .remove("encryptionTest")
+                //
+                //            encryptionTest = nil
+                //            encryptionTestDoesntExist = true
+                //            didShowBoardingScreen = false
+                //            isShowingBoardingScreen = true
 
-                    loadEncryptionTest()
-                    #if !EXTENSION
-                        shouldShowCreatePassword = encryptionTest == nil && !isShowingBoardingScreen
-                    #endif
+                loadEncryptionTest()
+#if !EXTENSION
+                shouldShowCreatePassword = encryptionTest == nil && !isShowingBoardingScreen
+#endif
 
-                    if !isLocked {
-                        isTextFieldFocussed = false
-                    } else if !(isShowingBoardingScreen || shouldShowCreatePassword) {
-                        if userSettings.shouldUseBiometrics {
-                            #if !EXTENSION
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                    unlockWithBiometrics()
-                                }
-                            #endif
-                        } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                isTextFieldFocussed = true
-                            }
+                if !isLocked {
+                    isTextFieldFocussed = false
+                } else if !(isShowingBoardingScreen || shouldShowCreatePassword) {
+                    if userSettings.shouldUseBiometrics {
+#if !EXTENSION
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            unlockWithBiometrics()
+                        }
+#endif
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            isTextFieldFocussed = true
                         }
                     }
                 }
+            }
     }
 }
 

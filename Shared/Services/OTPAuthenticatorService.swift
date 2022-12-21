@@ -12,9 +12,12 @@ import SwiftOTP
 class OTPAuthenticatorService: ObservableObject {
     // MARK: - Variables
 
-    @Published var totp: TOTP?
-    @Published var verificationCode: String?
-    @Published var verificationCodeDate: Date?
+    @Published
+    var totp: TOTP?
+    @Published
+    var verificationCode: String?
+    @Published
+    var verificationCodeDate: Date?
 
     var timer: Timer?
 
@@ -56,9 +59,11 @@ class OTPAuthenticatorService: ObservableObject {
         verificationCodeDate = Date().nearestThirtySeconds()
     }
 
-    func initialize(_ url: URL) { // otpauth://totp/{Website}:{Username}?secret={Secret}&issuer={Issuer}
+    func initialize(_ url: URL) {
+        // otpauth://totp/{Website}:{Username}?secret={Secret}&issuer={Issuer}
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        guard let secret = components?.queryItems?.first(where: { $0.name == "secret" })?.value else { return }
+        guard let secret = components?.queryItems?.first(where: { $0.name == "secret" })?.value
+        else { return }
 
         initialize(secret)
     }

@@ -9,12 +9,14 @@ import SwiftUI
 
 extension VaultView {
     struct NoteItemView: View {
-        @EnvironmentObject var viewModel: ViewModel
+        @EnvironmentObject
+        var viewModel: ViewModel
 
         let note: Note
         var isPopover: Bool = false
 
-        @State private var isPresenting: Bool = false
+        @State
+        private var isPresenting: Bool = false
 
         var body: some View {
             Group {

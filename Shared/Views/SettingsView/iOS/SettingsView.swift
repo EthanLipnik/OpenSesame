@@ -12,23 +12,39 @@ import StoreKit
 import SwiftUI
 
 struct SettingsView: View {
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.managedObjectContext)
+    var viewContext
 
     // MARK: - Variables
 
-    @State private var shouldNukeDatabase: Bool = false
+    @State
+    private var shouldNukeDatabase: Bool = false
 
-    @State private var shouldResetBiometrics: Bool = false
-    @State private var shouldAuthenticate: Bool = false
+    @State
+    private var shouldResetBiometrics: Bool = false
+    @State
+    private var shouldAuthenticate: Bool = false
 
-    @State private var exportFile: ExportFile?
-    @State private var shouldExportAccounts: Bool = false
+    @State
+    private var exportFile: ExportFile?
+    @State
+    private var shouldExportAccounts: Bool = false
 
-    @State private var importAppFormat: AppFormat?
+    @State
+    private var importAppFormat: AppFormat?
 
-    private let icons: [String] = ["Default", "Green", "Orange", "Purple", "Red", "Silver", "Space Gray"]
+    private let icons: [String] = [
+        "Default",
+        "Green",
+        "Orange",
+        "Purple",
+        "Red",
+        "Silver",
+        "Space Gray"
+    ]
 
-    @StateObject var userSettings = UserSettings.default
+    @StateObject
+    var userSettings = UserSettings.default
 
     // MARK: - View
 
@@ -55,7 +71,11 @@ struct SettingsView: View {
             } header: {
                 Text("General")
             } footer: {
-                Text(PersistenceController.isICloudContainerAvailable() ? "Sync with all your devices securely." : "You are not signed in with iCloud or disabled OpenSesame in iCloud settings.")
+                Text(
+                    PersistenceController
+                        .isICloudContainerAvailable() ? "Sync with all your devices securely." :
+                        "You are not signed in with iCloud or disabled OpenSesame in iCloud settings."
+                )
             }
 
             Section("Passwords") {
@@ -160,7 +180,8 @@ struct SettingsView: View {
 //                    Label("Tip Jar", systemImage: "heart.fill")
 //                }
                 Button {
-                    guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
+                    guard let writeReviewURL =
+                        URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
                     else { fatalError("Expected a valid URL") }
                     UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
 
@@ -187,59 +208,80 @@ struct SettingsView: View {
                 }
             }
 
-            #if DEBUG
-                Section("Self Destruct") {
-                    Button(role: .destructive) {
-                        ASCredentialIdentityStore.shared.getState { state in
-                            if state.isEnabled {
-                                ASCredentialIdentityStore.shared.removeAllCredentialIdentities { _, error in
-                                    let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
+#if DEBUG
+            Section("Self Destruct") {
+                Button(role: .destructive) {
+                    ASCredentialIdentityStore.shared.getState { state in
+                        if state.isEnabled {
+                            ASCredentialIdentityStore.shared
+                                .removeAllCredentialIdentities { _, error in
+                                    let accountsFetch =
+                                        NSFetchRequest<Account>(entityName: "Account")
 
                                     do {
                                         let accounts = try viewContext.fetch(accountsFetch)
-                                        let domainIdentifers = accounts.map { ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: $0.domain!, type: .domain),
-                                                                                                           user: $0.username!,
-                                                                                                           recordIdentifier: nil) }
+                                        let domainIdentifers = accounts
+                                            .map { ASPasswordCredentialIdentity(
+                                                serviceIdentifier: ASCredentialServiceIdentifier(
+                                                    identifier: $0
+                                                        .domain!,
+                                                    type: .domain
+                                                ),
+                                                user: $0.username!,
+                                                recordIdentifier: nil
+                                            ) }
 
-                                        ASCredentialIdentityStore.shared.saveCredentialIdentities(domainIdentifers, completion: { _, error in
-                                            print(error?.localizedDescription ?? "No errors in saving credentials")
-                                        })
+                                        ASCredentialIdentityStore.shared.saveCredentialIdentities(
+                                            domainIdentifers,
+                                            completion: { _, error in
+                                                print(
+                                                    error?
+                                                        .localizedDescription ??
+                                                        "No errors in saving credentials"
+                                                )
+                                            }
+                                        )
                                     } catch {
                                         print(error)
                                     }
                                 }
-                            }
                         }
-                    } label: {
-                        Label("Reset Autofill", systemImage: "exclamationmark.arrow.circlepath")
                     }
-                    Button(role: .destructive) {
-                        shouldNukeDatabase.toggle()
-                    } label: {
-                        Label("Nuke Database", systemImage: "trash.fill")
-                    }
-                    .confirmationDialog("Would you like to just nuke the local database or include the iCloud database as well?", isPresented: $shouldNukeDatabase) {
-                        Button("Local", role: .destructive) {
-                            do {
-                                try FileManager.default.removeItem(at: PersistenceController.storeURL)
-                                PersistenceController.shared.container = NSPersistentContainer.create()
-                                PersistenceController.shared.loadStore()
-                            } catch {
-                                print(error)
-                            }
-                        }
-
-                        Button("Local + iCloud", role: .destructive) {
-                            // TODO: Add iCloud self destruct for debugging
-                        }
-
-                        Button("Cancel", role: .cancel) {
-                            shouldNukeDatabase = false
-                        }
-                        .keyboardShortcut(.defaultAction)
-                    }
+                } label: {
+                    Label("Reset Autofill", systemImage: "exclamationmark.arrow.circlepath")
                 }
-            #endif
+                Button(role: .destructive) {
+                    shouldNukeDatabase.toggle()
+                } label: {
+                    Label("Nuke Database", systemImage: "trash.fill")
+                }
+                .confirmationDialog(
+                    "Would you like to just nuke the local database or include the iCloud database as well?",
+                    isPresented: $shouldNukeDatabase
+                ) {
+                    Button("Local", role: .destructive) {
+                        do {
+                            try FileManager.default
+                                .removeItem(at: PersistenceController.storeURL)
+                            PersistenceController.shared.container = NSPersistentContainer
+                                .create()
+                            PersistenceController.shared.loadStore()
+                        } catch {
+                            print(error)
+                        }
+                    }
+
+                    Button("Local + iCloud", role: .destructive) {
+                        // TODO: Add iCloud self destruct for debugging
+                    }
+
+                    Button("Cancel", role: .cancel) {
+                        shouldNukeDatabase = false
+                    }
+                    .keyboardShortcut(.defaultAction)
+                }
+            }
+#endif
         }
         .navigationTitle("Settings")
         .onChange(of: userSettings.shouldUseBiometrics) { value in
@@ -267,7 +309,12 @@ struct SettingsView: View {
         } onEnd: {
             shouldResetBiometrics = false
         }
-        .fileExporter(isPresented: $shouldExportAccounts, document: exportFile, contentType: (exportFile?.format ?? .json) == .json ? .json : .commaSeparatedText, defaultFilename: "Passwords") { result in
+        .fileExporter(
+            isPresented: $shouldExportAccounts,
+            document: exportFile,
+            contentType: (exportFile?.format ?? .json) == .json ? .json : .commaSeparatedText,
+            defaultFilename: "Passwords"
+        ) { result in
             switch result {
             case let .success(url):
                 print("Exported at path", url.path)

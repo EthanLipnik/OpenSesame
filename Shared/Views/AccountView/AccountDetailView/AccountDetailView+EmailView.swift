@@ -10,8 +10,11 @@ import SwiftUI
 extension AccountView.AccountDetailsView {
     var emailView: some View {
         VStack(alignment: .leading) {
-            Label((account.username?.contains("@") ?? false) ? "Email" : "Username", systemImage: "person.fill")
-                .foregroundColor(Color.secondary)
+            Label(
+                (account.username?.contains("@") ?? false) ? "Email" : "Username",
+                systemImage: "person.fill"
+            )
+            .foregroundColor(Color.secondary)
             if isEditing {
                 TextField("Email or Username", text: $newUsername)
                     .textFieldStyle(.roundedBorder)
@@ -21,7 +24,10 @@ extension AccountView.AccountDetailsView {
                         Button {
                             account.username?.copyToPasteboard()
                         } label: {
-                            Label("Copy " + (account.username!.contains("@") ? "email" : "username"), systemImage: "doc.on.doc")
+                            Label(
+                                "Copy " + (account.username!.contains("@") ? "email" : "username"),
+                                systemImage: "doc.on.doc"
+                            )
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)

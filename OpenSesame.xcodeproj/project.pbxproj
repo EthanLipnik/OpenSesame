@@ -55,6 +55,7 @@
 		AA08245626DDC3CF006BE956 /* VaultView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */; };
 		AA12A79F26D0A5DB000418C7 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = AA12A79E26D0A5DB000418C7 /* CSV */; };
 		AA12A7A126D0A5E2000418C7 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = AA12A7A026D0A5E2000418C7 /* CSV */; };
+		AA1603412952C498007D0FF3 /* HorizontalSizeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1603402952C498007D0FF3 /* HorizontalSizeClass.swift */; };
 		AA1F6A2526CD68CF004E1A81 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F6A2426CD68CF004E1A81 /* AuthenticationServices.framework */; };
 		AA1F6A2726CD68D4004E1A81 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F6A2626CD68D4004E1A81 /* AuthenticationServices.framework */; };
 		AA1F6A2926CD6993004E1A81 /* VaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F6A2826CD6993004E1A81 /* VaultView.swift */; };
@@ -381,6 +382,7 @@
 		AA07049326F284E00039A7FE /* NewNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteView.swift; sourceTree = "<group>"; };
 		AA08244F26DDC304006BE956 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AA08245426DDC3CF006BE956 /* VaultView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultView+ViewModel.swift"; sourceTree = "<group>"; };
+		AA1603402952C498007D0FF3 /* HorizontalSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSizeClass.swift; sourceTree = "<group>"; };
 		AA1F6A2426CD68CF004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		AA1F6A2626CD68D4004E1A81 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
 		AA1F6A2826CD6993004E1A81 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 				AA47A76D26E810DC0038ADD2 /* AuthenticationView.swift */,
 				AA2BAC1C26F6486700D99DA3 /* HalfSheetModal.swift */,
 				AACFCDB526FD0A3800778D78 /* ShareSheet.swift */,
+				AA1603402952C498007D0FF3 /* HorizontalSizeClass.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1422,6 +1425,7 @@
 				AA47A76F26E810DC0038ADD2 /* AuthenticationView.swift in Sources */,
 				AAD16AC926EFA2EC00CCAB56 /* BoardingView+Welcome.swift in Sources */,
 				AA91286926DEBBFE007B9B30 /* TipJarView.swift in Sources */,
+				AA1603412952C498007D0FF3 /* HorizontalSizeClass.swift in Sources */,
 				AA49EA2A26D3EB7500B12838 /* AccountView+Content.swift in Sources */,
 				AA3754F226DD38D2007FF26F /* VaultView+CardItemView.swift in Sources */,
 				AA5EB75E26DD84E800390B85 /* UserSettings.swift in Sources */,
@@ -1789,6 +1793,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan QR codes for Two Factor Authentication.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "View your accounts";
@@ -1798,7 +1803,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1807,6 +1812,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = OpenSesame;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1826,6 +1834,7 @@
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan QR codes for Two Factor Authentication.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "View your accounts";
@@ -1835,7 +1844,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1844,6 +1853,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = OpenSesame;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
@@ -1878,7 +1890,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.1.1;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=500 -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ethanlipnik.OpenSesame;
@@ -1916,7 +1928,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.1.1;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=500";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ethanlipnik.OpenSesame;

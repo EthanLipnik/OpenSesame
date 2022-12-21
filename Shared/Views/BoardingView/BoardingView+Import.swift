@@ -9,11 +9,14 @@ import SwiftUI
 
 extension BoardingView {
     struct ImportView: View {
-        @Environment(\.managedObjectContext) var viewContext
+        @Environment(\.managedObjectContext)
+        var viewContext
 
-        @Binding var selectedIndex: Int
+        @Binding
+        var selectedIndex: Int
 
-        @State private var importAppFormat: AppFormat?
+        @State
+        private var importAppFormat: AppFormat?
 
         var body: some View {
             VStack(spacing: 30) {
@@ -52,19 +55,19 @@ extension BoardingView {
             }
             .padding(30)
             .sheet(item: $importAppFormat) { format in
-                #if os(macOS)
+#if os(macOS)
+                OpenSesame.ImportView(importManager: ImportManager(appFormat: format))
+                    .environment(\.managedObjectContext, viewContext)
+#else
+                NavigationView {
                     OpenSesame.ImportView(importManager: ImportManager(appFormat: format))
                         .environment(\.managedObjectContext, viewContext)
-                #else
-                    NavigationView {
-                        OpenSesame.ImportView(importManager: ImportManager(appFormat: format))
-                            .environment(\.managedObjectContext, viewContext)
-                            .navigationTitle("Import")
-                            .navigationBarTitleDisplayMode(.inline)
-                    }
-                    .navigationViewStyle(.stack)
-                    .interactiveDismissDisabled()
-                #endif
+                        .navigationTitle("Import")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .navigationViewStyle(.stack)
+                .interactiveDismissDisabled()
+#endif
             }
         }
     }

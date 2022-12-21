@@ -26,42 +26,45 @@ extension ContentView {
         }
         .listStyle(.sidebar)
         .toolbar {
-            #if os(iOS)
-                ToolbarItem(placement: ToolbarItemPlacement.navigation) {
-                    HStack {
-                        Button {
-                            showSettings.toggle()
-                        } label: {
-                            Label("Settings", systemImage: "gearshape.fill")
-                        }
-                        .sheet(isPresented: $showSettings) {
-                            NavigationView {
-                                SettingsView()
-                                    .environment(\.managedObjectContext, viewContext)
-                                    .toolbar {
-                                        ToolbarItem(placement: .navigationBarTrailing) {
-                                            Button("Done") {
-                                                showSettings.toggle()
-                                            }
+#if os(iOS)
+            ToolbarItem(placement: ToolbarItemPlacement.navigation) {
+                HStack {
+                    Button {
+                        showSettings.toggle()
+                    } label: {
+                        Label("Settings", systemImage: "gearshape.fill")
+                    }
+                    .sheet(isPresented: $showSettings) {
+                        NavigationView {
+                            SettingsView()
+                                .environment(\.managedObjectContext, viewContext)
+                                .toolbar {
+                                    ToolbarItem(placement: .navigationBarTrailing) {
+                                        Button("Done") {
+                                            showSettings.toggle()
                                         }
                                     }
-                            }
+                                }
                         }
                     }
                 }
-            #endif
-            #if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            #endif
+            }
+#endif
+#if os(iOS)
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+            }
+#endif
             ToolbarItem {
                 Button(action: addItem) {
                     Label("Add Vault", systemImage: "rectangle.stack.fill.badge.plus")
                 }
             }
         }
-        .confirmationDialog("Are you sure you want to delete this '\(vaultToBeDeleted?.name?.capitalized ?? "vault")'? You cannot retreive it when it is gone.", isPresented: $shouldDeleteVault) { // COnfirmation dialogue for deleting a vault.
+        .confirmationDialog(
+            "Are you sure you want to delete this '\(vaultToBeDeleted?.name?.capitalized ?? "vault")'? You cannot retreive it when it is gone.",
+            isPresented: $shouldDeleteVault
+        ) { // COnfirmation dialogue for deleting a vault.
             Button("Delete", role: .destructive) {
                 guard let vault = vaultToBeDeleted else { return }
 
@@ -79,57 +82,75 @@ extension ContentView {
         .navigationTitle("OpenSesame")
         .onAppear {
             guard selectedVault == nil else { return }
-            #if os(macOS)
+#if os(macOS)
+            if horizontalClass == .regular {
                 selectedVault = vaults.first
-            #else
-                if UIDevice.current.userInterfaceIdiom == .pad {
-                    selectedVault = vaults.first
-                }
-            #endif
+            }
+#else
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                selectedVault = vaults.first
+            }
+#endif
         }
-        #if !os(macOS)
-        .overlay(vaults.isEmpty ? Text("Add a new vault")
-            .font(.title.bold())
-            .foregroundColor(Color.secondary) : nil)
-        #endif
-            .overlay(
-                (didRequestReview || !shouldShowReviewRequest) || OpenSesameApp.isMac ? nil :
-                    Button {
-                        guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1581907821?action=write-review")
-                        else { fatalError("Expected a valid URL") }
-                        #if os(iOS)
-                            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-                        #else
-                            NSWorkspace.shared.open(writeReviewURL)
-                        #endif
+#if !os(macOS)
+        .overlay(
+            vaults.isEmpty ? Text("Add a new vault")
+                .multilineTextAlignment(.center)
+                .font(.title.bold())
+                .foregroundColor(Color.secondary) : nil
+        )
+#endif
+        .overlay(
+            (didRequestReview || !shouldShowReviewRequest) || OpenSesameApp.isMac ? nil :
+                Button {
+                    guard let writeReviewURL =
+                        URL(
+                            string: "https://apps.apple.com/app/id1581907821?action=write-review"
+                        )
+                    else { fatalError("Expected a valid URL") }
+#if os(iOS)
+                    UIApplication.shared.open(
+                        writeReviewURL,
+                        options: [:],
+                        completionHandler: nil
+                    )
+#else
+                    NSWorkspace.shared.open(writeReviewURL)
+#endif
 
-                        UserDefaults.standard.set(true, forKey: "didRequestReview")
-                    } label: {
+                    UserDefaults.standard.set(true, forKey: "didRequestReview")
+                } label: {
+                    ZStack {
                         ZStack {
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
                                 .fill(Material.thin)
-                                .shadow(radius: 30)
-                            HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(Color.accentColor)
-                                VStack(alignment: .leading) {
-                                    Text("Enjoing OpenSesame?")
-                                        .font(.headline)
-                                    Text("Consider giving it a review!")
-                                        .allowsTightening(true)
-                                        .minimumScaleFactor(0.8)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                            }.padding()
-                        }
-                    }
-                    .frame(height: 60)
-                    .padding()
-                    .transition(.scale)
-                    .animation(.default, value: didRequestReview),
 
-                alignment: .bottom
-            )
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .stroke(Material.thick, lineWidth: 4)
+                        }
+                        .compositingGroup()
+                        .shadow(color: .black.opacity(0.1), radius: 16, y: 8)
+                        HStack {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(Color.accentColor)
+                            VStack(alignment: .leading) {
+                                Text("Enjoing OpenSesame?")
+                                    .font(.headline)
+                                Text("Consider giving it a review!")
+                                    .allowsTightening(true)
+                                    .minimumScaleFactor(0.8)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }.padding()
+                    }
+                }
+                .frame(height: 60)
+                .padding()
+                .transition(.scale)
+                .animation(.default, value: didRequestReview),
+
+            alignment: .bottom
+        )
     }
 
     private var vaultSection: some View {
@@ -319,7 +340,9 @@ extension ContentView {
                 try viewContext.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // fatalError() causes the application to generate a crash log and terminate. You
+                // should not use this function in a shipping application, although it may be useful
+                // during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }

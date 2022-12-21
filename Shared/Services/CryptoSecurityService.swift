@@ -36,7 +36,10 @@ class CryptoSecurityService {
         return SymmetricKey(data: keyHash)
     }
 
-    static func decrypt(_ combinedData: Data, encryptionKey: SymmetricKey? = encryptionKey) throws -> String? {
+    static func decrypt(
+        _ combinedData: Data,
+        encryptionKey: SymmetricKey? = encryptionKey
+    ) throws -> String? {
         guard let key = encryptionKey else { throw CocoaError(.coderInvalidValue) }
 
         let sealedBox = try AES.GCM.SealedBox(combined: combinedData)
@@ -50,19 +53,25 @@ class CryptoSecurityService {
 
         let nonce = Data(hexString: nonceStr)
 
-        guard let ciphertext = Data(base64Encoded: string) else { throw CocoaError(.coderReadCorrupt) }
+        guard let ciphertext = Data(base64Encoded: string)
+        else { throw CocoaError(.coderReadCorrupt) }
         let tag = Data(hexString: tag)
 
-        let sealedBox = try AES.GCM.SealedBox(nonce: AES.GCM.Nonce(data: nonce!),
-                                              ciphertext: ciphertext,
-                                              tag: tag!)
+        let sealedBox = try AES.GCM.SealedBox(
+            nonce: AES.GCM.Nonce(data: nonce!),
+            ciphertext: ciphertext,
+            tag: tag!
+        )
 
         let decryptedData = try AES.GCM.open(sealedBox, using: key)
 
         return String(decoding: decryptedData, as: UTF8.self)
     }
 
-    static func encrypt(_ string: String, encryptionKey: SymmetricKey? = encryptionKey) throws -> Data? {
+    static func encrypt(
+        _ string: String,
+        encryptionKey: SymmetricKey? = encryptionKey
+    ) throws -> Data? {
         guard let key = encryptionKey else { throw CocoaError(.coderValueNotFound) }
 
         let plainData = string.data(using: .utf8)
@@ -72,7 +81,11 @@ class CryptoSecurityService {
         return combined
     }
 
-    static func randomString(length: Int, numbersOnly: Bool = false, method: StringGeneratorMethod = .regular) -> String? {
+    static func randomString(
+        length: Int,
+        numbersOnly: Bool = false,
+        method: StringGeneratorMethod = .regular
+    ) -> String? {
         switch method {
         case .regular:
             var letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -108,7 +121,10 @@ class CryptoSecurityService {
             .synchronizable(true)
             .getData("encryptionTest")
         {
-            return (try? decrypt(test, encryptionKey: CryptoSecurityService.generateKey(fromString: password))) != nil
+            return (try? decrypt(
+                test,
+                encryptionKey: CryptoSecurityService.generateKey(fromString: password)
+            )) != nil
         } else {
             return false
         }

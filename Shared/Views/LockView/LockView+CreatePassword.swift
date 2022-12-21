@@ -9,7 +9,8 @@ import SwiftUI
 
 extension LockView {
     struct CreatePasswordView: View {
-        @State private var password: String = ""
+        @State
+        private var password: String = ""
         let completionAction: (String) -> Void
 
         var body: some View {
@@ -24,9 +25,9 @@ extension LockView {
                     .font(.system(.body, design: .monospaced))
                     .textFieldStyle(.plain)
                     .disableAutocorrection(true)
-                    #if os(iOS)
+#if os(iOS)
                         .autocapitalization(.none)
-                    #endif
+#endif
                 }
                 Button("Continue") {
                     guard !password.isEmpty else { return }

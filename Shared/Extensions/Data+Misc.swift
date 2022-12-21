@@ -27,7 +27,7 @@ extension Data {
 
     /// Hexadecimal string representation of `Data` object.
     var hexadecimal: String {
-        return map { String(format: "%02x", $0) }
+        map { String(format: "%02x", $0) }
             .joined()
     }
 }

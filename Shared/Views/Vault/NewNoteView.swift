@@ -10,16 +10,21 @@ import SwiftUI
 struct NewNoteView: View {
     // MARK: - Environment
 
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.dismiss)
+    var dismiss
+    @Environment(\.managedObjectContext)
+    var viewContext
 
     // MARK: - Variables
 
     let selectedVault: Vault
 
-    @State private var name: String = ""
-    @State private var bodyTxt: String = ""
-    @State private var selectedColor: Int = 0
+    @State
+    private var name: String = ""
+    @State
+    private var bodyTxt: String = ""
+    @State
+    private var selectedColor: Int = 0
 
     // MARK: - View
 
@@ -41,11 +46,11 @@ struct NewNoteView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom))
-                #if os(macOS)
+#if os(macOS)
                     .shadow(radius: 15, y: 8)
-                #else
+#else
                     .shadow(radius: 30, y: 8)
-                #endif
+#endif
                 VStack {
                     TextField("Name", text: $name)
                         .font(.system(.title, design: .rounded).bold())
@@ -63,7 +68,10 @@ struct NewNoteView: View {
                     .colorScheme(.light)
                     TextEditor(text: $bodyTxt)
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay)
+                        )
                         .font(.system(.title3, design: .monospaced))
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
@@ -77,18 +85,18 @@ struct NewNoteView: View {
                     dismiss.callAsFunction()
                 }
                 .keyboardShortcut(.cancelAction)
-                #if os(iOS)
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
 
                 Spacer()
 
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
                     .disabled(name.isEmpty || bodyTxt.isEmpty)
-                #if os(iOS)
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
             }.padding()
         }
     }

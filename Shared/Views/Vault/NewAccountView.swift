@@ -13,15 +13,20 @@ import SwiftUI
 struct NewAccountView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext)
+    private var viewContext
 
     // MARK: - Variables
 
-    @State private var website: String = ""
-    @State private var username: String = ""
-    @State private var password: String = ""
+    @State
+    private var website: String = ""
+    @State
+    private var username: String = ""
+    @State
+    private var password: String = ""
 
-    @Binding var isPresented: Bool
+    @Binding
+    var isPresented: Bool
     let selectedVault: Vault
 
     // MARK: - View
@@ -40,11 +45,11 @@ struct NewAccountView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("Website or Name", text: $website)
                             .textFieldStyle(.roundedBorder)
-                        #if os(iOS)
+#if os(iOS)
                             .keyboardType(.URL)
                             .textInputAutocapitalization(.none)
                             .textContentType(.URL)
-                        #endif
+#endif
                             .disableAutocorrection(true)
                     }
                     VStack(alignment: .leading) {
@@ -53,13 +58,13 @@ struct NewAccountView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         TextField("Email or Username", text: $username)
                             .textFieldStyle(.roundedBorder)
-                        #if os(iOS)
+#if os(iOS)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                             .textContentType(.emailAddress)
-                        #else
+#else
                             .textContentType(.username)
-                        #endif
+#endif
                             .disableAutocorrection(true)
                     }
 
@@ -72,28 +77,28 @@ struct NewAccountView: View {
                                 SecureField("Password", text: $password)
                                     .textFieldStyle(.roundedBorder)
                                     .font(.system(.body, design: .monospaced))
-                                #if os(iOS)
+#if os(iOS)
                                     .autocapitalization(.none)
                                     .textContentType(.newPassword)
-                                #endif
+#endif
                                     .disableAutocorrection(true)
                                 Text(password.isEmpty ? " " : password)
                                     .font(.system(.body, design: .monospaced))
                             }
-                            #if os(iOS)
-                                Button {
-                                    password = Keychain.generatePassword()
-                                } label: {
-                                    Image(systemName: "arrow.clockwise")
-                                        .imageScale(.large)
-                                }
-                            #endif
+#if os(iOS)
+                            Button {
+                                password = Keychain.generatePassword()
+                            } label: {
+                                Image(systemName: "arrow.clockwise")
+                                    .imageScale(.large)
+                            }
+#endif
                         }
                     }
                 }
-                #if os(macOS)
+#if os(macOS)
                 .padding(5)
-                #endif
+#endif
             }
             .padding()
             Spacer()
@@ -102,22 +107,22 @@ struct NewAccountView: View {
                     isPresented = false
                 }
                 .keyboardShortcut(.cancelAction)
-                #if os(iOS)
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
 
                 Spacer()
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
                     .disabled(website.isEmpty || username.isEmpty || password.isEmpty)
-                #if os(iOS)
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
             }.padding()
         }
-        #if os(macOS)
+#if os(macOS)
         .frame(width: 300)
-        #endif
+#endif
     }
 
     // MARK: - Functions
@@ -146,13 +151,21 @@ struct NewAccountView: View {
 
             ASCredentialIdentityStore.shared.getState { state in
                 if state.isEnabled {
-                    let domainIdentifer = ASPasswordCredentialIdentity(serviceIdentifier: ASCredentialServiceIdentifier(identifier: website, type: .domain),
-                                                                       user: username,
-                                                                       recordIdentifier: nil)
+                    let domainIdentifer = ASPasswordCredentialIdentity(
+                        serviceIdentifier: ASCredentialServiceIdentifier(
+                            identifier: website,
+                            type: .domain
+                        ),
+                        user: username,
+                        recordIdentifier: nil
+                    )
 
-                    ASCredentialIdentityStore.shared.saveCredentialIdentities([domainIdentifer], completion: { _, error in
-                        print(error?.localizedDescription ?? "No errors in saving credentials")
-                    })
+                    ASCredentialIdentityStore.shared.saveCredentialIdentities(
+                        [domainIdentifer],
+                        completion: { _, error in
+                            print(error?.localizedDescription ?? "No errors in saving credentials")
+                        }
+                    )
                 }
             }
 
@@ -160,9 +173,9 @@ struct NewAccountView: View {
         } catch {
             print(error)
 
-            #if os(macOS)
-                NSAlert(error: error).runModal()
-            #endif
+#if os(macOS)
+            NSAlert(error: error).runModal()
+#endif
         }
     }
 }

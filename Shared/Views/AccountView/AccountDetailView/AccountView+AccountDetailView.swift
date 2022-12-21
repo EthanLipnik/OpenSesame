@@ -11,27 +11,39 @@ extension AccountView {
     struct AccountDetailsView: View {
         // MARK: - Environment
 
-        @Environment(\.managedObjectContext) var viewContext
+        @Environment(\.managedObjectContext)
+        var viewContext
 
         // MARK: - Variables
 
-        @StateObject var otpService: OTPAuthenticatorService
+        @StateObject
+        var otpService: OTPAuthenticatorService
 
-        @State var account: Account
-        @Binding var isEditing: Bool
+        @State
+        var account: Account
+        @Binding
+        var isEditing: Bool
 
-        @Binding var isAddingVerificationCode: Bool
-        @State var isScanningQRCode: Bool = false
+        @Binding
+        var isAddingVerificationCode: Bool
+        @State
+        var isScanningQRCode: Bool = false
 
-        @State var isShowingPassword: Bool = false
+        @State
+        var isShowingPassword: Bool = false
 
-        @State var newUsername: String = ""
-        @State var newPassword: String = ""
+        @State
+        var newUsername: String = ""
+        @State
+        var newPassword: String = ""
 
-        @State var decryptedPassword: String?
-        @State var newVerificationURL: String = ""
+        @State
+        var decryptedPassword: String?
+        @State
+        var newVerificationURL: String = ""
 
-        @State var displayedPassword: String = ""
+        @State
+        var displayedPassword: String = ""
 
         // MARK: - Init
 
@@ -44,7 +56,8 @@ extension AccountView {
                 if let url = URL(string: account.otpAuth ?? ""), url.isValidURL {
                     _otpService = StateObject(wrappedValue: OTPAuthenticatorService(url))
                 } else {
-                    _otpService = StateObject(wrappedValue: OTPAuthenticatorService(account.otpAuth ?? ""))
+                    _otpService =
+                        StateObject(wrappedValue: OTPAuthenticatorService(account.otpAuth ?? ""))
                 }
             } else {
                 _otpService = StateObject(wrappedValue: OTPAuthenticatorService())
@@ -93,7 +106,8 @@ extension AccountView {
                     }
                 }
                 .onAppear {
-                    displayedPassword = CryptoSecurityService.randomString(length: Int(account.passwordLength))!
+                    displayedPassword = CryptoSecurityService
+                        .randomString(length: Int(account.passwordLength))!
                 }
             }
         }

@@ -10,8 +10,8 @@ import SwiftUI
 extension VaultView {
     var list: some View {
         List {
-            if !notes.isEmpty {
-                if accounts.isEmpty && cards.isEmpty {
+            if !notes.isEmpty, (tokens.contains(.notes) || tokens.isEmpty) {
+                if accounts.isEmpty, cards.isEmpty {
                     notesList
                 } else {
                     Section("Notes") {
@@ -19,8 +19,8 @@ extension VaultView {
                     }
                 }
             }
-            if !cards.isEmpty {
-                if accounts.isEmpty && notes.isEmpty {
+            if !cards.isEmpty, (tokens.contains(.cards) || tokens.isEmpty) {
+                if accounts.isEmpty, notes.isEmpty {
                     cardsList
                 } else {
                     Section("Cards") {
@@ -29,8 +29,8 @@ extension VaultView {
                 }
             }
 
-            if !accounts.isEmpty {
-                if cards.isEmpty && notes.isEmpty {
+            if !accounts.isEmpty, (tokens.contains(.accounts) || tokens.isEmpty) {
+                if cards.isEmpty, notes.isEmpty {
                     accountsList
                 } else {
                     Section("Accounts") {
@@ -39,39 +39,61 @@ extension VaultView {
                 }
             }
         }
-        #if !os(macOS)
-        .overlay(accounts.isEmpty && cards.isEmpty && notes.isEmpty ? Text("Add a new account, note, or card")
-            .font(.title.bold())
-            .foregroundColor(Color.secondary)
-            .padding(.horizontal) : nil)
-        #endif
-            .confirmationDialog("Are you sure you want to delete this account? You cannot retreive it when it is gone.", isPresented: $shouldDeleteAccount) {
-                Button("Delete", role: .destructive) {
-                    deleteItems(offsets: IndexSet([accounts.firstIndex(of: itemToBeDeleted!.account!)!]), type: .account)
-                }
-
-                Button("Cancel", role: .cancel) {
-                    shouldDeleteAccount = false
-                }.keyboardShortcut(.defaultAction)
+#if !os(macOS)
+        .overlay(
+            accounts.isEmpty && cards.isEmpty && notes
+                .isEmpty ? Text("Add a new account, note, or card")
+                .multilineTextAlignment(.center)
+                .font(.title.bold())
+                .foregroundColor(Color.secondary)
+                .padding(.horizontal) : nil
+        )
+#endif
+        .confirmationDialog(
+            "Are you sure you want to delete this account? You cannot retreive it when it is gone.",
+            isPresented: $shouldDeleteAccount
+        ) {
+            Button("Delete", role: .destructive) {
+                deleteItems(
+                    offsets: IndexSet([accounts.firstIndex(of: itemToBeDeleted!.account!)!]),
+                    type: .account
+                )
             }
-            .confirmationDialog("Are you sure you want to delete this card? You cannot retreive it when it is gone.", isPresented: $shouldDeleteCard) {
-                Button("Delete", role: .destructive) {
-                    deleteItems(offsets: IndexSet([cards.firstIndex(of: itemToBeDeleted!.card!)!]), type: .card)
-                }
 
-                Button("Cancel", role: .cancel) {
-                    shouldDeleteCard = false
-                }.keyboardShortcut(.defaultAction)
+            Button("Cancel", role: .cancel) {
+                shouldDeleteAccount = false
+            }.keyboardShortcut(.defaultAction)
+        }
+        .confirmationDialog(
+            "Are you sure you want to delete this card? You cannot retreive it when it is gone.",
+            isPresented: $shouldDeleteCard
+        ) {
+            Button("Delete", role: .destructive) {
+                deleteItems(
+                    offsets: IndexSet([cards.firstIndex(of: itemToBeDeleted!.card!)!]),
+                    type: .card
+                )
             }
-            .confirmationDialog("Are you sure you want to delete this note? You cannot retreive it when it is gone.", isPresented: $shouldDeleteNote) {
-                Button("Delete", role: .destructive) {
-                    deleteItems(offsets: IndexSet([notes.firstIndex(of: itemToBeDeleted!.note!)!]), type: .note)
-                }
 
-                Button("Cancel", role: .cancel) {
-                    shouldDeleteNote = false
-                }.keyboardShortcut(.defaultAction)
+            Button("Cancel", role: .cancel) {
+                shouldDeleteCard = false
+            }.keyboardShortcut(.defaultAction)
+        }
+        .confirmationDialog(
+            "Are you sure you want to delete this note? You cannot retreive it when it is gone.",
+            isPresented: $shouldDeleteNote
+        ) {
+            Button("Delete", role: .destructive) {
+                deleteItems(
+                    offsets: IndexSet([notes.firstIndex(of: itemToBeDeleted!.note!)!]),
+                    type: .note
+                )
             }
+
+            Button("Cancel", role: .cancel) {
+                shouldDeleteNote = false
+            }.keyboardShortcut(.defaultAction)
+        }
     }
 
     private var notesList: some View {
@@ -84,7 +106,10 @@ extension VaultView {
 
                         try? viewContext.save()
                     } label: {
-                        Label(note.isPinned ? "Unpin" : "Pin", systemImage: note.isPinned ? "pin.slash" : "pin")
+                        Label(
+                            note.isPinned ? "Unpin" : "Pin",
+                            systemImage: note.isPinned ? "pin.slash" : "pin"
+                        )
                     }
                     Button("Delete", role: .destructive) {
                         itemToBeDeleted = .init(note)
@@ -119,7 +144,10 @@ extension VaultView {
 
                         try? viewContext.save()
                     } label: {
-                        Label(card.isPinned ? "Unpin" : "Pin", systemImage: card.isPinned ? "pin.slash" : "pin")
+                        Label(
+                            card.isPinned ? "Unpin" : "Pin",
+                            systemImage: card.isPinned ? "pin.slash" : "pin"
+                        )
                     }
                     Button("Delete", role: .destructive) {
                         itemToBeDeleted = .init(card)
@@ -154,7 +182,10 @@ extension VaultView {
 
                         try? viewContext.save()
                     } label: {
-                        Label(account.isPinned ? "Unpin" : "Pin", systemImage: account.isPinned ? "pin.slash" : "pin")
+                        Label(
+                            account.isPinned ? "Unpin" : "Pin",
+                            systemImage: account.isPinned ? "pin.slash" : "pin"
+                        )
                     }
                     Button("Delete", role: .destructive) {
                         itemToBeDeleted = .init(account)

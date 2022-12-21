@@ -9,7 +9,8 @@ import SwiftUI
 
 extension BoardingView {
     struct WelcomeView: View {
-        @Binding var selectedIndex: Int
+        @Binding
+        var selectedIndex: Int
 
         var body: some View {
             VStack {
@@ -23,7 +24,10 @@ extension BoardingView {
                     ItemView(message: "Vaults", image: "lock.square.stack.fill")
                     ItemView(message: "On-Device encryption", image: "key.fill")
                     ItemView(message: "iCloud syncing", image: "icloud.fill")
-                    ItemView(message: "Two factor authentication", image: "lock.rectangle.on.rectangle.fill")
+                    ItemView(
+                        message: "Two factor authentication",
+                        image: "lock.rectangle.on.rectangle.fill"
+                    )
                     ItemView(message: "View on other devices", image: "laptopcomputer")
                 }
                 Spacer()
@@ -43,7 +47,7 @@ extension BoardingView {
         }
 
         func ItemView(message: String, image: String) -> some View {
-            return ZStack {
+            ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("Tertiary"))
                     .frame(height: 60)

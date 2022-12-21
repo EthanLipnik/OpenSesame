@@ -3,7 +3,8 @@ import CoreMotion
 import SwiftUI
 
 struct ParallaxMotionModifier: ViewModifier {
-    @ObservedObject var manager: MotionManager
+    @ObservedObject
+    var manager: MotionManager
     var magnitude: Double
 
     func body(content: Content) -> some View {
@@ -14,8 +15,10 @@ struct ParallaxMotionModifier: ViewModifier {
 }
 
 class MotionManager: ObservableObject {
-    @Published var pitch: Double = 0.0
-    @Published var roll: Double = 0.0
+    @Published
+    var pitch: Double = 0.0
+    @Published
+    var roll: Double = 0.0
 
     private var manager: CMMotionManager
 
@@ -28,7 +31,7 @@ class MotionManager: ObservableObject {
                 return
             }
 
-            if let motionData = motionData {
+            if let motionData {
                 withAnimation(.spring()) {
                     self.pitch = motionData.attitude.pitch
                     self.roll = motionData.attitude.roll

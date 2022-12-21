@@ -13,8 +13,10 @@ import DomainParser
 class AutoFillService: ObservableObject {
     lazy var viewContext = PersistenceController.shared.container.viewContext
 
-    @Published var suggestedAccounts: [Account] = []
-    @Published var allAccounts: [Account] = []
+    @Published
+    var suggestedAccounts: [Account] = []
+    @Published
+    var allAccounts: [Account] = []
 
     lazy var selectedCredential: ASPasswordCredentialIdentity? = nil
 
@@ -34,7 +36,9 @@ class AutoFillService: ObservableObject {
         }
     }
 
-    func loadAccountsForServiceIdentifiers(_ serviceIdentifiers: [ASCredentialServiceIdentifier]) throws {
+    func loadAccountsForServiceIdentifiers(
+        _ serviceIdentifiers: [ASCredentialServiceIdentifier]
+    ) throws {
         let domainParse = try DomainParser()
 
         let hosts = serviceIdentifiers

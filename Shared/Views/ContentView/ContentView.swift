@@ -8,13 +8,14 @@
 import CoreData
 import SwiftUI
 #if canImport(UIKit)
-    import UIKit
+import UIKit
 #endif
 
 struct ContentView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.managedObjectContext)
+    var viewContext
 
     // MARK: - CoreData Variables
 
@@ -47,35 +48,39 @@ struct ContentView: View {
 
     // MARK: - Variables
 
-    @Binding var isLocked: Bool
+    @Binding
+    var isLocked: Bool
 
-    @FocusState var isNewVaultFocused: Bool
-    @State var isCreatingNewVault: Bool = false
-    @State var newVaultName: String = ""
+    @FocusState
+    var isNewVaultFocused: Bool
+    @State
+    var isCreatingNewVault: Bool = false
+    @State
+    var newVaultName: String = ""
 
-    @State var selectedVault: Vault?
+    @State
+    var selectedVault: Vault?
 
-    @State var shouldDeleteVault: Bool = false
-    @State var vaultToBeDeleted: Vault?
-    @State var vaultToBeRenamed: Vault?
+    @State
+    var shouldDeleteVault: Bool = false
+    @State
+    var vaultToBeDeleted: Vault?
+    @State
+    var vaultToBeRenamed: Vault?
 
-    @State var showSettings: Bool = false
+    @State
+    var showSettings: Bool = false
 
-    @State private var openedFile: File?
+    @State
+    private var openedFile: File?
 
-    @AppStorage("didRequestReview") var didRequestReview: Bool = false
-    @State var shouldShowReviewRequest: Bool = false
+    @AppStorage("didRequestReview")
+    var didRequestReview: Bool = false
+    @State
+    var shouldShowReviewRequest: Bool = false
 
-    #if !os(macOS)
-        @Environment(\.horizontalSizeClass) var horizontalClass
-    #else
-        enum HorizontalClass {
-            case compact
-            case regular
-        }
-
-        let horizontalClass = HorizontalClass.regular
-    #endif
+    @Environment(\.horizontalSizeClass)
+    var horizontalClass
 
     // MARK: - View
 
@@ -88,23 +93,29 @@ struct ContentView: View {
 
                     // Add empty views for when the NavigationView is empty.
                     List {}
-                    #if os(macOS)
+#if os(macOS)
                         .listStyle(.inset(alternatesRowBackgrounds: true))
-                    #endif
+#endif
                     EmptyView()
-                    #if os(macOS)
+#if os(macOS)
                         .frame(minWidth: 300)
                         .toolbar {
                             ToolbarItem {
                                 Spacer()
                             }
                         }
-                    #endif
+#endif
                 }
             } else {
+#if os(macOS)
+                NavigationStack {
+                    list
+                }
+#else
                 NavigationView {
                     list
                 }
+#endif
             }
         }
         // URL Actions for keyboard shortcuts and documents.
@@ -120,9 +131,14 @@ struct ContentView: View {
             guard !isLocked else { return }
 
             if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-               let query = components.query, let url = components.string?.replacingOccurrences(of: "?" + query, with: ""), let queryItems = components.queryItems
+               let query = components.query, let url = components.string?.replacingOccurrences(
+                   of: "?" + query,
+                   with: ""
+               ), let queryItems = components.queryItems
             {
-                if let type = queryItems.first(where: { $0.name == "type" }), type.value == "vault", url == "openSesame://new" {
+                if let type = queryItems.first(where: { $0.name == "type" }), type.value == "vault",
+                   url == "openSesame://new"
+                {
                     addItem()
                 }
             } else {
@@ -130,15 +146,15 @@ struct ContentView: View {
             }
         }
         .sheet(item: $openedFile) { file in
-            #if os(macOS)
+#if os(macOS)
+            ImportDocumentView(file: file)
+                .environment(\.managedObjectContext, viewContext)
+#else
+            NavigationView {
                 ImportDocumentView(file: file)
                     .environment(\.managedObjectContext, viewContext)
-            #else
-                NavigationView {
-                    ImportDocumentView(file: file)
-                        .environment(\.managedObjectContext, viewContext)
-                }.navigationViewStyle(.stack)
-            #endif
+            }.navigationViewStyle(.stack)
+#endif
         }
         .onAppear {
             if UserDefaults.standard.bool(forKey: "hasBeenlaunched") {
@@ -147,10 +163,10 @@ struct ContentView: View {
                 UserDefaults.standard.set(true, forKey: "hasBeenlaunched")
             }
 
-            #if DEBUG
-                shouldShowReviewRequest = true
-                didRequestReview = false
-            #endif
+#if DEBUG
+            shouldShowReviewRequest = true
+            didRequestReview = false
+#endif
         }
     }
 }
@@ -162,10 +178,10 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 #if os(iOS)
-    extension UISplitViewController {
-        override open func viewDidLoad() {
-            super.viewDidLoad()
-            show(.primary)
-        }
+extension UISplitViewController {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        show(.primary)
     }
+}
 #endif

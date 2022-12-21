@@ -11,44 +11,48 @@ import SwiftUI
 struct MainView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext)
+    private var viewContext
 
     // MARK: - Variables
 
-    @Binding var isLocked: Bool
+    @Binding
+    var isLocked: Bool
 
     // MARK: - View
 
     var body: some View {
         Group {
-            #if os(iOS)
+#if os(iOS)
 
-                // MARK: - ContentView
+            // MARK: - ContentView
 
-                /// ContentView is the main page that displays the vaults. Only shows after login to prevent any peeping.
-                /// Even though it is initialized, they still can't decrypt important data until the user unlocks the app.
-                ContentView(isLocked: $isLocked)
-                    .environment(\.managedObjectContext, viewContext)
-                    .opacity(isLocked ? 0 : 1)
-                    .overlay(
-                        lockView
-                    )
-                    .animation(.default, value: isLocked)
-            #else
-                ZStack {
-                    if !isLocked {
-                        ContentView(isLocked: $isLocked)
-                            .environment(\.managedObjectContext, viewContext)
-                            .opacity(isLocked ? 0 : 1)
-                            .blur(radius: isLocked ? 25 : 0)
-                            .allowsHitTesting(!isLocked)
-                            .animation(.default, value: isLocked)
-                    }
+            /// ContentView is the main page that displays the vaults. Only shows after login to
+            /// prevent any peeping.
+            /// Even though it is initialized, they still can't decrypt important data until the
+            /// user unlocks the app.
+            ContentView(isLocked: $isLocked)
+                .environment(\.managedObjectContext, viewContext)
+                .opacity(isLocked ? 0 : 1)
+                .overlay(
                     lockView
-                        .allowsHitTesting(isLocked)
+                )
+                .animation(.default, value: isLocked)
+#else
+            ZStack {
+                if !isLocked {
+                    ContentView(isLocked: $isLocked)
+                        .environment(\.managedObjectContext, viewContext)
+                        .opacity(isLocked ? 0 : 1)
+                        .blur(radius: isLocked ? 25 : 0)
+                        .allowsHitTesting(!isLocked)
                         .animation(.default, value: isLocked)
                 }
-            #endif
+                lockView
+                    .allowsHitTesting(isLocked)
+                    .animation(.default, value: isLocked)
+            }
+#endif
         }
     }
 
@@ -61,7 +65,8 @@ struct MainView: View {
         .environment(\.managedObjectContext, viewContext)
         .opacity(isLocked ? 1 : 0)
         .blur(radius: isLocked ? 0 : 25)
-        .allowsHitTesting(isLocked) // Prevent lock screen from being interacted with even though it's in the foreground.
+        .allowsHitTesting(isLocked) // Prevent lock screen from being interacted with even though
+        // it's in the foreground.
     }
 }
 

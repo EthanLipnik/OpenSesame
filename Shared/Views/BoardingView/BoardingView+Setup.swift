@@ -9,11 +9,14 @@ import SwiftUI
 
 extension BoardingView {
     struct SetupView: View {
-        @Binding var encryptionTestDoesntExist: Bool
-        @Binding var selectedIndex: Int
+        @Binding
+        var encryptionTestDoesntExist: Bool
+        @Binding
+        var selectedIndex: Int
         let completion: (String) -> Void
 
-        @State private var masterPassword: String = ""
+        @State
+        private var masterPassword: String = ""
 
         var body: some View {
             VStack {
@@ -26,9 +29,12 @@ extension BoardingView {
                         .textFieldStyle(.plain)
                         .font(.system(.body, design: .monospaced))
                         .disabled(!encryptionTestDoesntExist)
-                    Text(encryptionTestDoesntExist || !masterPassword.isEmpty ? masterPassword : "Password already created")
-                        .font(.system(.body, design: .monospaced))
-                        .frame(maxWidth: .infinity, minHeight: 20, alignment: .leading)
+                    Text(
+                        encryptionTestDoesntExist || !masterPassword
+                            .isEmpty ? masterPassword : "Password already created"
+                    )
+                    .font(.system(.body, design: .monospaced))
+                    .frame(maxWidth: .infinity, minHeight: 20, alignment: .leading)
                 }
                 .padding()
                 .background(
@@ -43,7 +49,7 @@ extension BoardingView {
                         selectedIndex += 1
                     }
 
-                    guard !masterPassword.isEmpty && encryptionTestDoesntExist else { return }
+                    guard !masterPassword.isEmpty, encryptionTestDoesntExist else { return }
                     completion(masterPassword)
                 } label: {
                     Text("Continue")

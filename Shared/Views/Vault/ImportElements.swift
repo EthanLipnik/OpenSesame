@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ImportButtons: View {
-    @Environment(\.managedObjectContext) var viewContext
-    @State private var appFormat: AppFormat = .browser
+    @Environment(\.managedObjectContext)
+    var viewContext
+    @State
+    private var appFormat: AppFormat = .browser
 
-    @State private var shouldAuthenticate: Bool = false
+    @State
+    private var shouldAuthenticate: Bool = false
 
     var shouldHaveImageLabel: Bool = true
     var isBold: Bool = false
@@ -35,8 +38,11 @@ struct ImportButtons: View {
             }
         } label: {
             if shouldHaveImageLabel {
-                Label("Import".addElipsis(platformSpecific: true), systemImage: "tray.and.arrow.down.fill")
-                    .font(isBold ? .headline : .body)
+                Label(
+                    "Import".addElipsis(platformSpecific: true),
+                    systemImage: "tray.and.arrow.down.fill"
+                )
+                .font(isBold ? .headline : .body)
             } else {
                 Text("Import".addElipsis(platformSpecific: true))
                     .font(isBold ? .headline : .body)

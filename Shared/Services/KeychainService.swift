@@ -12,7 +12,9 @@ typealias OpenSesameKeychain = Keychain
 
 extension Keychain {
     convenience init() {
-        self.init(service: OpenSesameConfig.PRODUCT_BUNDLE_IDENTIFIER_BASE,
-                  accessGroup: "\(OpenSesameConfig.TEAM_IDENTIFIER).OpenSesame")
+        self.init(
+            service: OpenSesameConfig.PRODUCT_BUNDLE_IDENTIFIER_BASE,
+            accessGroup: "\(OpenSesameConfig.TEAM_IDENTIFIER).OpenSesame"
+        )
     }
 }

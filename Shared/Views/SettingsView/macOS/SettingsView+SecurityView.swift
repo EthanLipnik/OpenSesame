@@ -11,10 +11,13 @@ extension SettingsView {
     struct SecurityView: View {
         // MARK: - Environment
 
-        @EnvironmentObject var userSettings: UserSettings
+        @EnvironmentObject
+        var userSettings: UserSettings
 
-        @State private var shouldResetBiometrics: Bool = false
-        @State private var shouldAuthenticate: Bool = false
+        @State
+        private var shouldResetBiometrics: Bool = false
+        @State
+        private var shouldAuthenticate: Bool = false
 
         // MARK: - View
 

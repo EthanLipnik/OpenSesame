@@ -17,7 +17,9 @@ extension CredentialProviderViewController {
      prioritize the most relevant credentials in the list.
      */
 
-    override func prepareInterfaceToProvideCredential(for credentialIdentity: ASPasswordCredentialIdentity) {
+    override func prepareInterfaceToProvideCredential(
+        for credentialIdentity: ASPasswordCredentialIdentity
+    ) {
         autoFillService.selectedCredential = credentialIdentity
     }
 
@@ -31,16 +33,16 @@ extension CredentialProviderViewController {
     }
 
     func decryptedAccount(_ account: Account) throws -> (username: String, password: String) {
-        #if targetEnvironment(simulator)
-            let accessibility: Accessibility = .always
-        #else
-            let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
-        #endif
-        #if !os(macOS)
-            let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
-        #else
-            let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
-        #endif
+#if targetEnvironment(simulator)
+        let accessibility: Accessibility = .always
+#else
+        let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
+#endif
+#if !os(macOS)
+        let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+#else
+        let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+#endif
         if let masterPassword = try OpenSesameKeychain()
             .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
             .authenticationPrompt("Authenticate to login to view your accounts")
@@ -60,36 +62,51 @@ extension CredentialProviderViewController {
         }
     }
 
-    override func provideCredentialWithoutUserInteraction(for credentialIdentity: ASPasswordCredentialIdentity) {
+    override func provideCredentialWithoutUserInteraction(
+        for credentialIdentity: ASPasswordCredentialIdentity
+    ) {
         autoFillService.selectedCredential = credentialIdentity
 
-        guard let account = credentialIdentity.asAccount(autoFillService.allAccounts) else { extensionContext.cancelRequest(withError: ASExtensionError(.failed)); return }
+        guard let account = credentialIdentity.asAccount(autoFillService.allAccounts)
+        else { extensionContext.cancelRequest(withError: ASExtensionError(.failed))
+            return
+        }
 
         func decrypt() throws {
             let decryptedAccount = try decryptedAccount(account)
-            let passwordCredential = ASPasswordCredential(user: decryptedAccount.username, password: decryptedAccount.password)
+            let passwordCredential = ASPasswordCredential(
+                user: decryptedAccount.username,
+                password: decryptedAccount.password
+            )
 
-            extensionContext.completeRequest(withSelectedCredential: passwordCredential, completionHandler: nil)
+            extensionContext.completeRequest(
+                withSelectedCredential: passwordCredential,
+                completionHandler: nil
+            )
         }
 
-        #if os(macOS)
-            extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
-        #else
-            do {
-                try decrypt()
-            } catch {
-                extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
+#if os(macOS)
+        extensionContext.cancelRequest(withError: ASExtensionError(.userInteractionRequired))
+#else
+        do {
+            try decrypt()
+        } catch {
+            extensionContext
+                .cancelRequest(withError: ASExtensionError(.userInteractionRequired))
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    try? decrypt()
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                try? decrypt()
             }
-        #endif
+        }
+#endif
     }
 }
 
 extension ASPasswordCredentialIdentity {
     func asAccount(_ accounts: [Account]) -> Account? {
-        return accounts.first(where: { $0.username == self.user && $0.domain == self.serviceIdentifier.identifier })
+        accounts
+            .first(where: {
+                $0.username == self.user && $0.domain == self.serviceIdentifier.identifier
+            })
     }
 }

@@ -12,8 +12,10 @@ import UniformTypeIdentifiers
 struct ImportDocumentView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) var viewContext
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext)
+    var viewContext
+    @Environment(\.dismiss)
+    var dismiss
 
     // MARK: - CoreData Variables
 
@@ -26,8 +28,10 @@ struct ImportDocumentView: View {
     // MARK: - Variables
 
     let file: File
-    @State private var selectedVault: Vault?
-    @State private var isAuthorizing: Bool = false
+    @State
+    private var selectedVault: Vault?
+    @State
+    private var isAuthorizing: Bool = false
 
     // MARK: - View
 
@@ -60,7 +64,7 @@ struct ImportDocumentView: View {
                 }
             }
         }
-        #if os(iOS)
+#if os(iOS)
         .listStyle(.insetGrouped)
         .navigationTitle(file.url.lastPathComponent)
         .navigationBarTitleDisplayMode(.inline)
@@ -82,14 +86,15 @@ struct ImportDocumentView: View {
                 dismiss.callAsFunction()
             }
         }
-        #else
-                .listStyle(.inset(alternatesRowBackgrounds: true))
-        #endif
+#else
+            .listStyle(.inset(alternatesRowBackgrounds: true))
+#endif
     }
 
     private func add(encryptionKey: SymmetricKey) throws {
         _ = file.url.startAccessingSecurityScopedResource()
-        guard let data = FileManager.default.contents(atPath: file.url.path) else { throw CocoaError(.fileReadCorruptFile) }
+        guard let data = FileManager.default.contents(atPath: file.url.path)
+        else { throw CocoaError(.fileReadCorruptFile) }
 
         let type = UTType(filenameExtension: file.url.pathExtension)!
         switch type {
@@ -100,7 +105,10 @@ struct ImportDocumentView: View {
             account.domain = accountDoc.domain
             account.url = accountDoc.website
             account.username = accountDoc.username
-            account.password = try CryptoSecurityService.encrypt(accountDoc.password, encryptionKey: encryptionKey)
+            account.password = try CryptoSecurityService.encrypt(
+                accountDoc.password,
+                encryptionKey: encryptionKey
+            )
             account.passwordLength = Int16(accountDoc.password.count)
 
             print(accountDoc)
@@ -114,7 +122,10 @@ struct ImportDocumentView: View {
             card.holder = cardDoc.holder
             card.name = cardDoc.name
 
-            card.number = try CryptoSecurityService.encrypt(cardDoc.number, encryptionKey: encryptionKey)
+            card.number = try CryptoSecurityService.encrypt(
+                cardDoc.number,
+                encryptionKey: encryptionKey
+            )
 
             selectedVault?.addToCards(card)
         case .noteDocument:
@@ -123,7 +134,10 @@ struct ImportDocumentView: View {
             let note = Note(context: viewContext)
             note.name = noteDoc.name
             note.color = Int16(noteDoc.color)
-            note.body = try CryptoSecurityService.encrypt(noteDoc.body, encryptionKey: encryptionKey)
+            note.body = try CryptoSecurityService.encrypt(
+                noteDoc.body,
+                encryptionKey: encryptionKey
+            )
 
             selectedVault?.addToNotes(note)
         default:

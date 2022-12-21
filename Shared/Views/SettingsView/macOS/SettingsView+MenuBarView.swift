@@ -11,9 +11,12 @@ extension SettingsView {
     struct MenuBarView: View {
         // MARK: - Variables
 
-        @State var shouldShowInMenuBar: Bool = false
-        @State var shouldOpenOnStartup: Bool = false
-        @State var shouldKeepAppInDock: Bool = true
+        @State
+        var shouldShowInMenuBar: Bool = false
+        @State
+        var shouldOpenOnStartup: Bool = false
+        @State
+        var shouldKeepAppInDock: Bool = true
 
         // MARK: - View
 

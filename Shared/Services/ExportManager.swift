@@ -13,7 +13,8 @@ import Foundation
 class ExportManager: ObservableObject {
     // MARK: - Variables
 
-    @Published var progress: Float = 0
+    @Published
+    var progress: Float = 0
 
     let viewContext = PersistenceController.shared.container.viewContext
 
@@ -28,7 +29,7 @@ class ExportManager: ObservableObject {
     func export(_ fileFormat: FileFormat, appFormat: AppFormat) throws -> ExportFile {
         let accountsFetch = NSFetchRequest<Account>(entityName: "Account")
 
-        if let selectedVault = selectedVault {
+        if let selectedVault {
             accountsFetch.predicate = NSPredicate(format: "vault == %@", selectedVault)
         }
         let accounts = try viewContext.fetch(accountsFetch)
@@ -45,7 +46,7 @@ class ExportManager: ObservableObject {
                         "URL": account.url ?? "",
                         "Username": account.username ?? "",
                         "Password": password ?? "",
-                        "OTPAuth": account.otpAuth ?? "",
+                        "OTPAuth": account.otpAuth ?? ""
                     ]
                 case .bitwarden:
                     return [
@@ -58,7 +59,7 @@ class ExportManager: ObservableObject {
                         "login_uri": account.url ?? "",
                         "login_username": account.username ?? "",
                         "login_password": password ?? "",
-                        "login_totp": account.otpAuth ?? "",
+                        "login_totp": account.otpAuth ?? ""
                     ]
                 case .onePassword:
                     return [
@@ -68,13 +69,17 @@ class ExportManager: ObservableObject {
                         "Type": "Login",
                         "URL": account.url ?? "",
                         "Username": account.username ?? "",
-                        "OTPAuth": account.otpAuth ?? "",
+                        "OTPAuth": account.otpAuth ?? ""
                     ]
                 }
             }
 
-            let json = try JSONSerialization.data(withJSONObject: formattedAccounts, options: .prettyPrinted)
-            guard let string = String(data: json, encoding: .utf8) else { throw CocoaError(.fileReadCorruptFile) }
+            let json = try JSONSerialization.data(
+                withJSONObject: formattedAccounts,
+                options: .prettyPrinted
+            )
+            guard let string = String(data: json, encoding: .utf8)
+            else { throw CocoaError(.fileReadCorruptFile) }
             return ExportFile(string, format: fileFormat)
         case .csv:
             let csv = try CSVWriter(stream: .toMemory())
@@ -94,11 +99,20 @@ class ExportManager: ObservableObject {
                         account.url ?? "",
                         account.username ?? "",
                         password ?? "",
-                        account.otpAuth ?? "",
+                        account.otpAuth ?? ""
                     ])
                 }
             case .onePassword:
-                try csv.write(row: ["Notes", "Password", "Title", "Type", "URL", "Username", "OTPAuth"])
+                try csv
+                    .write(row: [
+                        "Notes",
+                        "Password",
+                        "Title",
+                        "Type",
+                        "URL",
+                        "Username",
+                        "OTPAuth"
+                    ])
                 try accounts.forEach { account in
                     guard let encryptedPassword = account.password else { return }
                     let password = try CryptoSecurityService.decrypt(encryptedPassword)
@@ -111,11 +125,22 @@ class ExportManager: ObservableObject {
                         account.domain ?? "",
                         "Login",
                         account.url ?? "",
-                        account.username ?? "",
+                        account.username ?? ""
                     ])
                 }
             case .bitwarden:
-                try csv.write(row: ["folder", "favorite", "type", "name", "notes", "fields", "login_uri", "login_username", "login_password", "login_totp"])
+                try csv.write(row: [
+                    "folder",
+                    "favorite",
+                    "type",
+                    "name",
+                    "notes",
+                    "fields",
+                    "login_uri",
+                    "login_username",
+                    "login_password",
+                    "login_totp"
+                ])
 
                 try accounts.forEach { account in
                     guard let encryptedPassword = account.password else { return }
@@ -133,7 +158,7 @@ class ExportManager: ObservableObject {
                         account.url ?? "",
                         account.username ?? "",
                         password ?? "",
-                        account.otpAuth ?? "",
+                        account.otpAuth ?? ""
                     ])
                 }
             }
@@ -142,7 +167,8 @@ class ExportManager: ObservableObject {
 
             // Get a String
             guard let csvData = csv.stream.property(forKey: .dataWrittenToMemoryStreamKey) as? Data,
-                  let csvString = String(data: csvData, encoding: .utf8) else { throw CocoaError(.fileReadCorruptFile) }
+                  let csvString = String(data: csvData, encoding: .utf8)
+            else { throw CocoaError(.fileReadCorruptFile) }
             return ExportFile(csvString, format: fileFormat)
         }
     }

@@ -9,12 +9,14 @@ import SwiftUI
 
 extension VaultView {
     struct AccountItemView: View {
-        @EnvironmentObject var viewModel: ViewModel
+        @EnvironmentObject
+        var viewModel: ViewModel
 
         let account: Account
         var isPopover: Bool = false
 
-        @State private var isPresenting: Bool = false
+        @State
+        private var isPresenting: Bool = false
 
         var body: some View {
             Group {
@@ -35,11 +37,11 @@ extension VaultView {
                                     }
                                 }
                         }
-                        #if os(iOS)
+#if os(iOS)
                         .frame(minWidth: 400, minHeight: 600)
-                        #else
+#else
                         .frame(minHeight: 500)
-                        #endif
+#endif
                     }
                     .buttonStyle(.plain)
                 } else {

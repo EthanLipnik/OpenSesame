@@ -44,7 +44,10 @@ struct EncryptedAccountDocument: FileDocument, Codable {
         username = account.username ?? ""
 
         guard let encryptionKey = CryptoSecurityService.generateKey(fromString: password),
-              let password = try CryptoSecurityService.encrypt(password, encryptionKey: encryptionKey)
+              let password = try CryptoSecurityService.encrypt(
+                  password,
+                  encryptionKey: encryptionKey
+              )
         else { throw CocoaError(.coderInvalidValue) }
 
         self.password = password
@@ -64,7 +67,7 @@ struct EncryptedAccountDocument: FileDocument, Codable {
         try container.encode(domain, forKey: .domain)
         try container.encode(website, forKey: .website)
         try container.encode(username, forKey: .username)
-        if let password = password {
+        if let password {
             try container.encode(password.base64EncodedString(), forKey: .password)
         }
     }

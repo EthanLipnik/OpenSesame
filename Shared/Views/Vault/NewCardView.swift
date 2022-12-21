@@ -10,16 +10,22 @@ import SwiftUI
 struct NewCardView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.managedObjectContext)
+    var viewContext
 
     // MARK: - Variables
 
-    @State private var name: String = ""
-    @State private var holder: String = ""
-    @State private var cardNumber: String = ""
-    @State private var expirationDate: String = ""
+    @State
+    private var name: String = ""
+    @State
+    private var holder: String = ""
+    @State
+    private var cardNumber: String = ""
+    @State
+    private var expirationDate: String = ""
 
-    @Binding var isPresented: Bool
+    @Binding
+    var isPresented: Bool
     let selectedVault: Vault
 
     // MARK: - View
@@ -37,19 +43,19 @@ struct NewCardView: View {
                     TextField("Holder", text: $holder)
                         .textFieldStyle(.plain)
                         .font(.title2)
-                    #if os(iOS)
+#if os(iOS)
                         .textContentType(.name)
                         .autocapitalization(.words)
-                    #endif
+#endif
                     Spacer()
                     HStack {
                         TextField("Card Number", text: $cardNumber)
                             .textFieldStyle(.plain)
                             .font(.system(.title2, design: .monospaced))
-                        #if os(iOS)
+#if os(iOS)
                             .keyboardType(.numberPad)
                             .textContentType(.creditCardNumber)
-                        #endif
+#endif
                             .allowsTightening(true)
                             .minimumScaleFactor(0.6)
                             .frame(maxWidth: .infinity)
@@ -58,9 +64,9 @@ struct NewCardView: View {
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             TextField("9/12", text: $expirationDate)
-                            #if os(iOS)
+#if os(iOS)
                                 .keyboardType(.numbersAndPunctuation)
-                            #endif
+#endif
                                 .frame(width: 50)
                         }
                     }
@@ -70,7 +76,11 @@ struct NewCardView: View {
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(LinearGradient(colors: [Color("Tertiary"), Color("Tertiary").opacity(0.7)], startPoint: .top, endPoint: .bottom))
+                        .fill(LinearGradient(
+                            colors: [Color("Tertiary"), Color("Tertiary").opacity(0.7)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ))
                         // #if os(macOS)
                         .shadow(radius: 15, y: 8)
                     // #else
@@ -82,36 +92,39 @@ struct NewCardView: View {
                 }.compositingGroup()
             )
             .aspectRatio(1.6, contentMode: .fit)
-            #if os(macOS)
+#if os(macOS)
                 .frame(height: 250)
-            #else
+#else
                 .padding()
-            #endif
+#endif
             Spacer()
             HStack {
                 Button("Cancel", role: .cancel) {
                     isPresented = false
                 }
                 .keyboardShortcut(.cancelAction)
-                #if os(iOS)
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
 
                 Spacer()
 
                 Button("Add", action: add)
                     .keyboardShortcut(.defaultAction)
-                    .disabled(name.isEmpty || holder.isEmpty || cardNumber.isEmpty || cardNumber.count < 15)
-                #if os(iOS)
+                    .disabled(
+                        name.isEmpty || holder.isEmpty || cardNumber.isEmpty || cardNumber
+                            .count < 15
+                    )
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
             }.padding()
         }
-        #if os(macOS)
+#if os(macOS)
         .frame(width: 400)
-        #else
+#else
         .frame(maxWidth: 400)
-        #endif
+#endif
     }
 
     // MARK: - Functions

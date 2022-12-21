@@ -11,8 +11,10 @@ import SwiftUI
 struct ImportView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) var viewContext
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext)
+    var viewContext
+    @Environment(\.dismiss)
+    var dismiss
 
     // MARK: - CoreData Variables
 
@@ -24,10 +26,13 @@ struct ImportView: View {
 
     // MARK: - Variables
 
-    @StateObject var importManager: ImportManager
-    @State var isPresentingImporter: Bool = true
+    @StateObject
+    var importManager: ImportManager
+    @State
+    var isPresentingImporter: Bool = true
 
-    @State var selectedVault: Int = 0
+    @State
+    var selectedVault: Int = 0
 
     // MARK: - View
 
@@ -42,26 +47,30 @@ struct ImportView: View {
             //                TableColumn("OTP Auth", value: \.otpAuth)
             //            }
             List {
-                #if os(iOS)
-                    if importManager.isImporting {
-                        ProgressView("Progress", value: Double(importManager.progress) / Double(importManager.importedAccounts.count))
-                    }
-                    Section {
-                        Picker("Vault", selection: $selectedVault) {
-                            ForEach(0 ..< vaults.count, id: \.self) {
-                                Text(vaults[$0].name!)
-                                    .tag($0)
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .onAppear {
-                            importManager.selectedVault = vaults[selectedVault]
-                        }
-                        .onChange(of: selectedVault) { _ in
-                            importManager.selectedVault = vaults[selectedVault]
+#if os(iOS)
+                if importManager.isImporting {
+                    ProgressView(
+                        "Progress",
+                        value: Double(importManager.progress) /
+                            Double(importManager.importedAccounts.count)
+                    )
+                }
+                Section {
+                    Picker("Vault", selection: $selectedVault) {
+                        ForEach(0 ..< vaults.count, id: \.self) {
+                            Text(vaults[$0].name!)
+                                .tag($0)
                         }
                     }
-                #endif
+                    .pickerStyle(.wheel)
+                    .onAppear {
+                        importManager.selectedVault = vaults[selectedVault]
+                    }
+                    .onChange(of: selectedVault) { _ in
+                        importManager.selectedVault = vaults[selectedVault]
+                    }
+                }
+#endif
                 ForEach(importManager.importedAccounts) { account in
                     HStack {
                         if account.isPinned {
@@ -79,49 +88,53 @@ struct ImportView: View {
                     }
                 }
             }
-            #if os(macOS)
+#if os(macOS)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            #endif
-            #if os(macOS)
-                GroupBox {
-                    HStack {
-                        Button("Cancel", role: .cancel) {
-                            dismiss.callAsFunction()
-                        }.keyboardShortcut(.cancelAction)
+#endif
+#if os(macOS)
+            GroupBox {
+                HStack {
+                    Button("Cancel", role: .cancel) {
+                        dismiss.callAsFunction()
+                    }.keyboardShortcut(.cancelAction)
 
-                        if importManager.isImporting {
-                            ProgressView("Progress", value: Double(importManager.progress) / Double(importManager.importedAccounts.count))
-                        } else {
-                            Spacer()
+                    if importManager.isImporting {
+                        ProgressView(
+                            "Progress",
+                            value: Double(importManager.progress) /
+                                Double(importManager.importedAccounts.count)
+                        )
+                    } else {
+                        Spacer()
+                    }
+
+                    Picker("Vault", selection: $selectedVault) {
+                        ForEach(0 ..< vaults.count, id: \.self) {
+                            Text(vaults[$0].name!)
+                                .tag($0)
                         }
-
-                        Picker("Vault", selection: $selectedVault) {
-                            ForEach(0 ..< vaults.count, id: \.self) {
-                                Text(vaults[$0].name!)
-                                    .tag($0)
+                    }
+                    .frame(width: 200)
+                    Button("Import", role: .destructive) {
+                        importManager.save { error in
+                            if let error {
+                                fatalError(error.localizedDescription)
+                            } else {
+                                print("Saved all accounts")
+                                dismiss.callAsFunction()
                             }
                         }
-                        .frame(width: 200)
-                        Button("Import", role: .destructive) {
-                            importManager.save { error in
-                                if let error = error {
-                                    fatalError(error.localizedDescription)
-                                } else {
-                                    print("Saved all accounts")
-                                    dismiss.callAsFunction()
-                                }
-                            }
-                        }
-                        .keyboardShortcut(.defaultAction)
-                        .disabled(importManager.isImporting)
-                    }.padding()
-                }
-            #endif
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(importManager.isImporting)
+                }.padding()
+            }
+#endif
         }
-        #if os(macOS)
+#if os(macOS)
         .frame(minWidth: 400, minHeight: 300)
         .frame(width: 600, height: 500)
-        #else
+#else
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel", role: .cancel) {
@@ -134,7 +147,7 @@ struct ImportView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Import", role: .destructive) {
                     importManager.save { error in
-                        if let error = error {
+                        if let error {
                             print(error)
                         } else {
                             print("Saved all accounts")
@@ -148,17 +161,20 @@ struct ImportView: View {
                 .disabled(importManager.isImporting)
             }
         }
-        #endif
-        .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: [.json, .commaSeparatedText]) { result in
+#endif
+        .fileImporter(
+            isPresented: $isPresentingImporter,
+            allowedContentTypes: [.json, .commaSeparatedText]
+        ) { result in
             switch result {
             case let .success(url):
                 importManager.importFromFile(url)
             case let .failure(error):
                 print(error)
 
-                #if os(macOS)
-                    NSAlert(error: error).runModal()
-                #endif
+#if os(macOS)
+                NSAlert(error: error).runModal()
+#endif
 
                 dismiss.callAsFunction()
             }

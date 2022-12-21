@@ -10,7 +10,7 @@ import Foundation
 
 struct Item: Identifiable, Hashable {
     var id: NSManagedObjectID {
-        return account?.objectID ?? card?.objectID ?? note!.objectID
+        account?.objectID ?? card?.objectID ?? note!.objectID
     }
 
     private(set) var account: Account?

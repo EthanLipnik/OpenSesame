@@ -10,8 +10,10 @@ import Foundation
 
 extension VaultView {
     class ViewModel: ObservableObject {
-        @Published var selectedItem: Item?
+        @Published
+        var selectedItem: Item?
 
-        @Published var selectedItems: Set<Item> = []
+        @Published
+        var selectedItems: Set<Item> = []
     }
 }

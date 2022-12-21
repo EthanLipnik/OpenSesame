@@ -9,17 +9,23 @@ import ScreenCorners
 import SwiftUI
 
 struct BottomSheet<ContentView: View>: ViewModifier {
-    @Binding var isPresented: Bool
+    @Binding
+    var isPresented: Bool
     let isInteractiveDismissEnabled: Bool
     let contentView: ContentView
 
-    init(isPresented: Binding<Bool>, isInteractiveDismissEnabled: Bool, @ViewBuilder content: @escaping () -> ContentView) {
+    init(
+        isPresented: Binding<Bool>,
+        isInteractiveDismissEnabled: Bool,
+        @ViewBuilder content: @escaping () -> ContentView
+    ) {
         _isPresented = isPresented
         self.isInteractiveDismissEnabled = isInteractiveDismissEnabled
         contentView = content()
     }
 
-    @State private var offset: CGSize = .zero
+    @State
+    private var offset: CGSize = .zero
 
     func body(content: Content) -> some View {
         let cornerRadius = UIScreen.main.displayCornerRadius
@@ -34,34 +40,41 @@ struct BottomSheet<ContentView: View>: ViewModifier {
                         contentView
                     }
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: cornerRadius == 0 ? 10 : cornerRadius, style: .continuous)
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: cornerRadius == 0 ? 10 : cornerRadius,
+                            style: .continuous
+                        )
                         .fill(Color("Tertiary"))
-                        .shadow(radius: 30, y: 10))
+                        .shadow(radius: 30, y: 10)
+                    )
                     .frame(maxWidth: 600, minHeight: 300)
                     .padding()
                     .offset(offset)
                     .animation(.spring(), value: offset)
-                    .gesture(DragGesture()
-                        .onChanged { value in
-                            let height: CGFloat = {
-                                if offset.height > 0 {
-                                    return value.translation.height
-                                } else {
-                                    return value.translation.height / 10
-                                }
-                            }()
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                let height: CGFloat = {
+                                    if offset.height > 0 {
+                                        return value.translation.height
+                                    } else {
+                                        return value.translation.height / 10
+                                    }
+                                }()
 
-                            offset = CGSize(width: value.translation.width / 10, height: height)
-                        }
-                        .onEnded { value in
-                            if value.translation.height > 100, isInteractiveDismissEnabled {
-                                withAnimation(.default) {
-                                    isPresented = false
-                                }
+                                offset = CGSize(width: value.translation.width / 10, height: height)
                             }
+                            .onEnded { value in
+                                if value.translation.height > 100, isInteractiveDismissEnabled {
+                                    withAnimation(.default) {
+                                        isPresented = false
+                                    }
+                                }
 
-                            offset = .zero
-                        })
+                                offset = .zero
+                            }
+                    )
                     .transition(.move(edge: .bottom))
                     : nil,
                 alignment: .bottom
@@ -71,8 +84,16 @@ struct BottomSheet<ContentView: View>: ViewModifier {
 }
 
 extension View {
-    func bottomSheet<ContentView: View>(isPresented: Binding<Bool>, isInteractiveDismissEnabled: Bool = true, @ViewBuilder content: @escaping () -> ContentView) -> some View {
-        modifier(BottomSheet(isPresented: isPresented, isInteractiveDismissEnabled: isInteractiveDismissEnabled, content: content))
+    func bottomSheet(
+        isPresented: Binding<Bool>,
+        isInteractiveDismissEnabled: Bool = true,
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
+        modifier(BottomSheet(
+            isPresented: isPresented,
+            isInteractiveDismissEnabled: isInteractiveDismissEnabled,
+            content: content
+        ))
     }
 }
 

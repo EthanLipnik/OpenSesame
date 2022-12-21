@@ -10,7 +10,8 @@ import SwiftUI
 struct AccountView: View {
     // MARK: - Environment
 
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.managedObjectContext)
+    var viewContext
 
     // MARK: - CoreData
 
@@ -23,13 +24,19 @@ struct AccountView: View {
     // MARK: - Variables
 
     let account: Account
-    @State var isEditing: Bool = false
-    @State var isAddingVerificationCode: Bool = false
-    @State var newNotes: String = ""
+    @State
+    var isEditing: Bool = false
+    @State
+    var isAddingVerificationCode: Bool = false
+    @State
+    var newNotes: String = ""
 
-    @State private var isAddingAlternateDomains: Bool = false
-    @State private var newAlternateDomains: String = ""
-    @State private var isSharing: Bool = false
+    @State
+    private var isAddingAlternateDomains: Bool = false
+    @State
+    private var newAlternateDomains: String = ""
+    @State
+    private var isSharing: Bool = false
 
     // MARK: - Init
 
@@ -48,11 +55,11 @@ struct AccountView: View {
         let otherAccounts = accounts.filter { $0.objectID != account.objectID }.map { $0 }
 
         let columns: [GridItem] = {
-            #if os(macOS)
-                return [.init()]
-            #else
-                return UIDevice.current.userInterfaceIdiom == .pad ? [.init(), .init()] : [.init()]
-            #endif
+#if os(macOS)
+            return [.init()]
+#else
+            return UIDevice.current.userInterfaceIdiom == .pad ? [.init(), .init()] : [.init()]
+#endif
         }()
 
         ScrollView {
@@ -84,17 +91,17 @@ struct AccountView: View {
                                 }
                             }
 
-                            #if os(iOS)
-                                NavigationLink {
-                                    AccountView(account: account)
-                                } label: {
-                                    content
-                                }.buttonStyle(.plain)
-                            #else
-                                Link(destination: URL(string: "opensesame://account")!) {
-                                    content
-                                }.buttonStyle(.plain)
-                            #endif
+#if os(iOS)
+                            NavigationLink {
+                                AccountView(account: account)
+                            } label: {
+                                content
+                            }.buttonStyle(.plain)
+#else
+                            Link(destination: URL(string: "opensesame://account")!) {
+                                content
+                            }.buttonStyle(.plain)
+#endif
                         }
                     }
                 }
@@ -105,7 +112,7 @@ struct AccountView: View {
             Spacer()
                 .frame(maxWidth: .infinity)
         }
-        #if os(iOS)
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -114,7 +121,10 @@ struct AccountView: View {
                         isEditing.toggle()
                     }
                 } label: {
-                    Label(isEditing ? "Done" : "Edit", systemImage: isEditing ? "checkmark.circle.fill" : "pencil")
+                    Label(
+                        isEditing ? "Done" : "Edit",
+                        systemImage: isEditing ? "checkmark.circle.fill" : "pencil"
+                    )
                 }
             }
             ToolbarItem {
@@ -126,7 +136,20 @@ struct AccountView: View {
                 .halfSheet(isPresented: $isSharing) {
                     ShareSheet(
                         activityItems: [try! AccountDocument(account).save()],
-                        excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
+                        excludedActivityTypes: [
+                            .addToReadingList,
+                            .assignToContact,
+                            .markupAsPDF,
+                            .openInIBooks,
+                            .postToFacebook,
+                            .postToVimeo,
+                            .postToWeibo,
+                            .postToFlickr,
+                            .postToTwitter,
+                            .postToTencentWeibo,
+                            .print,
+                            .saveToCameraRoll
+                        ]
                     )
                     .ignoresSafeArea()
                     .onDisappear {
@@ -135,14 +158,14 @@ struct AccountView: View {
                 }
             }
         }
-        #else
-                .toolbar {
-                    ToolbarItem {
-                        Spacer()
-                    }
+#else
+            .toolbar {
+                ToolbarItem {
+                    Spacer()
                 }
-                .frame(minWidth: 300)
-        #endif
+            }
+            .frame(minWidth: 300)
+#endif
     }
 }
 

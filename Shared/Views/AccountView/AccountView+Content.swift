@@ -10,9 +10,16 @@ import SwiftUI
 extension AccountView {
     var content: some View {
         // Give styling to domain
-        var attributedDomain = AttributedString(((account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP.removeWWW) ?? account.domain ?? "Unknown website")
+        var attributedDomain =
+            AttributedString((
+                (account.url?.isEmpty ?? true) ? nil : account.url?.removeHTTP
+                    .removeWWW
+            ) ?? account.domain ?? "Unknown website")
         if let domain = account.domain {
-            if let match = attributedDomain.range(of: domain, options: [.caseInsensitive, .diacriticInsensitive]) {
+            if let match = attributedDomain.range(
+                of: domain,
+                options: [.caseInsensitive, .diacriticInsensitive]
+            ) {
                 attributedDomain.foregroundColor = Color.secondary
                 attributedDomain[match].foregroundColor = Color("Label")
             }
@@ -42,34 +49,38 @@ extension AccountView {
                                     .foregroundColor(.secondary)
                             }
                         }
-                        #if os(macOS)
-                            Spacer()
-                            Button(isEditing ? "Done" : "Edit") {
-                                withAnimation {
-                                    isEditing.toggle()
-                                }
-                                //                            if !isEditing {
-                                //                                UserAuthenticationService.authenticate()
-                                //                                    .sink { success in
-                                //                                        if success {
-                                //                                            withAnimation {
-                                //                                                isEditing = true
-                                //                                            }
-                                //                                        }
-                                //                                    }
-                                //                                    .store(in: &UserAuthenticationService.cancellables)
-                                //                            } else {
-                                //                                withAnimation {
-                                //                                    isEditing = false
-                                //                                    isAddingVerificationCode = false
-                                //                                }
-                                //                            }
+#if os(macOS)
+                        Spacer()
+                        Button(isEditing ? "Done" : "Edit") {
+                            withAnimation {
+                                isEditing.toggle()
                             }
-                        #endif
+                            //                            if !isEditing {
+                            //                                UserAuthenticationService.authenticate()
+                            //                                    .sink { success in
+                            //                                        if success {
+                            //                                            withAnimation {
+                            //                                                isEditing = true
+                            //                                            }
+                            //                                        }
+                            //                                    }
+                            //                                    .store(in: &UserAuthenticationService.cancellables)
+                            //                            } else {
+                            //                                withAnimation {
+                            //                                    isEditing = false
+                            //                                    isAddingVerificationCode = false
+                            //                                }
+                            //                            }
+                        }
+#endif
                     }
                 }
-                AccountDetailsView(account: account, isEditing: $isEditing, isAddingVerificationCode: $isAddingVerificationCode)
-                    .padding(.vertical)
+                AccountDetailsView(
+                    account: account,
+                    isEditing: $isEditing,
+                    isAddingVerificationCode: $isAddingVerificationCode
+                )
+                .padding(.vertical)
                 GroupBox {
                     TextField("Notes", text: $newNotes, onCommit: {
                         account.notes = newNotes
@@ -77,30 +88,37 @@ extension AccountView {
                         try? viewContext.save()
                     }).textFieldStyle(.plain)
                 }
-                #if os(macOS)
-                    Spacer()
-                #endif
+#if os(macOS)
+                Spacer()
+#endif
                 HStack {
-                    if let website = ((account.url?.isEmpty ?? true) ? nil : account.url) ?? account.domain, let url = URL(string: website.withHTTPIfNeeded) {
+                    if let website = ((account.url?.isEmpty ?? true) ? nil : account.url) ?? account
+                        .domain, let url = URL(string: website.withHTTPIfNeeded)
+                    {
                         Link("Go to website", destination: url)
                             .foregroundColor(.accentColor)
-                        #if os(iOS)
+#if os(iOS)
                             .hoverEffect()
-                        #endif
+#endif
                     }
                     Spacer()
                     //                    if isEditing {
                     //                        if !isAddingAlternateDomains {
                     //                            Button("Alternate Domains") {
-                    //                                newAlternateDomains = String((account.alternateDomains?
-                    //                                                                .map({ String($0) }) ?? [])
+                    //                                newAlternateDomains =
+                    //                                String((account.alternateDomains?
+                    //                                                                .map({
+                    //                                                                String($0) })
+                    //                                                                ?? [])
                     //                                                                .joined(separator: ","))
                     //                                isAddingAlternateDomains = true
                     //                            }
                     //                        } else {
-                    //                            TextField("Alternate Domains", text: $newAlternateDomains, onCommit: {
+                    //                            TextField("Alternate Domains", text:
+                    //                            $newAlternateDomains, onCommit: {
                     //                                isAddingAlternateDomains = false
-                    //                                account.alternateDomains = newAlternateDomains.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ",").map({ $0 as NSString })
+                    //                                account.alternateDomains =
+                    //                                newAlternateDomains.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ",").map({ $0 as NSString })
                     //                            })
                     //                                .textFieldStyle(.roundedBorder)
                     // #if os(iOS)
@@ -111,9 +129,9 @@ extension AccountView {
                     //                    }
                 }
             }
-            #if os(macOS)
+#if os(macOS)
             .padding()
-            #endif
+#endif
         }
         .padding()
         .frame(maxWidth: 600)

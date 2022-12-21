@@ -9,7 +9,10 @@ import CoreData
 import Foundation
 
 extension NSPersistentContainer {
-    static func create(withSync iCloudSync: Bool = UserSettings.default.shouldSyncWithiCloud) -> NSPersistentCloudKitContainer {
+    static func create(
+        withSync iCloudSync: Bool = UserSettings.default
+            .shouldSyncWithiCloud
+    ) -> NSPersistentCloudKitContainer {
         let container = NSPersistentCloudKitContainer(name: "OpenSesame")
 
         let storeDescription = NSPersistentStoreDescription(url: PersistenceController.storeURL)
@@ -17,22 +20,31 @@ extension NSPersistentContainer {
         storeDescription.shouldInferMappingModelAutomatically = true
 
         if iCloudSync {
-            let cloudkitOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.\(OpenSesameConfig.PRODUCT_BUNDLE_IDENTIFIER_BASE)")
+            let cloudkitOptions =
+                NSPersistentCloudKitContainerOptions(
+                    containerIdentifier: "iCloud.\(OpenSesameConfig.PRODUCT_BUNDLE_IDENTIFIER_BASE)"
+                )
             storeDescription.cloudKitContainerOptions = cloudkitOptions
         } else {
             storeDescription.cloudKitContainerOptions = nil
         }
 
         let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
-        storeDescription.setOption(true as NSNumber,
-                                   forKey: remoteChangeKey)
+        storeDescription.setOption(
+            true as NSNumber,
+            forKey: remoteChangeKey
+        )
 
-        storeDescription.setOption(true as NSNumber,
-                                   forKey: NSPersistentHistoryTrackingKey)
+        storeDescription.setOption(
+            true as NSNumber,
+            forKey: NSPersistentHistoryTrackingKey
+        )
 
         container.persistentStoreDescriptions = [storeDescription]
 
-        NSLog("🟢 Initialized CoreData container\(iCloudSync ? " with iCloud Sync" : "") at path: \(PersistenceController.storeURL.path)")
+        NSLog(
+            "🟢 Initialized CoreData container\(iCloudSync ? " with iCloud Sync" : "") at path: \(PersistenceController.storeURL.path)"
+        )
 
         return container
     }

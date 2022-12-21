@@ -9,7 +9,8 @@ import SwiftUI
 
 extension BoardingView {
     struct SecurityView: View {
-        @Binding var selectedIndex: Int
+        @Binding
+        var selectedIndex: Int
 
         var body: some View {
             VStack {
@@ -29,8 +30,10 @@ extension BoardingView {
                         .aspectRatio(contentMode: .fit)
                 }
                 .frame(maxWidth: 300)
-                Text("Sensitive information is encrypted and decrypted on-device only. This means that only you can read your data.")
-                    .foregroundColor(Color.secondary)
+                Text(
+                    "Sensitive information is encrypted and decrypted on-device only. This means that only you can read your data."
+                )
+                .foregroundColor(Color.secondary)
                 Spacer()
                 Button {
                     withAnimation {

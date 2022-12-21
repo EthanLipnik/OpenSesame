@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct NoteView: View {
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.managedObjectContext)
+    var viewContext
 
     let note: Note
 
-    @State private var displayedBody: String = ""
-    @State private var isShowingBody: Bool = false
-    @State private var isEditing: Bool = false
-    @State private var decryptedBody: String?
-    @State private var isSharing: Bool = false
+    @State
+    private var displayedBody: String = ""
+    @State
+    private var isShowingBody: Bool = false
+    @State
+    private var isEditing: Bool = false
+    @State
+    private var decryptedBody: String?
+    @State
+    private var isSharing: Bool = false
 
-    @State private var newColor: Int = 0
+    @State
+    private var newColor: Int = 0
 
     var body: some View {
         let colors: [Color] = {
@@ -38,11 +45,11 @@ struct NoteView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom))
-                #if os(macOS)
+#if os(macOS)
                     .shadow(radius: 15, y: 8)
-                #else
+#else
                     .shadow(radius: 30, y: 8)
-                #endif
+#endif
                 VStack {
                     Text(note.name!)
                         .font(.system(.title, design: .rounded).bold())
@@ -61,13 +68,21 @@ struct NoteView: View {
                         .colorScheme(.light)
                         TextEditor(text: $displayedBody)
                             .padding(5)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay))
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color("Tertiary").opacity(0.5)).blendMode(.overlay)
+                            )
                             .font(.system(.title3, design: .monospaced))
                             .frame(maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
                     } else {
                         Text(displayedBody)
                             .font(.system(.title3, design: .monospaced))
-                            .frame(maxWidth: .infinity, minHeight: 250, maxHeight: .infinity, alignment: .topLeading)
+                            .frame(
+                                maxWidth: .infinity,
+                                minHeight: 250,
+                                maxHeight: .infinity,
+                                alignment: .topLeading
+                            )
                             .blur(radius: isShowingBody ? 0 : 8)
                             .contextMenu {
                                 Button {
@@ -76,19 +91,22 @@ struct NoteView: View {
                                     Label("Copy note", systemImage: "doc.on.doc")
                                 }.disabled(!isShowingBody)
                                 Button(action: toggleBody) {
-                                    Label(isShowingBody ? "Hide note" : "Reveal note", systemImage: isShowingBody ? "eye.slash" : "eye")
+                                    Label(
+                                        isShowingBody ? "Hide note" : "Reveal note",
+                                        systemImage: isShowingBody ? "eye.slash" : "eye"
+                                    )
                                 }
                             }
                             .animation(.default, value: isShowingBody)
                             .onTapGesture(perform: toggleBody)
                             .onHover { isHovering in
-                                #if os(macOS)
-                                    if isHovering {
-                                        NSCursor.pointingHand.set()
-                                    } else {
-                                        NSCursor.arrow.set()
-                                    }
-                                #endif
+#if os(macOS)
+                                if isHovering {
+                                    NSCursor.pointingHand.set()
+                                } else {
+                                    NSCursor.arrow.set()
+                                }
+#endif
                             }
                     }
                 }
@@ -107,7 +125,7 @@ struct NoteView: View {
             note.color = Int16(color)
             print(color)
         }
-        #if os(iOS)
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -130,7 +148,10 @@ struct NoteView: View {
                         isEditing.toggle()
                     }
                 } label: {
-                    Label(isEditing ? "Done" : "Edit", systemImage: isEditing ? "checkmark.circle.fill" : "pencil")
+                    Label(
+                        isEditing ? "Done" : "Edit",
+                        systemImage: isEditing ? "checkmark.circle.fill" : "pencil"
+                    )
                 }
             }
             ToolbarItem {
@@ -142,7 +163,20 @@ struct NoteView: View {
                 .halfSheet(isPresented: $isSharing) {
                     ShareSheet(
                         activityItems: [try! NoteDocument(note).save()],
-                        excludedActivityTypes: [.addToReadingList, .assignToContact, .markupAsPDF, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .print, .saveToCameraRoll]
+                        excludedActivityTypes: [
+                            .addToReadingList,
+                            .assignToContact,
+                            .markupAsPDF,
+                            .openInIBooks,
+                            .postToFacebook,
+                            .postToVimeo,
+                            .postToWeibo,
+                            .postToFlickr,
+                            .postToTwitter,
+                            .postToTencentWeibo,
+                            .print,
+                            .saveToCameraRoll
+                        ]
                     )
                     .ignoresSafeArea()
                     .onDisappear {
@@ -151,14 +185,14 @@ struct NoteView: View {
                 }
             }
         }
-        #else
-                .toolbar {
-                    ToolbarItem {
-                        Spacer()
-                    }
+#else
+            .toolbar {
+                ToolbarItem {
+                    Spacer()
                 }
-                .frame(minWidth: 300)
-        #endif
+            }
+            .frame(minWidth: 300)
+#endif
     }
 
     private func toggleBody() {
@@ -184,9 +218,9 @@ struct NoteView: View {
         } catch {
             print(error)
 
-            #if os(macOS)
-                NSAlert(error: error).runModal()
-            #endif
+#if os(macOS)
+            NSAlert(error: error).runModal()
+#endif
         }
     }
 }

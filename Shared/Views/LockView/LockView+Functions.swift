@@ -22,16 +22,21 @@ extension LockView {
     }
 
     static func encryptionTestExists() -> Bool {
-        return (try? OpenSesameKeychain()
-            .synchronizable(true)
-            .contains("encryptionTest")) ?? false
+        (
+            try? OpenSesameKeychain()
+                .synchronizable(true)
+                .contains("encryptionTest")
+        ) ?? false
     }
 
     // If a master password doesn't exist, then create one with a given password.
     func createMasterPassword(_ password: String) {
         CryptoSecurityService.loadEncryptionKey(password) {
             do {
-                guard let randomString = CryptoSecurityService.randomString(length: 32, method: .cryptic), let test = try CryptoSecurityService.encrypt(randomString) else { fatalError() }
+                guard let randomString = CryptoSecurityService.randomString(
+                    length: 32,
+                    method: .cryptic
+                ), let test = try CryptoSecurityService.encrypt(randomString) else { fatalError() }
 
                 self.encryptionTest = test
                 try? OpenSesameKeychain()
@@ -46,16 +51,20 @@ extension LockView {
         }
     }
 
-    // Save the master password to Keychain Access with a limited accessibility and requiring biometrics to view.
+    // Save the master password to Keychain Access with a limited accessibility and requiring
+    // biometrics to view.
     static func updateBiometrics(_ password: String) throws {
         let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
-        #if !os(macOS)
-            let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
-        #else
-            let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
-        #endif
+#if !os(macOS)
+        let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+#else
+        let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+#endif
         try OpenSesameKeychain()
-            .accessibility(accessibility, authenticationPolicy: authenticationPolicy) // If the biometrics change, this will no longer be accessible.
+            .accessibility(
+                accessibility,
+                authenticationPolicy: authenticationPolicy
+            ) // If the biometrics change, this will no longer be accessible.
             .authenticationPrompt("Authenticate to view your accounts")
             .set(password, key: "masterPassword")
 
@@ -64,27 +73,34 @@ extension LockView {
 
     // Test the given password with the saved encryption test to verify it is valid and correct.
     func unlock(_ password: String, method: UnlockMethod = .password) {
-        guard let test = encryptionTest else { encryptionTestDoesntExist = true; return }
+        guard let test = encryptionTest else { encryptionTestDoesntExist = true
+            return
+        }
 
         CryptoSecurityService.loadEncryptionKey(password) {
             let string = try? CryptoSecurityService.decrypt(test)
 
             if string != nil { // Passed the encryption test and the password is valid.
                 if method != .biometrics, didBiometricsFail, userSettings.shouldUseBiometrics {
-                    try? LockView.updateBiometrics(password) // Master password may have changed and biometrics have failed. Try to update them with the correct password.
+                    try? LockView
+                        .updateBiometrics(password) // Master password may have changed and
+                    // biometrics have failed. Try to update them with the correct password.
                 } else {
                     print("No need to update biometrics")
                 }
 
                 // MARK: Why I added a fake login delay
 
-                /// Much like how vacuums are designed to be loud and many services have fake loading bars, OpenSesame uses a short login delay so the user feels how secure it is. CryptoKit is so incredibly fast and low level that this would load instantly (much like iCloud Keychain), but this gives it a more solid feel.
-                /// This may be removed in the future.
-                #if DEBUG
-                    let loginDelay: Double = 0 // Remove the login delay when debugging
-                #else
-                    let loginDelay = 1.5
-                #endif
+/// Much like how vacuums are designed to be loud and many services have fake loading bars,
+/// OpenSesame uses a short login delay so the user feels how secure it is. CryptoKit is so
+/// incredibly fast and low level that this would load instantly (much like iCloud Keychain), but
+/// this gives it a more solid feel.
+/// This may be removed in the future.
+#if DEBUG
+                let loginDelay: Double = 0 // Remove the login delay when debugging
+#else
+                let loginDelay = 1.5
+#endif
                 isAuthenticating = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + loginDelay) {
                     onSuccessfulUnlock()
@@ -110,22 +126,24 @@ extension LockView {
 
     func unlockWithBiometrics() {
         do {
-            #if targetEnvironment(simulator)
-                let accessibility: Accessibility = .always
-            #else
-                let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
-            #endif
-            #if !os(macOS)
-                let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
-            #else
-                let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
-            #endif
-            if let masterPassword = try Keychain(service: "com.ethanlipnik.OpenSesame", accessGroup: "B6QG723P8Z.OpenSesame")
-                .synchronizable(false)
-                .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
-                .authenticationPrompt("Authenticate to view your accounts")
-                .get("masterPassword")
-            {
+#if targetEnvironment(simulator)
+            let accessibility: Accessibility = .always
+#else
+            let accessibility: Accessibility = .whenUnlockedThisDeviceOnly
+#endif
+#if !os(macOS)
+            let authenticationPolicy: AuthenticationPolicy = .biometryCurrentSet
+#else
+            let authenticationPolicy: AuthenticationPolicy = [.biometryCurrentSet, .or, .watch]
+#endif
+            if let masterPassword = try Keychain(
+                service: "com.ethanlipnik.OpenSesame",
+                accessGroup: "B6QG723P8Z.OpenSesame"
+            )
+            .synchronizable(false)
+            .accessibility(accessibility, authenticationPolicy: authenticationPolicy)
+            .authenticationPrompt("Authenticate to view your accounts")
+            .get("masterPassword") {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     unlock(masterPassword, method: .biometrics)
                 }

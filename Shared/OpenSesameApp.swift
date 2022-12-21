@@ -11,7 +11,8 @@ import SwiftUI
 struct OpenSesameApp: App {
     // MARK: - Environment
 
-    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.scenePhase)
+    var scenePhase
 
     // MARK: - Services
 
@@ -19,15 +20,21 @@ struct OpenSesameApp: App {
 
     // MARK: - Variables
 
-    @State var isLocked: Bool = true
-    @State var shouldHideApp: Bool = false
+    @State
+    var isLocked: Bool = true
+    @State
+    var shouldHideApp: Bool = false
 
-    @State var isExportingPasswords: Bool = false
-    @State var exportFile: ExportFile?
+    @State
+    var isExportingPasswords: Bool = false
+    @State
+    var exportFile: ExportFile?
 
-    @State var importAppFormat: AppFormat?
+    @State
+    var importAppFormat: AppFormat?
 
-    @State var lastOpenedDate: Date?
+    @State
+    var lastOpenedDate: Date?
 
     // MARK: - View
 
@@ -35,37 +42,11 @@ struct OpenSesameApp: App {
         WindowGroup {
             // MARK: - MainView
 
-            MainView(isLocked: $isLocked)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .overlay(shouldHideApp && !isLocked && UserSettings.default.shouldHideApp ? Rectangle().fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil)
-                .animation(.default, value: shouldHideApp)
-                .onAppear {
-                    UserSettings.default.updateColorScheme(shouldAnimate: false)
-                }
-                .fileExporter(isPresented: $isExportingPasswords, document: exportFile, contentType: (exportFile?.format ?? .json) == .csv ? .commaSeparatedText : .json, defaultFilename: "Passwords") { result in
-                    switch result {
-                    case let .success(url):
-                        print("Exported at path", url.path)
-                    case let .failure(error):
-                        print(error)
-                    }
-                }
-                .sheet(item: $importAppFormat) { format in
-                    #if os(iOS)
-                        NavigationView {
-                            ImportView(importManager: ImportManager(appFormat: format))
-                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                                .navigationTitle("Import")
-                                .navigationBarTitleDisplayMode(.inline)
-                        }
-                        .navigationViewStyle(.stack)
-                        .interactiveDismissDisabled()
-                    #else
-                        ImportView(importManager: ImportManager(appFormat: format))
-                            .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    #endif
-                }
-                .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
+            mainView
+                .handlesExternalEvents(
+                    preferring: Set(arrayLiteral: "*"),
+                    allowing: Set(arrayLiteral: "*")
+                )
         }
         .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
         .commands {
@@ -76,22 +57,25 @@ struct OpenSesameApp: App {
                 Group {
                     Link("New Vault...", destination: URL(string: "openSesame://new?type=vault")!)
                         .keyboardShortcut("n")
-                    Link("New Account...", destination: URL(string: "openSesame://new?type=account")!)
-                        .keyboardShortcut("n", modifiers: [.shift, .command])
+                    Link(
+                        "New Account...",
+                        destination: URL(string: "openSesame://new?type=account")!
+                    )
+                    .keyboardShortcut("n", modifiers: [.shift, .command])
                     Link("New Card...", destination: URL(string: "openSesame://new?type=card")!)
                         .keyboardShortcut("n", modifiers: [.shift, .option, .command])
                 }
-                #if os(macOS)
+#if os(macOS)
                 .disabled(isLocked)
-                #endif
+#endif
 
                 Divider()
 
                 Button("Unlock with Biometrics...") {}
                     .keyboardShortcut("b", modifiers: [.command, .shift])
-                #if os(macOS)
+#if os(macOS)
                     .disabled(!isLocked)
-                #endif
+#endif
 
                 Button("Lock") {
                     if !isLocked {
@@ -99,9 +83,9 @@ struct OpenSesameApp: App {
                     }
                 }
                 .keyboardShortcut("l", modifiers: [.command, .shift])
-                #if os(macOS)
+#if os(macOS)
                     .disabled(isLocked)
-                #endif
+#endif
 
                 Divider()
 
@@ -116,16 +100,21 @@ struct OpenSesameApp: App {
                         self.isExportingPasswords = true
                     }
                 }
-                #if os(macOS)
+#if os(macOS)
                 .disabled(isLocked)
-                #endif
+#endif
             }
 
-            #if os(macOS)
-                CommandGroup(replacing: .help) {
-                    Link("OpenSesame Help", destination: URL(string: "https://github.com/OpenSesameManager/OpenSesame/issues/new/choose")!)
-                }
-            #endif
+#if os(macOS)
+            CommandGroup(replacing: .help) {
+                Link(
+                    "OpenSesame Help",
+                    destination: URL(
+                        string: "https://github.com/OpenSesameManager/OpenSesame/issues/new/choose"
+                    )!
+                )
+            }
+#endif
         }
         .onChange(of: scenePhase) { phase in
             withAnimation {
@@ -134,7 +123,7 @@ struct OpenSesameApp: App {
                     print("App is active")
                     shouldHideApp = false
 
-                    if let lastOpenedDate = lastOpenedDate {
+                    if let lastOpenedDate {
                         let timeInterval = Date().timeIntervalSince(lastOpenedDate)
                         switch UserSettings.default.autoLockTimer {
                         case 1:
@@ -185,27 +174,85 @@ struct OpenSesameApp: App {
             }
         }
 
+#if os(macOS)
+        MenuBarExtra("OpenSesame", systemImage: "lock.square.stack.fill") {
+            mainView
+                .environment(\.horizontalSizeClass, .compact)
+        }
+        .menuBarExtraStyle(.window)
+#endif
+
         // MARK: - Settings
 
-        #if os(macOS)
-            Settings {
-                SettingsView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            }
-        #endif
+#if os(macOS)
+        Settings {
+            SettingsView()
+                .environment(
+                    \.managedObjectContext,
+                    persistenceController.container.viewContext
+                )
+        }
+#endif
     }
 
-    #if os(iOS)
-        init() {
-            UITextView.appearance().backgroundColor = .clear
-        }
-    #endif
+#if os(iOS)
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
+#endif
 
     static var isMac: Bool {
-        #if os(macOS)
-            return true
-        #else
-            return false
-        #endif
+#if os(macOS)
+        return true
+#else
+        return false
+#endif
+    }
+
+    var mainView: some View {
+        MainView(isLocked: $isLocked)
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .overlay(
+                shouldHideApp && !isLocked && UserSettings.default.shouldHideApp ? Rectangle()
+                    .fill(Material.ultraThin).ignoresSafeArea(.all, edges: .all) : nil
+            )
+            .animation(.default, value: shouldHideApp)
+            .onAppear {
+                UserSettings.default.updateColorScheme(shouldAnimate: false)
+            }
+            .fileExporter(
+                isPresented: $isExportingPasswords,
+                document: exportFile,
+                contentType: (exportFile?.format ?? .json) == .csv ? .commaSeparatedText : .json,
+                defaultFilename: "Passwords"
+            ) { result in
+                switch result {
+                case let .success(url):
+                    print("Exported at path", url.path)
+                case let .failure(error):
+                    print(error)
+                }
+            }
+            .sheet(item: $importAppFormat) { format in
+#if os(iOS)
+                NavigationView {
+                    ImportView(importManager: ImportManager(appFormat: format))
+                        .environment(
+                            \.managedObjectContext,
+                            persistenceController.container.viewContext
+                        )
+                        .navigationTitle("Import")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .navigationViewStyle(.stack)
+                .interactiveDismissDisabled()
+#else
+                ImportView(importManager: ImportManager(appFormat: format))
+                    .environment(
+                        \.managedObjectContext,
+                        persistenceController.container.viewContext
+                    )
+#endif
+            }
     }
 }

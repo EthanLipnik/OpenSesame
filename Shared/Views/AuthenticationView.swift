@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AuthenticationView: View {
-    @State private var authenticatedPassword: String = ""
+    @State
+    private var authenticatedPassword: String = ""
     var message: String?
     let onSuccess: (_ password: String) -> Void
     var onCancel: () -> Void = {}
@@ -31,7 +32,7 @@ struct AuthenticationView: View {
                     }
                 }
             }
-            if let message = message {
+            if let message {
                 Text(message)
                     .foregroundColor(Color.red)
             }
@@ -40,7 +41,8 @@ struct AuthenticationView: View {
     }
 
     func didAuthenticate() {
-        guard !authenticatedPassword.isEmpty, CryptoSecurityService.runEncryptionTest(authenticatedPassword) else { return }
+        guard !authenticatedPassword.isEmpty,
+              CryptoSecurityService.runEncryptionTest(authenticatedPassword) else { return }
 
         onSuccess(authenticatedPassword)
     }

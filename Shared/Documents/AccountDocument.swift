@@ -22,7 +22,16 @@ struct AccountDocument: FileDocument, Codable {
 
     // MARK: - Inits
 
-    init(domain: String, website: String, username: String, password: String, otpAuth: String? = nil, notes: String, dateAdded: Date, lastModified: Date? = nil) {
+    init(
+        domain: String,
+        website: String,
+        username: String,
+        password: String,
+        otpAuth: String? = nil,
+        notes: String,
+        dateAdded: Date,
+        lastModified: Date? = nil
+    ) {
         self.domain = domain
         self.website = website
         self.username = username
@@ -55,7 +64,8 @@ struct AccountDocument: FileDocument, Codable {
         otpAuth = try? container.decode(String.self, forKey: .otpAuth)
         notes = try container.decode(String.self, forKey: .notes)
 
-        dateAdded = dateFormatter.date(from: try container.decode(String.self, forKey: .dateAdded)) ?? Date()
+        dateAdded = dateFormatter
+            .date(from: try container.decode(String.self, forKey: .dateAdded)) ?? Date()
         if let lastModified = try? container.decode(String.self, forKey: .lastModified) {
             self.lastModified = dateFormatter.date(from: lastModified)
         }
@@ -94,7 +104,7 @@ struct AccountDocument: FileDocument, Codable {
         try container.encode(otpAuth, forKey: .otpAuth)
         try container.encode(notes, forKey: .notes)
         try container.encode(dateFormatter.string(from: dateAdded), forKey: .dateAdded)
-        if let lastModified = lastModified {
+        if let lastModified {
             try? container.encode(dateFormatter.string(from: lastModified), forKey: .lastModified)
         }
     }

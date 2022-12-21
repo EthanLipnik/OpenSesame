@@ -28,28 +28,28 @@ extension LockView {
                 unlock(password)
             } label: {
                 Image(systemName: "key.fill")
-                #if os(iOS)
+#if os(iOS)
                     .imageScale(.large)
-                #endif
+#endif
             }
             .keyboardShortcut(.defaultAction)
             .disabled(password.isEmpty)
             .accessibilityIdentifier("loginButton")
-            #if os(iOS)
+#if os(iOS)
                 .hoverEffect()
-            #endif
+#endif
 
-            if let image = image, userSettings.shouldUseBiometrics {
+            if let image, userSettings.shouldUseBiometrics {
                 Button(action: unlockWithBiometrics) {
                     Image(systemName: image)
-                    #if os(iOS)
+#if os(iOS)
                         .imageScale(.large)
-                    #endif
+#endif
                 }
                 .keyboardShortcut("b", modifiers: [.command, .shift])
-                #if os(iOS)
+#if os(iOS)
                     .hoverEffect()
-                #endif
+#endif
             }
         }
     }

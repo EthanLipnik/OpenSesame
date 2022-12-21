@@ -10,17 +10,28 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 class Document: Codable {
-    class func data<T: Encodable>(object: T) throws -> Data {
-        return try JSONEncoder().encode(object)
+    class func data(object: some Encodable) throws -> Data {
+        try JSONEncoder().encode(object)
     }
 
-    @discardableResult class func save<T: Encodable>(_ url: URL? = nil, object: T, fileName: String, fileExtension: String) throws -> URL {
+    @discardableResult
+    class func save(
+        _ url: URL? = nil,
+        object: some Encodable,
+        fileName: String,
+        fileExtension: String
+    ) throws -> URL {
         var fileURL: URL! = url
 
         if url == nil {
-            let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let directory = FileManager.default
+                .urls(for: .documentDirectory, in: .userDomainMask)[0]
             if FileManager.default.fileExists(atPath: directory.path) {
-                try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(
+                    at: directory,
+                    withIntermediateDirectories: true,
+                    attributes: nil
+                )
             }
             fileURL = directory.appendingPathComponent(fileName + "." + fileExtension)
         }
@@ -37,41 +48,45 @@ class Document: Codable {
 
 extension EncryptedAccountDocument {
     func data() throws -> Data {
-        return try Document.data(object: self)
+        try Document.data(object: self)
     }
 
-    @discardableResult func save(_ url: URL? = nil) throws -> URL {
-        return try Document.save(url, object: self, fileName: "Encrypted Account", fileExtension: "osae")
+    @discardableResult
+    func save(_ url: URL? = nil) throws -> URL {
+        try Document.save(url, object: self, fileName: "Encrypted Account", fileExtension: "osae")
     }
 }
 
 extension AccountDocument {
     func data() throws -> Data {
-        return try Document.data(object: self)
+        try Document.data(object: self)
     }
 
-    @discardableResult func save(_ url: URL? = nil) throws -> URL {
-        return try Document.save(url, object: self, fileName: "Account", fileExtension: "osa")
+    @discardableResult
+    func save(_ url: URL? = nil) throws -> URL {
+        try Document.save(url, object: self, fileName: "Account", fileExtension: "osa")
     }
 }
 
 extension CardDocument {
     func data() throws -> Data {
-        return try Document.data(object: self)
+        try Document.data(object: self)
     }
 
-    @discardableResult func save(_ url: URL? = nil) throws -> URL {
-        return try Document.save(url, object: self, fileName: "Card", fileExtension: "osc")
+    @discardableResult
+    func save(_ url: URL? = nil) throws -> URL {
+        try Document.save(url, object: self, fileName: "Card", fileExtension: "osc")
     }
 }
 
 extension NoteDocument {
     func data() throws -> Data {
-        return try Document.data(object: self)
+        try Document.data(object: self)
     }
 
-    @discardableResult func save(_ url: URL? = nil) throws -> URL {
-        return try Document.save(url, object: self, fileName: "Note", fileExtension: "osn")
+    @discardableResult
+    func save(_ url: URL? = nil) throws -> URL {
+        try Document.save(url, object: self, fileName: "Note", fileExtension: "osn")
     }
 }
 

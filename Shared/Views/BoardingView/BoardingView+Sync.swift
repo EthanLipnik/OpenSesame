@@ -9,7 +9,8 @@ import SwiftUI
 
 extension BoardingView {
     struct SyncView: View {
-        @Binding var selectedIndex: Int
+        @Binding
+        var selectedIndex: Int
 
         var body: some View {
             VStack(spacing: 30) {
@@ -21,8 +22,10 @@ extension BoardingView {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(.horizontal, 30)
-                Text("Sync with iCloud securely. Have your accounts and cards on all your devices with ease.")
-                    .foregroundColor(Color.secondary)
+                Text(
+                    "Sync with iCloud securely. Have your accounts and cards on all your devices with ease."
+                )
+                .foregroundColor(Color.secondary)
                 Spacer()
                 VStack {
                     Button {

@@ -50,23 +50,13 @@ Now more than ever, what was previously amazing native apps have become slow and
 - CoreData
 - 100% SwiftUI
 - Native support for macOS and iOS.
-
-## Planned Features
-
-- Better password bulk deleting
 - Menubar access
-- Dropbox, Google Drive, personal server support
-- OTP Autofill
-- Password suggestions (detect if password is secure)
-- Compromised/breached password notice
-- Chrome & native Windows support
-- [More](https://github.com/OpenSesameManager/OpenSesame/projects/1)
 
 ## Requirements
 
-- Xcode 13.1+
-- macOS 12+
-- iOS 15+
+- Xcode 14.2+
+- macOS 13+
+- iOS 16+
 
 ## License
 

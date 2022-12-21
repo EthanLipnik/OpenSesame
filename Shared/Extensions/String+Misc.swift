@@ -8,14 +8,14 @@
 import Foundation
 
 #if canImport(AppKit)
-    import AppKit.NSPasteboard
+import AppKit.NSPasteboard
 #elseif canImport(UIKit)
-    import UIKit.UIPasteboard
+import UIKit.UIPasteboard
 #endif
 
 extension String {
     func capitalizingFirstLetter() -> String {
-        return prefix(1).uppercased() + lowercased().dropFirst()
+        prefix(1).uppercased() + lowercased().dropFirst()
     }
 
     mutating func capitalizeFirstLetter() {
@@ -23,12 +23,12 @@ extension String {
     }
 
     subscript(i: Int) -> String {
-        return String(self[index(startIndex, offsetBy: i)])
+        String(self[index(startIndex, offsetBy: i)])
     }
 
     var asHexString: String {
-        return unicodeScalars
-            .filter { $0.isASCII }
+        unicodeScalars
+            .filter(\.isASCII)
             .map { String(format: "%X", $0.value) }
             .joined()
     }
@@ -85,24 +85,24 @@ extension String {
 
     func addElipsis(platformSpecific: Bool = false) -> String {
         if platformSpecific {
-            #if os(macOS)
-                return self + "..."
-            #else
-                return self
-            #endif
+#if os(macOS)
+            return self + "..."
+#else
+            return self
+#endif
         }
         return self + "..."
     }
 
     func copyToPasteboard() {
-        #if os(macOS)
-            let pasteboard = NSPasteboard.general
-            pasteboard.declareTypes([.string], owner: nil)
-            pasteboard.setString(self, forType: .string)
-        #else
-            let pasteboard = UIPasteboard.general
-            pasteboard.string = self
-        #endif
+#if os(macOS)
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(self, forType: .string)
+#else
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = self
+#endif
     }
 
     func contains(_ string: String, caseInsentive: Bool) -> Bool {

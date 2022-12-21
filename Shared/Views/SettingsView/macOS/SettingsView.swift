@@ -11,8 +11,10 @@ import SwiftUI
 struct SettingsView: View {
     // MARK: - Environment
 
-    @StateObject var userSettings = UserSettings.default
-    @State private var selectedTab: Int = 0
+    @StateObject
+    var userSettings = UserSettings.default
+    @State
+    private var selectedTab: Int = 0
 
     // MARK: - View
 

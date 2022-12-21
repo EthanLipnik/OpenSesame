@@ -13,7 +13,8 @@ extension SettingsView {
     struct GeneralView: View {
         // MARK: - Environment
 
-        @EnvironmentObject var userSettings: UserSettings
+        @EnvironmentObject
+        var userSettings: UserSettings
 
         // MARK: - View
 
