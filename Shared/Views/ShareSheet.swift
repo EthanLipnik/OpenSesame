@@ -1,12 +1,13 @@
 //
 //  ShareSheet.swift
-//  Syndromi
+//  OpenSesame
 //
 //  Created by Ethan Lipnik on 12/3/20.
 //
 
 import SwiftUI
 
+#if os(iOS)
 struct ShareSheet: UIViewControllerRepresentable {
     typealias Callback = (
         _ activityType: UIActivity.ActivityType?,
@@ -34,3 +35,4 @@ struct ShareSheet: UIViewControllerRepresentable {
         // nothing to do here
     }
 }
+#endif

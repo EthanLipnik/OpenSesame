@@ -20,9 +20,12 @@ class MotionManager: ObservableObject {
     @Published
     var roll: Double = 0.0
 
+#if !os(macOS)
     private var manager: CMMotionManager
+#endif
 
     init() {
+#if !os(macOS)
         manager = CMMotionManager()
         manager.deviceMotionUpdateInterval = 1 / 60
         manager.startDeviceMotionUpdates(to: .main) { motionData, error in
@@ -38,5 +41,6 @@ class MotionManager: ObservableObject {
                 }
             }
         }
+#endif
     }
 }

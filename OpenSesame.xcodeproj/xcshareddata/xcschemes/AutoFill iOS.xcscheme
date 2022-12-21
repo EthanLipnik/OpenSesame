@@ -31,7 +31,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA8B500C26CD641D003C92AE"
                BuildableName = "OpenSesame.app"
-               BlueprintName = "OpenSesame (iOS)"
+               BlueprintName = "OpenSesame"
                ReferencedContainer = "container:OpenSesame.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA8B500C26CD641D003C92AE"
             BuildableName = "OpenSesame.app"
-            BlueprintName = "OpenSesame (iOS)"
+            BlueprintName = "OpenSesame"
             ReferencedContainer = "container:OpenSesame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,7 +82,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA8B500C26CD641D003C92AE"
             BuildableName = "OpenSesame.app"
-            BlueprintName = "OpenSesame (iOS)"
+            BlueprintName = "OpenSesame"
             ReferencedContainer = "container:OpenSesame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

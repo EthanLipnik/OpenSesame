@@ -5,6 +5,7 @@
 //  Created by Ethan Lipnik on 8/22/21.
 //
 
+#if os(macOS)
 import CoreData
 import KeychainAccess
 import SwiftUI
@@ -52,3 +53,4 @@ extension SettingsView {
         }
     }
 }
+#endif

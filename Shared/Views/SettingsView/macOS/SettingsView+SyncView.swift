@@ -5,6 +5,7 @@
 //  Created by Ethan Lipnik on 8/24/21.
 //
 
+#if os(macOS)
 import AuthenticationServices
 import SwiftUI
 
@@ -39,3 +40,4 @@ extension SettingsView {
         }
     }
 }
+#endif

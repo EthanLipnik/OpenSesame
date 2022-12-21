@@ -5,6 +5,7 @@
 //  Created by Ethan Lipnik on 8/22/21.
 //
 
+#if os(macOS)
 import SwiftUI
 
 extension SettingsView {
@@ -49,3 +50,4 @@ extension SettingsView {
         }
     }
 }
+#endif

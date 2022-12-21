@@ -8,6 +8,7 @@
 /// https://www.patreon.com/posts/early-access-3-0-53427789?ref=morioh.com&utm_source=morioh.com
 /// They make some really great tutorials
 
+#if os(iOS)
 import SwiftUI
 
 // Custom Half Sheet Modifier....
@@ -120,3 +121,4 @@ class CustomHostingController<Content: View>: UIHostingController<Content> {
         }
     }
 }
+#endif

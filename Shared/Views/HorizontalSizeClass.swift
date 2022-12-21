@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if os(macOS)
 enum HorizontalClass {
     case compact
     case regular
@@ -22,3 +23,4 @@ extension EnvironmentValues {
         set { self[HorizontalSizeClassKey.self] = newValue }
     }
 }
+#endif

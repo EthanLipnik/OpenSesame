@@ -5,6 +5,7 @@
 //  Created by Ethan Lipnik on 8/18/21.
 //
 
+#if os(macOS)
 import KeychainAccess
 import SwiftUI
 
@@ -56,3 +57,4 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
     }
 }
+#endif

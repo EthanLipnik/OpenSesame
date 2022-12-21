@@ -5,6 +5,7 @@
 //  Created by Ethan Lipnik on 9/18/21.
 //
 
+#if os(iOS)
 import ScreenCorners
 import SwiftUI
 
@@ -107,3 +108,4 @@ struct BottomSheet_Previews: PreviewProvider {
             }
     }
 }
+#endif

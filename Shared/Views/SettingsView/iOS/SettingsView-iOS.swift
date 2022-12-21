@@ -11,6 +11,7 @@ import KeychainAccess
 import StoreKit
 import SwiftUI
 
+#if os(iOS)
 struct SettingsView: View {
     @Environment(\.managedObjectContext)
     var viewContext
@@ -353,3 +354,4 @@ struct SettingsView_Previews: PreviewProvider {
         }
     }
 }
+#endif
