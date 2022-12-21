@@ -313,7 +313,7 @@
 		AA8B504426CD6454003C92AE /* OpenSesame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenSesame.entitlements; sourceTree = "<group>"; };
 		AA8B504626CD6457003C92AE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		AA8B504926CD6468003C92AE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OpenSesame--iOS--Info.plist"; sourceTree = "<group>"; };
+		AA8B504B26CD646F003C92AE /* OpenSesameInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OpenSesameInfo.plist; sourceTree = "<group>"; };
 		AA91286726DEBBFE007B9B30 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
 		AAADDF5626FE1B6E002172D4 /* CardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDocument.swift; sourceTree = "<group>"; };
 		AAADDF5926FE1E78002172D4 /* NoteDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDocument.swift; sourceTree = "<group>"; };
@@ -589,9 +589,9 @@
 				C41CBD1F26E12E4300BD2F91 /* Configuration */,
 				AA49EA0126D3EAF000B12838 /* LICENSE.md */,
 				AA49EA0026D3EAF000B12838 /* README.md */,
-				AA8B504B26CD646F003C92AE /* OpenSesame--iOS--Info.plist */,
+				AA8B504B26CD646F003C92AE /* OpenSesameInfo.plist */,
 				AA8B504426CD6454003C92AE /* OpenSesame.entitlements */,
-				AA8B500226CD641C003C92AE /* Shared */,
+				AA8B500226CD641C003C92AE /* OpenSesame */,
 				AA8B501B26CD641D003C92AE /* Tests iOS */,
 				AA8B502726CD641D003C92AE /* Tests macOS */,
 				AA05CCE226CDDA5200E27F6D /* AutoFill iOS */,
@@ -601,7 +601,7 @@
 			);
 			sourceTree = "<group>";
 		};
-		AA8B500226CD641C003C92AE /* Shared */ = {
+		AA8B500226CD641C003C92AE /* OpenSesame */ = {
 			isa = PBXGroup;
 			children = (
 				AA8B500526CD641C003C92AE /* OpenSesameApp.swift */,
@@ -615,7 +615,7 @@
 				AA8B500826CD641D003C92AE /* Assets.xcassets */,
 				AA413B1626E93D26000CE360 /* Credits.rtf */,
 			);
-			path = Shared;
+			path = OpenSesame;
 			sourceTree = "<group>";
 		};
 		AA8B500E26CD641D003C92AE /* Products */ = {
@@ -1465,7 +1465,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
+				INFOPLIST_FILE = OpenSesameInfo.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan QR codes for Two Factor Authentication.";
@@ -1507,7 +1507,7 @@
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = z;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OpenSesame--iOS--Info.plist";
+				INFOPLIST_FILE = OpenSesameInfo.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan QR codes for Two Factor Authentication.";
@@ -1559,7 +1559,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "OpenSesame (iOS)";
+				TEST_TARGET_NAME = OpenSesame;
 			};
 			name = Debug;
 		};
@@ -1583,7 +1583,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "OpenSesame (iOS)";
+				TEST_TARGET_NAME = OpenSesame;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1608,7 +1608,7 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "OpenSesame (macOS)";
+				TEST_TARGET_NAME = OpenSesame;
 			};
 			name = Debug;
 		};
@@ -1632,7 +1632,7 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "OpenSesame (macOS)";
+				TEST_TARGET_NAME = OpenSesame;
 			};
 			name = Release;
 		};
