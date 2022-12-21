@@ -188,6 +188,6 @@ extension NSAppearance {
 
 extension UserDefaults {
     static var group: UserDefaults {
-        UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)!
+        UserDefaults(suiteName: OpenSesameConfig.appGroup)!
     }
 }

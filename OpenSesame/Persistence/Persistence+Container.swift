@@ -22,7 +22,7 @@ extension NSPersistentContainer {
         if iCloudSync {
             let cloudkitOptions =
                 NSPersistentCloudKitContainerOptions(
-                    containerIdentifier: "iCloud.\(OpenSesameConfig.PRODUCT_BUNDLE_IDENTIFIER_BASE)"
+                    containerIdentifier: "iCloud.\(OpenSesameConfig.bundleIdentifer)"
                 )
             storeDescription.cloudKitContainerOptions = cloudkitOptions
         } else {

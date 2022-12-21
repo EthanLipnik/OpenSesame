@@ -14,8 +14,8 @@ class PersistenceController {
     static let shared = PersistenceController()
 
     static let storeURL = URL.storeURL(
-        for: OpenSesameConfig.APP_GROUP,
-        databaseName: OpenSesameConfig.APP_GROUP
+        for: OpenSesameConfig.appGroup,
+        databaseName: OpenSesameConfig.appGroup
     )
 
     static var preview: PersistenceController = {
@@ -47,7 +47,7 @@ class PersistenceController {
         if coreDataVersion < 1.4 {
             try? FileManager.default.removeItem(at: PersistenceController.storeURL)
 
-            UserDefaults(suiteName: OpenSesameConfig.APP_GROUP)?.set(1.4, forKey: "coreDataVersion")
+            UserDefaults(suiteName: OpenSesameConfig.appGroup)?.set(1.4, forKey: "coreDataVersion")
         }
 
         loadStore()
@@ -169,12 +169,12 @@ class PersistenceController {
         case .iCloud:
             if let iCloudContainer = PersistenceController.containerUrl {
                 let destinationURL = iCloudContainer
-                    .appendingPathComponent("\(OpenSesameConfig.APP_GROUP).sqlite")
+                    .appendingPathComponent("\(OpenSesameConfig.appGroup).sqlite")
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
                     try FileManager.default.removeItem(at: destinationURL)
                 }
 
-                let backup = URL.storeURL(for: OpenSesameConfig.APP_GROUP, databaseName: "backup")
+                let backup = URL.storeURL(for: OpenSesameConfig.appGroup, databaseName: "backup")
                 print(iCloudContainer.path, backup.path)
 
                 if FileManager.default.fileExists(atPath: backup.path) {

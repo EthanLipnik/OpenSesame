@@ -21,12 +21,12 @@
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>$(APP_GROUP)</string>
+		<string>group.OpenSesame.ethanlipnik</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)OpenSesame</string>
-		<string>$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER_BASE)</string>
+		<string>$(AppIdentifierPrefix)com.ethanlipnik.OpenSesame</string>
 	</array>
 </dict>
 </plist>
