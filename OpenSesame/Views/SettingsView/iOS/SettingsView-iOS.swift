@@ -121,7 +121,7 @@ struct SettingsView: View {
                     }
                 } label: {
                     Label("App Icon", systemImage: "app.fill")
-                }
+                }.pickerStyle(.navigationLink)
             }
 
             Section("Security") {
