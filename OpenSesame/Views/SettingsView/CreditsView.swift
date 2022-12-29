@@ -19,7 +19,7 @@ struct CreditsView: View {
                         } icon: {
                             AsyncImage(
                                 url: URL(
-                                    string: "https://pbs.twimg.com/profile_images/1384494074955173888/EkfIwNyD.jpg"
+                                    string: "https://www.ethanlipnik.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FProfilePic.4dd0e195.png&w=1080&q=75"
                                 )
                             ) { phase in
                                 switch phase {

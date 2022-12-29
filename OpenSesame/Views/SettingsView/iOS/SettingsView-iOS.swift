@@ -94,15 +94,15 @@ struct SettingsView: View {
 
             Section("Appearance") {
                 HStack {
-                    Label("Color Scheme", systemImage: "circle.fill")
-                    Spacer()
-                    Picker("Color Scheme", selection: $userSettings.colorScheme) {
+                    Picker(selection: $userSettings.colorScheme) {
                         Text("System")
                             .tag(0)
                         Text("Light")
                             .tag(1)
                         Text("Dark")
                             .tag(2)
+                    } label: {
+                        Label("Color Scheme", systemImage: "circle.fill")
                     }
                     .pickerStyle(.menu)
                 }
@@ -142,9 +142,7 @@ struct SettingsView: View {
                 .tint(.accentColor)
                 .disabled(availableBiometrics.isEmpty)
                 HStack {
-                    Label("Auto-Lock", systemImage: "lock.fill")
-                    Spacer()
-                    Picker("Auto-lock", selection: $userSettings.autoLockTimer) {
+                    Picker(selection: $userSettings.autoLockTimer) {
                         Text("Immediately")
                             .tag(0)
                         Text("30 seconds")
@@ -157,6 +155,8 @@ struct SettingsView: View {
                             .tag(4)
                         Text("5 minutes")
                             .tag(5)
+                    } label: {
+                        Label("Auto-Lock", systemImage: "lock.fill")
                     }
                     .pickerStyle(.menu)
                 }
